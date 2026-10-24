@@ -10,7 +10,7 @@
     { label: "Home",          href: "/" },
     { label: "Journal",       href: "/MalikTradesJournal/" },
     { label: "Trade Review",  href: "/MalikTradesReview/" },
-    { label: "Prop Firm Tool", href: "/prop-firm-tool/" },
+    { label: "Prop Firm Tool", href: "/prop-firm-tool.html" },
     { label: "Prop Tracker",  href: "/MalikTradesPropTracker/" },
     { label: "Mindset",       href: "/MalikTrades-Mindset-Tool/" },
     { label: "Guides",        href: "/#guides" }
