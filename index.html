@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MalikTrades Toolkit</title>
-<meta name="description" content="Free guides and tools from MalikTrades: the core setups, bonus tips, Trading in the Zone book notes, a trading journal, trade review cards, the Prop Firm Hacking Tool, a prop account tracker and a mindset guide.">
+<meta name="description" content="Free guides and tools from MalikTrades: chart setup, the core setups, bonus tips, Trading in the Zone book notes, a trading journal, trade review cards, the Prop Firm Hacking Tool, a prop account tracker and a mindset guide.">
 <meta name="theme-color" content="#1E4C52">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,6 +81,7 @@ section{margin-top:64px}
 .row h3{font-size:23px;line-height:1.15}
 .row p{color:var(--muted);font-size:14.5px;margin:2px 0 0}
 .row .you{color:var(--jade);font-size:13px;margin-top:3px}
+.row .cv{flex:none;width:44px;aspect-ratio:297/420;border-radius:3px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,.3)}
 .row .arr{flex:none;color:var(--muted);font-size:20px;transition:transform .2s,color .2s}
 .row:hover .arr{transform:translateX(4px);color:var(--cream)}
 
@@ -116,14 +117,21 @@ footer p{margin:0 0 6px}
 
   <section id="guides" aria-labelledby="gTitle" style="scroll-margin-top:16px">
     <div class="label"><h2 id="gTitle">Guides</h2><span>Read these first</span></div>
-    <div class="guides">
-      <a class="guide" href="/core-setups.pdf" target="_blank" rel="noopener">
-        <img src="/core-setups-cover.jpg" alt="">
-        <div><h3>Core Setups</h3><p>The Snap, the Flip and the Magnet.</p></div>
+    <div class="list">
+      <a class="row" href="/chart-setup.pdf" target="_blank" rel="noopener">
+        <img class="cv" src="/chart-setup-cover.jpg" alt="">
+        <span class="tx"><h3>Chart Setup</h3><p>Set up volume profile, VWAP and ATR on your chart.</p></span>
+        <span class="arr" aria-hidden="true">→</span>
       </a>
-      <a class="guide" href="/bonus-tips.pdf" target="_blank" rel="noopener">
-        <img src="/bonus-tips-cover.jpg" alt="">
-        <div><h3>Bonus Tips</h3><p>Five scenarios to watch for.</p></div>
+      <a class="row" href="/core-setups.pdf" target="_blank" rel="noopener">
+        <img class="cv" src="/core-setups-cover.jpg" alt="">
+        <span class="tx"><h3>Core Setups</h3><p>The Snap, the Flip and the Magnet.</p></span>
+        <span class="arr" aria-hidden="true">→</span>
+      </a>
+      <a class="row" href="/bonus-tips.pdf" target="_blank" rel="noopener">
+        <img class="cv" src="/bonus-tips-cover.jpg" alt="">
+        <span class="tx"><h3>Bonus Tips</h3><p>Five scenarios to watch for.</p></span>
+        <span class="arr" aria-hidden="true">→</span>
       </a>
     </div>
   </section>
