@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MalikTrades Toolkit</title>
-<meta name="description" content="Free guides and tools from MalikTrades: the core setups, bonus tips, a trading journal, trade review cards, the Prop Firm Hacking Tool, a prop account tracker and a mindset guide.">
+<meta name="description" content="Free guides and tools from MalikTrades: the core setups, bonus tips, Trading in the Zone book notes, a trading journal, trade review cards, the Prop Firm Hacking Tool, a prop account tracker and a mindset guide.">
 <meta name="theme-color" content="#1E4C52">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,8 @@ main{max-width:760px;margin:0 auto;padding:8px 24px 40px}
 
 section{margin-top:64px}
 .label{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
-.label h2{font-size:31px}
+.label{flex-wrap:wrap;row-gap:2px}
+.label h2{font-size:31px;white-space:nowrap}
 .label span{color:var(--muted);font-size:14.5px}
 
 /* guides */
@@ -58,6 +59,17 @@ section{margin-top:64px}
 .guide img{width:64px;aspect-ratio:297/420;border-radius:3px;object-fit:cover;flex:none;box-shadow:0 8px 18px rgba(0,0,0,.3)}
 .guide h3{font-size:23px;line-height:1.15}
 .guide p{color:var(--muted);font-size:14.5px;margin:3px 0 0}
+
+/* book notes */
+.books{display:grid;gap:16px}
+.book{display:flex;gap:22px;align-items:center;padding:18px 20px;border:1px solid var(--line);border-radius:8px;background:var(--panel);transition:border-color .2s,background .2s}
+.book:hover{border-color:rgba(247,239,220,.35);background:rgba(247,239,220,.08)}
+.book img{width:84px;aspect-ratio:612/792;border-radius:3px;object-fit:cover;flex:none;box-shadow:0 10px 22px rgba(0,0,0,.3)}
+.book h3{font-size:25px;line-height:1.15}
+.book .by{color:var(--jade);font-size:14px;margin:2px 0 0}
+.book p{color:var(--muted);font-size:14.5px;margin:6px 0 0;max-width:52ch}
+.book .read{display:inline-block;margin-top:10px;font-size:14px;color:var(--cream);transition:transform .2s}
+.book:hover .read{transform:translateX(3px)}
 
 /* tools list */
 .list{border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden}
@@ -81,6 +93,9 @@ footer p{margin:0 0 6px}
   .intro p{font-size:16.5px}
   section{margin-top:48px}
   .guides{grid-template-columns:1fr}
+  .book{align-items:flex-start;gap:16px;padding:16px}
+  .book img{width:68px}
+  .book h3{font-size:22px}
   .row{padding:16px;gap:14px}
   .row .ic{width:40px;height:40px;font-size:18px}
   footer{padding:22px 18px 48px}
@@ -116,6 +131,18 @@ footer p{margin:0 0 6px}
   <section aria-labelledby="tTitle">
     <div class="label"><h2 id="tTitle">Tools</h2><span>Free, no sign-up</span></div>
     <div class="list" id="tools"></div>
+  </section>
+
+  <section id="books" aria-labelledby="bTitle" style="scroll-margin-top:16px">
+    <div class="label"><h2 id="bTitle">Book notes</h2><span>Key lessons from the books worth reading</span></div>
+    <div class="books">
+      <a class="book" href="/trading-in-the-zone.pdf" target="_blank" rel="noopener">
+        <img src="/trading-in-the-zone-cover.jpg" alt="">
+        <div><h3>Trading in the Zone</h3><p class="by">Mark Douglas</p>
+        <p>The five fundamental truths, thinking like a casino, and why trading is a mental game before it's an analytical one.</p>
+        <span class="read">Read the notes →</span></div>
+      </a>
+    </div>
   </section>
 
 </main>
