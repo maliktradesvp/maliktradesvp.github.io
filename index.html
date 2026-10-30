@@ -41,10 +41,10 @@ a{color:inherit;text-decoration:none}
 .banner img{width:100%;height:auto;display:block;max-height:280px;object-fit:cover;object-position:center 40%}
 .banner::after{content:"";position:absolute;left:0;right:0;bottom:0;height:50%;background:linear-gradient(to bottom, rgba(30,76,82,0), var(--ground))}
 
-main{max-width:760px;margin:0 auto;padding:8px 24px 40px}
+main{max-width:1120px;margin:0 auto;padding:8px 24px 40px}
 
 .intro h1{font-size:54px;line-height:1.05;text-wrap:balance}
-.intro p{color:var(--muted);font-size:18px;margin:14px 0 0;max-width:36ch}
+.intro p{color:var(--muted);font-size:18px;margin:14px 0 0;max-width:46ch}
 
 section{margin-top:64px}
 .label{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
@@ -86,8 +86,38 @@ section{margin-top:64px}
 .row .arr{flex:none;color:var(--muted);font-size:20px;transition:transform .2s,color .2s}
 .row:hover .arr{transform:translateX(4px);color:var(--cream)}
 
-footer{max-width:760px;margin:72px auto 0;padding:24px 24px 56px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer{max-width:1072px;margin:72px auto 0;padding:24px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
 footer p{margin:0 0 6px}
+
+
+/* layout: VP Academy left, Playbook + Book notes right */
+.pair{margin-top:64px;display:grid;grid-template-columns:1.45fr 1fr;gap:36px;align-items:start}
+.pair section{margin-top:0}
+.side{display:grid;gap:40px}
+.side .book{gap:18px;padding:16px 18px}
+.side .book img{width:70px}
+.side .book h3{font-size:23px}
+
+/* tools as tiles */
+#tools{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;border:0;border-radius:0;background:none;overflow:visible}
+#tools .row{position:relative;flex-direction:column;align-items:flex-start;gap:14px;padding:18px 18px 20px;border:1px solid var(--line);border-radius:8px;background:var(--panel);transition:border-color .2s,background .2s}
+#tools .row:hover{border-color:rgba(247,239,220,.35);background:rgba(247,239,220,.08)}
+#tools .row h3{font-size:21px}
+#tools .row p{font-size:14px}
+#tools .row .arr{position:absolute;top:18px;right:16px}
+
+@media (max-width:1000px){
+  #tools{grid-template-columns:1fr;gap:10px}
+  #tools .row{flex-direction:row;align-items:center;gap:18px;padding:16px 20px}
+  #tools .row .arr{position:static}
+}
+@media (max-width:1120px){
+  footer{margin-left:24px;margin-right:24px}
+}
+@media (max-width:900px){
+  .pair{display:block}
+  .side{margin-top:48px;gap:48px}
+}
 
 @media (max-width:640px){
   main{padding:4px 18px 32px}
@@ -95,12 +125,16 @@ footer p{margin:0 0 6px}
   .intro p{font-size:16.5px}
   section{margin-top:48px}
   .guides{grid-template-columns:1fr}
+  .pair{margin-top:48px}
+  #tools{grid-template-columns:1fr;gap:10px}
+  #tools .row{flex-direction:row;align-items:center;gap:14px;padding:16px}
+  #tools .row .arr{position:static}
   .book{align-items:flex-start;gap:16px;padding:16px}
   .book img{width:68px}
   .book h3{font-size:22px}
   .row{padding:16px;gap:14px}
   .row .ic{width:40px;height:40px;font-size:18px}
-  footer{padding:22px 18px 48px}
+  footer{padding:22px 0 48px;margin-left:18px;margin-right:18px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -116,6 +150,7 @@ footer p{margin:0 0 6px}
     <p>Free guides and tools for trading the MalikTrades way. Start with VP Academy, then use the tools.</p>
   </div>
 
+  <div class="pair">
   <section id="guides" aria-labelledby="gTitle" style="scroll-margin-top:16px">
     <div class="label"><h2 id="gTitle">VP Academy</h2><span>Read these in order</span></div>
     <div class="list">
@@ -147,6 +182,7 @@ footer p{margin:0 0 6px}
     </div>
   </section>
 
+  <div class="side">
   <section id="playbook" aria-labelledby="pTitle" style="scroll-margin-top:16px">
     <div class="label"><h2 id="pTitle">The Playbook</h2><span>My setups and rules, for reference</span></div>
     <div class="list">
@@ -163,11 +199,6 @@ footer p{margin:0 0 6px}
     </div>
   </section>
 
-  <section aria-labelledby="tTitle">
-    <div class="label"><h2 id="tTitle">Tools</h2><span>Free, no sign-up</span></div>
-    <div class="list" id="tools"></div>
-  </section>
-
   <section id="books" aria-labelledby="bTitle" style="scroll-margin-top:16px">
     <div class="label"><h2 id="bTitle">Book notes</h2><span>Key lessons from the books worth reading</span></div>
     <div class="books">
@@ -178,6 +209,13 @@ footer p{margin:0 0 6px}
         <span class="read">Read the notes →</span></div>
       </a>
     </div>
+  </section>
+  </div>
+  </div>
+
+  <section aria-labelledby="tTitle">
+    <div class="label"><h2 id="tTitle">Tools</h2><span>Free, no sign-up</span></div>
+    <div class="list" id="tools"></div>
   </section>
 
 </main>
