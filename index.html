@@ -37,11 +37,20 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;letter-spacing:.005em
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--cream);outline-offset:3px}
 
-.banner{position:relative;line-height:0}
-.banner img{width:100%;height:auto;display:block;max-height:280px;object-fit:cover;object-position:center 40%}
-.banner::after{content:"";position:absolute;left:0;right:0;bottom:0;height:50%;background:linear-gradient(to bottom, rgba(30,76,82,0), var(--ground))}
+/* hero: banner fills the top of the page */
+.hero{position:relative;min-height:calc(56.25vw + 210px);display:flex;align-items:flex-end;overflow:hidden;
+  background:var(--ground) url(/MalikTradesJournal/banner.jpg) center top/100% auto no-repeat}
+.hero::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(to bottom, rgba(30,76,82,0) 0, rgba(30,76,82,0) 22vw, rgba(30,76,82,.55) 30vw, var(--ground) 37.5vw, var(--ground) 100%)}
+.hero{min-height:auto;padding-top:30vw}
+.hero .in{position:relative;width:100%;max-width:1120px;margin:0 auto;padding:0 24px 8px}
+.hero .intro h1{font-size:64px;text-shadow:0 2px 24px rgba(16,40,44,.45)}
+.hero .intro p{color:rgba(247,239,220,.86)}
+/* soft cloud glow behind the rest of the page */
+
 
 main{max-width:1120px;margin:0 auto;padding:8px 24px 40px}
+.pair{margin-top:40px!important}
 
 .intro h1{font-size:54px;line-height:1.05;text-wrap:balance}
 .intro p{color:var(--muted);font-size:18px;margin:14px 0 0;max-width:46ch}
@@ -149,6 +158,10 @@ footer p{margin:0 0 6px}
   .tick{right:16px;width:30px;height:30px}
   main{padding:4px 18px 32px}
   .intro h1{font-size:38px}
+  .hero{padding-top:56vw;background-size:150% auto}
+  .hero::before{background:linear-gradient(to bottom, rgba(30,76,82,0) 0, rgba(30,76,82,0) 34vw, rgba(30,76,82,.6) 46vw, var(--ground) 56vw, var(--ground) 100%)}
+  .hero .intro h1{font-size:42px}
+  .hero .in{padding:0 18px 28px}
   .intro p{font-size:16.5px}
   section{margin-top:48px}
   .guides{grid-template-columns:1fr}
@@ -168,10 +181,9 @@ footer p{margin:0 0 6px}
 </head>
 <body>
 
-<header class="banner"><img src="/MalikTradesJournal/banner.jpg" alt="MalikTrades"></header>
 
-<main>
 
+<header class="hero"><div class="in">
   <div class="intro">
     <h1>Everything in one place.</h1>
     <p>Free guides and tools for trading the MalikTrades way. Start with VP Academy, then use the tools.</p>
@@ -182,6 +194,10 @@ footer p{margin:0 0 6px}
     <div class="pbar"><div class="pfill" id="pFill"></div></div>
     <div class="psub" id="pSub">Tick each guide as you finish it.</div>
   </div>
+
+</div></header>
+
+<main>
 
   <div class="pair">
   <section id="guides" aria-labelledby="gTitle" style="scroll-margin-top:16px">
