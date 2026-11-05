@@ -13,6 +13,7 @@
     { label: "Prop Firm Tool", href: "/prop-firm-tool.html" },
     { label: "Prop Tracker",  href: "/MalikTradesPropTracker/" },
     { label: "Mindset",       href: "/MalikTrades-Mindset-Tool/" },
+    { label: "Setup Library", href: "/setup-library.html" },
     { label: "Guides",        href: "/#guides" }
   ];
 

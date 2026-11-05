@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Setup Library · MalikTrades</title>
+<meta name="description" content="Real trades from MalikTrades sessions, sorted by setup and instrument.">
+<meta name="theme-color" content="#1E4C52">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="/MalikTradesJournal/banner.jpg">
+<style>
+:root{
+  --ground:#1E4C52;--panel:rgba(247,239,220,0.05);--line:rgba(247,239,220,0.13);
+  --cream:#F7EFDC;--muted:rgba(247,239,220,0.66);--jade:#7EC3A0;--gold:#E3C98A;--red:#E8907F;
+  --serif:"Cormorant Garamond","Hoefler Text",Baskerville,Georgia,serif;
+  --sans:"Figtree","Avenir Next","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--ground);color:var(--cream);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
+main{max-width:1120px;margin:0 auto;padding:40px 24px 64px}
+h1{font-family:var(--serif);font-weight:600;font-size:52px;line-height:1.05;margin:0}
+.intro p{color:var(--muted);font-size:18px;max-width:52ch;margin:12px 0 0}
+.count{color:var(--muted);font-size:14px;margin-top:14px}
+.filters{display:grid;gap:12px;margin:30px 0 24px}
+.fg{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fg .lab{width:96px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.chip{border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:14px;background:transparent;cursor:pointer;transition:background .2s,border-color .2s}
+.chip:hover{border-color:rgba(247,239,220,.4)}
+.chip i{font-style:normal;opacity:.6;margin-left:4px;font-size:12.5px}
+.chip[aria-pressed="true"]{background:var(--cream);color:#1E4C52;border-color:var(--cream);font-weight:500}
+.chip[aria-pressed="true"] i{opacity:.7}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{border:1px solid var(--line);border-radius:10px;background:var(--panel);overflow:hidden;cursor:pointer;text-align:left;padding:0;display:flex;flex-direction:column;transition:border-color .2s,background .2s}
+.card:hover{border-color:rgba(247,239,220,.35);background:rgba(247,239,220,.08)}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:center center;display:block;border-bottom:1px solid var(--line);background:#E8E4DC}
+.cb{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1}
+.tags{display:flex;gap:6px;margin-bottom:9px;flex-wrap:wrap}
+.tag{font-size:11.5px;font-weight:500;border-radius:6px;padding:3px 8px;background:rgba(247,239,220,.08)}
+.tag.s{background:#2F6E66}
+.tag.g{background:transparent;color:var(--gold);letter-spacing:1px;padding:3px 2px;font-size:12.5px}
+.tag.d{background:rgba(126,195,160,.18);color:var(--jade)}
+.tag.d.sh{background:rgba(232,144,127,.18);color:var(--red)}
+.cf{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}
+.cf span{font-size:12.5px;font-weight:500;background:var(--cream);color:#1E4C52;border-radius:99px;padding:4px 11px}
+.cfl{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 7px}
+.card h3{font-family:var(--serif);font-weight:600;font-size:22px;margin:0;line-height:1.15}
+.card p{color:var(--muted);font-size:14px;margin:5px 0 0;line-height:1.45}
+.meta{display:flex;justify-content:space-between;margin-top:auto;padding-top:12px;font-size:13px;color:var(--muted)}
+.res{font-weight:500}.res.w{color:var(--jade)}.res.l{color:var(--red)}.res.b{color:var(--muted)}
+.empty{border:1px dashed var(--line);border-radius:10px;padding:40px 24px;text-align:center;color:var(--muted)}
+.empty b{display:block;font-family:var(--serif);font-size:24px;color:var(--cream);font-weight:600;margin-bottom:4px}
+
+/* detail view */
+.ov{position:fixed;inset:0;background:rgba(10,28,31,.82);display:none;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;z-index:50}
+.ov.open{display:flex}
+.dlg{width:100%;max-width:980px;background:#22545A;border:1px solid var(--line);border-radius:12px;overflow:hidden;position:relative}
+.dlg .x{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(20,48,52,.85);cursor:pointer;font-size:20px;line-height:1}
+.dlg .imgs img{width:100%;max-height:72vh;object-fit:contain;display:block;background:#E8E4DC;border-bottom:1px solid var(--line)}
+.dlg .body{padding:20px 24px 26px}
+.dlg h2{font-family:var(--serif);font-weight:600;font-size:32px;margin:6px 0 8px;line-height:1.1}
+.dlg .facts{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-bottom:14px}
+.dlg .facts b{color:var(--cream);font-weight:500}
+.dlg .notes p{margin:0 0 10px;font-size:15.5px;line-height:1.6}
+.dlg .see{margin-top:14px;font-size:14px;color:var(--muted)}
+.dlg .see a{color:var(--jade)}
+
+@media (max-width:900px){ .grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:640px){
+  main{padding:28px 18px 48px}
+  h1{font-size:40px}
+  .intro p{font-size:16.5px}
+  .fg .lab{width:100%}
+  .grid{grid-template-columns:1fr}
+  .ov{padding:0}
+  .dlg{border-radius:0;min-height:100%}
+  .dlg .body{padding:18px}
+  .dlg h2{font-size:27px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <div class="intro">
+    <h1>Setup Library</h1>
+    <p>Real trades from my sessions, broken down setup by setup. Study them until you can spot them on your own chart.</p>
+    <div class="count" id="count"></div>
+  </div>
+
+  <div class="filters">
+    <div class="fg" role="group" aria-label="Setup"><span class="lab">Setup</span><span id="fSetup" style="display:contents"></span></div>
+    <div class="fg" role="group" aria-label="Instrument"><span class="lab">Instrument</span><span id="fInst" style="display:contents"></span></div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</main>
+
+<div class="ov" id="ov" aria-hidden="true">
+  <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="dTitle">
+    <button class="x" id="dClose" aria-label="Close">×</button>
+    <div class="imgs" id="dImgs"></div>
+    <div class="body">
+      <div class="tags" id="dTags"></div>
+      <h2 id="dTitle"></h2>
+      <div class="facts" id="dFacts"></div>
+      <div class="notes" id="dNotes"></div>
+      <div class="see" id="dSee"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const SETUPS = [
+  { id:"snap",   label:"Snap",   icon:"🫰", guide:{ name:"Core Setups",     href:"/core-setups.pdf" } },
+  { id:"flip",   label:"Flip",   icon:"🔄", guide:{ name:"Core Setups",     href:"/core-setups.pdf" } },
+  { id:"magnet", label:"Magnet", icon:"🧲", guide:{ name:"Core Setups",     href:"/core-setups.pdf" } },
+  { id:"anchor", label:"Anchor", icon:"⚓", guide:{ name:"Advanced Setups", href:"/advanced-setups.pdf" } }
+];
+const INSTRUMENTS = ["NQ", "ES", "GC", "CL"];
+const state = { setup:"all", inst:"all" };
+let TRADES = [];
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+const setupOf = id => SETUPS.find(s => s.id === id) || { label:id, icon:"" };
+const fmtDate = d => { const t = new Date(d + "T00:00:00"); return isNaN(t) ? esc(d) : t.toLocaleDateString(undefined, { day:"numeric", month:"short", year:"numeric" }); };
+const resClass = r => /^\s*-/.test(r || "") ? "l" : (/^\s*\+/.test(r || "") ? "w" : "b");
+const resLabel = r => /^\s*0R?\s*$/i.test(r || "") ? "0R · Breakeven" : r;
+const stars = n => n ? `<span class="tag g" title="${n} out of 4">${"★".repeat(n)}<span style="opacity:.3">${"★".repeat(Math.max(0, 4 - n))}</span></span>` : "";
+const dir = d => d ? `<span class="tag d${/short/i.test(d) ? " sh" : ""}">${esc(d)}</span>` : "";
+
+function chip(group, value, label, n){
+  const on = state[group] === value;
+  return `<button class="chip" type="button" data-g="${group}" data-v="${value}" aria-pressed="${on}">${label}${n != null ? ` <i>${n}</i>` : ""}</button>`;
+}
+function renderFilters(){
+  const inInst = TRADES.filter(t => state.inst === "all" || t.instrument === state.inst);
+  document.getElementById("fSetup").innerHTML = chip("setup", "all", "All", inInst.length) +
+    SETUPS.map(s => chip("setup", s.id, `${s.icon} ${s.label}`, inInst.filter(t => t.setup === s.id).length)).join("");
+  document.getElementById("fInst").innerHTML = chip("inst", "all", "All") + INSTRUMENTS.map(i => chip("inst", i, i)).join("");
+}
+function visible(){
+  return TRADES.filter(t => (state.setup === "all" || t.setup === state.setup) && (state.inst === "all" || t.instrument === state.inst));
+}
+function renderGrid(){
+  const list = visible();
+  document.getElementById("count").textContent = TRADES.length
+    ? `${TRADES.length} trade${TRADES.length === 1 ? "" : "s"} · new ones added daily` : "New trades added daily";
+  const g = document.getElementById("grid");
+  if(!TRADES.length){ g.innerHTML = `<div class="empty" style="grid-column:1/-1"><b>First trades coming soon</b>Check back after the next session.</div>`; return; }
+  if(!list.length){ g.innerHTML = `<div class="empty" style="grid-column:1/-1"><b>No trades here yet</b>Try another setup or instrument.</div>`; return; }
+  g.innerHTML = list.map(t => {
+    const s = setupOf(t.setup), img = (t.images || [])[0];
+    return `<button class="card" type="button" data-id="${esc(t.id)}">
+      ${img ? `<img src="/${esc(img)}" alt="" loading="lazy">` : ""}
+      <div class="cb">
+        <div class="tags"><span class="tag s">${s.icon} ${esc(s.label)}</span><span class="tag">${esc(t.instrument)}</span>${dir(t.direction)}${stars(t.stars)}</div>
+        <h3>${esc(t.title)}</h3>
+        ${t.summary ? `<p>${esc(t.summary.length > 120 ? t.summary.slice(0, 117).replace(/\s+\S*$/, "") + "…" : t.summary)}</p>` : ""}
+        <div class="meta"><span>${fmtDate(t.date)}</span>${t.result ? `<span class="res ${resClass(t.result)}">${esc(resLabel(t.result))}</span>` : ""}</div>
+      </div>
+    </button>`;
+  }).join("");
+}
+function render(){ renderFilters(); renderGrid(); }
+
+let lastFocus = null;
+function openTrade(id){
+  const t = TRADES.find(x => x.id === id); if(!t) return;
+  const s = setupOf(t.setup);
+  document.getElementById("dImgs").innerHTML = (t.images || []).map(i => `<img src="/${esc(i)}" alt="">`).join("");
+  document.getElementById("dTags").innerHTML = `<span class="tag s">${s.icon} ${esc(s.label)}</span><span class="tag">${esc(t.instrument)}</span>${dir(t.direction)}${stars(t.stars)}`;
+  document.getElementById("dTitle").textContent = t.title;
+  const facts = [["Date", fmtDate(t.date)], ["Rating", t.stars ? `${t.stars} out of 4` : ""], ["Entry", t.entry], ["Stop", t.stop], ["Target", t.target], ["Result", resLabel(t.result)]].filter(f => f[1]);
+  document.getElementById("dFacts").innerHTML = facts.map(([k, v]) => `<span>${k} <b>${k === "Date" ? v : esc(v)}</b></span>`).join("");
+  const notes = Array.isArray(t.notes) ? t.notes : (t.notes ? [t.notes] : []);
+  document.getElementById("dNotes").innerHTML = (t.confluences && t.confluences.length ? `<div class="cfl">Confluences</div><div class="cf">${t.confluences.map(c => `<span>${esc(c)}</span>`).join("")}</div><div class="cfl">Why I took it</div>` : "") + notes.map(n => `<p>${esc(n)}</p>`).join("");
+  document.getElementById("dSee").innerHTML = s.guide ? `Read more: <a href="${s.guide.href}" target="_blank" rel="noopener">${s.guide.name}</a>` : "";
+  lastFocus = document.activeElement;
+  const ov = document.getElementById("ov"); ov.classList.add("open"); ov.setAttribute("aria-hidden", "false"); ov.scrollTop = 0;
+  document.body.style.overflow = "hidden";
+  document.getElementById("dClose").focus();
+}
+function closeTrade(){
+  const ov = document.getElementById("ov"); ov.classList.remove("open"); ov.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = ""; if(lastFocus) lastFocus.focus();
+}
+
+document.addEventListener("click", e => {
+  const c = e.target.closest(".chip");
+  if(c){ state[c.dataset.g] = c.dataset.v; render(); return; }
+  const card = e.target.closest(".card");
+  if(card){ openTrade(card.dataset.id); return; }
+  if(e.target.id === "ov" || e.target.id === "dClose") closeTrade();
+});
+document.addEventListener("keydown", e => { if(e.key === "Escape" && document.getElementById("ov").classList.contains("open")) closeTrade(); });
+
+fetch("/setup-library.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []).then(data => {
+  TRADES = (Array.isArray(data) ? data : (data.trades || [])).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  render();
+});
+</script>
+<script src="/mt-nav.js" defer></script>
+</body>
+</html>
