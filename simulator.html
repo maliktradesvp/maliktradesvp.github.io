@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision Simulator · MalikTrades</title>
+<meta name="description" content="Practise reading the auction: take the trade, pick the setup, or sit on your hands. Then watch it play out.">
+<meta name="theme-color" content="#1E4C52">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/MalikTradesJournal/banner.jpg">
+<style>
+:root{
+  --ground:#1E4C52;--panel:rgba(247,239,220,0.05);--line:rgba(247,239,220,0.13);
+  --cream:#F7EFDC;--muted:rgba(247,239,220,0.66);--jade:#7EC3A0;--gold:#E3C98A;--red:#E8907F;
+  --serif:"Cormorant Garamond","Hoefler Text",Baskerville,Georgia,serif;
+  --sans:"Figtree","Avenir Next","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--ground);color:var(--cream);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--jade)}
+:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
+main{max-width:1120px;margin:0 auto;padding:36px 24px 64px}
+h1{font-family:var(--serif);font-weight:600;font-size:48px;line-height:1.05;margin:0}
+.intro p{color:var(--muted);font-size:17px;max-width:60ch;margin:10px 0 0}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 18px}
+.stat{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 14px;min-width:96px}
+.stat b{display:block;font-family:var(--serif);font-size:24px;font-weight:600;line-height:1.1;font-variant-numeric:lining-nums;font-feature-settings:"lnum"}
+.stat span{color:var(--muted);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
+.wrap{display:grid;grid-template-columns:1fr 330px;gap:18px;align-items:start}
+.chartbox{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#E8E4DC;position:relative}
+.chartbox canvas{display:block;width:100%;height:auto}
+.cbar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 14px;background:#22545A;border-top:1px solid var(--line);font-size:13px;color:var(--muted);flex-wrap:wrap}
+.legend{display:flex;gap:12px;flex-wrap:wrap}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.side{display:grid;gap:14px}
+.card{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px 18px}
+.card .lab{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ctx{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.tag{font-size:12px;font-weight:500;border-radius:6px;padding:3px 9px;background:rgba(247,239,220,.08)}
+.prompt{font-family:var(--serif);font-size:23px;font-weight:600;line-height:1.2;margin:0 0 4px}
+.sub{color:var(--muted);font-size:14px;margin:0}
+.btns{display:grid;gap:8px;margin-top:12px}
+.btns.three{grid-template-columns:1fr 1fr 1fr}
+.b{border:1px solid var(--line);background:rgba(247,239,220,.05);border-radius:9px;padding:11px 8px;font-weight:500;font-size:15px;transition:background .15s,border-color .15s}
+.b:hover:not(:disabled){border-color:rgba(247,239,220,.45);background:rgba(247,239,220,.1)}
+.b.long{border-color:rgba(126,195,160,.5)}
+.b.short{border-color:rgba(232,144,127,.5)}
+.b.sel{background:var(--cream);color:#1E4C52;border-color:var(--cream)}
+.b:disabled{opacity:.45;cursor:default}
+.hint{margin-top:12px;background:none;border:0;color:var(--muted);font-size:13.5px;text-decoration:underline;padding:0}
+.hinttx{font-size:14px;color:var(--gold);margin:8px 0 0}
+.res .verdict{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1.1;margin:0 0 6px}
+.res .verdict.ok{color:var(--jade)}.res .verdict.half{color:var(--gold)}.res .verdict.no{color:var(--red)}
+.res p{font-size:14.5px;margin:0 0 8px;line-height:1.55}
+.res .ans{font-size:14px;color:var(--muted)}
+.res .ans b{color:var(--cream)}
+.res .trade{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:10px}
+.next{width:100%;margin-top:12px;background:var(--cream);color:#1E4C52;border:0;border-radius:9px;padding:12px;font-weight:600;font-size:15.5px}
+.next:hover{filter:brightness(.96)}
+.small{font-size:12.5px;color:var(--muted);margin-top:10px}
+.reset{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:12.5px;padding:0}
+@media (max-width:900px){ .wrap{grid-template-columns:1fr} }
+@media (max-width:640px){
+  main{padding:24px 14px 48px}
+  h1{font-size:36px}
+  .intro p{font-size:15.5px}
+  .stat{min-width:0;flex:1}
+  .prompt{font-size:21px}
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="intro">
+    <h1>Decision Simulator</h1>
+    <p>Read the chart like a live session. Take the trade, pick the setup, or sit on your hands. Then watch how it plays out.</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="sPlayed">0</b><span>Played</span></div>
+    <div class="stat"><b id="sAcc">–</b><span>Accuracy</span></div>
+    <div class="stat"><b id="sStreak">0</b><span>Streak</span></div>
+    <div class="stat"><b id="sBest">0</b><span>Best streak</span></div>
+  </div>
+
+  <div class="wrap">
+    <div class="chartbox">
+      <canvas id="cv" aria-label="Simulated 1-minute chart with developing volume profile"></canvas>
+      <div class="cbar">
+        <div class="legend">
+          <span><i style="background:#C9473A"></i>dPOC</span>
+          <span><i style="background:#2962FF"></i>dVAH / dVAL</span>
+          <span><i style="background:#E08A00"></i>Your level</span>
+        </div>
+        <span id="atrTx"></span>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="card" id="qCard">
+        <div class="ctx" id="ctx"></div>
+        <p class="prompt" id="prompt"></p>
+        <p class="sub" id="psub"></p>
+        <div class="lab" style="margin-top:14px">1 · What do you do?</div>
+        <div class="btns three">
+          <button class="b long" data-act="long" type="button">Long</button>
+          <button class="b short" data-act="short" type="button">Short</button>
+          <button class="b" data-act="none" type="button">No trade</button>
+        </div>
+        <div id="step2" hidden>
+          <div class="lab" style="margin-top:14px">2 · Which setup?</div>
+          <div class="btns three">
+            <button class="b" data-set="snap" type="button">🫰 Snap</button>
+            <button class="b" data-set="flip" type="button">🔄 Flip</button>
+            <button class="b" data-set="magnet" type="button">🧲 Magnet</button>
+          </div>
+        </div>
+        <button class="hint" id="hintBtn" type="button">Need a hint?</button>
+        <p class="hinttx" id="hintTx" hidden></p>
+      </div>
+
+      <div class="card res" id="rCard" hidden>
+        <p class="verdict" id="verdict"></p>
+        <p class="ans" id="ans"></p>
+        <p id="why"></p>
+        <p class="trade" id="tradeTx"></p>
+        <p class="small" id="see"></p>
+        <button class="next" id="nextBtn" type="button">Next scenario →</button>
+      </div>
+
+      <p class="small">Scenarios are simplified and generated, not real market data. Every one follows the rules in VP Academy and the Playbook. Your score saves in this browser. <button class="reset" id="resetBtn" type="button">Reset score</button></p>
+    </div>
+  </div>
+</main>
+
+<script>
+"use strict";
+/* ================= random + path generation ================= */
+function rng(seed){ let z = (seed % 2147483646) + 1; return () => { z = (z * 16807) % 2147483647; return z / 2147483647; }; }
+const R0 = Math.random;
+const pick = (a, r = R0) => a[Math.floor(r() * a.length)];
+const jit = (v, r, f = .12) => v * (1 + (r() * 2 - 1) * f);
+
+function profile(pts, rows, lo, hi){
+  const h = new Array(rows).fill(0);
+  pts.forEach(p => { const i = Math.min(rows - 1, Math.max(0, Math.floor((p - lo) / (hi - lo) * rows))); h[i]++; });
+  let poc = 0; h.forEach((v, i) => { if(v > h[poc]) poc = i; });
+  const tot = h.reduce((a, b) => a + b, 0); let a = poc, z = poc, acc = h[poc];
+  while(acc < tot * .7 && (a > 0 || z < rows - 1)){
+    const up = z < rows - 1 ? h[z + 1] : -1, dn = a > 0 ? h[a - 1] : -1;
+    if(up >= dn){ z++; acc += up; } else { a--; acc += dn; }
+  }
+  const step = (hi - lo) / rows;
+  return { h, poc, a, z, rows, pocP: lo + (poc + .5) * step, vah: lo + (z + 1) * step, val: lo + a * step };
+}
+function gen(parts, seed){
+  const r = rng(seed); const g = () => { let u = r() || 1e-9, v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(6.2832 * v); };
+  const out = []; let p = parts[0].from ?? 0;
+  parts.forEach(q0 => { const q = { ...q0 };
+    for(let i = 0; i < q.n; i++){
+      if(q.kind === "rot"){ p += (q.c - p) * q.k + g() * q.s; p = Math.max(q.c - q.w, Math.min(q.c + q.w, p)); }
+      else { if(q.to === "POC"){ const mn = Math.min(...out), mx = Math.max(...out); q.to = profile(out, 22, mn - .5, mx + .5).pocP; } p += (q.to - p) / (q.n - i) + g() * q.s; }
+      out.push(p);
+    } });
+  return out.map((v, i) => { let a = 0, n = 0; for(let j = Math.max(0, i - 2); j <= Math.min(out.length - 1, i + 2); j++){ a += out[j]; n++; } return a / n; });
+}
+const rot = (n, c, w, k = .08, s = .14) => ({ kind:"rot", n, c, k, s, w });
+const go  = (n, to, s = .06, from) => ({ kind:"go", n, to, s, from });
+
+/* ================= scenarios (all written with the real move UP; mirrored at random) ================= */
+const LV = {
+  low:  [{ n:"ONVAL", c:"#E08A00" }, { n:"NYVAL", c:"#D6453A" }, { n:"PWVAL", c:"#7C838B" }],
+  high: [{ n:"ONVAH", c:"#E08A00" }, { n:"NYVAH", c:"#D6453A" }, { n:"PWVAH", c:"#7C838B" }],
+  poc:  [{ n:"ONPOC", c:"#E08A00" }, { n:"NYPOC", c:"#D6453A" }, { n:"PWPOC", c:"#7C838B" }]
+};
+function dshapeHead(r, seed){
+  let A = 1.6;
+  for(let it = 0; it < 10; it++){
+    const seq = [[0,.55,34],[A,0,10],[.2,0,10],[0,.55,24],[-A,0,10],[-.2,0,10],[0,.55,24],[A,0,10],[.25,0,10],[0,.55,22],[-A,0,10],[-.15,0,10],[0,.55,22],[A,0,10],[.3,0,10],[0,.55,20]];
+    const parts = seq.map(([to, w, n]) => w ? rot(Math.round(jit(n, r, .2)), to, w, .08, .13) : go(n, to, .05));
+    const h = gen(parts, seed); const P = profile(h, 22, -3.6, 3.6);
+    const want = Math.min(P.vah, -P.val) + .18;
+    if(Math.abs(A - want) < .03 || it === 9){ return h.concat(gen([go(14, P.val, .03, h[h.length - 1])], seed + 1)); }
+    A = want;
+  }
+}
+const SC = {
+  dshape: { valid:true, ans:{ act:"long", set:"snap" }, showD:true,
+    head:(r, s) => dshapeHead(r, s), keyAtEnd:true, keySet:"low",
+    tail:(r) => [go(8, -.12, .05), go(16, 1.0, .06), rot(30, 1.0, .5, .08, .12)], tailRel:true,
+    prompt: k => `Price is coming down to the ${k} and the dVAL.`,
+    hint: "Look at the shape of the developing profile. Is the market balanced, or is one side in control?",
+    why: "The developing profile is D-shaped: price has been rotating between the dVAH and dVAL all session. In balance, fading the edges is the higher-probability trade, and the {K} stacked with the dVAL makes the level stronger.",
+    see: "VP Academy #04: Profile Shapes · Core Setups" },
+  flip: { valid:true, ans:{ act:"long", set:"flip" }, showD:false, key:0, keySet:"any",
+    head:(r, s) => gen([rot(Math.round(jit(170, r)), -1.4, 1.0, .06, .16), go(10, .9), rot(Math.round(jit(85, r)), 1.0, .45, .1, .12), go(12, .05, .05)], s),
+    tail:() => [go(10, 1.0), go(8, .7), go(14, 2.2, .07)],
+    zone:[.45, 1.5, "Acceptance above the level", "ok"],
+    prompt: k => `Price is pulling back to the ${k} from above.`,
+    hint: "After price broke the level, did it spend time above it and build volume there?",
+    why: "Price broke above the {K} and then built volume above it, so the market accepted the new prices. Pulling back to the {K} from above is the Flip: the old ceiling now acts as a floor.",
+    see: "Core Setups · VP Academy #05: Why the Setups Work" },
+  magnet: { valid:true, ans:{ act:"long", set:"magnet" }, showD:true, endAtPOC:true,
+    head:(r, s) => gen([rot(Math.round(jit(110, r)), 0, .9, .07, .14), go(10, 1.9), rot(Math.round(jit(70, r)), 2.1, .45, .1, .12), go(14, "POC", .05)], s),
+    tail:() => [go(10, 1.3), go(8, 1.0), go(14, 2.9, .07)], tailRel:true,
+    zone:["VAH", 2.6, "Acceptance above the dVAH", "ok"],
+    prompt: () => `Price is pulling back to the dPOC.`,
+    hint: "When price went above the dVAH, did it stay there and build volume?",
+    why: "Price went above the dVAH and stayed there, building volume. That's acceptance at higher prices. The pullback to the dPOC is the Magnet: a retest at fair value, then continuation the way price broke.",
+    see: "Core Setups · Bonus Tips: Scenario 04" },
+  hvn: { valid:false, ans:{ act:"none" }, tempt:{ act:"short", set:"snap" }, showD:false, key:1.5, keySet:"high",
+    head:(r, s) => gen([rot(Math.round(jit(150, r)), -1.6, 1.6, .05, .3), go(24, 1.0, .1), rot(Math.round(jit(120, r)), 1.05, .4, .12, .12), go(6, 1.45, .04)], s),
+    tail:() => [go(14, 2.6, .08), rot(60, 3.0, .8, .08, .15)],
+    zone:[.65, 1.45, "HVN building under the level", "bad"],
+    prompt: k => `Price has come back up to the ${k} again.`,
+    hint: "Look at where volume has been building near the level.",
+    why: "Price has been ranging just below the {K} and building an HVN right under it. That's pressure building on a ceiling, so the Snap is lower probability and the level is more likely to break. Wait for the Flip instead.",
+    see: "Bonus Tips: Scenario 02 · Common Mistakes #02" },
+  poke: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"flip" }, showD:false, key:0, keySet:"any",
+    head:(r, s) => gen([rot(Math.round(jit(150, r)), -1.3, .9), go(8, .05, .06), go(3, .7, .05), go(3, .55, .05), go(5, .02, .05)], s),
+    tail:() => [go(8, -.6), go(8, -.4), go(16, -1.8, .07)],
+    zone:[.05, .75, "A quick poke, no volume", "bad"],
+    prompt: k => `Price is back at the ${k} after poking above it.`,
+    hint: "How long did price spend above the level? Did any volume build there?",
+    why: "Price only poked above the {K} for a few candles. No volume built above it, so there was no acceptance. A retest without acceptance isn't a Flip, and price fell back through the level.",
+    see: "Common Mistakes #04 · Core Setups" },
+  fakeMagnet: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"magnet" }, showD:true, endAtPOC:true,
+    head:(r, s) => gen([rot(Math.round(jit(170, r)), 0, .9, .07, .14), go(4, 2.1, .05), go(5, .6, .05), go(10, "POC", .05)], s),
+    tail:() => [go(10, -.7), go(8, -.5), go(14, -1.7, .07)], tailRel:true,
+    zone:["VAH", 2.2, "Spiked and snapped back", "bad"],
+    prompt: () => `Price is back at the dPOC after going above the dVAH.`,
+    hint: "When price went above the dVAH, did it stay and build volume, or snap straight back?",
+    why: "Price spiked above the dVAH and snapped straight back without building any volume up there. The market rejected those prices, so the Magnet isn't valid and the dPOC is just the middle of the range.",
+    see: "Bonus Tips: Scenario 04 · Common Mistakes #03" },
+  trend: { valid:false, ans:{ act:"none" }, tempt:{ act:"short", set:"snap" }, showD:true, keyAtEnd:true, keySet:"high",
+    head:(r, s) => { const parts = [go(6, -4.1, .06, -4.2)]; let l = -4.2; for(let i = 0; i < 8; i++){ l += jit(1.15, r, .1); parts.push(go(16, l, .09)); parts.push(go(8, l - jit(.35, r, .3), .06)); } parts.push(go(10, l + .3, .06)); return gen(parts, s); },
+    tail:() => [go(14, 1.1, .08), go(8, .8, .06), go(16, 2.0, .08)], tailRel:true,
+    prompt: k => `Price has run up to the ${k}.`,
+    hint: "What kind of day is it? Look at the shape of the profile and the direction all session.",
+    why: "This is a trend day: one-sided all session, with a long, thin profile. Fading against a trend is lower probability. The level you fade tends to become the next one price breaks through.",
+    see: "VP Academy #04: Profile Shapes · Common Mistakes #01" },
+  slice: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"snap" }, showD:true, keyAtEnd:true, keySet:"lowpoc",
+    head:(r, s) => gen([rot(Math.round(jit(200, r)), 1.2, 1.4, .06, .2), go(18, -2.3, .04)], s),
+    tail:() => [go(8, -.6, .05), go(6, -.3), go(16, -1.4, .07)], tailRel:true,
+    prompt: k => `Price has dropped straight down to the ${k}.`,
+    hint: "How did price get to this level? Did it react anywhere on the way down?",
+    why: "On the way to the {K}, price cut straight through the dPOC and the dVAL without reacting. It's actively looking for new fair value, so fading it at the next level is lower probability.",
+    see: "Bonus Tips: Scenario 03 · Common Mistakes" }
+};
+
+/* ================= build one round ================= */
+const INSTR = [ { sym:"NQ", U:25, dp:2 }, { sym:"ES", U:5, dp:2 }, { sym:"GC", U:4, dp:1 }, { sym:"CL", U:.2, dp:2 } ];
+const SESS = ["Asia", "London", "NY"];
+const PER = 8; // path points per candle
+function candles(pts){
+  const out = [];
+  for(let s = 0; s < pts.length - 1; s += PER){
+    const seg = pts.slice(s, Math.min(pts.length, s + PER + 1));
+    out.push({ s, o: seg[0], c: seg[seg.length - 1], h: Math.max(...seg), l: Math.min(...seg) });
+  }
+  return out;
+}
+const PAIRS = [["down","up"],["above","below"],["dVAH","dVAL"],["higher","lower"],["ceiling","floor"],["under","over"],["fell","rose"],["dropped","rallied"]];
+function mirrorText(t){
+  const map = {}; PAIRS.forEach(([a, b]) => { const C = x => x[0].toUpperCase() + x.slice(1); map[a] = b; map[b] = a; map[C(a)] = C(b); map[C(b)] = C(a); });
+  return t.replace(/\b(?:down|up|Down|Up|above|below|Above|Below|dVAH|dVAL|higher|lower|ceiling|floor|under|over|fell|rose|dropped|rallied)\b(?![- ]probability)/g, w => map[w] || w);
+}
+const MIRROR_NAME = n => n.replace("VAL", "§").replace("VAH", "VAL").replace("§", "VAH");
+const opp = a => a === "long" ? "short" : a === "short" ? "long" : a;
+
+function makeRound(forceId){
+  const valid = R0() < .5;
+  const ids = Object.keys(SC).filter(k => forceId ? k === forceId : SC[k].valid === valid);
+  for(let attempt = 0; attempt < 60; attempt++){
+    const id = pick(ids), sc = SC[id], seed = Math.floor(R0() * 1e9), r = rng(seed);
+    let head = sc.head(r, seed);
+    // walk the last few points onto the dPOC (Magnet) or the dVAL (D-shape), measured in the same rows the chart draws
+    const snapTo = which => { for(let k = 0; k < 3; k++){ const mn = Math.min(...head), mx = Math.max(...head), m = (mx - mn) * .2;
+      const P = profile(head, 22, mn - m, mx + m), t = which === "poc" ? P.pocP : P.val, st = head[head.length - 1];
+      head = head.concat([1, 2, 3, 4].map(j => st + (t - st) * j / 4)); } };
+    if(sc.endAtPOC) snapTo("poc");
+    if(id === "dshape") snapTo("val");
+    const end = head[head.length - 1];
+    const tparts = sc.tail(r).map(q => sc.tailRel && q.kind === "go" ? { ...q, to: end + q.to } : sc.tailRel && q.kind === "rot" ? { ...q, c: end + q.c } : q);
+    tparts[0] = { ...tparts[0], from: end };
+    const tail = gen(tparts, seed + 7); const off = end - tail[0];
+    let pts = head.concat(tail.slice(1).map((v, i) => v + off * Math.max(0, 1 - i / 6)));
+    let key = sc.keyAtEnd ? end : sc.key;
+    const cut = head.length;
+    // stop and target from candle ATR, then check the outcome actually behaves
+    const cs = candles(head); const last = cs.slice(-20); const atr = last.reduce((a, x) => a + (x.h - x.l), 0) / last.length;
+    const tr = sc.valid ? sc.ans : sc.tempt; const dir = tr.act === "long" ? 1 : -1;
+    const entry = end, stop = 2 * atr, tgt = entry + dir * stop, sl = entry - dir * stop;
+    let hit = null, hitI = null;
+    for(let i = cut; i < pts.length; i++){ const p = pts[i];
+      if(dir > 0 ? p >= tgt : p <= tgt){ hit = "tp"; hitI = i; break; }
+      if(dir > 0 ? p <= sl : p >= sl){ hit = "sl"; hitI = i; break; } }
+    if((sc.valid && hit !== "tp") || (!sc.valid && hit !== "sl")) continue;
+    // level names
+    const set = sc.keySet === "low" ? LV.low : sc.keySet === "high" ? LV.high : sc.keySet === "lowpoc" ? LV.low.concat(LV.poc) : sc.keySet === "any" ? LV.high.concat(LV.poc) : null;
+    let level = set && key != null ? { ...pick(set, r), p:key } : null;
+    // zone
+    const mn0 = Math.min(...pts, key ?? Infinity), mx0 = Math.max(...pts, key ?? -Infinity), m0 = (mx0 - mn0) * .28;
+    let lo = mn0 - m0, hi = mx0 + m0;
+    // question view is fitted to what's visible only, so empty space never hints at the move
+    const hd = head.concat(key != null ? [key] : []), hmn = Math.min(...hd), hmx = Math.max(...hd), hm = (hmx - hmn) * .2;
+    let qlo = hmn - hm, qhi = hmx + hm;
+    lo = Math.min(lo, qlo); hi = Math.max(hi, qhi);
+    // the profile is frozen at the decision, in fixed price rows, so the lines never shift on reveal
+    const PH = profile(head, 22, qlo, qhi);
+    if(sc.endAtPOC && !(PH.pocP < .9 && PH.vah < 1.8 && Math.abs(end - PH.pocP) < (qhi - qlo) / 22)) continue; // dPOC must sit in the old balance, not the breakout
+    if(id === "trend" && Math.abs(PH.pocP - end) < (qhi - qlo) / 22 * 4) continue; // trend dPOC lags behind price
+    if(id === "dshape" && Math.abs(end - PH.val) > (qhi - qlo) / 22) continue; // the level must sit on the dVAL
+    let zone = null;
+    if(sc.zone) zone = { a: sc.zone[0] === "VAH" ? PH.vah : sc.zone[0], b: sc.zone[1], lab: sc.zone[2], good: sc.zone[3] === "ok" };
+    const mirror = R0() < .5;
+    let prof = { h: PH.h, poc: PH.poc, a: PH.a, z: PH.z, lo: qlo, hi: qhi, pocP: PH.pocP, vah: PH.vah, val: PH.val };
+    let ans = { ...sc.ans }, tempt = sc.tempt ? { ...sc.tempt } : null, trade = { act: tr.act, set: tr.set };
+    let E = entry, T = tgt, S = sl;
+    if(mirror){
+      pts = pts.map(v => -v); [lo, hi] = [-hi, -lo]; [qlo, qhi] = [-qhi, -qlo]; prof = { h: prof.h.slice().reverse(), poc: 21 - prof.poc, a: 21 - prof.z, z: 21 - prof.a, lo: -prof.hi, hi: -prof.lo, pocP: -prof.pocP, vah: -prof.val, val: -prof.vah };
+      if(level) level = { ...level, n: MIRROR_NAME(level.n), p: -level.p };
+      if(zone) zone = { ...zone, a: -zone.a, b: -zone.b, lab: mirrorText(zone.lab) };
+      ans.act = opp(ans.act); if(tempt) tempt.act = opp(tempt.act); trade.act = opp(trade.act);
+      E = -E; T = -T; S = -S;
+    }
+    return { id, sc, pts, cut, lo, hi, qlo, qhi, prof, level, zone, ans, tempt, trade, entry:E, tgt:T, sl:S, atr, stop, hitI, mirror,
+             inst: pick(INSTR), sess: pick(SESS) };
+  }
+  return makeRound(forceId);
+}
+
+/* ================= drawing ================= */
+const cv = document.getElementById("cv"), ctx = cv.getContext("2d");
+let S = null, shown = 0, revealing = false, raf = null;
+function draw(){
+  if(!S) return;
+  const W = cv.parentElement.clientWidth, H = Math.round(Math.max(300, Math.min(520, W * .58))), d = window.devicePixelRatio || 1;
+  cv.width = W * d; cv.height = H * d; cv.style.height = H + "px"; ctx.setTransform(d, 0, 0, d, 0, 0);
+  const narrow = W < 560;
+  const PW = narrow ? 70 : 128, L = PW + 18, Rr = W - (narrow ? 78 : 112), T = 26, B = H - 22;
+  const { pts } = S, N = pts.length, lo = revealing ? S.lo : S.qlo, hi = revealing ? S.hi : S.qhi;
+  const X = i => L + (Rr - L) * i / (N - 1), Y = p => B - (p - lo) / (hi - lo) * (B - T);
+  ctx.fillStyle = "#EFEBE3"; ctx.fillRect(0, 0, W, H);
+  const P = S.prof, rows = P.h.length, mx = Math.max(...P.h), step = (P.hi - P.lo) / rows, rh = Y(P.lo) - Y(P.lo + step);
+  if(S.sc.showD){ ctx.fillStyle = "rgba(73,156,136,.10)"; ctx.fillRect(L, Y(P.vah), Rr - L, Y(P.val) - Y(P.vah)); }
+  // teaching annotation only after the decision
+  if(revealing && S.zone){ const a0 = Math.min(S.zone.a, S.zone.b), a1 = Math.max(S.zone.a, S.zone.b);
+    ctx.fillStyle = S.zone.good ? "rgba(46,139,87,.13)" : "rgba(192,57,43,.12)"; ctx.fillRect(L - 8, Y(a1), Rr - L + 8, Y(a0) - Y(a1));
+    ctx.fillStyle = S.zone.good ? "#2E8B57" : "#C0392B"; ctx.font = "600 11px Figtree, system-ui, sans-serif"; ctx.textAlign = "left";
+    ctx.fillText(S.zone.lab, L + 4, Y(a1) - 6); }
+  // profile
+  P.h.forEach((v, i) => { if(!v) return; const y = Y(P.lo + (i + 1) * step);
+    ctx.fillStyle = i === P.poc ? "#C9473A" : (i >= P.a && i <= P.z ? "#5FA494" : "#B9D3C4");
+    ctx.fillRect(12, y + 1.2, Math.max(2, (PW - 6) * v / mx), rh - 2.4); });
+  // lines
+  ctx.font = "600 " + (narrow ? 10.5 : 12) + "px Figtree, system-ui, sans-serif"; ctx.textAlign = "left";
+  const line = (p, col, lab, w = 2, dash) => { ctx.strokeStyle = col; ctx.lineWidth = w; ctx.setLineDash(dash || []);
+    ctx.beginPath(); ctx.moveTo(L - 8, Y(p)); ctx.lineTo(Rr, Y(p)); ctx.stroke(); ctx.setLineDash([]);
+    if(lab) labs.push({ y: Y(p) + 4, lab, col }); };
+  const labs = [];
+  const near = S.level && S.sc.showD && Math.abs(Y(S.level.p) - Y(P.val)) < 14;
+  const nearH = S.level && S.sc.showD && Math.abs(Y(S.level.p) - Y(P.vah)) < 14;
+  if(S.sc.showD){ line(P.vah, "#2962FF", nearH ? "" : "dVAH"); line(P.pocP, "#C9473A", "dPOC"); line(P.val, "#2962FF", near ? "" : "dVAL"); }
+  if(S.level){ const tag = near ? " + dVAL" : nearH ? " + dVAH" : ""; line(S.level.p, S.level.c, S.level.n + tag, 2.4, [7, 5]); }
+  labs.sort((u, v) => u.y - v.y);
+  for(let i = 1; i < labs.length; i++) if(labs[i].y - labs[i - 1].y < 13){ const m = (labs[i].y + labs[i - 1].y) / 2; labs[i - 1].y = m - 6.5; labs[i].y = m + 6.5; }
+  labs.forEach(o => { ctx.fillStyle = o.col; ctx.fillText(o.lab, Rr + 7, o.y); });
+  // trade box after the decision (neutral colours)
+  if(revealing){ const x0 = X(S.cut - 1), x1 = X(Math.min(N - 1, (S.hitI ?? N - 1) + 10));
+    ctx.fillStyle = "rgba(143,168,194,.30)"; ctx.fillRect(x0, Math.min(Y(S.entry), Y(S.tgt)), x1 - x0, Math.abs(Y(S.tgt) - Y(S.entry)));
+    ctx.fillStyle = "rgba(184,174,162,.34)"; ctx.fillRect(x0, Math.min(Y(S.entry), Y(S.sl)), x1 - x0, Math.abs(Y(S.sl) - Y(S.entry)));
+    ctx.strokeStyle = "#5E676D"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x0, Y(S.entry)); ctx.lineTo(x1, Y(S.entry)); ctx.stroke(); }
+  // candles
+  const good = S.sc.valid;
+  const cw = (Rr - L) / ((N - 1) / PER), bw = Math.max(2, cw * .62);
+  for(let s0 = 0; s0 < N - 1; s0 += PER){
+    let e = Math.min(N - 1, s0 + PER);
+    const fut = s0 >= S.cut - 1;
+    if(fut && !revealing) break;
+    if(!fut && e > S.cut - 1) e = S.cut - 1;
+    if(fut && e > shown - 1) e = shown - 1;
+    if(e <= s0) continue;
+    const seg = pts.slice(s0, e + 1), o = seg[0], c = seg[seg.length - 1], h = Math.max(...seg), l = Math.min(...seg);
+    const xc = X(s0 + (e - s0) / 2);
+    ctx.strokeStyle = fut ? (good ? "#2E8B57" : "#C0392B") : "#1F2A2C"; ctx.lineWidth = 1.3;
+    ctx.beginPath(); ctx.moveTo(xc, Y(h)); ctx.lineTo(xc, Y(l)); ctx.stroke();
+    ctx.fillStyle = fut ? (good ? "#9FD2B4" : "#EDB1A8") : (c >= o ? "#BBD9FB" : "#787B86");
+    const yb = Math.min(Y(o), Y(c)), hb = Math.max(1.5, Math.abs(Y(c) - Y(o)));
+    ctx.fillRect(xc - bw / 2, yb, bw, hb); ctx.strokeRect(xc - bw / 2, yb, bw, hb);
+  }
+  // now marker
+  const xn = X(S.cut - 1);
+  ctx.strokeStyle = "rgba(30,76,82,.5)"; ctx.setLineDash([4, 4]); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(xn, T); ctx.lineTo(xn, B); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle = "#1E4C52"; ctx.font = "600 11px Figtree, system-ui, sans-serif"; ctx.textAlign = "center";
+  ctx.fillText(revealing ? "DECISION" : "NOW", xn, T - 9);
+  ctx.beginPath(); ctx.arc(xn, Y(pts[S.cut - 1]), 5.5, 0, 7); ctx.fillStyle = "#E3B45A"; ctx.fill();
+  document.getElementById("atrTx").textContent = `${S.inst.sym} · ATR ${(S.atr * S.inst.U).toFixed(S.inst.dp)}`;
+}
+
+/* ================= flow ================= */
+const $ = id => document.getElementById(id);
+const SKEY = "maliktrades.sim.v1";
+function load(){ try{ return JSON.parse(localStorage.getItem(SKEY)) || null; }catch(e){ return null; } }
+function save(){ try{ localStorage.setItem(SKEY, JSON.stringify(score)); }catch(e){} }
+let score = load() || { played:0, pts:0, streak:0, best:0 };
+let choice = { act:null, set:null };
+const Tx = t => S && S.mirror ? mirrorText(t) : t;
+const cap = s => s[0].toUpperCase() + s.slice(1);
+function paintScore(){
+  $("sPlayed").textContent = score.played;
+  $("sAcc").textContent = score.played ? Math.round(score.pts / score.played * 100) + "%" : "–";
+  $("sStreak").textContent = score.streak; $("sBest").textContent = score.best;
+}
+function newRound(forceId){
+  cancelAnimationFrame(raf);
+  S = makeRound(forceId); shown = S.cut; revealing = false; choice = { act:null, set:null };
+  $("ctx").innerHTML = `<span class="tag">${S.inst.sym}</span><span class="tag">${S.sess} session</span>`;
+  $("prompt").textContent = Tx(S.sc.prompt(S.level ? S.level.n : ""));
+  $("psub").textContent = "Read the profile and the levels. What's your decision?";
+  $("hintTx").hidden = true; $("hintBtn").hidden = false; $("step2").hidden = true;
+  document.querySelectorAll(".b").forEach(x => { x.disabled = false; x.classList.remove("sel"); });
+  $("rCard").hidden = true;
+  draw();
+}
+function choose(act){
+  choice.act = act;
+  document.querySelectorAll("[data-act]").forEach(x => x.classList.toggle("sel", x.dataset.act === act));
+  if(act === "none"){ finish(); return; }
+  $("step2").hidden = false;
+}
+function finish(){
+  document.querySelectorAll(".b").forEach(x => x.disabled = true);
+  const a = S.ans;
+  let pts = 0;
+  if(choice.act === a.act) pts = (a.act === "none" || choice.set === a.set) ? 1 : .5;
+  score.played++; score.pts += pts; score.streak = pts === 1 ? score.streak + 1 : 0; score.best = Math.max(score.best, score.streak);
+  save(); paintScore();
+  const names = { snap:"Snap 🫰", flip:"Flip 🔄", magnet:"Magnet 🧲" };
+  const v = $("verdict");
+  v.className = "verdict " + (pts === 1 ? "ok" : pts ? "half" : "no");
+  v.textContent = pts === 1 ? (a.act === "none" ? "Good discipline ✅" : "Nailed it ✅") : pts ? "Right direction, wrong setup" : (a.act === "none" ? "Lower-probability trade ❌" : "Missed it ❌");
+  const yours = choice.act === "none" ? "No trade" : `${cap(choice.act)} ${names[choice.set]}`;
+  const right = a.act === "none" ? "No trade" : `${cap(a.act)} ${names[a.set]}`;
+  $("ans").innerHTML = `You: <b>${yours}</b> · Best answer: <b>${right}</b>`;
+  const K = S.level ? S.level.n : "level";
+  $("why").textContent = Tx(S.sc.why).replaceAll("{K}", K);
+  const U = S.inst.U, dp = S.inst.dp, st = `ATR ${(S.atr * U).toFixed(dp)} × 2 = ${(S.stop * U).toFixed(dp)} points`;
+  $("tradeTx").textContent = S.sc.valid
+    ? `The trade: ${S.trade.act} ${cap(S.trade.set)} at the level, stop ${st}, 1:1 target. It hit target.`
+    : `If you'd taken the ${S.trade.act} ${cap(S.trade.set)} here with a stop of ${st}, it would have been stopped out.`;
+  $("see").textContent = "Read more: " + S.sc.see;
+  $("rCard").hidden = false;
+  if(window.innerWidth < 900) setTimeout(() => $("cv").scrollIntoView({ behavior:"smooth", block:"start" }), 50);
+  revealing = true; let lastT = 0;
+  const step = ts => { if(ts - lastT > 30){ lastT = ts; shown = Math.min(S.pts.length, shown + 3); draw(); } if(shown < S.pts.length) raf = requestAnimationFrame(step); };
+  raf = requestAnimationFrame(step);
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-act]"); if(a && !a.disabled){ choose(a.dataset.act); return; }
+  const s = e.target.closest("[data-set]");
+  if(s && !s.disabled){ choice.set = s.dataset.set; document.querySelectorAll("[data-set]").forEach(x => x.classList.toggle("sel", x === s)); finish(); }
+});
+$("hintBtn").addEventListener("click", () => { $("hintTx").textContent = "💡 " + Tx(S.sc.hint); $("hintTx").hidden = false; $("hintBtn").hidden = true; });
+$("nextBtn").addEventListener("click", () => { newRound(); window.scrollTo({ top:0, behavior:"smooth" }); });
+$("resetBtn").addEventListener("click", () => { score = { played:0, pts:0, streak:0, best:0 }; save(); paintScore(); });
+let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw, 120); });
+paintScore();
+Promise.all(["600 12px Figtree", "600 11px Figtree", "600 10.5px Figtree"].map(f => document.fonts.load(f).catch(() => {}))).then(() => newRound());
+</script>
+<script src="/mt-nav.js" defer></script>
+</body>
+</html>

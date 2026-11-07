@@ -391,5 +391,67 @@
   "images": [
    "lib-2026-11-05-nq-snap.jpg"
   ]
+ },
+ {
+  "id": "2026-11-06-gc-flip",
+  "date": "2026-11-06",
+  "setup": "flip",
+  "instrument": "GC",
+  "direction": "Short",
+  "stars": 1,
+  "result": "+1R",
+  "title": "PWVAH Flip after acceptance below",
+  "summary": "Initially price broke through the level and built volume below it, so when price came back to retest it, it was a classic Flip setup and it hit TP really quickly.",
+  "confluences": [
+   "PWVAH"
+  ],
+  "notes": [
+   "Initially price broke through the level and built volume below it, so when price came back to retest it, it was a classic Flip setup and it hit TP really quickly."
+  ],
+  "images": [
+   "lib-2026-11-06-gc-flip.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-06-gc-snap",
+  "date": "2026-11-06",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 2,
+  "result": "-1R",
+  "title": "PWVAH Snap stopped out before the move",
+  "summary": "Price came from above and I took the Snap setup expecting a reaction from the level, but the trade stopped me out before ripping upwards. Unfortunate.",
+  "confluences": [
+   "PWVAH",
+   "VWAP Band"
+  ],
+  "notes": [
+   "Price came from above and I took the Snap setup expecting a reaction from the level, but the trade stopped me out before ripping upwards. Unfortunate."
+  ],
+  "images": [
+   "lib-2026-11-06-gc-snap.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-06-gc-snap-nypoc",
+  "date": "2026-11-06",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Short",
+  "stars": 2,
+  "result": "+1R",
+  "title": "NYPOC Snap",
+  "summary": "Price came from below and I took the classic Snap off the NYPOC, expecting a reaction from the level, and price gave a really clean reaction down.",
+  "confluences": [
+   "VWAP Band",
+   "NYPOC"
+  ],
+  "notes": [
+   "Price came from below and I took the classic Snap off the NYPOC, expecting a reaction from the level, and price gave a really clean reaction down."
+  ],
+  "images": [
+   "lib-2026-11-06-gc-snap-nypoc.jpg"
+  ]
  }
 ]

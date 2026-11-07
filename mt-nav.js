@@ -14,6 +14,7 @@
     { label: "Prop Tracker",  href: "/MalikTradesPropTracker/" },
     { label: "Mindset",       href: "/MalikTrades-Mindset-Tool/" },
     { label: "Setup Library", href: "/setup-library.html" },
+    { label: "Simulator",     href: "/simulator.html" },
     { label: "Guides",        href: "/#guides" }
   ];
 
