@@ -41,6 +41,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:48px;line-height:1.05;marg
 .card .lab{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .ctx{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
 .tag{font-size:12px;font-weight:500;border-radius:6px;padding:3px 9px;background:rgba(247,239,220,.08)}
+.tag.warn{background:rgba(227,180,90,.18);color:#F2CF8A}
 .prompt{font-family:var(--serif);font-size:23px;font-weight:600;line-height:1.2;margin:0 0 4px}
 .sub{color:var(--muted);font-size:14px;margin:0}
 .btns{display:grid;gap:8px;margin-top:12px}
@@ -248,8 +249,74 @@ const SC = {
     prompt: k => `Price has dropped straight down to the ${k}.`,
     hint: "How did price get to this level? Did it react anywhere on the way down?",
     why: "On the way to the {K}, price cut straight through the dPOC and the dVAL without reacting. It's actively looking for new fair value, so fading it at the next level is lower probability.",
-    see: "Bonus Tips: Scenario 03 · Common Mistakes" }
+    see: "Bonus Tips: Scenario 03 · Common Mistakes" },
+
+  /* ---- clean setups ---- */
+  snapPlain: { valid:true, ans:{ act:"long", set:"snap" }, showD:true, keyAtEnd:true, keySet:"lowpoc",
+    head:(r, s) => stepDown(r, s),
+    tail:() => [go(6, -.08, .04), go(16, 1.0, .06), rot(30, 1.1, .5, .08, .12)], tailRel:true,
+    prompt: k => `Price is stepping down into the ${k}.`,
+    hint: "Is anything working against this level: an HVN building on the other side, a trend day, or a slice straight through?",
+    why: "Price came down to the {K} in steps, pausing and reacting on the way. There's no HVN building against the level, it isn't a trend day, and price didn't slice through anything to get here. Nothing argues against the level, so it's a clean Snap.",
+    see: "Core Setups · Bonus Tips: Scenario 03" },
+  stackedSnap: { valid:true, ans:{ act:"long", set:"snap" }, showD:true, keyAtEnd:true, keySet:"low", key2:-.09,
+    head:(r, s) => stepDown(r, s),
+    tail:() => [go(6, -.1, .04), go(16, 1.1, .06), rot(30, 1.2, .5, .08, .12)], tailRel:true,
+    prompt: (k, k2) => `Price is coming down to the ${k} and the ${k2}.`,
+    hint: "How many levels are sitting at this price?",
+    why: "The {K} and the {K2} are stacked together, so this price has two confluences (2★). Stacked levels give stronger reactions, which makes this a higher-quality Snap.",
+    see: "VP Academy #03: Volume Profile 101 · Core Setups" },
+  hvnLevel: { valid:true, ans:{ act:"long", set:"snap" }, showD:false, key:-1.5, keySet:"low",
+    head:(r, s) => gen([rot(Math.round(jit(100, r)), -1.5, .3, .12, .12), go(14, .5, .06), rot(Math.round(jit(120, r)), .7, .7, .07, .14), go(12, -.35, .05), rot(Math.round(jit(18, r)), -.3, .18, .1, .1), go(12, -1.5, .05)], s),
+    tail:() => [go(6, -1.58, .04), go(16, -.5, .06), rot(30, -.4, .5, .08, .12)],
+    zone:[-1.8, -1.2, "HVN sitting on the level", "ok"],
+    prompt: k => `Price is coming back down to the ${k}.`,
+    hint: "Look at the volume sitting at the level itself.",
+    why: "Earlier in the session, price built an HVN right at the {K}. An HVN sitting on your level is an extra confluence (another ★), so the Snap gets stronger. That's different from an HVN building against the level from the other side, which is pressure.",
+    see: "VP Academy #03: Volume Profile 101 · Bonus Tips: Scenario 02" },
+  trendFlip: { valid:true, ans:{ act:"long", set:"flip" }, showD:true, key:0, keySet:"high",
+    head:(r, s) => { const parts = [go(6, -4.1, .06, -4.2)]; let l = -4.2; for(let i = 0; i < 6; i++){ l += jit(.65, r, .1); parts.push(go(18, l, .08)); parts.push(go(8, l - jit(.22, r, .3), .05)); }
+      parts.push(go(12, .9, .06), rot(Math.round(jit(44, r)), .62, .26, .12, .1), go(10, .04, .05)); return gen(parts, s); },
+    tail:() => [go(12, 1.0, .06), go(8, .8, .05), go(16, 2.1, .07)],
+    zone:[.3, 1.0, "Holding above the level", "ok"],
+    prompt: k => `Price is pulling back to the ${k} on a strong day up.`,
+    hint: "What kind of day is it, and which setups go with that kind of day?",
+    why: "It's a trend day, so you trade with the trend, not against it. Price broke above the {K} and held above it, building volume, so the market accepted those prices. The pullback to the {K} is a Flip in the direction of the trend.",
+    see: "VP Academy #04: Profile Shapes · Core Setups" },
+
+  /* ---- more traps ---- */
+  dpocFade: { valid:false, ans:{ act:"none" }, tempt:{ act:"short", set:"snap" }, showD:true, endAtPOC:true,
+    head:(r, s) => gen([rot(Math.round(jit(190, r)), 0, .9, .07, .14), go(10, -.8, .05), go(12, "POC", .05)], s),
+    tail:() => [go(10, .9, .06), go(8, .6, .05), go(14, 1.6, .07)], tailRel:true,
+    prompt: () => `Price is coming up to the dPOC.`,
+    hint: "Has price been accepted outside the value area today? Without that, what does the dPOC give you?",
+    why: "Price has stayed inside the value area all session, so there's been no acceptance outside it and no Magnet. On its own, the dPOC is the busiest, noisiest price of the day. We only trade it as a Magnet, so this is a pass.",
+    see: "Common Mistakes #05 · Core Setups" },
+  chase: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"snap" }, showD:true, key:-1.2, keySet:"low",
+    head:(r, s) => gen([rot(Math.round(jit(130, r)), 1.0, .7, .07, .14), go(14, -1.2, .05), go(4, -1.12, .03), go(12, jit(0, r) - .05 + r() * .3, .06)], s),
+    tail:() => [go(10, -.9, .05), go(8, -1.1, .04), go(14, -.4, .06)], tailRel:true,
+    prompt: k => `Price bounced off the ${k} and is running up. Do you get in now?`,
+    hint: "Where would your entry and stop be compared to the level?",
+    why: "The Snap already happened at the {K}. Getting in now is chasing: you're far from the level, with nothing under your entry to define the trade. We enter with limit orders at planned levels, so if you missed it, let it go and wait for the next setup.",
+    result: (act, st) => `If you'd chased it ${act} here with a stop of ${st}, the pullback would have stopped you out.`,
+    see: "VP Academy #07: Execution · Common Mistakes" },
+  twoLosses: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"snap" }, showD:true, keyAtEnd:true, keySet:"lowpoc",
+    expect:"tp", neutral:true, tag:"⚠️ 2 losses today",
+    head:(r, s) => stepDown(r, s),
+    tail:() => [go(6, -.08, .04), go(16, 1.0, .06), rot(30, 1.1, .5, .08, .12)], tailRel:true,
+    prompt: k => `You've already taken 2 losses on this account today. Price is stepping down into the ${k}.`,
+    hint: "Check your rules for the day, not just the chart.",
+    why: "Two losses and done. It doesn't matter how good the setup looks: once you've taken two losses on an account, you stop for the day. Protecting the account, and your head, is the job.",
+    result: () => `It would have worked this time. That doesn't change the rule: the next one might not, and that's how a bad day turns into a blown account.`,
+    noVerdict: "Broke the daily rule ❌",
+    see: "VP Academy #07: Execution · Mindset tool" }
 };
+// a gradual approach with pauses, so it reads differently from a slice
+function stepDown(r, s){
+  const a = jit(.42, r, .3), b = -jit(.4, r, .3);
+  return gen([rot(Math.round(jit(130, r)), 1.2, .8, .07, .14), go(12, a, .05), rot(Math.round(jit(24, r)), a + .05, .2, .1, .1),
+    go(12, b, .05), rot(Math.round(jit(20, r)), b + .05, .2, .1, .1), go(14, -jit(1.3, r, .12), .05)], s);
+}
 
 /* ================= build one round ================= */
 const INSTR = [ { sym:"NQ", U:25, dp:2 }, { sym:"ES", U:5, dp:2 }, { sym:"GC", U:4, dp:1 }, { sym:"CL", U:.2, dp:2 } ];
@@ -271,9 +338,11 @@ function mirrorText(t){
 const MIRROR_NAME = n => n.replace("VAL", "§").replace("VAH", "VAL").replace("§", "VAH");
 const opp = a => a === "long" ? "short" : a === "short" ? "long" : a;
 
+const RECENT = [];
 function makeRound(forceId){
   const valid = R0() < .5;
-  const ids = Object.keys(SC).filter(k => forceId ? k === forceId : SC[k].valid === valid);
+  let ids = Object.keys(SC).filter(k => forceId ? k === forceId : SC[k].valid === valid);
+  if(!forceId){ const fresh = ids.filter(k => !RECENT.includes(k)); if(fresh.length) ids = fresh; }
   for(let attempt = 0; attempt < 60; attempt++){
     const id = pick(ids), sc = SC[id], seed = Math.floor(R0() * 1e9), r = rng(seed);
     let head = sc.head(r, seed);
@@ -298,10 +367,12 @@ function makeRound(forceId){
     for(let i = cut; i < pts.length; i++){ const p = pts[i];
       if(dir > 0 ? p >= tgt : p <= tgt){ hit = "tp"; hitI = i; break; }
       if(dir > 0 ? p <= sl : p >= sl){ hit = "sl"; hitI = i; break; } }
-    if((sc.valid && hit !== "tp") || (!sc.valid && hit !== "sl")) continue;
+    if(hit !== (sc.expect || (sc.valid ? "tp" : "sl"))) continue;
     // level names
     const set = sc.keySet === "low" ? LV.low : sc.keySet === "high" ? LV.high : sc.keySet === "lowpoc" ? LV.low.concat(LV.poc) : sc.keySet === "any" ? LV.high.concat(LV.poc) : null;
     let level = set && key != null ? { ...pick(set, r), p:key } : null;
+    let level2 = null;
+    if(level && sc.key2){ const others = set.filter(x => x.n !== level.n && x.c !== level.c); level2 = { ...pick(others, r), p: key + sc.key2 }; }
     // zone
     const mn0 = Math.min(...pts, key ?? Infinity), mx0 = Math.max(...pts, key ?? -Infinity), m0 = (mx0 - mn0) * .28;
     let lo = mn0 - m0, hi = mx0 + m0;
@@ -312,6 +383,7 @@ function makeRound(forceId){
     // the profile is frozen at the decision, in fixed price rows, so the lines never shift on reveal
     const PH = profile(head, 22, qlo, qhi);
     if(sc.endAtPOC && !(PH.pocP < .9 && PH.vah < 1.8 && Math.abs(end - PH.pocP) < (qhi - qlo) / 22)) continue; // dPOC must sit in the old balance, not the breakout
+    if(id === "trendFlip" && PH.pocP > -.3) continue; // the dPOC stays below the level on a Flip
     if(id === "trend" && Math.abs(PH.pocP - end) < (qhi - qlo) / 22 * 4) continue; // trend dPOC lags behind price
     if(id === "dshape" && Math.abs(end - PH.val) > (qhi - qlo) / 22) continue; // the level must sit on the dVAL
     let zone = null;
@@ -323,11 +395,13 @@ function makeRound(forceId){
     if(mirror){
       pts = pts.map(v => -v); [lo, hi] = [-hi, -lo]; [qlo, qhi] = [-qhi, -qlo]; prof = { h: prof.h.slice().reverse(), poc: 21 - prof.poc, a: 21 - prof.z, z: 21 - prof.a, lo: -prof.hi, hi: -prof.lo, pocP: -prof.pocP, vah: -prof.val, val: -prof.vah };
       if(level) level = { ...level, n: MIRROR_NAME(level.n), p: -level.p };
+      if(level2) level2 = { ...level2, n: MIRROR_NAME(level2.n), p: -level2.p };
       if(zone) zone = { ...zone, a: -zone.a, b: -zone.b, lab: mirrorText(zone.lab) };
       ans.act = opp(ans.act); if(tempt) tempt.act = opp(tempt.act); trade.act = opp(trade.act);
       E = -E; T = -T; S = -S;
     }
-    return { id, sc, pts, cut, lo, hi, qlo, qhi, prof, level, zone, ans, tempt, trade, entry:E, tgt:T, sl:S, atr, stop, hitI, mirror,
+    if(!forceId){ RECENT.push(id); if(RECENT.length > 4) RECENT.shift(); }
+    return { id, sc, pts, cut, lo, hi, qlo, qhi, prof, level, level2, zone, ans, tempt, trade, entry:E, tgt:T, sl:S, atr, stop, hitI, mirror,
              inst: pick(INSTR), sess: pick(SESS) };
   }
   return makeRound(forceId);
@@ -366,6 +440,7 @@ function draw(){
   const nearH = S.level && S.sc.showD && Math.abs(Y(S.level.p) - Y(P.vah)) < 14;
   if(S.sc.showD){ line(P.vah, "#2962FF", nearH ? "" : "dVAH"); line(P.pocP, "#C9473A", "dPOC"); line(P.val, "#2962FF", near ? "" : "dVAL"); }
   if(S.level){ const tag = near ? " + dVAL" : nearH ? " + dVAH" : ""; line(S.level.p, S.level.c, S.level.n + tag, 2.4, [7, 5]); }
+  if(S.level2) line(S.level2.p, S.level2.c, S.level2.n, 2.4, [3, 4]);
   labs.sort((u, v) => u.y - v.y);
   for(let i = 1; i < labs.length; i++) if(labs[i].y - labs[i - 1].y < 13){ const m = (labs[i].y + labs[i - 1].y) / 2; labs[i - 1].y = m - 6.5; labs[i].y = m + 6.5; }
   labs.forEach(o => { ctx.fillStyle = o.col; ctx.fillText(o.lab, Rr + 7, o.y); });
@@ -386,9 +461,9 @@ function draw(){
     if(e <= s0) continue;
     const seg = pts.slice(s0, e + 1), o = seg[0], c = seg[seg.length - 1], h = Math.max(...seg), l = Math.min(...seg);
     const xc = X(s0 + (e - s0) / 2);
-    ctx.strokeStyle = fut ? (good ? "#2E8B57" : "#C0392B") : "#1F2A2C"; ctx.lineWidth = 1.3;
+    ctx.strokeStyle = fut ? (S.sc.neutral ? "#6E675C" : good ? "#2E8B57" : "#C0392B") : "#1F2A2C"; ctx.lineWidth = 1.3;
     ctx.beginPath(); ctx.moveTo(xc, Y(h)); ctx.lineTo(xc, Y(l)); ctx.stroke();
-    ctx.fillStyle = fut ? (good ? "#9FD2B4" : "#EDB1A8") : (c >= o ? "#BBD9FB" : "#787B86");
+    ctx.fillStyle = fut ? (S.sc.neutral ? "#D3CCBE" : good ? "#9FD2B4" : "#EDB1A8") : (c >= o ? "#BBD9FB" : "#787B86");
     const yb = Math.min(Y(o), Y(c)), hb = Math.max(1.5, Math.abs(Y(c) - Y(o)));
     ctx.fillRect(xc - bw / 2, yb, bw, hb); ctx.strokeRect(xc - bw / 2, yb, bw, hb);
   }
@@ -419,8 +494,8 @@ function paintScore(){
 function newRound(forceId){
   cancelAnimationFrame(raf);
   S = makeRound(forceId); shown = S.cut; revealing = false; choice = { act:null, set:null };
-  $("ctx").innerHTML = `<span class="tag">${S.inst.sym}</span><span class="tag">${S.sess} session</span>`;
-  $("prompt").textContent = Tx(S.sc.prompt(S.level ? S.level.n : ""));
+  $("ctx").innerHTML = `<span class="tag">${S.inst.sym}</span><span class="tag">${S.sess} session</span>` + (S.sc.tag ? `<span class="tag warn">${S.sc.tag}</span>` : "");
+  $("prompt").textContent = Tx(S.sc.prompt(S.level ? S.level.n : "", S.level2 ? S.level2.n : ""));
   $("psub").textContent = "Read the profile and the levels. What's your decision?";
   $("hintTx").hidden = true; $("hintBtn").hidden = false; $("step2").hidden = true;
   document.querySelectorAll(".b").forEach(x => { x.disabled = false; x.classList.remove("sel"); });
@@ -443,14 +518,15 @@ function finish(){
   const names = { snap:"Snap 🫰", flip:"Flip 🔄", magnet:"Magnet 🧲" };
   const v = $("verdict");
   v.className = "verdict " + (pts === 1 ? "ok" : pts ? "half" : "no");
-  v.textContent = pts === 1 ? (a.act === "none" ? "Good discipline ✅" : "Nailed it ✅") : pts ? "Right direction, wrong setup" : (a.act === "none" ? "Lower-probability trade ❌" : "Missed it ❌");
+  v.textContent = pts === 1 ? (a.act === "none" ? "Good discipline ✅" : "Nailed it ✅") : pts ? "Right direction, wrong setup" : (a.act === "none" ? (S.sc.noVerdict || "Lower-probability trade ❌") : "Missed it ❌");
   const yours = choice.act === "none" ? "No trade" : `${cap(choice.act)} ${names[choice.set]}`;
   const right = a.act === "none" ? "No trade" : `${cap(a.act)} ${names[a.set]}`;
   $("ans").innerHTML = `You: <b>${yours}</b> · Best answer: <b>${right}</b>`;
   const K = S.level ? S.level.n : "level";
-  $("why").textContent = Tx(S.sc.why).replaceAll("{K}", K);
+  $("why").textContent = Tx(S.sc.why).replaceAll("{K2}", S.level2 ? S.level2.n : "").replaceAll("{K}", K);
   const U = S.inst.U, dp = S.inst.dp, st = `ATR ${(S.atr * U).toFixed(dp)} × 2 = ${(S.stop * U).toFixed(dp)} points`;
-  $("tradeTx").textContent = S.sc.valid
+  $("tradeTx").textContent = S.sc.result ? Tx(S.sc.result(S.trade.act, st))
+    : S.sc.valid
     ? `The trade: ${S.trade.act} ${cap(S.trade.set)} at the level, stop ${st}, 1:1 target. It hit target.`
     : `If you'd taken the ${S.trade.act} ${cap(S.trade.set)} here with a stop of ${st}, it would have been stopped out.`;
   $("see").textContent = "Read more: " + S.sc.see;
