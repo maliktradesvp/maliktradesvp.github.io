@@ -453,5 +453,108 @@
   "images": [
    "lib-2026-11-06-gc-snap-nypoc.jpg"
   ]
+ },
+ {
+  "id": "2026-11-09-nq-snap-pwval",
+  "date": "2026-11-09",
+  "setup": "snap",
+  "instrument": "NQ",
+  "direction": "Short",
+  "stars": 1,
+  "result": "+1R",
+  "title": "PWVAL Snap from underneath",
+  "summary": "Classic Snap setup. Price came from underneath and I took a short at the PWVAL, and price had an immediate reaction to the downside.",
+  "confluences": [
+   "PWVAL"
+  ],
+  "notes": [
+   "Classic Snap setup. Price came from underneath and I took a short at the PWVAL, and price had an immediate reaction to the downside."
+  ],
+  "images": [
+   "lib-2026-11-09-nq-snap-pwval.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-09-nq-snap-nyvah",
+  "date": "2026-11-09",
+  "setup": "snap",
+  "instrument": "NQ",
+  "direction": "Short",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYVAH Snap",
+  "summary": "Classic Snap setup. Price came from underneath and I took a short at the NYVAH, and price had an immediate reaction to the downside.",
+  "confluences": [
+   "NYVAH"
+  ],
+  "notes": [
+   "Classic Snap setup. Price came from underneath and I took a short at the NYVAH, and price had an immediate reaction to the downside."
+  ],
+  "images": [
+   "lib-2026-11-09-nq-snap-nyvah.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-09-nq-flip-pwval",
+  "date": "2026-11-09",
+  "setup": "flip",
+  "instrument": "NQ",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "PWVAL Flip after acceptance above",
+  "summary": "Classic Flip. Price initially broke through the PWVAL and built acceptance beyond the level, so when it came back to the PWVAL it was a very good trade to take. Price had a very nice reaction off the level and I hit TP fast.",
+  "confluences": [
+   "PWVAL"
+  ],
+  "notes": [
+   "Classic Flip. Price initially broke through the PWVAL and built acceptance beyond the level, so when it came back to the PWVAL it was a very good trade to take. Price had a very nice reaction off the level and I hit TP fast."
+  ],
+  "images": [
+   "lib-2026-11-09-nq-flip-pwval.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-09-gc-wall",
+  "date": "2026-11-09",
+  "setup": "wall",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "The Wall off a dVP HVN shelf",
+  "summary": "Here there was an HVN in the dVP (the green box), and I took a small continuation play to the upside when price came down to the HVN.",
+  "confluences": [
+   "HVN"
+  ],
+  "notes": [
+   "This was a Wall, a rare advanced setup with a very specific condition: price has to move in one direction the entire session. To capitalise on the momentum, we can take retests of HVNs in the developing profile.",
+   "Here there was an HVN in the dVP (the green box), and I took a small continuation play to the upside when price came down to the HVN."
+  ],
+  "images": [
+   "lib-2026-11-09-gc-wall.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-09-gc-wall-dpoc",
+  "date": "2026-11-09",
+  "setup": "wall",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "The Wall at the dPOC HVN",
+  "summary": "Here the dPOC had the biggest HVN, so I placed my buy limit just above it and caught a nice continuation play to the upside.",
+  "confluences": [
+   "dPOC",
+   "HVN"
+  ],
+  "notes": [
+   "This was a Wall, a rare advanced setup with a very specific condition: price has to move in one direction the entire session. To capitalise on the momentum, we can take retests of HVNs in the developing profile.",
+   "Here the dPOC had the biggest HVN, so I placed my buy limit just above it and caught a nice continuation play to the upside."
+  ],
+  "images": [
+   "lib-2026-11-09-gc-wall-dpoc.jpg"
+  ]
  }
 ]
