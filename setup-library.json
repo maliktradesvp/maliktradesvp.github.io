@@ -556,5 +556,89 @@
   "images": [
    "lib-2026-11-09-gc-wall-dpoc.jpg"
   ]
+ },
+ {
+  "id": "2026-11-10-gc-flip-onpoc",
+  "date": "2026-11-10",
+  "setup": "flip",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 2,
+  "result": "+1R",
+  "title": "ONPOC Flip stacked with the dVAL",
+  "summary": "This was a classic Flip setup. Price broke past the level initially, and when it approached the level again I put a limit order on the ONPOC.",
+  "confluences": [
+   "dVAL",
+   "ONPOC"
+  ],
+  "notes": [
+   "This was a classic Flip setup. Price broke past the level initially, and when it approached the level again I put a limit order on the ONPOC.",
+   "This was a double confluence trade, as the dVAL was in the same zone as well. I got tagged in at the level and quickly hit TP."
+  ],
+  "images": [
+   "lib-2026-11-10-gc-flip-onpoc.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-10-nq-snap-nypoc",
+  "date": "2026-11-10",
+  "setup": "snap",
+  "instrument": "NQ",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYPOC Snap from above",
+  "summary": "This was a classic Snap setup. Price came down from above and I took a quick Snap off the level. Quick in and out trade.",
+  "confluences": [
+   "NYPOC"
+  ],
+  "notes": [
+   "This was a classic Snap setup. Price came down from above and I took a quick Snap off the level. Quick in and out trade."
+  ],
+  "images": [
+   "lib-2026-11-10-nq-snap-nypoc.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-10-gc-reinforced-flip-nypoc",
+  "date": "2026-11-10",
+  "setup": "flip",
+  "instrument": "GC",
+  "direction": "Short",
+  "stars": 2,
+  "result": "+1R",
+  "title": "Reinforced Flip at the NYPOC",
+  "summary": "This was a Reinforced Flip setup. There was an HVN shelf above the NYPOC before the trade, so when price came from below to retest the level, I felt confident taking it, as the HVN would act as a wall of defence, reinforcing the level.",
+  "confluences": [
+   "NYPOC",
+   "HVN"
+  ],
+  "notes": [
+   "This was a Reinforced Flip setup. There was an HVN shelf above the NYPOC before the trade, so when price came from below to retest the level, I felt confident taking it, as the HVN would act as a wall of defence, reinforcing the level.",
+   "I got tagged in and quickly hit TP in the same candle."
+  ],
+  "images": [
+   "lib-2026-11-10-gc-reinforced-flip-nypoc.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-10-gc-flip-nyval",
+  "date": "2026-11-10",
+  "setup": "flip",
+  "instrument": "GC",
+  "direction": "Short",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYVAL Flip back to the downside",
+  "summary": "This was a classic Flip. Price broke through the level initially, and when it came back to retest, I took the Flip back to the downside and hit TP really fast.",
+  "confluences": [
+   "NYVAL"
+  ],
+  "notes": [
+   "This was a classic Flip. Price broke through the level initially, and when it came back to retest, I took the Flip back to the downside and hit TP really fast."
+  ],
+  "images": [
+   "lib-2026-11-10-gc-flip-nyval.jpg"
+  ]
  }
 ]
