@@ -47,7 +47,7 @@ aside .wm{width:168px;margin:0 10px 4px;display:block}
 .disc a{display:inline-flex;gap:8px;align-items:center;margin-top:12px;background:#E9E2D3;color:var(--teal);padding:8px 13px;border-radius:9px;font-weight:700}
 
 /* ---------- main ---------- */
-main{padding:28px 36px 40px;display:flex;flex-direction:column;gap:28px;max-width:1240px;width:100%}
+main{padding:28px 36px 40px;display:flex;flex-direction:column;gap:28px;max-width:1320px;width:100%;margin:0 auto}
 .mtop{display:none}
 .hero{border-radius:20px;overflow:hidden;position:relative;color:#F2ECE1;background:#21414A url(/home-hero.jpg) center/cover;padding:26px 30px 22px}
 .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(26,51,58,.93) 0%,rgba(26,51,58,.74) 55%,rgba(26,51,58,.4))}
@@ -61,7 +61,7 @@ main{padding:28px 36px 40px;display:flex;flex-direction:column;gap:28px;max-widt
 .hero p{margin:0;color:#C9D5D2;font-size:16.5px}
 .clk{text-align:right;background:rgba(0,0,0,.2);border:1px solid rgba(242,236,225,.14);border-radius:14px;padding:10px 16px;flex:none}
 .clk small{display:block;font-size:11px;letter-spacing:.2em;color:#AFC1BD;font-weight:700}
-.clk b{font-family:var(--display);font-size:38px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.clk b{font-family:var(--body);font-size:34px;font-weight:600;letter-spacing:-.01em;line-height:1.05;font-variant-numeric:tabular-nums}
 .clk span{font-size:13px;color:#AFC1BD}
 .tl{margin-top:30px;position:relative;height:70px}
 .tl.closed{opacity:.5}
@@ -112,6 +112,7 @@ main{padding:28px 36px 40px;display:flex;flex-direction:column;gap:28px;max-widt
 section{scroll-margin-top:20px}
 
 .lib{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.lib .tr:nth-child(n+5){display:none}
 .tr{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px -20px rgba(33,65,74,.3);transition:transform .15s,box-shadow .15s}
 .tr:hover{transform:translateY(-2px);box-shadow:0 16px 34px -18px rgba(33,65,74,.4)}
 .tr .im{position:relative;height:170px;overflow:hidden;background:#E8E2D6}
@@ -190,6 +191,21 @@ footer p{margin:0}
 
 .tabs{display:none}
 
+@media (min-width:1760px){
+  .app{grid-template-columns:280px minmax(0,1fr)}
+  main{max-width:1560px;padding:36px 56px 48px;gap:32px}
+  .lib{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .lib .tr:nth-child(n+5){display:block}
+  .tools{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .tool .pv{height:110px}
+  .hero{padding:32px 38px 26px}
+  .pbs{grid-template-columns:300px minmax(0,1fr)}
+  .books{max-width:1080px;justify-self:end;width:100%}
+}
+@media (min-width:2300px){
+  main{max-width:1820px}
+  body{font-size:17px}
+}
 @media (max-width:1100px){
   .lib{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tools{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -462,7 +478,7 @@ function paintPractice(){
   const right = res.filter(r => r === 1).length;
   const ring = `<svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="#EAE1D1" stroke-width="8"/>
     <circle cx="46" cy="46" r="38" fill="none" stroke="#2E8B57" stroke-width="8" stroke-dasharray="${(239 * frac).toFixed(0)} 239" transform="rotate(-90 46 46)" stroke-linecap="round"/>
-    <text x="46" y="53" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="600" font-size="24" fill="#1B2729">${Math.min(n, 99)}/${goal}</text></svg>`;
+    <text x="46" y="53" text-anchor="middle" font-family="Source Sans 3, system-ui, sans-serif" font-weight="700" font-size="21" fill="#1B2729">${Math.min(n, 99)}/${goal}</text></svg>`;
   const line = n === 0 ? "10 rounds a day until the read is automatic."
     : n >= goal ? `Done for today ✓ · ${Math.round(right / n * 100)}% right`
     : `${goal - n} round${goal - n === 1 ? "" : "s"} left today · ${Math.round(right / n * 100)}% right`;
@@ -486,7 +502,7 @@ fetch("/setup-library.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).cat
   if(!Array.isArray(data) || !data.length){ $("lib").closest("section").hidden = true; return; }
   $("navLib").textContent = data.length;
   $("libAll").textContent = `All ${data.length} trades →`;
-  const latest = data.map((t, i) => ({ t, i })).sort((a, b) => (b.t.date || "").localeCompare(a.t.date || "") || b.i - a.i).slice(0, 4).map(x => x.t);
+  const latest = data.map((t, i) => ({ t, i })).sort((a, b) => (b.t.date || "").localeCompare(a.t.date || "") || b.i - a.i).slice(0, 6).map(x => x.t);
   $("lib").innerHTML = latest.map(t => {
     const d = (t.direction || "").toLowerCase(), img = (t.images || [])[0];
     const dt = t.date ? new Date(t.date + "T12:00:00").toLocaleDateString("en-GB", { day:"numeric", month:"short" }) : "";
