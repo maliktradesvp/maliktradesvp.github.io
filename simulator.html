@@ -666,6 +666,9 @@ function finish(){
   let pts = 0;
   if(choice.act === a.act) pts = (a.act === "none" || choice.set === a.set) ? 1 : .5;
   score.played++; score.pts += pts; score.streak = pts === 1 ? score.streak + 1 : 0; score.best = Math.max(score.best, score.streak);
+  { const d = new Date(), day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+    if(!score.today || score.today.d !== day) score.today = { d:day, res:[] };
+    score.today.res.push(pts); }
   save(); paintScore();
   const names = { snap:"Snap 🫰", flip:"Flip 🔄", magnet:"Magnet 🧲", wall:"Wall 🧱" };
   const v = $("verdict");

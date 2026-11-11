@@ -2,371 +2,498 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MalikTrades Toolkit</title>
-<meta name="description" content="Free guides and tools from MalikTrades: chart setup, a futures cheat sheet, Volume Profile 101, profile shapes, the core setups, why the setups work, VWAP and ATR, execution, putting it all together, bonus tips, common mistakes, advanced setups, chart colours, Trading in the Zone book notes, a trading journal, trade review cards, the Prop Firm Hacking Tool, a prop account tracker and a mindset guide.">
-<meta name="theme-color" content="#1E4C52">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MalikTrades</title>
+<meta name="description" content="Free volume profile guides and tools for trading the MalikTrades way.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="/MalikTradesJournal/banner.jpg">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="MalikTrades">
-<meta property="og:title" content="MalikTrades Toolkit">
-<meta property="og:description" content="Free guides and tools for trading the MalikTrades way. Everything in one place.">
-<meta property="og:image" content="https://maliktradesvp.github.io/MalikTradesJournal/banner.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MalikTrades Toolkit">
-<meta name="twitter:description" content="Free guides and tools for trading the MalikTrades way. Everything in one place.">
-<meta name="twitter:image" content="https://maliktradesvp.github.io/MalikTradesJournal/banner.jpg">
 <style>
 :root{
-  --ground:#1E4C52;
-  --panel:rgba(247,239,220,0.05);
-  --line:rgba(247,239,220,0.13);
-  --cream:#F7EFDC;
-  --muted:rgba(247,239,220,0.66);
-  --jade:#7EC3A0;
-  --serif:"Cormorant Garamond","Hoefler Text",Baskerville,Georgia,serif;
-  --sans:"Figtree","Avenir Next","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  --paper:#F2ECE1; --card:#FFFCF6; --line:#E6DCCB; --ink:#1B2729; --mut:#6E746F;
+  --teal:#21414A; --teal2:#2F5A60; --tealsoft:#E4ECEA; --gold:#B4893A; --gold2:#E2C27A;
+  --win:#2E8B57; --winbg:#DCEDE2; --loss:#B03A2E; --lossbg:#F6E1DC;
+  --display:"Cormorant Garamond", Georgia, serif; --body:"Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{background:var(--ground);color:var(--cream);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;letter-spacing:.005em}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;font-variant-numeric:lining-nums;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+.app{display:grid;grid-template-columns:256px minmax(0,1fr);min-height:100vh}
 
-.banner{position:relative;line-height:0}
-.banner img{width:100%;height:auto;display:block;max-height:280px;object-fit:cover;object-position:center 40%}
-.banner::after{content:"";position:absolute;left:0;right:0;bottom:0;height:50%;background:linear-gradient(to bottom, rgba(30,76,82,0), var(--ground))}
+/* ---------- sidebar ---------- */
+aside{background:linear-gradient(180deg,#1E3C44,#1A333A);color:#E9E2D3;padding:30px 16px 20px;display:flex;flex-direction:column;gap:24px;position:sticky;top:0;height:100vh;overflow-y:auto}
+aside .wm{width:168px;margin:0 10px 4px;display:block}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{padding:9px 12px;border-radius:10px;color:#C3D1CE;font-weight:600;font-size:15px;display:flex;align-items:center;gap:12px;transition:background .15s,color .15s}
+.nav a:hover{background:rgba(233,226,211,.07);color:#fff}
+.nav a svg{opacity:.75;flex:none}
+.nav a .ct{margin-left:auto;font-size:12px;color:#93AAA6;font-weight:700;font-variant-numeric:tabular-nums}
+.nav a.on{background:rgba(233,226,211,.1);color:#fff}.nav a.on svg{opacity:1;color:var(--gold2)}
+.navh{font-size:10.5px;letter-spacing:.24em;color:#86A09B;font-weight:700;margin:0 12px 6px}
+.disc{margin-top:auto;border-radius:14px;padding:16px;font-size:14px;color:#C3D1CE;background:rgba(0,0,0,.18);border:1px solid rgba(233,226,211,.1)}
+.disc b{display:block;color:#fff;font-size:15px;margin-bottom:4px}
+.disc a{display:inline-flex;gap:8px;align-items:center;margin-top:12px;background:#E9E2D3;color:var(--teal);padding:8px 13px;border-radius:9px;font-weight:700}
 
-main{max-width:1120px;margin:0 auto;padding:8px 24px 40px}
+/* ---------- main ---------- */
+main{padding:28px 36px 40px;display:flex;flex-direction:column;gap:28px;max-width:1240px;width:100%}
+.mtop{display:none}
+.hero{border-radius:20px;overflow:hidden;position:relative;color:#F2ECE1;background:#21414A url(/home-hero.jpg) center/cover;padding:26px 30px 22px}
+.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(26,51,58,.93) 0%,rgba(26,51,58,.74) 55%,rgba(26,51,58,.4))}
+.hero>*{position:relative}
+.ht{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.2em;font-weight:700;color:var(--gold2);text-transform:uppercase}
+.live i{width:8px;height:8px;border-radius:50%;background:#7FD39E;box-shadow:0 0 0 4px rgba(127,211,158,.22)}
+.live.off i{background:#9FB3AF;box-shadow:0 0 0 4px rgba(159,179,175,.2)}
+.hero h1{font-family:var(--display);font-weight:600;font-size:clamp(34px,4.4vw,50px);line-height:1.02;margin:10px 0 8px;text-wrap:balance}
+.hero h1 em{color:var(--gold2);font-weight:500}
+.hero p{margin:0;color:#C9D5D2;font-size:16.5px}
+.clk{text-align:right;background:rgba(0,0,0,.2);border:1px solid rgba(242,236,225,.14);border-radius:14px;padding:10px 16px;flex:none}
+.clk small{display:block;font-size:11px;letter-spacing:.2em;color:#AFC1BD;font-weight:700}
+.clk b{font-family:var(--display);font-size:38px;font-weight:600;line-height:1.05;font-variant-numeric:tabular-nums}
+.clk span{font-size:13px;color:#AFC1BD}
+.tl{margin-top:30px;position:relative;height:70px}
+.tl.closed{opacity:.5}
+.track{position:absolute;left:0;right:0;top:16px;height:30px;border-radius:9px;background:rgba(242,236,225,.08)}
+.seg{z-index:2;position:absolute;top:16px;height:30px;border-radius:9px;padding:0 10px;display:flex;align-items:center;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;background:rgba(242,236,225,.16);color:#DDE6E3;transition:background .3s,color .3s}
+.seg.on{background:var(--gold2);color:var(--teal);outline:2px solid #fff;outline-offset:2px;box-shadow:0 6px 18px rgba(226,194,122,.3)}
+.seg.ny{background:rgba(242,236,225,.85);color:var(--teal)}
+.seg.ny.on{background:var(--gold2)}
+.nowm{z-index:1;position:absolute;top:6px;height:50px;width:2px;margin-left:-1px;background:#fff}
+.nowm:before{content:"";position:absolute;top:-4px;left:-4px;width:10px;height:10px;border-radius:50%;background:#fff}
+.nowm span{position:absolute;top:-24px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;letter-spacing:.12em}
+.ticks{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;font-size:11.5px;color:#9FB3AF}
+.leg{display:flex;gap:18px;margin-top:14px;font-size:12.5px;color:#B8C8C4;flex-wrap:wrap}
+.leg span{display:inline-flex;align-items:center;gap:7px}.leg i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.leg .tz{margin-left:auto}
 
-.intro h1{font-size:54px;line-height:1.05;text-wrap:balance}
-.intro p{color:var(--muted);font-size:18px;margin:14px 0 0;max-width:46ch}
+.g2{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 10px 30px -18px rgba(33,65,74,.25);min-width:0}
+.lab{font-size:11px;letter-spacing:.2em;font-weight:700;color:var(--teal2);text-transform:uppercase}
+.cont{display:flex;gap:22px;align-items:center;margin-top:14px}
+.cont img{width:112px;border-radius:7px;box-shadow:0 14px 30px -10px rgba(0,0,0,.4);transform:rotate(-2deg);flex:none}
+.num{font-size:13px;color:var(--gold);font-weight:700}
+.cont h3{font-family:var(--display);font-weight:600;font-size:34px;margin:2px 0 4px;line-height:1}
+.cont p{margin:0;color:var(--mut)}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.btn{display:inline-flex;gap:8px;align-items:center;background:var(--teal);color:#fff;padding:10px 16px;border-radius:10px;font-weight:700;font-size:15px;border:1px solid var(--teal);cursor:pointer}
+.btn:hover{background:var(--teal2)}
+.btn.ghost{background:transparent;color:var(--teal);border-color:var(--line)}
+.btn.ghost:hover{background:var(--tealsoft)}
+.pg{display:flex;gap:5px;margin-top:20px}.pg i{flex:1;height:6px;border-radius:3px;background:#EAE1D1}.pg i.d{background:var(--teal2)}
+.pgl{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--mut);margin-top:8px}
+.prac{display:flex;flex-direction:column}
+.ring{display:flex;gap:18px;align-items:center;margin-top:14px}
+.ring svg{flex:none}
+.ring b{font-family:var(--display);font-weight:600;font-size:28px;display:block;line-height:1.05}
+.ring span{color:var(--mut);font-size:14.5px}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.dots i{width:22px;height:22px;border-radius:6px;background:#EAE1D1;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11px;font-weight:700}
+.dots i.w{background:var(--winbg);color:var(--win)}.dots i.h{background:#F3E7CC;color:var(--gold)}.dots i.l{background:var(--lossbg);color:var(--loss)}
+.mind{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font-size:14px;color:var(--mut);display:flex;gap:10px;align-items:center}
+.mind svg{color:var(--gold);flex:none}.mind a{color:var(--ink);font-weight:700}.mind a:hover{text-decoration:underline}
+.prac .sp{flex:1;min-height:12px}
 
-section{margin-top:64px}
-.label{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
-.label{flex-wrap:wrap;row-gap:2px}
-.label h2{font-size:31px;white-space:nowrap}
-.label span{color:var(--muted);font-size:14.5px}
+.sh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.sh h2{font-family:var(--display);font-weight:600;font-size:30px;margin:0;color:var(--teal);line-height:1.1}
+.sh .r{font-size:14px;color:var(--teal2);font-weight:700}
+.sh .m{font-size:14px;color:var(--mut)}
+section{scroll-margin-top:20px}
 
-/* guides */
-.guides{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.guide{display:flex;gap:18px;align-items:center;padding:16px;border:1px solid var(--line);border-radius:8px;background:var(--panel);transition:border-color .2s,background .2s}
-.guide:hover{border-color:rgba(247,239,220,.35);background:rgba(247,239,220,.08)}
-.guide img{width:64px;aspect-ratio:297/420;border-radius:3px;object-fit:cover;flex:none;box-shadow:0 8px 18px rgba(0,0,0,.3)}
-.guide h3{font-size:23px;line-height:1.15}
-.guide p{color:var(--muted);font-size:14.5px;margin:3px 0 0}
+.lib{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.tr{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px -20px rgba(33,65,74,.3);transition:transform .15s,box-shadow .15s}
+.tr:hover{transform:translateY(-2px);box-shadow:0 16px 34px -18px rgba(33,65,74,.4)}
+.tr .im{position:relative;height:170px;overflow:hidden;background:#E8E2D6}
+.tr .im img{width:100%;height:100%;object-fit:cover;object-position:center 52%;display:block}
+.tr .im .r{position:absolute;top:10px;right:10px;background:var(--win);color:#fff;font-weight:700;font-size:13px;padding:3px 9px;border-radius:7px}
+.tr .bd{padding:12px 14px 14px}
+.tags{display:flex;gap:5px;margin-bottom:6px;flex-wrap:wrap}
+.tg{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:5px;background:var(--tealsoft);color:var(--teal2)}
+.tg.s{background:var(--lossbg);color:var(--loss)}.tg.L{background:var(--winbg);color:var(--win)}
+.tr h4{margin:0;font-size:15.5px;line-height:1.3}
+.tr .dt{font-size:12.5px;color:var(--mut);margin-top:4px}
 
-/* book notes */
-.books{display:grid;gap:16px}
-.book{display:flex;gap:22px;align-items:center;padding:18px 20px;border:1px solid var(--line);border-radius:8px;background:var(--panel);transition:border-color .2s,background .2s}
-.book:hover{border-color:rgba(247,239,220,.35);background:rgba(247,239,220,.08)}
-.book img{width:84px;aspect-ratio:612/792;border-radius:3px;object-fit:cover;flex:none;box-shadow:0 10px 22px rgba(0,0,0,.3)}
-.book h3{font-size:25px;line-height:1.15}
-.book .by{color:var(--jade);font-size:14px;margin:2px 0 0}
-.book p{color:var(--muted);font-size:14.5px;margin:6px 0 0;max-width:52ch}
-.book .read{display:inline-block;margin-top:10px;font-size:14px;color:var(--cream);transition:transform .2s}
-.book:hover .read{transform:translateX(3px)}
+/* guide rows */
+.two{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:start}
+.gl{display:flex;flex-direction:column;gap:10px}
+.gr{position:relative;display:grid;grid-template-columns:44px 58px minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;transition:border-color .15s,box-shadow .15s}
+.gr:hover{border-color:#D3C5AC;box-shadow:0 10px 26px -18px rgba(33,65,74,.35)}
+.gr .n{font-family:var(--display);font-size:28px;font-weight:600;color:#C9BBA0;text-align:center}
+.gr img{width:58px;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,.15);display:block}
+.gr h3{margin:0;font-size:17px;line-height:1.25}.gr p{margin:2px 0 0;color:var(--mut);font-size:14px}
+.gr.done .n{color:var(--win)}
+.gr.next{border:2px solid var(--gold);padding:11px 15px;box-shadow:0 8px 24px -10px rgba(180,137,58,.35)}
+.gr .lnk{position:absolute;inset:0;border-radius:14px;z-index:1}
+.tick{position:relative;z-index:2;font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--mut)}
+.tick:hover{border-color:var(--teal2);color:var(--teal)}
+.tick[aria-pressed="true"]{background:var(--winbg);border-color:var(--winbg);color:var(--win)}
+.gr.next .tick{background:var(--teal);border-color:var(--teal);color:#fff}
+.gl.play .gr{grid-template-columns:58px minmax(0,1fr) auto}
+.side{display:flex;flex-direction:column;gap:16px}
+.big{font-family:var(--display);font-size:54px;font-weight:600;line-height:1;color:var(--teal)}
+.big span{font-size:28px;color:var(--mut)}
+.book{display:flex;gap:16px;align-items:center;margin-top:12px}
+.book img{width:70px;border-radius:5px;box-shadow:0 6px 16px rgba(0,0,0,.2);flex:none}
+.book h3{font-family:var(--display);font-size:24px;margin:0;line-height:1.05}
+.book .by{color:var(--gold);font-weight:700;font-size:13px;margin:2px 0 4px}
+.book p{margin:0;color:var(--mut);font-size:14px}
+.dark{background:var(--teal);color:#E9E2D3;border:0}.dark .lab{color:#BFD0CC}.dark p{margin:10px 0 0;font-size:15px}.dark a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px}
 
-/* tools list */
-.list{border:1px solid var(--line);border-radius:8px;background:var(--panel);overflow:hidden}
-.row{display:flex;align-items:center;gap:18px;padding:18px 20px;border-top:1px solid var(--line);transition:background .2s}
-.row:first-child{border-top:0}
-.row:hover{background:rgba(247,239,220,.06)}
-.row .ic{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:20px;background:rgba(247,239,220,.07)}
-.row .tx{flex:1;min-width:0}
-.row h3{font-size:23px;line-height:1.15}
-.row p{color:var(--muted);font-size:14.5px;margin:2px 0 0}
-.row .num{display:block;font-size:11.5px;letter-spacing:.14em;color:var(--jade);font-weight:500;margin-bottom:1px}
-.row .you{color:var(--jade);font-size:13px;margin-top:3px}
-.row .cv{flex:none;width:44px;aspect-ratio:297/420;border-radius:3px;object-fit:cover;box-shadow:0 6px 14px rgba(0,0,0,.3)}
-.row .arr{flex:none;color:var(--muted);font-size:20px;transition:transform .2s,color .2s}
-.row:hover .arr{transform:translateX(4px);color:var(--cream)}
+.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tool{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;transition:border-color .15s,box-shadow .15s}
+.tool:hover{border-color:#D3C5AC;box-shadow:0 10px 26px -18px rgba(33,65,74,.35)}
+.tool .ico{width:44px;height:44px;border-radius:12px;background:var(--tealsoft);color:var(--teal2);display:flex;align-items:center;justify-content:center;flex:none}
+.tool b{display:block;font-size:16px}.tool span{font-size:13.5px;color:var(--mut)}
+.tool .you{display:block;font-size:12.5px;color:var(--win);font-weight:700;margin-top:2px}
+.tool .ar{margin-left:auto;color:#B9AE99;font-size:18px}
+footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--mut);font-size:13px;border-top:1px solid var(--line);padding-top:18px}
+footer p{margin:0}
 
-footer{max-width:1072px;margin:72px auto 0;padding:24px 0 56px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
-footer p{margin:0 0 6px}
+.tabs{display:none}
 
-
-/* layout: VP Academy left, Playbook + Book notes right */
-.pair{margin-top:64px;display:grid;grid-template-columns:1.45fr 1fr;gap:36px;align-items:start}
-.pair section{margin-top:0}
-.side{display:grid;gap:40px}
-.side .book{gap:18px;padding:16px 18px}
-.side .book img{width:70px}
-.side .book h3{font-size:23px}
-
-/* tools as tiles */
-#tools{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;border:0;border-radius:0;background:none;overflow:visible}
-#tools .row{position:relative;flex-direction:column;align-items:flex-start;gap:14px;padding:18px 18px 20px;border:1px solid var(--line);border-radius:8px;background:var(--panel);transition:border-color .2s,background .2s}
-#tools .row:hover{border-color:rgba(247,239,220,.35);background:rgba(247,239,220,.08)}
-#tools .row h3{font-size:21px}
-#tools .row p{font-size:14px}
-#tools .row .arr{position:absolute;top:18px;right:16px}
-
-@media (max-width:1000px){
-  #tools{grid-template-columns:1fr;gap:10px}
-  #tools .row{flex-direction:row;align-items:center;gap:18px;padding:16px 20px}
-  #tools .row .arr{position:static}
+@media (max-width:1100px){
+  .lib{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .two{grid-template-columns:1fr}
 }
-@media (max-width:1120px){
-  footer{margin-left:24px;margin-right:24px}
+@media (max-width:860px){
+  .app{display:block}
+  aside{display:none}
+  main{padding:14px max(16px,env(safe-area-inset-right)) 110px max(16px,env(safe-area-inset-left));gap:22px}
+  .mtop{display:flex;justify-content:space-between;align-items:center}
+  .mtop img{height:26px}
+  .mtop a{font-size:14px;font-weight:700;color:var(--teal);border:1px solid var(--line);background:var(--card);padding:7px 12px;border-radius:10px}
+  .hero{padding:20px 18px 16px;border-radius:18px}
+  .hero p{font-size:14.5px}
+  .clk{display:none}
+  .seg{font-size:11.5px;padding:0 6px}
+  .seg .lg{display:none}
+  .leg{display:none}
+  .tl{height:66px}
+  .g2{grid-template-columns:1fr}
+  .cont img{width:78px}.cont h3{font-size:27px}.cont{gap:16px}
+  .cont p{display:none}
+  .tools{grid-template-columns:1fr}
+  .lib{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;margin:0 -16px;padding-left:16px;padding-right:16px}
+  .lib .tr{flex:none;width:250px;scroll-snap-align:start}
+  .gr{grid-template-columns:34px 46px minmax(0,1fr);gap:12px;padding:12px}
+  .gr img{width:46px}
+  .gr .n{font-size:22px}
+  .gr .tick{grid-column:2 / -1;justify-self:start}
+  .gl.play .gr{grid-template-columns:46px minmax(0,1fr)}
+  .gl.play .gr .tick{grid-column:1 / -1}
+  .tabs{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;background:rgba(255,252,246,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line);justify-content:space-around;padding:9px max(8px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+  .tabs a{display:flex;flex-direction:column;align-items:center;font-size:11px;font-weight:700;color:var(--mut);gap:3px;min-width:56px}
+  .tabs a.on{color:var(--teal)}.tabs a.on svg{color:var(--gold)}
 }
-@media (max-width:900px){
-  .pair{display:block}
-  .side{margin-top:48px;gap:48px}
-}
-
-/* setup library banner */
-.libcta{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:64px;padding:22px 24px;border:1px solid rgba(126,195,160,.45);border-radius:10px;background:rgba(126,195,160,.08);text-decoration:none;transition:background .2s,border-color .2s}
-.libcta:hover{background:rgba(126,195,160,.14);border-color:var(--jade)}
-.libcta b{display:block;font-family:var(--serif);font-size:28px;font-weight:600;line-height:1.1}
-.libcta em{display:block;font-style:normal;color:var(--muted);font-size:15px;margin-top:4px}
-.libcta .arr{font-size:22px;color:var(--jade)}
-
-/* reading progress */
-.prog{margin-top:36px;max-width:560px;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:16px 18px}
-.ptop{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.plab{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
-.pnum{font-family:var(--serif);font-size:22px;font-weight:600}
-.pbar{height:8px;border-radius:99px;background:rgba(247,239,220,.1);margin-top:10px;overflow:hidden}
-.pfill{height:100%;width:0;border-radius:99px;background:var(--jade);transition:width .4s ease}
-.psub{color:var(--muted);font-size:13.5px;margin-top:8px}
-.rw{position:relative;border-top:1px solid var(--line)}
-.list > .rw:first-child,.list > .rw:first-of-type{border-top:0}
-.rw > .row{border-top:0;padding-right:96px}
-.tick{position:absolute;right:52px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:1.5px solid rgba(247,239,220,.35);background:transparent;color:transparent;font-size:15px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .2s,border-color .2s,color .2s}
-.tick:hover{border-color:var(--jade)}
-.tick[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#16353A}
-.rw.done h3{opacity:.75}
-
-@media (max-width:640px){
-  .prog{margin-top:28px;padding:14px 16px}
-  .rw > .row{padding-right:58px}
-  .rw .arr{display:none}
-  .tick{right:16px;width:30px;height:30px}
-  main{padding:4px 18px 32px}
-  .intro h1{font-size:38px}
-  .intro p{font-size:16.5px}
-  section{margin-top:48px}
-  .guides{grid-template-columns:1fr}
-  .pair{margin-top:48px}
-  #tools{grid-template-columns:1fr;gap:10px}
-  #tools .row{flex-direction:row;align-items:center;gap:14px;padding:16px}
-  #tools .row .arr{position:static}
-  .book{align-items:flex-start;gap:16px;padding:16px}
-  .book img{width:68px}
-  .book h3{font-size:22px}
-  .row{padding:16px;gap:14px}
-  .row .ic{width:40px;height:40px;font-size:18px}
-  footer{padding:22px 0 48px;margin-left:18px;margin-right:18px}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<div class="app">
 
-<header class="banner"><img src="/MalikTradesJournal/banner.jpg" alt="MalikTrades"></header>
+<aside aria-label="Main menu">
+  <a href="/"><img class="wm" src="/mt-wordmark.png" alt="MalikTrades"></a>
+  <nav class="nav" aria-label="Learn"><div class="navh">LEARN</div>
+    <a class="on" href="/" data-ic="home">Home</a>
+    <a href="#academy" data-ic="book">VP Academy<span class="ct" id="navAcad"></span></a>
+    <a href="#playbook" data-ic="layers">The Playbook</a>
+    <a href="/setup-library.html" data-ic="grid">Setup Library<span class="ct" id="navLib"></span></a>
+    <a href="/simulator.html" data-ic="target">Simulator</a>
+  </nav>
+  <nav class="nav" aria-label="Tools"><div class="navh">TOOLS</div>
+    <a href="/MalikTradesJournal/" data-ic="pen">Journal</a>
+    <a href="/MalikTradesReview/" data-ic="card">Trade Review</a>
+    <a href="/MalikTradesPropTracker/" data-ic="chart">Prop Tracker</a>
+    <a href="/prop-firm-tool.html" data-ic="calc">Prop Firm Hacking Tool</a>
+    <a href="/MalikTrades-Mindset-Tool/" data-ic="brain">Mindset</a>
+  </nav>
+  <div class="disc" id="disc"><b>Malik's Auction House</b>Ask questions, post reviews and trade the session together.<br><a id="discBtn" href="#" target="_blank" rel="noopener" data-ic="chat">Join the Discord</a></div>
+</aside>
 
-<main>
+<main id="top">
+  <div class="mtop"><a href="/" style="border:0;background:none;padding:0"><img src="/mt-wordmark-teal.png" alt="MalikTrades"></a><a id="discBtnM" href="#" target="_blank" rel="noopener">Discord</a></div>
 
-  <div class="intro">
-    <h1>Everything in one place.</h1>
-    <p>Free guides and tools for trading the MalikTrades way. Start with VP Academy, then use the tools.</p>
+  <div class="hero" aria-live="polite">
+    <div class="ht">
+      <div>
+        <div class="live" id="live"><i></i><span id="liveTx">London is open</span></div>
+        <h1 id="greet">Good morning. <em>Mark your levels.</em></h1>
+        <p id="sub">New York opens in 5h 00m.</p>
+      </div>
+      <div class="clk"><small>NEW YORK TIME</small><b id="clk">4:30</b> <span id="ampm">AM EST</span></div>
+    </div>
+    <div class="tl" id="tl">
+      <div class="track"></div>
+      <div class="seg" data-s="asia" style="left:0;width:8.333%"></div>
+      <div class="seg" data-s="london" style="left:8.333%;width:31.25%">London</div>
+      <div class="seg ny" data-s="ny" style="left:39.583%;width:27.083%">New York</div>
+      <div class="seg" data-s="asia" style="left:79.167%;width:20.833%">Asia</div>
+      <div class="nowm" id="nowm"><span>NOW</span></div>
+      <div class="ticks"><span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>12 AM</span></div>
+    </div>
+    <div class="leg"><span><i style="background:rgba(242,236,225,.4)"></i>Asia 7 PM–2 AM</span><span><i style="background:var(--gold2)"></i>London 2:00–9:30 AM</span><span><i style="background:#F2ECE1"></i>New York 9:30 AM–4 PM</span><span class="tz" id="tzNote">All times EST</span></div>
   </div>
 
-  <div class="prog" id="prog" aria-live="polite">
-    <div class="ptop"><span class="plab">Your progress</span><span class="pnum" id="pNum">0 of 12 read</span></div>
-    <div class="pbar"><div class="pfill" id="pFill"></div></div>
-    <div class="psub" id="pSub">Tick each guide as you finish it.</div>
+  <div class="g2">
+    <div class="card" id="contCard"></div>
+    <div class="card prac" id="pracCard"></div>
   </div>
 
-  <div class="pair">
-  <section id="guides" aria-labelledby="gTitle" style="scroll-margin-top:16px">
-    <div class="label"><h2 id="gTitle">VP Academy</h2><span>Read these in order</span></div>
-    <div class="list">
-      <a class="row" href="/chart-setup.pdf" target="_blank" rel="noopener" data-read="a01">
-        <img class="cv" src="/chart-setup-cover.jpg" alt="">
-        <span class="tx"><span class="num">#01</span><h3>Chart Setup</h3><p>Set up volume profile, VWAP and ATR on your chart.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/futures-cheat-sheet.pdf" target="_blank" rel="noopener" data-read="a02">
-        <img class="cv" src="/futures-cheat-sheet-cover.jpg" alt="">
-        <span class="tx"><span class="num">#02</span><h3>Futures Cheat Sheet</h3><p>Contract specs, and what to mark for Asia, London and NY.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/volume-profile-101.pdf" target="_blank" rel="noopener" data-read="a03">
-        <img class="cv" src="/volume-profile-101-cover.jpg" alt="">
-        <span class="tx"><span class="num">#03</span><h3>Volume Profile 101</h3><p>How the auction works, and why our levels matter.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/profile-shapes.pdf" target="_blank" rel="noopener" data-read="a04">
-        <img class="cv" src="/profile-shapes-cover.jpg" alt="">
-        <span class="tx"><span class="num">#04</span><h3>Profile Shapes</h3><p>D, P, b and trend shapes, and how to trade each.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/why-the-setups-work.pdf" target="_blank" rel="noopener" data-read="a05">
-        <img class="cv" src="/why-the-setups-work-cover.jpg" alt="">
-        <span class="tx"><span class="num">#05</span><h3>Why the Setups Work</h3><p>The auction behind the Snap, the Flip and the Magnet. Read Core Setups first.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/vwap-and-atr.pdf" target="_blank" rel="noopener" data-read="a06">
-        <img class="cv" src="/vwap-and-atr-cover.jpg" alt="">
-        <span class="tx"><span class="num">#06</span><h3>VWAP and ATR</h3><p>VWAP and its bands as confluence, and ATR × 2 for your stop.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/execution.pdf" target="_blank" rel="noopener" data-read="a07">
-        <img class="cv" src="/execution-cover.jpg" alt="">
-        <span class="tx"><span class="num">#07</span><h3>Execution</h3><p>Limit entries, ATR × 2 stops, 1:1 targets and breakeven at 75%.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/putting-it-all-together.pdf" target="_blank" rel="noopener" data-read="a08">
-        <img class="cv" src="/putting-it-all-together-cover.jpg" alt="">
-        <span class="tx"><span class="num">#08</span><h3>Putting It All Together</h3><p>Your pre-session checklist, and what your chart should look like.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/prop-playbook.pdf" target="_blank" rel="noopener" data-read="a09">
-        <img class="cv" src="/prop-playbook-cover.jpg" alt="">
-        <span class="tx"><span class="num">#09</span><h3>The Prop Playbook</h3><p>Trading prop firms as a business: drawdowns, risk rules and running 2–3 accounts.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
+  <section aria-labelledby="libT">
+    <div class="sh"><h2 id="libT">Latest from the Setup Library</h2><a class="r" href="/setup-library.html" id="libAll">All trades →</a></div>
+    <div class="lib" id="lib"></div>
+  </section>
+
+  <section id="academy" aria-labelledby="acT">
+    <div class="sh"><h2 id="acT">VP Academy</h2><span class="m">Read these in order. Tick each one as you finish it.</span></div>
+    <div class="two">
+      <div class="gl" id="acad"></div>
+      <div class="side">
+        <div class="card"><div class="lab">Your progress</div><div class="big" style="margin-top:8px" id="pBig">0<span> / 9</span></div><div class="pg" id="pBar"></div><p style="color:var(--mut);margin:12px 0 0;font-size:14.5px" id="pSub">Saved in this browser.</p></div>
+        <div class="card dark"><div class="lab">Then practise</div><p>Run 10 rounds a day on the <a href="/simulator.html">Decision Simulator</a> until the read is automatic.</p></div>
+      </div>
     </div>
   </section>
 
-  <div class="side">
-  <section id="playbook" aria-labelledby="pTitle" style="scroll-margin-top:16px">
-    <div class="label"><h2 id="pTitle">The Playbook</h2><span>My setups, rules and chart, for reference</span></div>
-    <div class="list">
-      <a class="row" href="/core-setups.pdf" target="_blank" rel="noopener" data-read="p1">
-        <img class="cv" src="/core-setups-cover.jpg" alt="">
-        <span class="tx"><h3>Core Setups</h3><p>The Snap, the Flip and the Magnet.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/bonus-tips.pdf" target="_blank" rel="noopener" data-read="p2">
-        <img class="cv" src="/bonus-tips-cover.jpg" alt="">
-        <span class="tx"><h3>Bonus Tips</h3><p>Five scenarios to watch for.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/common-mistakes.pdf" target="_blank" rel="noopener" data-read="p3">
-        <img class="cv" src="/common-mistakes-cover.jpg" alt="">
-        <span class="tx"><h3>Common Mistakes</h3><p>The fourteen I see most, and how to fix them.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/advanced-setups.pdf" target="_blank" rel="noopener" data-read="p4">
-        <img class="cv" src="/advanced-setups-cover.jpg" alt="">
-        <span class="tx"><h3>Advanced Setups</h3><p>Rarer plays: The Anchor, The Wall and The Whip. Read this last.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="row" href="/chart-colours.pdf" target="_blank" rel="noopener">
-        <img class="cv" src="/chart-colours-cover.jpg" alt="">
-        <span class="tx"><h3>Chart Colours</h3><p>The exact colours on my charts, ready to copy.</p></span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
+  <section id="playbook" aria-labelledby="pbT">
+    <div class="sh"><h2 id="pbT">The Playbook</h2><span class="m">My setups, rules and chart, for reference while you trade.</span></div>
+    <div class="two">
+      <div class="gl play" id="play"></div>
+      <div class="side">
+        <div class="card"><div class="lab">Book notes</div>
+          <a class="book" href="/trading-in-the-zone.pdf" target="_blank" rel="noopener"><img src="/trading-in-the-zone-cover.jpg" alt=""><div><h3>Trading in the Zone</h3><div class="by">Mark Douglas</div><p>The five fundamental truths, thinking like a casino, and why trading is a mental game first.</p></div></a>
+        </div>
+        <div class="card"><div class="lab">Save for later</div><p style="margin:10px 0 0;font-size:15px;color:var(--mut)">Read <b style="color:var(--ink)">Advanced Setups</b> once the Snap, the Flip and the Magnet feel obvious.</p></div>
+      </div>
     </div>
   </section>
 
-  <section id="books" aria-labelledby="bTitle" style="scroll-margin-top:16px">
-    <div class="label"><h2 id="bTitle">Book notes</h2><span>Key lessons from the books worth reading</span></div>
-    <div class="books">
-      <a class="book" href="/trading-in-the-zone.pdf" target="_blank" rel="noopener">
-        <img src="/trading-in-the-zone-cover.jpg" alt="">
-        <div><h3>Trading in the Zone</h3><p class="by">Mark Douglas</p>
-        <p>The five fundamental truths, thinking like a casino, and why trading is a mental game before it's an analytical one.</p>
-        <span class="read">Read the notes →</span></div>
-      </a>
-    </div>
-  </section>
-  </div>
-  </div>
-
-  <a class="libcta" href="/setup-library.html">
-    <span><b>📚 Setup Library</b><em>Real trades from my sessions, sorted by setup and instrument. New ones added daily.</em></span>
-    <span class="arr" aria-hidden="true">→</span>
-  </a>
-
-  <section aria-labelledby="tTitle">
-    <div class="label"><h2 id="tTitle">Tools</h2><span>Free, no sign-up</span></div>
-    <div class="list" id="tools"></div>
+  <section id="tools" aria-labelledby="tT">
+    <div class="sh"><h2 id="tT">Tools</h2><span class="m">Free · everything saves in your own browser</span></div>
+    <div class="tools" id="toolList"></div>
   </section>
 
+  <footer><p>Everything saves in your own browser. Nothing is uploaded.</p><p>Education only, not financial advice.</p></footer>
 </main>
+</div>
 
-<footer>
-  <p>Everything saves in your own browser. Nothing is uploaded.</p>
-  <p>Education only, not financial advice.</p>
-</footer>
+<nav class="tabs" aria-label="Quick menu">
+  <a class="on" href="#top" data-ic="home">Home</a>
+  <a href="#academy" data-ic="book">Academy</a>
+  <a href="/setup-library.html" data-ic="grid">Library</a>
+  <a href="/simulator.html" data-ic="target">Simulator</a>
+  <a href="#tools" data-ic="calc">Tools</a>
+</nav>
 
 <script>
 "use strict";
-const TOOLS = [
-  { id:"calc",    icon:"🧮", name:"Prop Firm Hacking Tool", href:"/prop-firm-tool.html",           line:"Find your size before you buy an evaluation." },
-  { id:"journal", icon:"📓", name:"Trading Journal",        href:"/MalikTradesJournal/",       line:"Log every trade and see your stats." },
-  { id:"review",  icon:"🧾", name:"Trade Review",           href:"/MalikTradesReview/",        line:"Get your trades reviewed in <span style='white-space:nowrap'>#trade-review</span>." },
-  { id:"tracker", icon:"📊", name:"Prop Tracker",           href:"/MalikTradesPropTracker/",   line:"Know your floor and room left on every account." },
-  { id:"sim",     icon:"🎯", name:"Decision Simulator",     href:"/simulator.html",            line:"Practise the read: trade it, or sit on your hands." },
-  { id:"mindset", icon:"🧠", name:"Mindset",                href:"/MalikTrades-Mindset-Tool/", line:"For when a losing streak gets to you." }
-];
+/* Paste your Discord invite link between the quotes to show the Join buttons. */
+const DISCORD = "";
 
+/* ---------- icons ---------- */
+const IC = {
+  home:'<path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/>',
+  book:'<path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h9"/>',
+  layers:'<path d="m12 4 8 4-8 4-8-4z"/><path d="m4 12 8 4 8-4"/><path d="m4 16 8 4 8-4"/>',
+  grid:'<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
+  target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8"/>',
+  pen:'<path d="M5 19l1-4L16 5l3 3L9 18z"/><path d="M14 7l3 3"/>',
+  card:'<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 15l3-3 2 2 3-4"/>',
+  chart:'<path d="M4 19h16"/><rect x="6" y="11" width="3" height="6"/><rect x="11" y="7" width="3" height="10"/><rect x="16" y="13" width="3" height="4"/>',
+  calc:'<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 7h6M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/>',
+  brain:'<path d="M12 5a3 3 0 0 0-5.5 1.5A3 3 0 0 0 5 12a3 3 0 0 0 2 5 3 3 0 0 0 5 1z"/><path d="M12 5a3 3 0 0 1 5.5 1.5A3 3 0 0 1 19 12a3 3 0 0 1-2 5 3 3 0 0 1-5 1z"/>',
+  chat:'<path d="M5 5h14v10H9l-4 4z"/>'
+};
+const ic = (n, s = 20) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
+document.querySelectorAll("[data-ic]").forEach(el => el.insertAdjacentHTML("afterbegin", ic(el.dataset.ic, el.closest(".tabs") ? 22 : el.closest(".disc") ? 16 : 19)));
+
+const $ = id => document.getElementById(id);
 function read(key){ try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : null; }catch(e){ return null; } }
-// a small reminder of what you've already got going, from this browser only
+
+/* ---------- Discord ---------- */
+if(DISCORD){ $("discBtn").href = DISCORD; $("discBtnM").href = DISCORD; }
+else { $("discBtn").hidden = true; $("discBtnM").hidden = true; }
+
+/* ---------- live sessions (New York time) ---------- */
+const NYF = new Intl.DateTimeFormat("en-US", { timeZone:"America/New_York", weekday:"short", hour:"numeric", minute:"2-digit", hour12:false, timeZoneName:"short" });
+function nyNow(){
+  const p = {}; NYF.formatToParts(new Date()).forEach(x => p[x.type] = x.value);
+  const dow = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(p.weekday);
+  const h = (+p.hour) % 24, m = +p.minute;
+  return { dow, h, m, min: h * 60 + m, tz: p.timeZoneName || "ET" };
+}
+const span = mins => { mins = Math.max(0, Math.round(mins)); const d = Math.floor(mins / 1440), h = Math.floor(mins % 1440 / 60), m = mins % 60;
+  return d ? `${d}d ${h}h` : h ? `${h}h ${String(m).padStart(2,"0")}m` : `${m}m`; };
+const LON = 120, NY = 570, NYC = 960, ASIA = 1140; // minutes after midnight, New York time
+function sessionState(t){
+  const { dow, min } = t;
+  // CME futures: closed from Friday 5 PM to Sunday 6 PM New York time
+  const weekend = dow === 6 || (dow === 5 && min >= 1020) || (dow === 0 && min < 1080);
+  if(weekend){
+    const toSun = ((7 - dow) % 7) * 1440 + 1080 - min;
+    return { weekend:true, on:null, label:"Markets are closed", sub:`Futures reopen Sunday 6 PM ${t.tz}, in ${span(toSun)}. Rest up and review your week.` };
+  }
+  const asiaOpenToday = dow !== 5; // no Asia session on Friday evening
+  if(min < LON && dow !== 0) return { on:"asia", label:"Asia is open", sub:`London opens in ${span(LON - min)}.` };
+  if(min >= LON && min < NY && dow !== 0) return { on:"london", label:"London is open", sub:`New York opens in ${span(NY - min)}.` };
+  if(min >= NY && min < NYC && dow !== 0) return { on:"ny", label:"New York is open", sub:`New York closes in ${span(NYC - min)}. Respect your loss cap.` };
+  if(min >= ASIA && asiaOpenToday) return { on:"asia", label:"Asia is open", sub:`London opens in ${span(1440 - min + LON)}.` };
+  if(asiaOpenToday) return { on:null, label:"Markets are quiet", sub:`Asia opens in ${span(ASIA - min)}. Mark your levels for tomorrow.` };
+  return { on:null, label:"Markets are quiet", sub:`Futures close for the weekend at 5 PM ${t.tz}.` };
+}
+function paintClock(){
+  const t = nyNow(), s = sessionState(t);
+  const h12 = t.h % 12 || 12;
+  $("clk").textContent = `${h12}:${String(t.m).padStart(2,"0")}`;
+  $("ampm").textContent = `${t.h < 12 ? "AM" : "PM"} ${t.tz}`;
+  $("tzNote").textContent = `All times ${t.tz}`;
+  const g = t.h < 12 ? "Good morning." : t.h < 17 ? "Good afternoon." : "Good evening.";
+  const tag = s.weekend ? "Enjoy the weekend." : s.on ? "Mark your levels." : "Plan tomorrow.";
+  $("greet").innerHTML = `${g} <em>${tag}</em>`;
+  $("liveTx").textContent = s.label;
+  $("live").classList.toggle("off", !s.on);
+  $("sub").textContent = s.sub;
+  $("tl").classList.toggle("closed", !!s.weekend);
+  document.querySelectorAll(".seg").forEach(el => el.classList.toggle("on", el.dataset.s === s.on));
+  $("nowm").style.left = (t.min / 1440 * 100) + "%";
+}
+paintClock();
+setInterval(paintClock, 20000);
+
+/* ---------- guides + reading progress ---------- */
+const ACAD = [
+  ["a01","chart-setup","Chart Setup","Volume profile, VWAP and ATR on your chart."],
+  ["a02","futures-cheat-sheet","Futures Cheat Sheet","Contract specs, and what to mark for Asia, London and NY."],
+  ["a03","volume-profile-101","Volume Profile 101","How the auction works, and why our levels matter."],
+  ["a04","profile-shapes","Profile Shapes","D, P, b and trend shapes, and how to trade each."],
+  ["a05","why-the-setups-work","Why the Setups Work","The auction behind the Snap, the Flip and the Magnet."],
+  ["a06","vwap-and-atr","VWAP and ATR","VWAP bands as confluence, and ATR × 2 for your stop."],
+  ["a07","execution","Execution","Limit entries, 1:1 targets and breakeven at 75%."],
+  ["a08","putting-it-all-together","Putting It All Together","Your pre-session checklist, and what your chart should look like."],
+  ["a09","prop-playbook","The Prop Playbook","Trading prop firms as a business: drawdowns, risk rules and running 2–3 accounts."]
+];
+const PLAY = [
+  ["p1","core-setups","Core Setups","The Snap, the Flip and the Magnet."],
+  ["p2","bonus-tips","Bonus Tips","Five scenarios to watch for."],
+  ["p3","common-mistakes","Common Mistakes","The fourteen I see most, and how to fix them."],
+  ["p4","advanced-setups","Advanced Setups","Rarer plays: The Anchor, The Wall and The Whip. Read this last."],
+  [null,"chart-colours","Chart Colours","The exact colours on my charts, ready to copy."]
+];
+const RKEY = "maliktrades.reading.v1";
+let readSet = new Set((read(RKEY) || {}).read || []);
+function saveRead(){ try{ localStorage.setItem(RKEY, JSON.stringify({ read:[...readSet] })); }catch(e){} }
+function row([id, slug, title, line], i, isAcad, nextId){
+  const done = !!id && readSet.has(id), next = !!id && id === nextId;
+  const btn = id ? `<button type="button" class="tick" data-id="${id}" aria-pressed="${done}" aria-label="${done ? "Unmark" : "Mark as read"}: ${title}">${done ? "✓ Read" : next ? "Up next" : "Mark as read"}</button>` : "";
+  return `<div class="gr ${done ? "done" : ""} ${next ? "next" : ""}">
+    <a class="lnk" href="/${slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${title}"></a>
+    ${isAcad ? `<div class="n">${String(i + 1).padStart(2,"0")}</div>` : ""}
+    <img src="/${slug}-cover.jpg" alt="" loading="lazy">
+    <div><h3>${title}</h3><p>${line}</p></div>${btn}</div>`;
+}
+function paintGuides(){
+  const next = ACAD.find(g => !readSet.has(g[0]));
+  const nextId = next ? next[0] : null;
+  $("acad").innerHTML = ACAD.map((g, i) => row(g, i, true, nextId)).join("");
+  $("play").innerHTML = PLAY.map((g, i) => row(g, i, false, null)).join("");
+  const a = ACAD.filter(g => readSet.has(g[0])).length, p = PLAY.filter(g => g[0] && readSet.has(g[0])).length;
+  $("pBig").innerHTML = `${a}<span> / 9</span>`;
+  $("pBar").innerHTML = ACAD.map(g => `<i class="${readSet.has(g[0]) ? "d" : ""}"></i>`).join("");
+  $("pSub").textContent = a === 9 ? `VP Academy done. Playbook ${p} of 4 read.` : `Saved in this browser. Playbook ${p} of 4 read.`;
+  $("navAcad").textContent = `${a}/9`;
+  // continue card
+  const c = $("contCard");
+  if(next){
+    const i = ACAD.indexOf(next), after = ACAD[i + 1];
+    c.innerHTML = `<div class="lab">${a ? "Continue VP Academy" : "Start here"}</div>
+      <div class="cont"><img src="/${next[1]}-cover.jpg" alt=""><div><div class="num">#${String(i + 1).padStart(2,"0")} of 09</div><h3>${next[2]}</h3><p>${next[3]}</p>
+      <div class="btns"><a class="btn" href="/${next[1]}.pdf" target="_blank" rel="noopener">${a ? "Keep reading" : "Start reading"} →</a><a class="btn ghost" href="#academy">All guides</a></div></div></div>
+      <div class="pg">${ACAD.map(g => `<i class="${readSet.has(g[0]) ? "d" : ""}"></i>`).join("")}</div>
+      <div class="pgl"><span>${a} of 9 read</span><span>${after ? "Next up: " + after[2] : "Last one"}</span></div>`;
+  } else {
+    c.innerHTML = `<div class="lab">VP Academy complete</div>
+      <div class="cont"><img src="/core-setups-cover.jpg" alt=""><div><div class="num">All 9 read ✓</div><h3>Now study the setups daily</h3><p>Go through the Setup Library every day and keep the Playbook open while you trade.</p>
+      <div class="btns"><a class="btn" href="/setup-library.html">Setup Library →</a><a class="btn ghost" href="#playbook">The Playbook</a></div></div></div>`;
+  }
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest(".tick"); if(!b) return;
+  e.preventDefault();
+  const id = b.dataset.id; readSet.has(id) ? readSet.delete(id) : readSet.add(id);
+  saveRead(); paintGuides();
+});
+paintGuides();
+
+/* ---------- daily practice (from the Simulator) ---------- */
+function localDay(){ const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
+function paintPractice(){
+  const s = read("maliktrades.sim.v1") || {};
+  const res = s.today && s.today.d === localDay() && Array.isArray(s.today.res) ? s.today.res : [];
+  const n = res.length, goal = 10, frac = Math.min(1, n / goal);
+  const right = res.filter(r => r === 1).length;
+  const ring = `<svg width="92" height="92" viewBox="0 0 92 92"><circle cx="46" cy="46" r="38" fill="none" stroke="#EAE1D1" stroke-width="8"/>
+    <circle cx="46" cy="46" r="38" fill="none" stroke="#2E8B57" stroke-width="8" stroke-dasharray="${(239 * frac).toFixed(0)} 239" transform="rotate(-90 46 46)" stroke-linecap="round"/>
+    <text x="46" y="53" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-weight="600" font-size="24" fill="#1B2729">${Math.min(n, 99)}/${goal}</text></svg>`;
+  const line = n === 0 ? "10 rounds a day until the read is automatic."
+    : n >= goal ? `Done for today ✓ · ${Math.round(right / n * 100)}% right`
+    : `${goal - n} round${goal - n === 1 ? "" : "s"} left today · ${Math.round(right / n * 100)}% right`;
+  const dots = Array.from({ length: Math.max(goal, n) }, (_, i) => {
+    const r = res[i]; return r === undefined ? "<i></i>" : r === 1 ? '<i class="w">✓</i>' : r > 0 ? '<i class="h">½</i>' : '<i class="l">✕</i>';
+  }).join("");
+  const all = s.played ? `<div style="font-size:13px;color:var(--mut);margin-top:10px">All time: ${s.played} played · ${Math.round(s.pts / s.played * 100)}% accuracy · best streak ${s.best || 0}</div>` : "";
+  $("pracCard").innerHTML = `<div class="lab">Daily practice</div>
+    <a class="ring" href="/simulator.html">${ring}<div><b>Decision Simulator</b><span>${line}</span></div></a>
+    <div class="dots" aria-label="Today's rounds">${dots}</div>${all}
+    <div class="btns"><a class="btn ghost" href="/simulator.html">${n ? "Keep practising" : "Start today's rounds"} →</a></div>
+    <div class="sp"></div>
+    <div class="mind">${ic("brain", 18)}<span>Losing streak getting to you? Open <a href="/MalikTrades-Mindset-Tool/">Mindset</a>.</span></div>`;
+}
+paintPractice();
+
+/* ---------- Setup Library preview ---------- */
+const SET = { snap:"Snap", flip:"Flip", magnet:"Magnet", anchor:"Anchor", wall:"The Wall", whip:"The Whip" };
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+fetch("/setup-library.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []).then(data => {
+  if(!Array.isArray(data) || !data.length){ $("lib").closest("section").hidden = true; return; }
+  $("navLib").textContent = data.length;
+  $("libAll").textContent = `All ${data.length} trades →`;
+  const latest = data.map((t, i) => ({ t, i })).sort((a, b) => (b.t.date || "").localeCompare(a.t.date || "") || b.i - a.i).slice(0, 4).map(x => x.t);
+  $("lib").innerHTML = latest.map(t => {
+    const d = (t.direction || "").toLowerCase(), img = (t.images || [])[0];
+    const dt = t.date ? new Date(t.date + "T12:00:00").toLocaleDateString("en-GB", { day:"numeric", month:"short" }) : "";
+    return `<a class="tr" href="/setup-library.html">
+      <div class="im">${img ? `<img src="/${esc(img)}" alt="" loading="lazy">` : ""}${t.result ? `<span class="r">${esc(t.result)}</span>` : ""}</div>
+      <div class="bd"><div class="tags"><span class="tg">${esc(t.instrument)}</span><span class="tg">${esc(SET[t.setup] || t.setup)}</span>${d ? `<span class="tg ${d === "short" ? "s" : "L"}">${esc(t.direction)}</span>` : ""}</div>
+      <h4>${esc(t.title)}</h4><div class="dt">${dt}</div></div></a>`;
+  }).join("");
+});
+
+/* ---------- tools ---------- */
+const TOOLS = [
+  { id:"sim",     ic:"target", name:"Decision Simulator",     href:"/simulator.html",            line:"Trade it, or sit on your hands." },
+  { id:"calc",    ic:"calc",   name:"Prop Firm Hacking Tool", href:"/prop-firm-tool.html",       line:"Find your size before you buy an eval." },
+  { id:"tracker", ic:"chart",  name:"Prop Tracker",           href:"/MalikTradesPropTracker/",   line:"Know your floor on every account." },
+  { id:"journal", ic:"pen",    name:"Trading Journal",        href:"/MalikTradesJournal/",       line:"Log every trade and see your stats." },
+  { id:"review",  ic:"card",   name:"Trade Review",           href:"/MalikTradesReview/",        line:"Make cards for #trade-review." },
+  { id:"mindset", ic:"brain",  name:"Mindset",                href:"/MalikTrades-Mindset-Tool/", line:"For when a losing streak gets to you." }
+];
 function yours(id){
   if(id === "journal"){ const s = read("maliktrades.journal.v1"), n = s && Array.isArray(s.trades) ? s.trades.length : 0; return n ? `${n} trade${n === 1 ? "" : "s"} logged` : ""; }
   if(id === "sim"){ const s = read("maliktrades.sim.v1"); return s && s.played ? `${s.played} played · ${Math.round(s.pts / s.played * 100)}% accuracy` : ""; }
   if(id === "tracker"){ const s = read("maliktrades.props.v1"), n = s && Array.isArray(s.accounts) ? s.accounts.filter(a => !a.archived && !a.example).length : 0; return n ? `${n} account${n === 1 ? "" : "s"} tracked` : ""; }
   return "";
 }
-function render(){
-  document.getElementById("tools").innerHTML = TOOLS.map(t => {
-    const y = yours(t.id);
-    return `<a class="row" href="${t.href}">
-      <span class="ic" aria-hidden="true">${t.icon}</span>
-      <span class="tx"><h3>${t.name}</h3><p>${t.line}</p>${y ? `<div class="you">${y}</div>` : ""}</span>
-      <span class="arr" aria-hidden="true">→</span>
-    </a>`;
-  }).join("");
+function paintTools(){
+  $("toolList").innerHTML = TOOLS.map(t => { const y = yours(t.id);
+    return `<a class="tool" href="${t.href}"><div class="ico">${ic(t.ic, 22)}</div><div><b>${t.name}</b><span>${t.line}</span>${y ? `<span class="you">${y}</span>` : ""}</div><span class="ar" aria-hidden="true">→</span></a>`; }).join("");
 }
-render();
-document.addEventListener("visibilitychange", () => { if(!document.hidden) render(); });
-
-// reading progress, saved in this browser only
-const RKEY = "maliktrades.reading.v1";
-function getRead(){ const s = read(RKEY); return new Set(s && Array.isArray(s.read) ? s.read : []); }
-function setRead(set){ try{ localStorage.setItem(RKEY, JSON.stringify({ read: [...set] })); }catch(e){} }
-let readSet = getRead();
-const rows = [...document.querySelectorAll("a.row[data-read]")];
-rows.forEach(a => {
-  const w = document.createElement("div"); w.className = "rw";
-  a.parentNode.insertBefore(w, a); w.appendChild(a);
-  const b = document.createElement("button"); b.type = "button"; b.className = "tick"; b.textContent = "✓";
-  const name = a.querySelector("h3").textContent;
-  b.addEventListener("click", e => {
-    e.preventDefault(); e.stopPropagation();
-    const id = a.dataset.read;
-    readSet.has(id) ? readSet.delete(id) : readSet.add(id);
-    setRead(readSet); paint();
-  });
-  b.dataset.name = name; w.appendChild(b);
-});
-function paint(){
-  let a = 0, p = 0;
-  rows.forEach(r => {
-    const on = readSet.has(r.dataset.read), b = r.parentNode.querySelector(".tick");
-    b.setAttribute("aria-pressed", on); b.title = on ? "Read. Tap to undo" : "Mark as read";
-    b.setAttribute("aria-label", (on ? "Unmark " : "Mark as read: ") + b.dataset.name);
-    r.parentNode.classList.toggle("done", on);
-    if(on){ r.dataset.read.startsWith("a") ? a++ : p++; }
-  });
-  const total = rows.length, n = a + p;
-  document.getElementById("pNum").textContent = `${n} of ${total} read`;
-  document.getElementById("pFill").style.width = (n / total * 100) + "%";
-  document.getElementById("pSub").textContent = n === total
-    ? "All done. Now study the #setup-library every day."
-    : n === 0 ? "Tick each guide as you finish it." : `VP Academy ${a} of 8 · Playbook ${p} of 4`;
-}
-paint();
+paintTools();
+document.addEventListener("visibilitychange", () => { if(!document.hidden){ paintClock(); paintPractice(); paintTools(); readSet = new Set((read(RKEY) || {}).read || []); paintGuides(); } });
 </script>
-<script src="/mt-nav.js" defer></script>
 </body>
 </html>
