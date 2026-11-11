@@ -10,12 +10,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="/MalikTradesJournal/banner.jpg">
 <style>
-@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2")}
-@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:500;font-display:swap;src:url(/fonts/cormorant-garamond-latin-500-italic.woff2) format("woff2")}
-@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/cormorant-garamond-latin-600-normal.woff2) format("woff2")}
-@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/source-sans-3-latin-400-normal.woff2) format("woff2")}
-@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/source-sans-3-latin-600-normal.woff2) format("woff2")}
-@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/source-sans-3-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;font-display:swap;src:url(/cormorant-garamond-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:500;font-display:swap;src:url(/cormorant-garamond-latin-500-italic.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:600;font-display:swap;src:url(/cormorant-garamond-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:400;font-display:swap;src:url(/source-sans-3-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:600;font-display:swap;src:url(/source-sans-3-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:700;font-display:swap;src:url(/source-sans-3-latin-700-normal.woff2) format("woff2")}
 :root{
   --paper:#F2ECE1; --card:#FFFCF6; --line:#E6DCCB; --ink:#1B2729; --mut:#6E746F;
   --teal:#21414A; --teal2:#2F5A60; --tealsoft:#E4ECEA; --gold:#B4893A; --gold2:#E2C27A;
@@ -124,31 +124,41 @@ section{scroll-margin-top:20px}
 .tr h4{margin:0;font-size:15.5px;line-height:1.3}
 .tr .dt{font-size:12.5px;color:var(--mut);margin-top:4px}
 
-/* guide rows */
-.two{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:start}
-.gl{display:flex;flex-direction:column;gap:10px}
-.gr{position:relative;display:grid;grid-template-columns:44px 58px minmax(0,1fr) auto;gap:16px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;transition:border-color .15s,box-shadow .15s}
-.gr:hover{border-color:#D3C5AC;box-shadow:0 10px 26px -18px rgba(33,65,74,.35)}
-.gr .n{font-family:var(--display);font-size:28px;font-weight:600;color:#C9BBA0;text-align:center}
-.gr img{width:58px;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,.15);display:block}
-.gr h3{margin:0;font-size:17px;line-height:1.25}.gr p{margin:2px 0 0;color:var(--mut);font-size:14px}
-.gr.done .n{color:var(--win)}
-.gr.next{border:2px solid var(--gold);padding:11px 15px;box-shadow:0 8px 24px -10px rgba(180,137,58,.35)}
-.gr .lnk{position:absolute;inset:0;border-radius:14px;z-index:1}
-.tick{position:relative;z-index:2;font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;white-space:nowrap;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--mut)}
-.tick:hover{border-color:var(--teal2);color:var(--teal)}
-.tick[aria-pressed="true"]{background:var(--winbg);border-color:var(--winbg);color:var(--win)}
-.gr.next .tick{background:var(--teal);border-color:var(--teal);color:#fff}
-.gl.play .gr{grid-template-columns:58px minmax(0,1fr) auto}
-.side{display:flex;flex-direction:column;gap:16px}
-.big{font-family:var(--display);font-size:54px;font-weight:600;line-height:1;color:var(--teal)}
-.big span{font-size:28px;color:var(--mut)}
-.book{display:flex;gap:16px;align-items:center;margin-top:12px}
-.book img{width:70px;border-radius:5px;box-shadow:0 6px 16px rgba(0,0,0,.2);flex:none}
-.book h3{font-family:var(--display);font-size:24px;margin:0;line-height:1.05}
-.book .by{color:var(--gold);font-weight:700;font-size:13px;margin:2px 0 4px}
-.book p{margin:0;color:var(--mut);font-size:14px}
-.dark{background:var(--teal);color:#E9E2D3;border:0}.dark .lab{color:#BFD0CC}.dark p{margin:10px 0 0;font-size:15px}.dark a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+/* VP Academy modules + Playbook shelf */
+.mods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.mod{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:8px;box-shadow:0 10px 30px -22px rgba(33,65,74,.35);min-width:0}
+.mod.done{background:linear-gradient(180deg,#F1F7F3,var(--card))}
+.mh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:4px}
+.mk{font-size:11px;letter-spacing:.2em;font-weight:700;color:var(--gold)}
+.mod h3{font-family:var(--display);font-weight:600;font-size:26px;margin:2px 0 0;line-height:1.05;color:var(--teal)}
+.ms{font-size:12.5px;font-weight:700;color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap}
+.mod.done .ms{color:var(--win)}
+.mr{position:relative;display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px;border-radius:12px;border:1px solid transparent;transition:background .15s}
+.mr:hover{background:#F7F1E6}
+.mr .lnk{position:absolute;inset:0;border-radius:12px;z-index:1}
+.mr img{width:46px;border-radius:4px;box-shadow:0 4px 10px rgba(0,0,0,.18);display:block}
+.mr b{font-size:14.5px;display:block;line-height:1.25}.mr span{font-size:12.5px;color:var(--mut);display:block;margin-top:2px;line-height:1.35}
+.mr.nx{background:#FBF3E1;border-color:#E9D3A3}
+.mr .up{display:inline-block;font-size:10.5px;letter-spacing:.14em;font-weight:700;color:var(--gold);margin-top:4px}
+.tick{position:relative;z-index:2;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:transparent;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex:none}
+.tick:hover{border-color:var(--teal2);color:#B9C7C4}
+.tick[aria-pressed="true"]{background:var(--win);border-color:var(--win);color:#fff}
+.mr.nx .tick{border-color:var(--gold)}
+.mtot{font-size:14px;color:var(--mut)}.mtot b{color:var(--ink)}
+.pbs{border-radius:22px;background:linear-gradient(120deg,#1E3C44,#2F5A60);padding:26px 28px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:28px;align-items:center;color:#EEE7D8}
+.pbs .k{font-size:11px;letter-spacing:.22em;font-weight:700;color:var(--gold2)}
+.pbs h3{font-family:var(--display);font-weight:600;font-size:34px;margin:6px 0 8px;line-height:1}
+.pbs p{margin:0;color:#C9D5D2;font-size:14.5px;line-height:1.5}
+.books{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.bk{position:relative;display:flex;flex-direction:column;gap:6px;min-width:0}
+.bk .lnk{display:block;border-radius:6px}
+.bk img{width:100%;aspect-ratio:297/420;object-fit:cover;object-position:top;border-radius:6px;box-shadow:0 14px 26px -12px rgba(0,0,0,.6);display:block;transition:transform .2s}
+.bk .lnk:hover img{transform:translateY(-4px)}
+.bk b{font-size:13.5px;line-height:1.25;margin-top:4px}.bk span{font-size:12px;color:#AFC1BD;line-height:1.3}
+.bk .tg2{align-self:flex-start;font-size:10px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:5px;background:rgba(242,236,225,.12);color:#DDE6E3}
+.bk .tg2.adv{background:rgba(226,194,122,.2);color:var(--gold2)}
+.bk .tick{position:absolute;top:-8px;right:-8px;border-color:rgba(242,236,225,.5);background:#21414A}
+.bk .tick[aria-pressed="true"]{background:var(--win);border-color:#fff}
 
 .tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .tool{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px -20px rgba(33,65,74,.35);transition:transform .15s,box-shadow .15s}
@@ -183,7 +193,8 @@ footer p{margin:0}
 @media (max-width:1100px){
   .lib{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tools{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .two{grid-template-columns:1fr}
+  .mods{grid-template-columns:1fr 1fr}
+  .pbs{grid-template-columns:1fr}
 }
 @media (max-width:860px){
   .app{display:block}
@@ -203,14 +214,12 @@ footer p{margin:0}
   .cont img{width:78px}.cont h3{font-size:27px}.cont{gap:16px}
   .cont p{display:none}
   .tools{grid-template-columns:1fr}
+  .mods{grid-template-columns:1fr}
+  .pbs{padding:22px 18px}
+  .books{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:10px 4px 6px;margin:0 -4px}
+  .bk{flex:none;width:118px;scroll-snap-align:start}
   .lib{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;margin:0 -16px;padding-left:16px;padding-right:16px}
   .lib .tr{flex:none;width:250px;scroll-snap-align:start}
-  .gr{grid-template-columns:34px 46px minmax(0,1fr);gap:12px;padding:12px}
-  .gr img{width:46px}
-  .gr .n{font-size:22px}
-  .gr .tick{grid-column:2 / -1;justify-self:start}
-  .gl.play .gr{grid-template-columns:46px minmax(0,1fr)}
-  .gl.play .gr .tick{grid-column:1 / -1}
   .tabs{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;background:rgba(255,252,246,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line);justify-content:space-around;padding:9px max(8px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
   .tabs a{display:flex;flex-direction:column;align-items:center;font-size:11px;font-weight:700;color:var(--mut);gap:3px;min-width:56px}
   .tabs a.on{color:var(--teal)}.tabs a.on svg{color:var(--gold)}
@@ -276,26 +285,14 @@ footer p{margin:0}
   </section>
 
   <section id="academy" aria-labelledby="acT">
-    <div class="sh"><h2 id="acT">VP Academy</h2><span class="m">Read these in order. Tick each one as you finish it.</span></div>
-    <div class="two">
-      <div class="gl" id="acad"></div>
-      <div class="side">
-        <div class="card"><div class="lab">Your progress</div><div class="big" style="margin-top:8px" id="pBig">0<span> / 9</span></div><div class="pg" id="pBar"></div><p style="color:var(--mut);margin:12px 0 0;font-size:14.5px" id="pSub">Saved in this browser.</p></div>
-        <div class="card dark"><div class="lab">Then practise</div><p>Run 10 rounds a day on the <a href="/simulator.html">The Rep Room</a> until the read is automatic.</p></div>
-      </div>
-    </div>
+    <div class="sh"><h2 id="acT">VP Academy</h2><span class="mtot" id="acTot">3 modules · 9 guides · read in order</span></div>
+    <div class="mods" id="mods"></div>
   </section>
 
   <section id="playbook" aria-labelledby="pbT">
-    <div class="sh"><h2 id="pbT">The Playbook</h2><span class="m">My setups, rules and chart, for reference while you trade.</span></div>
-    <div class="two">
-      <div class="gl play" id="play"></div>
-      <div class="side">
-        <div class="card"><div class="lab">Book notes</div>
-          <a class="book" href="/trading-in-the-zone.pdf" target="_blank" rel="noopener"><img src="/trading-in-the-zone-cover.jpg" alt=""><div><h3>Trading in the Zone</h3><div class="by">Mark Douglas</div><p>The five fundamental truths, thinking like a casino, and why trading is a mental game first.</p></div></a>
-        </div>
-        <div class="card"><div class="lab">Save for later</div><p style="margin:10px 0 0;font-size:15px;color:var(--mut)">Read <b style="color:var(--ink)">Advanced Setups</b> once the Snap, the Flip and the Magnet feel obvious.</p></div>
-      </div>
+    <div class="pbs">
+      <div><div class="k">THE PLAYBOOK</div><h3 id="pbT">Your reference shelf</h3><p>My setups, rules and chart. Keep these open while you trade, and save Advanced Setups for when the core three feel obvious.</p></div>
+      <div class="books" id="books"></div>
     </div>
   </section>
 
@@ -303,11 +300,6 @@ footer p{margin:0}
     <div class="sh"><h2 id="tT">Tools</h2><span class="m">Free · everything saves in your own browser</span></div>
     <div class="tools" id="toolList"></div>
   </section>
-
-  <div class="social">
-    <div><div class="k">TikTok</div><h3>Follow <em>@maliktradesvp</em></h3><p>Follow to keep up with the daily live recaps.</p></div>
-    <div class="bt"><a class="p1" href="https://www.tiktok.com/@maliktradesvp" target="_blank" rel="noopener" data-ic="play">Follow on TikTok</a><a class="p2" id="discBtnB" href="#" target="_blank" rel="noopener" data-ic="chat">Join the Discord</a></div>
-  </div>
 
   <footer><p>Everything saves in your own browser. Nothing is uploaded.</p><p>Education only, not financial advice.</p></footer>
 </main>
@@ -348,8 +340,8 @@ const $ = id => document.getElementById(id);
 function read(key){ try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : null; }catch(e){ return null; } }
 
 /* ---------- Discord ---------- */
-if(DISCORD){ ["discBtn","discBtnM","discBtnB"].forEach(id => $(id).href = DISCORD); }
-else { ["discBtn","discBtnM","discBtnB"].forEach(id => $(id).hidden = true); }
+if(DISCORD){ ["discBtn","discBtnM"].forEach(id => $(id).href = DISCORD); }
+else { ["discBtn","discBtnM"].forEach(id => $(id).hidden = true); }
 
 /* ---------- live sessions (New York time) ---------- */
 const NYF = new Intl.DateTimeFormat("en-US", { timeZone:"America/New_York", weekday:"short", hour:"numeric", minute:"2-digit", hour12:false, timeZoneName:"short" });
@@ -419,24 +411,24 @@ const PLAY = [
 const RKEY = "maliktrades.reading.v1";
 let readSet = new Set((read(RKEY) || {}).read || []);
 function saveRead(){ try{ localStorage.setItem(RKEY, JSON.stringify({ read:[...readSet] })); }catch(e){} }
-function row([id, slug, title, line], i, isAcad, nextId){
-  const done = !!id && readSet.has(id), next = !!id && id === nextId;
-  const btn = id ? `<button type="button" class="tick" data-id="${id}" aria-pressed="${done}" aria-label="${done ? "Unmark" : "Mark as read"}: ${title}">${done ? "✓ Read" : next ? "Up next" : "Mark as read"}</button>` : "";
-  return `<div class="gr ${done ? "done" : ""} ${next ? "next" : ""}">
-    <a class="lnk" href="/${slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${title}"></a>
-    ${isAcad ? `<div class="n">${String(i + 1).padStart(2,"0")}</div>` : ""}
-    <img src="/${slug}-cover.jpg" alt="" loading="lazy">
-    <div><h3>${title}</h3><p>${line}</p></div>${btn}</div>`;
-}
+const MODS = [["MODULE 1","Foundations",0],["MODULE 2","Reading the auction",3],["MODULE 3","Execution and funding",6]];
+const tick = (id, title) => { const on = readSet.has(id); return `<button type="button" class="tick" data-id="${id}" aria-pressed="${on}" aria-label="${on ? "Unmark" : "Mark as read"}: ${title}" title="${on ? "Read. Tap to undo" : "Mark as read"}">✓</button>`; };
 function paintGuides(){
   const next = ACAD.find(g => !readSet.has(g[0]));
   const nextId = next ? next[0] : null;
-  $("acad").innerHTML = ACAD.map((g, i) => row(g, i, true, nextId)).join("");
-  $("play").innerHTML = PLAY.map((g, i) => row(g, i, false, null)).join("");
-  const a = ACAD.filter(g => readSet.has(g[0])).length, p = PLAY.filter(g => g[0] && readSet.has(g[0])).length;
-  $("pBig").innerHTML = `${a}<span> / 9</span>`;
-  $("pBar").innerHTML = ACAD.map(g => `<i class="${readSet.has(g[0]) ? "d" : ""}"></i>`).join("");
-  $("pSub").textContent = a === 9 ? `VP Academy done. Playbook ${p} of 4 read.` : `Saved in this browser. Playbook ${p} of 4 read.`;
+  $("mods").innerHTML = MODS.map(([k, h, from]) => {
+    const items = ACAD.slice(from, from + 3), d = items.filter(g => readSet.has(g[0])).length;
+    return `<div class="mod ${d === 3 ? "done" : ""}"><div class="mh"><div><div class="mk">${k}</div><h3>${h}</h3></div><span class="ms">${d === 3 ? "✓ " : ""}${d}/3</span></div>` +
+      items.map(([id, slug, title, line], j) => { const i = from + j, nx = id === nextId;
+        return `<div class="mr ${nx ? "nx" : ""}"><a class="lnk" href="/${slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${title}"></a>
+          <img src="/${slug}-cover.jpg" alt="" loading="lazy"><div><b>#${String(i + 1).padStart(2,"0")} ${title}</b><span>${line}</span>${nx ? '<em class="up" style="font-style:normal">UP NEXT</em>' : ""}</div>${tick(id, title)}</div>`; }).join("") + `</div>`;
+  }).join("");
+  const BOOKS = PLAY.map(([id, slug, title, line]) => ({ id, slug, title, line, tag: slug === "advanced-setups" ? "Read last" : "Reference", adv: slug === "advanced-setups" }))
+    .concat([{ id:null, slug:"trading-in-the-zone", title:"Trading in the Zone", line:"Book notes · Mark Douglas", tag:"Book notes", adv:false }]);
+  $("books").innerHTML = BOOKS.map(b => `<div class="bk"><a class="lnk" href="/${b.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg" alt="" loading="lazy"></a>
+    ${b.id ? tick(b.id, b.title) : ""}<span class="tg2 ${b.adv ? "adv" : ""}">${b.tag}</span><b>${b.title}</b><span>${b.line}</span></div>`).join("");
+  const a = ACAD.filter(g => readSet.has(g[0])).length;
+  $("acTot").innerHTML = `<b>${a} of 9 read</b> · 3 modules · read in order`;
   $("navAcad").textContent = `${a}/9`;
   // continue card
   const c = $("contCard");
