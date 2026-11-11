@@ -1,644 +1,685 @@
 [
- {
-  "id": "2026-10-21-gc-flip",
-  "date": "2026-10-21",
-  "setup": "flip",
-  "instrument": "GC",
-  "direction": "Short",
-  "stars": 4,
-  "result": "+1R",
-  "title": "ONVAL Flip after acceptance below",
-  "summary": "Price initially broke below the ONVAL and started building acceptance below the level, as indicated by the increasing volume in the developing profile.",
-  "confluences": [
-   "ONVAL",
-   "dVAL",
-   "HVN",
-   "VWAP Band"
-  ],
-  "notes": [
-   "Price initially broke below the ONVAL and started building acceptance below the level, as indicated by the increasing volume in the developing profile.",
-   "This was a key indication that the market was accepting lower prices, suggesting that participants were comfortable transacting within this discounted region.",
-   "With that in mind, when price eventually pulled back to retest the ONVAL from below, I saw it as a high-probability short opportunity, as the acceptance established below value supported the likelihood of a bearish continuation."
-  ],
-  "images": [
-   "lib-2026-10-21-gc-flip.jpg"
-  ]
- },
- {
-  "id": "2026-10-22-gc-snap",
-  "date": "2026-10-22",
-  "setup": "snap",
-  "instrument": "GC",
-  "direction": "Long",
-  "stars": 1,
-  "result": "+1R",
-  "title": "ONVAL Snap",
-  "summary": "This is a classic Snap 🫰 setup. Nothing much to explain here, price came down and tapped the level and shot up!",
-  "confluences": [
-   "ONVAL"
-  ],
-  "notes": [
-   "This is a classic Snap 🫰 setup. Nothing much to explain here, price came down and tapped the level and shot up!"
-  ],
-  "images": [
-   "lib-2026-10-22-gc-snap.jpg"
-  ]
- },
- {
-  "id": "2026-10-22-cl-flip",
-  "date": "2026-10-22",
-  "setup": "flip",
-  "instrument": "CL",
-  "direction": "Long",
-  "stars": 4,
-  "result": "+1R",
-  "title": "P-shape ONVAL Flip",
-  "summary": "This is The Flip 🔄. This was a P-shaped profile so longs were the play here.",
-  "confluences": [
-   "ONVAL",
-   "dVAL",
-   "VWAP Band",
-   "HVN"
-  ],
-  "notes": [
-   "This is The Flip 🔄. This was a P-shaped profile so longs were the play here.",
-   "Apart from that, price broke through the level previously from below and now it was retesting the level from above.",
-   "Combined with the VWAP band, dVAL and HVN, this was a high probability long and it shot to TP instantly."
-  ],
-  "images": [
-   "lib-2026-10-22-cl-flip.jpg"
-  ]
- },
- {
-  "id": "2026-10-22-cl-magnet",
-  "date": "2026-10-22",
-  "setup": "magnet",
-  "instrument": "CL",
-  "direction": "Long",
-  "stars": 2,
-  "result": "+1R",
-  "title": "dPOC Magnet after dVAH acceptance",
-  "summary": "Classic Magnet 🧲 setup. After price broke past the dVAH, I waited for some acceptance building beyond the dVAH (meaning participants are comfortable transacting at higher prices).",
-  "confluences": [
-   "ONVAL",
-   "VWAP"
-  ],
-  "notes": [
-   "Classic Magnet 🧲 setup. After price broke past the dVAH, I waited for some acceptance building beyond the dVAH (meaning participants are comfortable transacting at higher prices).",
-   "This was shown to me by the volume building beyond the dVAH in the developing volume profile. When price came back to the dPOC, it was a high probability continuation play back up."
-  ],
-  "images": [
-   "lib-2026-10-22-cl-magnet.jpg"
-  ]
- },
- {
-  "id": "2026-10-29-cl-flip",
-  "date": "2026-10-29",
-  "setup": "flip",
-  "instrument": "CL",
-  "direction": "Long",
-  "stars": 2,
-  "result": "+1R",
-  "title": "Flip with the dPOC in the same spot",
-  "summary": "Price broke past the level and built acceptance beyond the level. This is the basic requirement for the Flip setup.",
-  "confluences": [
-   "ONVAL",
-   "ONVAH",
-   "dPOC"
-  ],
-  "notes": [
-   "Price broke past the level and built acceptance beyond the level. This is the basic requirement for the Flip setup.",
-   "I took this because the dPOC was in the same spot, giving it an extra confluence for price to react at that area."
-  ],
-  "images": [
-   "lib-2026-10-29-cl-flip.jpg"
-  ]
- },
- {
-  "id": "2026-10-29-nq-magnet",
-  "date": "2026-10-29",
-  "setup": "magnet",
-  "instrument": "NQ",
-  "direction": "Long",
-  "stars": 2,
-  "result": "+1R",
-  "title": "dPOC Magnet after dVAH acceptance",
-  "summary": "Price broke past the dVAH and built volume above the level, indicating acceptance.",
-  "confluences": [
-   "VWAP",
-   "dPOC"
-  ],
-  "notes": [
-   "Price broke past the dVAH and built volume above the level, indicating acceptance.",
-   "This showed me that price likes the expensive region, so when price came back to the dPOC, it was a no brainer setup for me to take."
-  ],
-  "images": [
-   "lib-2026-10-29-nq-magnet.jpg"
-  ]
- },
- {
-  "id": "2026-10-29-gc-snap",
-  "date": "2026-10-29",
-  "setup": "snap",
-  "instrument": "GC",
-  "direction": "Long",
-  "stars": 1,
-  "result": "+1R",
-  "title": "ONVAL Snap",
-  "summary": "Single confluence trade. Price came to the level and I just took the classic Snap setup back up. 30 tick move, in and out.",
-  "confluences": [
-   "ONVAL",
-   "VWAP"
-  ],
-  "notes": [
-   "Single confluence trade. Price came to the level and I just took the classic Snap setup back up. 30 tick move, in and out."
-  ],
-  "images": [
-   "lib-2026-10-29-gc-snap.jpg"
-  ]
- },
- {
-  "id": "2026-10-29-cl-snap",
-  "date": "2026-10-29",
-  "setup": "snap",
-  "instrument": "CL",
-  "direction": "Long",
-  "stars": 1,
-  "result": "+1R",
-  "title": "ONVAL Snap",
-  "summary": "Classic Snap setup. Price came down from above and got a nice upwards reaction from the level.",
-  "confluences": [
-   "ONVAL",
-   "VWAP",
-   "VWAP Band"
-  ],
-  "notes": [
-   "Classic Snap setup. Price came down from above and got a nice upwards reaction from the level."
-  ],
-  "images": [
-   "lib-2026-10-29-cl-snap.jpg"
-  ]
- },
- {
-  "id": "2026-10-30-cl-snap",
-  "date": "2026-10-30",
-  "setup": "snap",
-  "instrument": "CL",
-  "direction": "Long",
-  "stars": 2,
-  "result": "+1R",
-  "title": "D-shape dVAL Snap",
-  "summary": "The developing profile was D-shaped, so the market was in balance and price kept rotating between the dVAH and the dVAL.",
-  "confluences": [
-   "VWAP",
-   "dVAL"
-  ],
-  "notes": [
-   "The developing profile was D-shaped, so the market was in balance and price kept rotating between the dVAH and the dVAL.",
-   "Price dropped into the dVAL, couldn't hold below it and got bought straight back up. I went long at the dVAL with my stop just below it and my target at the dPOC, 1:1.",
-   "Hit target within minutes.",
-   "Lesson: in a D-shape, fade the edges until price breaks out."
-  ],
-  "images": [
-   "lib-2026-10-30-cl-snap.jpg"
-  ]
- },
- {
-  "id": "2026-11-02-cl-snap",
-  "date": "2026-11-02",
-  "setup": "snap",
-  "instrument": "CL",
-  "direction": "Long",
-  "stars": 2,
-  "result": "+1R",
-  "title": "PWPOC Snap",
-  "summary": "Classic Snap setup. Price came down to the level, limit order set and price flew to take profit.",
-  "confluences": [
-   "PWPOC",
-   "VWAP Band"
-  ],
-  "notes": [
-   "Classic Snap setup. Price came down to the level, limit order set and price flew to take profit."
-  ],
-  "images": [
-   "lib-2026-11-02-cl-snap.jpg"
-  ]
- },
- {
-  "id": "2026-11-02-cl-flip",
-  "date": "2026-11-02",
-  "setup": "flip",
-  "instrument": "CL",
-  "direction": "Short",
-  "stars": 2,
-  "result": "+1R",
-  "title": "PWPOC Flip",
-  "summary": "Classic Flip. Price broke through the PWPOC and built volume below the level, and once it came back to the level, it had a nice reaction to the downside. Bread and butter setup.",
-  "confluences": [
-   "PWPOC",
-   "VWAP Band"
-  ],
-  "notes": [
-   "Classic Flip. Price broke through the PWPOC and built volume below the level, and once it came back to the level, it had a nice reaction to the downside. Bread and butter setup."
-  ],
-  "images": [
-   "lib-2026-11-02-cl-flip.jpg"
-  ]
- },
- {
-  "id": "2026-11-02-nq-snap",
-  "date": "2026-11-02",
-  "setup": "snap",
-  "instrument": "NQ",
-  "direction": "Long",
-  "stars": 3,
-  "result": "+1R",
-  "title": "Stacked ONVAL + NYPOC Snap",
-  "summary": "Extremely confluential zone to take the Snap from. There were 2 stacked levels + a VWAP band, making it a 3 star trade.",
-  "confluences": [
-   "VWAP Band",
-   "ONVAL",
-   "NYPOC"
-  ],
-  "notes": [
-   "Extremely confluential zone to take the Snap from. There were 2 stacked levels + a VWAP band, making it a 3 star trade.",
-   "Limit order set at the first level and an easy 1:1 taken."
-  ],
-  "images": [
-   "lib-2026-11-02-nq-snap.jpg"
-  ]
- },
- {
-  "id": "2026-11-03-cl-snap",
-  "date": "2026-11-03",
-  "setup": "snap",
-  "instrument": "CL",
-  "direction": "Long",
-  "stars": 2,
-  "result": "+1R",
-  "title": "NYVAL Snap",
-  "summary": "Classic Snap setup. Price came from above and had a nice quick reaction from the level.",
-  "confluences": [
-   "VWAP Band",
-   "NYVAL"
-  ],
-  "notes": [
-   "Classic Snap setup. Price came from above and had a nice quick reaction from the level."
-  ],
-  "images": [
-   "lib-2026-11-03-cl-snap.jpg"
-  ]
- },
- {
-  "id": "2026-11-03-cl-flip",
-  "date": "2026-11-03",
-  "setup": "flip",
-  "instrument": "CL",
-  "direction": "Long",
-  "stars": 2,
-  "result": "0R",
-  "title": "NYVAL Flip",
-  "summary": "Classic Flip. Price broke above the level and built volume beyond, and when it came back it was a good retest. Unfortunately I ended up taking breakeven on this one.",
-  "confluences": [
-   "NYVAL",
-   "VWAP"
-  ],
-  "notes": [
-   "Classic Flip. Price broke above the level and built volume beyond, and when it came back it was a good retest. Unfortunately I ended up taking breakeven on this one."
-  ],
-  "images": [
-   "lib-2026-11-03-cl-flip.jpg"
-  ]
- },
- {
-  "id": "2026-11-04-gc-flip",
-  "date": "2026-11-04",
-  "setup": "flip",
-  "instrument": "GC",
-  "direction": "Long",
-  "stars": 1,
-  "result": "+1R",
-  "title": "ONVAH Flip",
-  "summary": "Price broke above the ONVAH and built volume above the level. When it came down to the level I took a quick Flip off it and it shot straight to TP.",
-  "confluences": [
-   "ONVAH"
-  ],
-  "notes": [
-   "Price broke above the ONVAH and built volume above the level. When it came down to the level I took a quick Flip off it and it shot straight to TP."
-  ],
-  "images": [
-   "lib-2026-11-04-gc-flip.jpg"
-  ]
- },
- {
-  "id": "2026-11-05-nq-magnet",
-  "date": "2026-11-05",
-  "setup": "magnet",
-  "instrument": "NQ",
-  "direction": "Short",
-  "stars": 2,
-  "result": "+1R",
-  "title": "dPOC Magnet after dVAL acceptance",
-  "summary": "Price went below the dVAL and developed acceptance below it.",
-  "confluences": [
-   "VWAP"
-  ],
-  "notes": [
-   "Price went below the dVAL and developed acceptance below it.",
-   "When price came back up to the dPOC, I put my sell limit order in and price had a very nice reaction downwards."
-  ],
-  "images": [
-   "lib-2026-11-05-nq-magnet.jpg"
-  ]
- },
- {
-  "id": "2026-11-05-cl-snap",
-  "date": "2026-11-05",
-  "setup": "snap",
-  "instrument": "CL",
-  "direction": "Long",
-  "stars": 2,
-  "result": "+1R",
-  "title": "NYVAL Snap",
-  "summary": "As price was coming down to the NYVAL, I set a limit order and waited. Price then had a really nice reaction to the level and shot up, hitting my TP.",
-  "confluences": [
-   "NYVAL",
-   "VWAP Band"
-  ],
-  "notes": [
-   "As price was coming down to the NYVAL, I set a limit order and waited. Price then had a really nice reaction to the level and shot up, hitting my TP."
-  ],
-  "images": [
-   "lib-2026-11-05-cl-snap.jpg"
-  ]
- },
- {
-  "id": "2026-11-05-nq-snap",
-  "date": "2026-11-05",
-  "setup": "snap",
-  "instrument": "NQ",
-  "direction": "Long",
-  "stars": 1,
-  "result": "-1R",
-  "title": "ONPOC Snap that broke",
-  "summary": "As price was coming down to the ONPOC, I set a limit order on the level but unfortunately price had no reaction to the level and broke through.",
-  "confluences": [
-   "ONPOC"
-  ],
-  "notes": [
-   "As price was coming down to the ONPOC, I set a limit order on the level but unfortunately price had no reaction to the level and broke through."
-  ],
-  "images": [
-   "lib-2026-11-05-nq-snap.jpg"
-  ]
- },
- {
-  "id": "2026-11-06-gc-flip",
-  "date": "2026-11-06",
-  "setup": "flip",
-  "instrument": "GC",
-  "direction": "Short",
-  "stars": 1,
-  "result": "+1R",
-  "title": "PWVAH Flip after acceptance below",
-  "summary": "Initially price broke through the level and built volume below it, so when price came back to retest it, it was a classic Flip setup and it hit TP really quickly.",
-  "confluences": [
-   "PWVAH"
-  ],
-  "notes": [
-   "Initially price broke through the level and built volume below it, so when price came back to retest it, it was a classic Flip setup and it hit TP really quickly."
-  ],
-  "images": [
-   "lib-2026-11-06-gc-flip.jpg"
-  ]
- },
- {
-  "id": "2026-11-06-gc-snap",
-  "date": "2026-11-06",
-  "setup": "snap",
-  "instrument": "GC",
-  "direction": "Long",
-  "stars": 2,
-  "result": "-1R",
-  "title": "PWVAH Snap stopped out before the move",
-  "summary": "Price came from above and I took the Snap setup expecting a reaction from the level, but the trade stopped me out before ripping upwards. Unfortunate.",
-  "confluences": [
-   "PWVAH",
-   "VWAP Band"
-  ],
-  "notes": [
-   "Price came from above and I took the Snap setup expecting a reaction from the level, but the trade stopped me out before ripping upwards. Unfortunate."
-  ],
-  "images": [
-   "lib-2026-11-06-gc-snap.jpg"
-  ]
- },
- {
-  "id": "2026-11-06-gc-snap-nypoc",
-  "date": "2026-11-06",
-  "setup": "snap",
-  "instrument": "GC",
-  "direction": "Short",
-  "stars": 2,
-  "result": "+1R",
-  "title": "NYPOC Snap",
-  "summary": "Price came from below and I took the classic Snap off the NYPOC, expecting a reaction from the level, and price gave a really clean reaction down.",
-  "confluences": [
-   "VWAP Band",
-   "NYPOC"
-  ],
-  "notes": [
-   "Price came from below and I took the classic Snap off the NYPOC, expecting a reaction from the level, and price gave a really clean reaction down."
-  ],
-  "images": [
-   "lib-2026-11-06-gc-snap-nypoc.jpg"
-  ]
- },
- {
-  "id": "2026-11-09-nq-snap-pwval",
-  "date": "2026-11-09",
-  "setup": "snap",
-  "instrument": "NQ",
-  "direction": "Short",
-  "stars": 1,
-  "result": "+1R",
-  "title": "PWVAL Snap from underneath",
-  "summary": "Classic Snap setup. Price came from underneath and I took a short at the PWVAL, and price had an immediate reaction to the downside.",
-  "confluences": [
-   "PWVAL"
-  ],
-  "notes": [
-   "Classic Snap setup. Price came from underneath and I took a short at the PWVAL, and price had an immediate reaction to the downside."
-  ],
-  "images": [
-   "lib-2026-11-09-nq-snap-pwval.jpg"
-  ]
- },
- {
-  "id": "2026-11-09-nq-snap-nyvah",
-  "date": "2026-11-09",
-  "setup": "snap",
-  "instrument": "NQ",
-  "direction": "Short",
-  "stars": 1,
-  "result": "+1R",
-  "title": "NYVAH Snap",
-  "summary": "Classic Snap setup. Price came from underneath and I took a short at the NYVAH, and price had an immediate reaction to the downside.",
-  "confluences": [
-   "NYVAH"
-  ],
-  "notes": [
-   "Classic Snap setup. Price came from underneath and I took a short at the NYVAH, and price had an immediate reaction to the downside."
-  ],
-  "images": [
-   "lib-2026-11-09-nq-snap-nyvah.jpg"
-  ]
- },
- {
-  "id": "2026-11-09-nq-flip-pwval",
-  "date": "2026-11-09",
-  "setup": "flip",
-  "instrument": "NQ",
-  "direction": "Long",
-  "stars": 1,
-  "result": "+1R",
-  "title": "PWVAL Flip after acceptance above",
-  "summary": "Classic Flip. Price initially broke through the PWVAL and built acceptance beyond the level, so when it came back to the PWVAL it was a very good trade to take. Price had a very nice reaction off the level and I hit TP fast.",
-  "confluences": [
-   "PWVAL"
-  ],
-  "notes": [
-   "Classic Flip. Price initially broke through the PWVAL and built acceptance beyond the level, so when it came back to the PWVAL it was a very good trade to take. Price had a very nice reaction off the level and I hit TP fast."
-  ],
-  "images": [
-   "lib-2026-11-09-nq-flip-pwval.jpg"
-  ]
- },
- {
-  "id": "2026-11-09-gc-wall",
-  "date": "2026-11-09",
-  "setup": "wall",
-  "instrument": "GC",
-  "direction": "Long",
-  "stars": 1,
-  "result": "+1R",
-  "title": "The Wall off a dVP HVN shelf",
-  "summary": "Here there was an HVN in the dVP (the green box), and I took a small continuation play to the upside when price came down to the HVN.",
-  "confluences": [
-   "HVN"
-  ],
-  "notes": [
-   "This was a Wall, a rare advanced setup with a very specific condition: price has to move in one direction the entire session. To capitalise on the momentum, we can take retests of HVNs in the developing profile.",
-   "Here there was an HVN in the dVP (the green box), and I took a small continuation play to the upside when price came down to the HVN."
-  ],
-  "images": [
-   "lib-2026-11-09-gc-wall.jpg"
-  ]
- },
- {
-  "id": "2026-11-09-gc-wall-dpoc",
-  "date": "2026-11-09",
-  "setup": "wall",
-  "instrument": "GC",
-  "direction": "Long",
-  "stars": 1,
-  "result": "+1R",
-  "title": "The Wall at the dPOC HVN",
-  "summary": "Here the dPOC had the biggest HVN, so I placed my buy limit just above it and caught a nice continuation play to the upside.",
-  "confluences": [
-   "dPOC",
-   "HVN"
-  ],
-  "notes": [
-   "This was a Wall, a rare advanced setup with a very specific condition: price has to move in one direction the entire session. To capitalise on the momentum, we can take retests of HVNs in the developing profile.",
-   "Here the dPOC had the biggest HVN, so I placed my buy limit just above it and caught a nice continuation play to the upside."
-  ],
-  "images": [
-   "lib-2026-11-09-gc-wall-dpoc.jpg"
-  ]
- },
- {
-  "id": "2026-11-10-gc-flip-onpoc",
-  "date": "2026-11-10",
-  "setup": "flip",
-  "instrument": "GC",
-  "direction": "Long",
-  "stars": 2,
-  "result": "+1R",
-  "title": "ONPOC Flip stacked with the dVAL",
-  "summary": "This was a classic Flip setup. Price broke past the level initially, and when it approached the level again I put a limit order on the ONPOC.",
-  "confluences": [
-   "dVAL",
-   "ONPOC"
-  ],
-  "notes": [
-   "This was a classic Flip setup. Price broke past the level initially, and when it approached the level again I put a limit order on the ONPOC.",
-   "This was a double confluence trade, as the dVAL was in the same zone as well. I got tagged in at the level and quickly hit TP."
-  ],
-  "images": [
-   "lib-2026-11-10-gc-flip-onpoc.jpg"
-  ]
- },
- {
-  "id": "2026-11-10-nq-snap-nypoc",
-  "date": "2026-11-10",
-  "setup": "snap",
-  "instrument": "NQ",
-  "direction": "Long",
-  "stars": 1,
-  "result": "+1R",
-  "title": "NYPOC Snap from above",
-  "summary": "This was a classic Snap setup. Price came down from above and I took a quick Snap off the level. Quick in and out trade.",
-  "confluences": [
-   "NYPOC"
-  ],
-  "notes": [
-   "This was a classic Snap setup. Price came down from above and I took a quick Snap off the level. Quick in and out trade."
-  ],
-  "images": [
-   "lib-2026-11-10-nq-snap-nypoc.jpg"
-  ]
- },
- {
-  "id": "2026-11-10-gc-reinforced-flip-nypoc",
-  "date": "2026-11-10",
-  "setup": "flip",
-  "instrument": "GC",
-  "direction": "Short",
-  "stars": 2,
-  "result": "+1R",
-  "title": "Reinforced Flip at the NYPOC",
-  "summary": "This was a Reinforced Flip setup. There was an HVN shelf above the NYPOC before the trade, so when price came from below to retest the level, I felt confident taking it, as the HVN would act as a wall of defence, reinforcing the level.",
-  "confluences": [
-   "NYPOC",
-   "HVN"
-  ],
-  "notes": [
-   "This was a Reinforced Flip setup. There was an HVN shelf above the NYPOC before the trade, so when price came from below to retest the level, I felt confident taking it, as the HVN would act as a wall of defence, reinforcing the level.",
-   "I got tagged in and quickly hit TP in the same candle."
-  ],
-  "images": [
-   "lib-2026-11-10-gc-reinforced-flip-nypoc.jpg"
-  ]
- },
- {
-  "id": "2026-11-10-gc-flip-nyval",
-  "date": "2026-11-10",
-  "setup": "flip",
-  "instrument": "GC",
-  "direction": "Short",
-  "stars": 1,
-  "result": "+1R",
-  "title": "NYVAL Flip back to the downside",
-  "summary": "This was a classic Flip. Price broke through the level initially, and when it came back to retest, I took the Flip back to the downside and hit TP really fast.",
-  "confluences": [
-   "NYVAL"
-  ],
-  "notes": [
-   "This was a classic Flip. Price broke through the level initially, and when it came back to retest, I took the Flip back to the downside and hit TP really fast."
-  ],
-  "images": [
-   "lib-2026-11-10-gc-flip-nyval.jpg"
-  ]
- }
+  {
+    "id": "2026-10-21-gc-flip",
+    "date": "2026-10-21",
+    "setup": "flip",
+    "instrument": "GC",
+    "direction": "Short",
+    "stars": 4,
+    "result": "+1R",
+    "title": "ONVAL Flip after acceptance below",
+    "summary": "Price initially broke below the ONVAL and started building acceptance below the level, as indicated by the increasing volume in the developing profile.",
+    "confluences": [
+      "ONVAL",
+      "dVAL",
+      "HVN",
+      "VWAP Band"
+    ],
+    "notes": [
+      "Price initially broke below the ONVAL and started building acceptance below the level, as indicated by the increasing volume in the developing profile.",
+      "This was a key indication that the market was accepting lower prices, suggesting that participants were comfortable transacting within this discounted region.",
+      "With that in mind, when price eventually pulled back to retest the ONVAL from below, I saw it as a high-probability short opportunity, as the acceptance established below value supported the likelihood of a bearish continuation."
+    ],
+    "images": [
+      "lib-2026-10-21-gc-flip.jpg"
+    ]
+  },
+  {
+    "id": "2026-10-22-gc-snap",
+    "date": "2026-10-22",
+    "setup": "snap",
+    "instrument": "GC",
+    "direction": "Long",
+    "stars": 1,
+    "result": "+1R",
+    "title": "ONVAL Snap",
+    "summary": "This is a classic Snap 🫰 setup. Nothing much to explain here, price came down and tapped the level and shot up!",
+    "confluences": [
+      "ONVAL"
+    ],
+    "notes": [
+      "This is a classic Snap 🫰 setup. Nothing much to explain here, price came down and tapped the level and shot up!"
+    ],
+    "images": [
+      "lib-2026-10-22-gc-snap.jpg"
+    ]
+  },
+  {
+    "id": "2026-10-22-cl-flip",
+    "date": "2026-10-22",
+    "setup": "flip",
+    "instrument": "CL",
+    "direction": "Long",
+    "stars": 4,
+    "result": "+1R",
+    "title": "P-shape ONVAL Flip",
+    "summary": "This is The Flip 🔄. This was a P-shaped profile so longs were the play here.",
+    "confluences": [
+      "ONVAL",
+      "dVAL",
+      "VWAP Band",
+      "HVN"
+    ],
+    "notes": [
+      "This is The Flip 🔄. This was a P-shaped profile so longs were the play here.",
+      "Apart from that, price broke through the level previously from below and now it was retesting the level from above.",
+      "Combined with the VWAP band, dVAL and HVN, this was a high probability long and it shot to TP instantly."
+    ],
+    "images": [
+      "lib-2026-10-22-cl-flip.jpg"
+    ]
+  },
+  {
+    "id": "2026-10-22-cl-magnet",
+    "date": "2026-10-22",
+    "setup": "magnet",
+    "instrument": "CL",
+    "direction": "Long",
+    "stars": 2,
+    "result": "+1R",
+    "title": "dPOC Magnet after dVAH acceptance",
+    "summary": "Classic Magnet 🧲 setup. After price broke past the dVAH, I waited for some acceptance building beyond the dVAH (meaning participants are comfortable transacting at higher prices).",
+    "confluences": [
+      "ONVAL",
+      "VWAP"
+    ],
+    "notes": [
+      "Classic Magnet 🧲 setup. After price broke past the dVAH, I waited for some acceptance building beyond the dVAH (meaning participants are comfortable transacting at higher prices).",
+      "This was shown to me by the volume building beyond the dVAH in the developing volume profile. When price came back to the dPOC, it was a high probability continuation play back up."
+    ],
+    "images": [
+      "lib-2026-10-22-cl-magnet.jpg"
+    ]
+  },
+  {
+    "id": "2026-10-29-cl-flip",
+    "date": "2026-10-29",
+    "setup": "flip",
+    "instrument": "CL",
+    "direction": "Long",
+    "stars": 2,
+    "result": "+1R",
+    "title": "Flip with the dPOC in the same spot",
+    "summary": "Price broke past the level and built acceptance beyond the level. This is the basic requirement for the Flip setup.",
+    "confluences": [
+      "ONVAL",
+      "ONVAH",
+      "dPOC"
+    ],
+    "notes": [
+      "Price broke past the level and built acceptance beyond the level. This is the basic requirement for the Flip setup.",
+      "I took this because the dPOC was in the same spot, giving it an extra confluence for price to react at that area."
+    ],
+    "images": [
+      "lib-2026-10-29-cl-flip.jpg"
+    ]
+  },
+  {
+    "id": "2026-10-29-nq-magnet",
+    "date": "2026-10-29",
+    "setup": "magnet",
+    "instrument": "NQ",
+    "direction": "Long",
+    "stars": 2,
+    "result": "+1R",
+    "title": "dPOC Magnet after dVAH acceptance",
+    "summary": "Price broke past the dVAH and built volume above the level, indicating acceptance.",
+    "confluences": [
+      "VWAP",
+      "dPOC"
+    ],
+    "notes": [
+      "Price broke past the dVAH and built volume above the level, indicating acceptance.",
+      "This showed me that price likes the expensive region, so when price came back to the dPOC, it was a no brainer setup for me to take."
+    ],
+    "images": [
+      "lib-2026-10-29-nq-magnet.jpg"
+    ]
+  },
+  {
+    "id": "2026-10-29-gc-snap",
+    "date": "2026-10-29",
+    "setup": "snap",
+    "instrument": "GC",
+    "direction": "Long",
+    "stars": 1,
+    "result": "+1R",
+    "title": "ONVAL Snap",
+    "summary": "Single confluence trade. Price came to the level and I just took the classic Snap setup back up. 30 tick move, in and out.",
+    "confluences": [
+      "ONVAL",
+      "VWAP"
+    ],
+    "notes": [
+      "Single confluence trade. Price came to the level and I just took the classic Snap setup back up. 30 tick move, in and out."
+    ],
+    "images": [
+      "lib-2026-10-29-gc-snap.jpg"
+    ]
+  },
+  {
+    "id": "2026-10-29-cl-snap",
+    "date": "2026-10-29",
+    "setup": "snap",
+    "instrument": "CL",
+    "direction": "Long",
+    "stars": 1,
+    "result": "+1R",
+    "title": "ONVAL Snap",
+    "summary": "Classic Snap setup. Price came down from above and got a nice upwards reaction from the level.",
+    "confluences": [
+      "ONVAL",
+      "VWAP",
+      "VWAP Band"
+    ],
+    "notes": [
+      "Classic Snap setup. Price came down from above and got a nice upwards reaction from the level."
+    ],
+    "images": [
+      "lib-2026-10-29-cl-snap.jpg"
+    ]
+  },
+  {
+    "id": "2026-10-30-cl-snap",
+    "date": "2026-10-30",
+    "setup": "snap",
+    "instrument": "CL",
+    "direction": "Long",
+    "stars": 2,
+    "result": "+1R",
+    "title": "D-shape dVAL Snap",
+    "summary": "The developing profile was D-shaped, so the market was in balance and price kept rotating between the dVAH and the dVAL.",
+    "confluences": [
+      "VWAP",
+      "dVAL"
+    ],
+    "notes": [
+      "The developing profile was D-shaped, so the market was in balance and price kept rotating between the dVAH and the dVAL.",
+      "Price dropped into the dVAL, couldn't hold below it and got bought straight back up. I went long at the dVAL with my stop just below it and my target at the dPOC, 1:1.",
+      "Hit target within minutes.",
+      "Lesson: in a D-shape, fade the edges until price breaks out."
+    ],
+    "images": [
+      "lib-2026-10-30-cl-snap.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-02-cl-snap",
+    "date": "2026-11-02",
+    "setup": "snap",
+    "instrument": "CL",
+    "direction": "Long",
+    "stars": 2,
+    "result": "+1R",
+    "title": "PWPOC Snap",
+    "summary": "Classic Snap setup. Price came down to the level, limit order set and price flew to take profit.",
+    "confluences": [
+      "PWPOC",
+      "VWAP Band"
+    ],
+    "notes": [
+      "Classic Snap setup. Price came down to the level, limit order set and price flew to take profit."
+    ],
+    "images": [
+      "lib-2026-11-02-cl-snap.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-02-cl-flip",
+    "date": "2026-11-02",
+    "setup": "flip",
+    "instrument": "CL",
+    "direction": "Short",
+    "stars": 2,
+    "result": "+1R",
+    "title": "PWPOC Flip",
+    "summary": "Classic Flip. Price broke through the PWPOC and built volume below the level, and once it came back to the level, it had a nice reaction to the downside. Bread and butter setup.",
+    "confluences": [
+      "PWPOC",
+      "VWAP Band"
+    ],
+    "notes": [
+      "Classic Flip. Price broke through the PWPOC and built volume below the level, and once it came back to the level, it had a nice reaction to the downside. Bread and butter setup."
+    ],
+    "images": [
+      "lib-2026-11-02-cl-flip.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-02-nq-snap",
+    "date": "2026-11-02",
+    "setup": "snap",
+    "instrument": "NQ",
+    "direction": "Long",
+    "stars": 3,
+    "result": "+1R",
+    "title": "Stacked ONVAL + NYPOC Snap",
+    "summary": "Extremely confluential zone to take the Snap from. There were 2 stacked levels + a VWAP band, making it a 3 star trade.",
+    "confluences": [
+      "VWAP Band",
+      "ONVAL",
+      "NYPOC"
+    ],
+    "notes": [
+      "Extremely confluential zone to take the Snap from. There were 2 stacked levels + a VWAP band, making it a 3 star trade.",
+      "Limit order set at the first level and an easy 1:1 taken."
+    ],
+    "images": [
+      "lib-2026-11-02-nq-snap.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-03-cl-snap",
+    "date": "2026-11-03",
+    "setup": "snap",
+    "instrument": "CL",
+    "direction": "Long",
+    "stars": 2,
+    "result": "+1R",
+    "title": "NYVAL Snap",
+    "summary": "Classic Snap setup. Price came from above and had a nice quick reaction from the level.",
+    "confluences": [
+      "VWAP Band",
+      "NYVAL"
+    ],
+    "notes": [
+      "Classic Snap setup. Price came from above and had a nice quick reaction from the level."
+    ],
+    "images": [
+      "lib-2026-11-03-cl-snap.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-03-cl-flip",
+    "date": "2026-11-03",
+    "setup": "flip",
+    "instrument": "CL",
+    "direction": "Long",
+    "stars": 2,
+    "result": "0R",
+    "title": "NYVAL Flip",
+    "summary": "Classic Flip. Price broke above the level and built volume beyond, and when it came back it was a good retest. Unfortunately I ended up taking breakeven on this one.",
+    "confluences": [
+      "NYVAL",
+      "VWAP"
+    ],
+    "notes": [
+      "Classic Flip. Price broke above the level and built volume beyond, and when it came back it was a good retest. Unfortunately I ended up taking breakeven on this one."
+    ],
+    "images": [
+      "lib-2026-11-03-cl-flip.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-04-gc-flip",
+    "date": "2026-11-04",
+    "setup": "flip",
+    "instrument": "GC",
+    "direction": "Long",
+    "stars": 1,
+    "result": "+1R",
+    "title": "ONVAH Flip",
+    "summary": "Price broke above the ONVAH and built volume above the level. When it came down to the level I took a quick Flip off it and it shot straight to TP.",
+    "confluences": [
+      "ONVAH"
+    ],
+    "notes": [
+      "Price broke above the ONVAH and built volume above the level. When it came down to the level I took a quick Flip off it and it shot straight to TP."
+    ],
+    "images": [
+      "lib-2026-11-04-gc-flip.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-05-nq-magnet",
+    "date": "2026-11-05",
+    "setup": "magnet",
+    "instrument": "NQ",
+    "direction": "Short",
+    "stars": 2,
+    "result": "+1R",
+    "title": "dPOC Magnet after dVAL acceptance",
+    "summary": "Price went below the dVAL and developed acceptance below it.",
+    "confluences": [
+      "VWAP"
+    ],
+    "notes": [
+      "Price went below the dVAL and developed acceptance below it.",
+      "When price came back up to the dPOC, I put my sell limit order in and price had a very nice reaction downwards."
+    ],
+    "images": [
+      "lib-2026-11-05-nq-magnet.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-05-cl-snap",
+    "date": "2026-11-05",
+    "setup": "snap",
+    "instrument": "CL",
+    "direction": "Long",
+    "stars": 2,
+    "result": "+1R",
+    "title": "NYVAL Snap",
+    "summary": "As price was coming down to the NYVAL, I set a limit order and waited. Price then had a really nice reaction to the level and shot up, hitting my TP.",
+    "confluences": [
+      "NYVAL",
+      "VWAP Band"
+    ],
+    "notes": [
+      "As price was coming down to the NYVAL, I set a limit order and waited. Price then had a really nice reaction to the level and shot up, hitting my TP."
+    ],
+    "images": [
+      "lib-2026-11-05-cl-snap.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-05-nq-snap",
+    "date": "2026-11-05",
+    "setup": "snap",
+    "instrument": "NQ",
+    "direction": "Long",
+    "stars": 1,
+    "result": "-1R",
+    "title": "ONPOC Snap that broke",
+    "summary": "As price was coming down to the ONPOC, I set a limit order on the level but unfortunately price had no reaction to the level and broke through.",
+    "confluences": [
+      "ONPOC"
+    ],
+    "notes": [
+      "As price was coming down to the ONPOC, I set a limit order on the level but unfortunately price had no reaction to the level and broke through."
+    ],
+    "images": [
+      "lib-2026-11-05-nq-snap.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-06-gc-flip",
+    "date": "2026-11-06",
+    "setup": "flip",
+    "instrument": "GC",
+    "direction": "Short",
+    "stars": 1,
+    "result": "+1R",
+    "title": "PWVAH Flip after acceptance below",
+    "summary": "Initially price broke through the level and built volume below it, so when price came back to retest it, it was a classic Flip setup and it hit TP really quickly.",
+    "confluences": [
+      "PWVAH"
+    ],
+    "notes": [
+      "Initially price broke through the level and built volume below it, so when price came back to retest it, it was a classic Flip setup and it hit TP really quickly."
+    ],
+    "images": [
+      "lib-2026-11-06-gc-flip.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-06-gc-snap",
+    "date": "2026-11-06",
+    "setup": "snap",
+    "instrument": "GC",
+    "direction": "Long",
+    "stars": 2,
+    "result": "-1R",
+    "title": "PWVAH Snap stopped out before the move",
+    "summary": "Price came from above and I took the Snap setup expecting a reaction from the level, but the trade stopped me out before ripping upwards. Unfortunate.",
+    "confluences": [
+      "PWVAH",
+      "VWAP Band"
+    ],
+    "notes": [
+      "Price came from above and I took the Snap setup expecting a reaction from the level, but the trade stopped me out before ripping upwards. Unfortunate."
+    ],
+    "images": [
+      "lib-2026-11-06-gc-snap.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-06-gc-snap-nypoc",
+    "date": "2026-11-06",
+    "setup": "snap",
+    "instrument": "GC",
+    "direction": "Short",
+    "stars": 2,
+    "result": "+1R",
+    "title": "NYPOC Snap",
+    "summary": "Price came from below and I took the classic Snap off the NYPOC, expecting a reaction from the level, and price gave a really clean reaction down.",
+    "confluences": [
+      "VWAP Band",
+      "NYPOC"
+    ],
+    "notes": [
+      "Price came from below and I took the classic Snap off the NYPOC, expecting a reaction from the level, and price gave a really clean reaction down."
+    ],
+    "images": [
+      "lib-2026-11-06-gc-snap-nypoc.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-09-nq-snap-pwval",
+    "date": "2026-11-09",
+    "setup": "snap",
+    "instrument": "NQ",
+    "direction": "Short",
+    "stars": 1,
+    "result": "+1R",
+    "title": "PWVAL Snap from underneath",
+    "summary": "Classic Snap setup. Price came from underneath and I took a short at the PWVAL, and price had an immediate reaction to the downside.",
+    "confluences": [
+      "PWVAL"
+    ],
+    "notes": [
+      "Classic Snap setup. Price came from underneath and I took a short at the PWVAL, and price had an immediate reaction to the downside."
+    ],
+    "images": [
+      "lib-2026-11-09-nq-snap-pwval.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-09-nq-snap-nyvah",
+    "date": "2026-11-09",
+    "setup": "snap",
+    "instrument": "NQ",
+    "direction": "Short",
+    "stars": 1,
+    "result": "+1R",
+    "title": "NYVAH Snap",
+    "summary": "Classic Snap setup. Price came from underneath and I took a short at the NYVAH, and price had an immediate reaction to the downside.",
+    "confluences": [
+      "NYVAH"
+    ],
+    "notes": [
+      "Classic Snap setup. Price came from underneath and I took a short at the NYVAH, and price had an immediate reaction to the downside."
+    ],
+    "images": [
+      "lib-2026-11-09-nq-snap-nyvah.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-09-nq-flip-pwval",
+    "date": "2026-11-09",
+    "setup": "flip",
+    "instrument": "NQ",
+    "direction": "Long",
+    "stars": 1,
+    "result": "+1R",
+    "title": "PWVAL Flip after acceptance above",
+    "summary": "Classic Flip. Price initially broke through the PWVAL and built acceptance beyond the level, so when it came back to the PWVAL it was a very good trade to take. Price had a very nice reaction off the level and I hit TP fast.",
+    "confluences": [
+      "PWVAL"
+    ],
+    "notes": [
+      "Classic Flip. Price initially broke through the PWVAL and built acceptance beyond the level, so when it came back to the PWVAL it was a very good trade to take. Price had a very nice reaction off the level and I hit TP fast."
+    ],
+    "images": [
+      "lib-2026-11-09-nq-flip-pwval.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-09-gc-wall",
+    "date": "2026-11-09",
+    "setup": "wall",
+    "instrument": "GC",
+    "direction": "Long",
+    "stars": 1,
+    "result": "+1R",
+    "title": "The Wall off a dVP HVN shelf",
+    "summary": "Here there was an HVN in the dVP (the green box), and I took a small continuation play to the upside when price came down to the HVN.",
+    "confluences": [
+      "HVN"
+    ],
+    "notes": [
+      "This was a Wall, a rare advanced setup with a very specific condition: price has to move in one direction the entire session. To capitalise on the momentum, we can take retests of HVNs in the developing profile.",
+      "Here there was an HVN in the dVP (the green box), and I took a small continuation play to the upside when price came down to the HVN."
+    ],
+    "images": [
+      "lib-2026-11-09-gc-wall.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-09-gc-wall-dpoc",
+    "date": "2026-11-09",
+    "setup": "wall",
+    "instrument": "GC",
+    "direction": "Long",
+    "stars": 1,
+    "result": "+1R",
+    "title": "The Wall at the dPOC HVN",
+    "summary": "Here the dPOC had the biggest HVN, so I placed my buy limit just above it and caught a nice continuation play to the upside.",
+    "confluences": [
+      "dPOC",
+      "HVN"
+    ],
+    "notes": [
+      "This was a Wall, a rare advanced setup with a very specific condition: price has to move in one direction the entire session. To capitalise on the momentum, we can take retests of HVNs in the developing profile.",
+      "Here the dPOC had the biggest HVN, so I placed my buy limit just above it and caught a nice continuation play to the upside."
+    ],
+    "images": [
+      "lib-2026-11-09-gc-wall-dpoc.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-10-gc-flip-onpoc",
+    "date": "2026-11-10",
+    "setup": "flip",
+    "instrument": "GC",
+    "direction": "Long",
+    "stars": 2,
+    "result": "+1R",
+    "title": "ONPOC Flip stacked with the dVAL",
+    "summary": "This was a classic Flip setup. Price broke past the level initially, and when it approached the level again I put a limit order on the ONPOC.",
+    "confluences": [
+      "dVAL",
+      "ONPOC"
+    ],
+    "notes": [
+      "This was a classic Flip setup. Price broke past the level initially, and when it approached the level again I put a limit order on the ONPOC.",
+      "This was a double confluence trade, as the dVAL was in the same zone as well. I got tagged in at the level and quickly hit TP."
+    ],
+    "images": [
+      "lib-2026-11-10-gc-flip-onpoc.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-10-nq-snap-nypoc",
+    "date": "2026-11-10",
+    "setup": "snap",
+    "instrument": "NQ",
+    "direction": "Long",
+    "stars": 1,
+    "result": "+1R",
+    "title": "NYPOC Snap from above",
+    "summary": "This was a classic Snap setup. Price came down from above and I took a quick Snap off the level. Quick in and out trade.",
+    "confluences": [
+      "NYPOC"
+    ],
+    "notes": [
+      "This was a classic Snap setup. Price came down from above and I took a quick Snap off the level. Quick in and out trade."
+    ],
+    "images": [
+      "lib-2026-11-10-nq-snap-nypoc.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-10-gc-reinforced-flip-nypoc",
+    "date": "2026-11-10",
+    "setup": "flip",
+    "instrument": "GC",
+    "direction": "Short",
+    "stars": 2,
+    "result": "+1R",
+    "title": "Reinforced Flip at the NYPOC",
+    "summary": "This was a Reinforced Flip setup. There was an HVN shelf above the NYPOC before the trade, so when price came from below to retest the level, I felt confident taking it, as the HVN would act as a wall of defence, reinforcing the level.",
+    "confluences": [
+      "NYPOC",
+      "HVN"
+    ],
+    "notes": [
+      "This was a Reinforced Flip setup. There was an HVN shelf above the NYPOC before the trade, so when price came from below to retest the level, I felt confident taking it, as the HVN would act as a wall of defence, reinforcing the level.",
+      "I got tagged in and quickly hit TP in the same candle."
+    ],
+    "images": [
+      "lib-2026-11-10-gc-reinforced-flip-nypoc.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-10-gc-flip-nyval",
+    "date": "2026-11-10",
+    "setup": "flip",
+    "instrument": "GC",
+    "direction": "Short",
+    "stars": 1,
+    "result": "+1R",
+    "title": "NYVAL Flip back to the downside",
+    "summary": "This was a classic Flip. Price broke through the level initially, and when it came back to retest, I took the Flip back to the downside and hit TP really fast.",
+    "confluences": [
+      "NYVAL"
+    ],
+    "notes": [
+      "This was a classic Flip. Price broke through the level initially, and when it came back to retest, I took the Flip back to the downside and hit TP really fast."
+    ],
+    "images": [
+      "lib-2026-11-10-gc-flip-nyval.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-11-gc-magnet-dpoc",
+    "date": "2026-11-11",
+    "setup": "magnet",
+    "instrument": "GC",
+    "direction": "Short",
+    "stars": 2,
+    "result": "+1R",
+    "title": "dPOC Magnet after acceptance below dVAL",
+    "summary": "Price went past dVAL and put in a lot of volume below the dVAL, and when it came back to the dPOC, I took a short, expecting some reaction from the dPOC to the downside.",
+    "confluences": [
+      "dPOC",
+      "VWAP Band"
+    ],
+    "notes": [
+      "Price went past dVAL and put in a lot of volume below the dVAL, and when it came back to the dPOC, I took a short, expecting some reaction from the dPOC to the downside."
+    ],
+    "images": [
+      "lib-2026-11-11-gc-magnet-dpoc.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-11-gc-snap-pwpoc",
+    "date": "2026-11-11",
+    "setup": "snap",
+    "instrument": "GC",
+    "direction": "Short",
+    "stars": 1,
+    "result": "+1R",
+    "title": "PWPOC Snap from below",
+    "summary": "Classic Snap. Price came from below and when it hit the level, price had a small reaction down which I capitalised on.",
+    "confluences": [
+      "PWPOC"
+    ],
+    "notes": [
+      "Classic Snap. Price came from below and when it hit the level, price had a small reaction down which I capitalised on."
+    ],
+    "images": [
+      "lib-2026-11-11-gc-snap-pwpoc.jpg"
+    ]
+  }
 ]
