@@ -107,6 +107,7 @@ main{padding:28px 36px 40px;display:flex;flex-direction:column;gap:28px;max-widt
 
 .sh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
 .sh h2{font-family:var(--display);font-weight:600;font-size:30px;margin:0;color:var(--teal);line-height:1.1}
+.eyb{font-size:11px;letter-spacing:.22em;font-weight:700;color:var(--gold);margin-bottom:2px}
 .sh .r{font-size:14px;color:var(--teal2);font-weight:700}
 .sh .m{font-size:14px;color:var(--mut)}
 section{scroll-margin-top:20px}
@@ -340,7 +341,7 @@ footer p{margin:0}
   </div>
 
   <section aria-labelledby="libT">
-    <div class="sh"><h2 id="libT">Trade of the day</h2><a class="r" href="/setup-library.html" id="libAll" hidden>All trades →</a></div>
+    <div class="sh"><div><div class="eyb">FROM THE SETUP LIBRARY</div><h2 id="libT">Trade of the day</h2></div><a class="r" href="/setup-library.html">Open the Setup Library →</a></div>
     <div class="feat" id="lib"></div>
   </section>
 
@@ -545,7 +546,7 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&l
 fetch("/setup-library.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []).then(data => {
   if(!Array.isArray(data) || !data.length){ $("lib").closest("section").hidden = true; return; }
   $("navLib").textContent = data.length;
-  $("libAll").textContent = `All ${data.length} trades →`;
+  
   const order = data.map((t, i) => ({ t, i })).sort((a, b) => (b.t.date || "").localeCompare(a.t.date || "") || (b.t.stars || 0) - (a.t.stars || 0) || b.i - a.i).map(x => x.t);
   const f = order[0], more = order.slice(1, 4);
   const day = t => t.date ? new Date(t.date + "T12:00:00").toLocaleDateString("en-GB", { day:"numeric", month:"short" }) : "";
@@ -567,7 +568,7 @@ fetch("/setup-library.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).cat
         ${f.summary ? `<div class="q"><b>WHY I TOOK IT</b>${esc(f.summary)}</div>` : ""}
         ${conf ? `<div class="cf">${conf}</div>` : ""}
         <span class="go">Open in the library →</span></div></a>
-    <div class="tline"><div class="h">MORE RECENT TRADES<a href="/setup-library.html">All ${data.length} →</a></div>${more.map(t => { const im = (t.images || [])[0], dd = (t.direction || "").toLowerCase(), n = Math.max(0, Math.min(4, t.stars || 0));
+    <div class="tline"><div class="h">MORE RECENT TRADES</div>${more.map(t => { const im = (t.images || [])[0], dd = (t.direction || "").toLowerCase(), n = Math.max(0, Math.min(4, t.stars || 0));
       const rc = /^\s*-/.test(t.result || "") ? "l" : /^\s*\+/.test(t.result || "") ? "" : "b";
       return `<a class="ca" href="/setup-library.html#${encodeURIComponent(t.id)}"><div class="im">${im ? `<img src="/${esc(im)}" alt="" loading="lazy">` : ""}${t.result ? `<span class="r ${rc}">${esc(t.result)}</span>` : ""}</div>
         <div class="bd"><div class="k">${ICON[t.setup] || ""} ${esc(SET[t.setup] || t.setup)} · ${esc(INST[t.instrument] || t.instrument)}</div><h4>${esc(t.title)}</h4>
