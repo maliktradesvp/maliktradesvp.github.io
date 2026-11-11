@@ -203,7 +203,7 @@ footer p{margin:0}
     <a href="#academy" data-ic="book">VP Academy<span class="ct" id="navAcad"></span></a>
     <a href="#playbook" data-ic="layers">The Playbook</a>
     <a href="/setup-library.html" data-ic="grid">Setup Library<span class="ct" id="navLib"></span></a>
-    <a href="/simulator.html" data-ic="target">Simulator</a>
+    <a href="/simulator.html" data-ic="target">The Rep Room</a>
   </nav>
   <nav class="nav" aria-label="Tools"><div class="navh">TOOLS</div>
     <a href="/MalikTradesJournal/" data-ic="pen">Journal</a>
@@ -255,7 +255,7 @@ footer p{margin:0}
       <div class="gl" id="acad"></div>
       <div class="side">
         <div class="card"><div class="lab">Your progress</div><div class="big" style="margin-top:8px" id="pBig">0<span> / 9</span></div><div class="pg" id="pBar"></div><p style="color:var(--mut);margin:12px 0 0;font-size:14.5px" id="pSub">Saved in this browser.</p></div>
-        <div class="card dark"><div class="lab">Then practise</div><p>Run 10 rounds a day on the <a href="/simulator.html">Decision Simulator</a> until the read is automatic.</p></div>
+        <div class="card dark"><div class="lab">Then practise</div><p>Run 10 rounds a day on the <a href="/simulator.html">The Rep Room</a> until the read is automatic.</p></div>
       </div>
     </div>
   </section>
@@ -286,7 +286,7 @@ footer p{margin:0}
   <a class="on" href="#top" data-ic="home">Home</a>
   <a href="#academy" data-ic="book">Academy</a>
   <a href="/setup-library.html" data-ic="grid">Library</a>
-  <a href="/simulator.html" data-ic="target">Simulator</a>
+  <a href="/simulator.html" data-ic="target">Rep Room</a>
   <a href="#tools" data-ic="calc">Tools</a>
 </nav>
 
@@ -447,7 +447,7 @@ function paintPractice(){
   }).join("");
   const all = s.played ? `<div style="font-size:13px;color:var(--mut);margin-top:10px">All time: ${s.played} played · ${Math.round(s.pts / s.played * 100)}% accuracy · best streak ${s.best || 0}</div>` : "";
   $("pracCard").innerHTML = `<div class="lab">Daily practice</div>
-    <a class="ring" href="/simulator.html">${ring}<div><b>Decision Simulator</b><span>${line}</span></div></a>
+    <a class="ring" href="/simulator.html">${ring}<div><b>The Rep Room</b><span>${line}</span></div></a>
     <div class="dots" aria-label="Today's rounds">${dots}</div>${all}
     <div class="btns"><a class="btn ghost" href="/simulator.html">${n ? "Keep practising" : "Start today's rounds"} →</a></div>
     <div class="sp"></div>
@@ -475,7 +475,7 @@ fetch("/setup-library.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).cat
 
 /* ---------- tools ---------- */
 const TOOLS = [
-  { id:"sim",     ic:"target", name:"Decision Simulator",     href:"/simulator.html",            line:"Trade it, or sit on your hands." },
+  { id:"sim",     ic:"target", name:"The Rep Room",     href:"/simulator.html",            line:"Trade it, or sit on your hands." },
   { id:"calc",    ic:"calc",   name:"Prop Firm Hacking Tool", href:"/prop-firm-tool.html",       line:"Find your size before you buy an eval." },
   { id:"tracker", ic:"chart",  name:"Prop Tracker",           href:"/MalikTradesPropTracker/",   line:"Know your floor on every account." },
   { id:"journal", ic:"pen",    name:"Trading Journal",        href:"/MalikTradesJournal/",       line:"Log every trade and see your stats." },

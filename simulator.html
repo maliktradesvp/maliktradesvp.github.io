@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Decision Simulator · MalikTrades</title>
+<title>The Rep Room · MalikTrades</title>
 <meta name="description" content="Practise reading the auction: take the trade, pick the setup, or sit on your hands. Then watch it play out.">
 <meta name="theme-color" content="#1E4C52">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,6 +47,11 @@ h1{font-family:var(--serif);font-weight:600;font-size:48px;line-height:1.05;marg
 .btns{display:grid;gap:8px;margin-top:12px}
 .btns.three{grid-template-columns:1fr 1fr 1fr}
 .btns.four{grid-template-columns:1fr 1fr 1fr 1fr}
+.btns.two{grid-template-columns:1fr 1fr}
+.grp{font-size:12px;font-weight:600;color:var(--muted);margin:10px 0 -4px;display:flex;align-items:center;gap:8px}
+.grp:after{content:"";flex:1;height:1px;background:rgba(255,255,255,.12)}
+.kind{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:.06em;white-space:nowrap;text-transform:uppercase;padding:5px 10px;border-radius:999px;margin:0 0 10px;background:rgba(127,211,158,.14);color:#9FDDB6}
+.kind.adv{background:rgba(226,180,90,.16);color:#E8C27A}
 .btns.four .b{padding-left:4px;padding-right:4px}
 @media (max-width:420px){.btns.four{grid-template-columns:1fr 1fr}}
 .b{border:1px solid var(--line);background:rgba(247,239,220,.05);border-radius:9px;padding:11px 8px;font-weight:500;font-size:15px;transition:background .15s,border-color .15s}
@@ -80,7 +85,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:48px;line-height:1.05;marg
 <body>
 <main>
   <div class="intro">
-    <h1>Decision Simulator</h1>
+    <h1>The Rep Room</h1>
     <p>Read the chart like a live session. Take the trade, pick the setup, or sit on your hands. Then watch how it plays out.</p>
   </div>
   <div class="stats">
@@ -116,11 +121,16 @@ h1{font-family:var(--serif);font-weight:600;font-size:48px;line-height:1.05;marg
         </div>
         <div id="step2" hidden>
           <div class="lab" style="margin-top:14px">2 · Which setup?</div>
-          <div class="btns four">
+          <div class="grp">Core setups</div>
+          <div class="btns three">
             <button class="b" data-set="snap" type="button">🫰 Snap</button>
             <button class="b" data-set="flip" type="button">🔄 Flip</button>
             <button class="b" data-set="magnet" type="button">🧲 Magnet</button>
+          </div>
+          <div class="grp">Advanced setups</div>
+          <div class="btns two">
             <button class="b" data-set="wall" type="button">🧱 Wall</button>
+            <button class="b" data-set="whip" type="button">⚡ Whip</button>
           </div>
         </div>
         <button class="hint" id="hintBtn" type="button">Need a hint?</button>
@@ -128,6 +138,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:48px;line-height:1.05;marg
       </div>
 
       <div class="card res" id="rCard" hidden>
+        <p class="kind" id="kind" hidden></p>
         <p class="verdict" id="verdict"></p>
         <p class="ans" id="ans"></p>
         <p id="why"></p>
@@ -438,8 +449,54 @@ const SC = {
     prompt: () => `Price has gone up all session, through all your levels. Now it's pulling back.`,
     hint: "Look at the profile where price is pulling back to. Is there an obvious shelf there?",
     why: "The session is one-way, but price is pulling back into thin volume. There's no obvious HVN shelf here, just a patch of the profile price moved straight through. No shelf, no Wall.",
-    see: "Advanced Setups: The Wall" }
+    see: "Advanced Setups: The Wall" },
+  /* ---- The Whip (Advanced Setups) ---- */
+  whip: { valid:true, ans:{ act:"long", set:"whip" }, showD:true,
+    head:(r, s) => whipEnd(dshapeHead(r, s), 5.5),
+    check:(head, PH, lo, hi) => whipOk(head, PH, lo, hi),
+    tail:() => [go(6, .12, .04), go(14, 1.1, .06), rot(30, 1.15, .45, .08, .12)], tailRel:true,
+    zone:e => [e - .62, e - .12, "Wick below the dVAL, no volume", "ok"],
+    prompt: () => `Your trade at the dVAL just got stopped out. Price broke below it and came straight back inside value.`,
+    hint: "You just lost at this level. Did price build any volume below it, or come straight back?",
+    why: "This is the Whip. On a balanced D-shape day, price broke below the dVAL, put in no volume down there and came straight back into value, on the same candle or the next. No volume means no acceptance, so the breakout failed. You lost the first trade, but you re-enter as soon as price is back inside value.",
+    result:(act) => `The trade: ${act} the Whip as price got back inside value, stop past the wick, target the dPOC or 1:1. It hit target.`,
+    see: "Advanced Setups: The Whip" },
+  whipP: { valid:true, ans:{ act:"long", set:"whip" }, showD:true,
+    head:(r, s) => whipEnd(gen([go(6, -3.3, .05, -3.4), go(Math.round(jit(16, r)), -2.3, .08), go(6, -2.45, .05), go(Math.round(jit(16, r)), -1.3, .08), go(6, -1.45, .05), go(12, -.5, .08), rot(Math.round(jit(170, r)), .3, .9, .07, .16)], s), 3.6),
+    check:(head, PH, lo, hi) => whipOk(head, PH, lo, hi) && PH.val > lo + (hi - lo) * .45,
+    tail:() => [go(6, .12, .04), go(14, 1.1, .06), go(16, 1.9, .07)], tailRel:true,
+    zone:e => [e - 1.2, e - .2, "Wick below the dVAL, no volume", "ok"],
+    prompt: () => `It's been a strong day up and the profile is P-shaped. Your trade at the dVAL just got stopped out, and price came straight back inside value.`,
+    hint: "What kind of day is it, and did price accept below the dVAL or whip straight back?",
+    why: "On a bullish trend day with a P-shaped profile, the Whip works with the trend. Price broke below the dVAL, built no volume and whipped straight back into value. Re-enter as soon as it's back inside, in the direction of the trend.",
+    result:(act) => `The trade: ${act} the Whip as price got back inside value, stop past the wick, target the dPOC or 1:1. It hit target.`,
+    see: "Advanced Setups: The Whip" },
+  whipTrend: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"whip" }, showD:true,
+    head:(r, s) => whipEnd(gen([go(6, 3.3, .05, 3.4), go(Math.round(jit(16, r)), 2.3, .08), go(6, 2.45, .05), go(Math.round(jit(16, r)), 1.3, .08), go(6, 1.45, .05), go(12, .5, .08), rot(Math.round(jit(170, r)), -.3, .9, .07, .16)], s), 3.6),
+    check:(head, PH, lo, hi) => whipOk(head, PH, lo, hi) && PH.vah < lo + (hi - lo) * .6,
+    tail:() => [go(6, -.1, .04), go(10, -.9, .05), go(16, -1.9, .07)], tailRel:true,
+    zone:e => [e - 1.2, e - .2, "Break below the dVAL, against the trend", "bad"],
+    prompt: () => `It's been a strong day down and the profile is b-shaped. Price broke below the dVAL and came straight back inside value.`,
+    hint: "Which way is the session trending, and which side of value is this break on?",
+    why: "On a bearish trend day with a b-shaped profile, the only Whip is a break above the dVAH that whips back down, with the trend. This break was below the dVAL, against the trend, so there's no Whip and price kept going down.",
+    see: "Advanced Setups: The Whip" }
 };
+// walk the end of a path onto the dVAL, in the same rows the chart uses
+function toVal(head){
+  for(let k = 0; k < 3; k++){ const mn = Math.min(...head), mx = Math.max(...head), m = (mx - mn) * .2;
+    const P = profile(head, 22, mn - m, mx + m), st = head[head.length - 1];
+    head = head.concat([1, 2, 3, 4].map(j => st + (P.val - st) * j / 4)); }
+  return head;
+}
+// the whip: a fast break below the dVAL with no volume, straight back inside value
+function whipEnd(head, rows){
+  head = toVal(head); const v = head[head.length - 1], d = rows * (Math.max(...head) - Math.min(...head)) * 1.4 / 22;
+  return head.concat([.3, .6, .85, 1].map(f => v - d * f), [.7, .35, .05].map(f => v - d * f), [v + .08]);
+}
+function whipOk(head, PH, lo, hi){
+  const e = head[head.length - 1], w = Math.min(...head.slice(-10)), row = (hi - lo) / 22;
+  return e > PH.val && e < PH.val + row * 1.5 && w < PH.val - row * 2.5;
+}
 // one-way session up: steady legs with shallow pullbacks, through the last marked level
 function oneWayUp(r){
   return [go(6, -4.4, .05, -4.5), go(Math.round(jit(16, r)), -3.6, .08), go(6, -3.75, .05), go(Math.round(jit(16, r)), -2.8, .08), go(6, -2.95, .05), go(Math.round(jit(16, r)), -1.9, .08), go(6, -2.05, .05), go(Math.round(jit(16, r)), -.9, .08), go(6, -1.0, .05)];
@@ -463,10 +520,10 @@ function candles(pts){
   }
   return out;
 }
-const PAIRS = [["down","up"],["above","below"],["dVAH","dVAL"],["higher","lower"],["ceiling","floor"],["under","over"],["fell","rose"],["dropped","rallied"]];
+const PAIRS = [["P-shaped","b-shaped"],["bullish","bearish"],["down","up"],["above","below"],["dVAH","dVAL"],["higher","lower"],["ceiling","floor"],["under","over"],["fell","rose"],["dropped","rallied"]];
 function mirrorText(t){
   const map = {}; PAIRS.forEach(([a, b]) => { const C = x => x[0].toUpperCase() + x.slice(1); map[a] = b; map[b] = a; map[C(a)] = C(b); map[C(b)] = C(a); });
-  return t.replace(/\b(?:down|up|Down|Up|above|below|Above|Below|dVAH|dVAL|higher|lower|ceiling|floor|under|over|fell|rose|dropped|rallied)\b(?![- ]probability)/g, w => map[w] || w);
+  return t.replace(/\b(?:P-shaped|b-shaped|bullish|bearish|down|up|Down|Up|above|below|Above|Below|dVAH|dVAL|higher|lower|ceiling|floor|under|over|fell|rose|dropped|rallied)\b(?![- ]probability)/g, w => map[w] || w);
 }
 const MIRROR_NAME = n => n.replace("VAL", "§").replace("VAH", "VAL").replace("§", "VAH");
 const opp = a => a === "long" ? "short" : a === "short" ? "long" : a;
@@ -670,7 +727,9 @@ function finish(){
     if(!score.today || score.today.d !== day) score.today = { d:day, res:[] };
     score.today.res.push(pts); }
   save(); paintScore();
-  const names = { snap:"Snap 🫰", flip:"Flip 🔄", magnet:"Magnet 🧲", wall:"Wall 🧱" };
+  const names = { snap:"Snap 🫰", flip:"Flip 🔄", magnet:"Magnet 🧲", wall:"Wall 🧱", whip:"Whip ⚡" };
+  const ks = a.set || (S.tempt && S.tempt.set), adv = ["anchor","wall","whip"].includes(ks), full = { snap:"The Snap 🫰", flip:"The Flip 🔄", magnet:"The Magnet 🧲", anchor:"The Anchor ⚓", wall:"The Wall 🧱", whip:"The Whip ⚡" };
+  const kd = $("kind"); kd.hidden = !ks; if(ks){ kd.className = "kind" + (adv ? " adv" : ""); kd.textContent = (adv ? "Advanced setup · " : "Core setup · ") + full[ks]; }
   const v = $("verdict");
   v.className = "verdict " + (pts === 1 ? "ok" : pts ? "half" : "no");
   v.textContent = pts === 1 ? (a.act === "none" ? "Good discipline ✅" : "Nailed it ✅") : pts ? "Right direction, wrong setup" : (a.act === "none" ? (S.sc.noVerdict || "Lower-probability trade ❌") : "Missed it ❌");
