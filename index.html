@@ -111,6 +111,36 @@ main{padding:28px 36px 40px;display:flex;flex-direction:column;gap:28px;max-widt
 .sh .m{font-size:14px;color:var(--mut)}
 section{scroll-margin-top:20px}
 
+.feat{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:18px;align-items:start}
+.d1{border-radius:22px;background:linear-gradient(140deg,#1C3A41,#27494F);color:#EEE7D8;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);overflow:hidden;box-shadow:0 20px 50px -26px rgba(15,35,40,.7);transition:transform .15s,box-shadow .15s}
+.d1:hover{transform:translateY(-2px);box-shadow:0 26px 56px -26px rgba(15,35,40,.8)}
+.d1 .im{position:relative;margin:14px;border-radius:14px;overflow:hidden;min-height:380px;background:#E8E2D6}
+.d1 .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 64%;transform:scale(1.2)}
+.d1 .im .r{position:absolute;top:12px;left:12px;background:var(--win);color:#fff;font-weight:700;font-size:14px;padding:4px 10px;border-radius:8px}
+.d1 .bd{padding:24px 26px 22px 10px;display:flex;flex-direction:column;min-width:0}
+.d1 .eb{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.22em;font-weight:700;color:var(--gold2);text-transform:uppercase}
+.d1 .eb i{width:8px;height:8px;border-radius:50%;background:#7FD39E;box-shadow:0 0 0 4px rgba(127,211,158,.2)}
+.d1 .eb.old i{background:#9FB3AF;box-shadow:0 0 0 4px rgba(159,179,175,.2)}
+.d1 h3{font-family:var(--display);font-weight:600;font-size:34px;line-height:1.04;margin:10px 0 16px;text-wrap:balance}
+.d1 .st{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.d1 .st div{background:rgba(255,255,255,.07);border:1px solid rgba(238,231,216,.1);border-radius:10px;padding:8px 10px;min-width:0}
+.d1 .st small{display:block;font-size:9.5px;letter-spacing:.16em;color:#AFC1BD;font-weight:700}
+.d1 .st b{font-size:15px;white-space:nowrap}.d1 .st b.g{color:#7FD39E}.d1 .st b.y{color:var(--gold2);letter-spacing:0;font-size:13px}.d1 .st b.y span{opacity:.3}
+.d1 .q{position:relative;margin-top:16px;padding:14px 16px 14px 40px;border-radius:12px;background:rgba(0,0,0,.18);font-size:14.5px;line-height:1.5;color:#DCE4E1}
+.d1 .q:before{content:"\201C";position:absolute;left:12px;top:-4px;font-family:var(--display);font-size:54px;color:var(--gold2)}
+.d1 .q b{display:block;font-size:10px;letter-spacing:.2em;color:#AFC1BD;margin-bottom:4px}
+.d1 .cf{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}.d1 .cf span{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;border:1px solid rgba(238,231,216,.25);color:#DCE4E1}
+.d1 .go{margin-top:auto;padding-top:16px;color:var(--gold2);font-weight:700;font-size:14px}
+.tline{display:flex;flex-direction:column;min-width:0}
+.tline .h{font-size:10.5px;letter-spacing:.2em;font-weight:700;color:var(--mut);margin-bottom:10px}
+.ti{display:grid;grid-template-columns:20px 110px minmax(0,1fr);gap:12px;align-items:center;padding-bottom:14px;position:relative}
+.ti:before{content:"";position:absolute;left:9px;top:50%;bottom:-50%;width:2px;background:var(--line)}
+.ti:nth-last-child(2):before{display:none}
+.ti .dot{width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--teal2);margin-left:4px;position:relative;z-index:1}
+.ti img{width:110px;height:84px;object-fit:cover;object-position:center 62%;border-radius:10px;border:1px solid var(--line);display:block}
+.ti:hover img{border-color:#C9BBA0}
+.ti h4{margin:3px 0 2px;font-size:15px;line-height:1.25}.ti .dt{font-size:12.5px;color:var(--mut)}
+.tline .all{margin-left:32px;font-weight:700;color:var(--teal2);font-size:14px}
 .lib{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .lib .tr:nth-child(n+5){display:none}
 .tr{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px -20px rgba(33,65,74,.3);transition:transform .15s,box-shadow .15s}
@@ -210,6 +240,7 @@ footer p{margin:0}
   .lib{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tools{grid-template-columns:repeat(2,minmax(0,1fr))}
   .mods{grid-template-columns:1fr 1fr}
+  .feat{grid-template-columns:1fr}
   .pbs{grid-template-columns:1fr}
 }
 @media (max-width:860px){
@@ -230,6 +261,11 @@ footer p{margin:0}
   .cont img{width:78px}.cont h3{font-size:27px}.cont{gap:16px}
   .cont p{display:none}
   .tools{grid-template-columns:1fr}
+  .d1{grid-template-columns:1fr}
+  .d1 .im{min-height:300px;margin:12px 12px 0}
+  .d1 .bd{padding:18px 18px 20px}
+  .d1 h3{font-size:28px}
+  .d1 .st{grid-template-columns:repeat(2,minmax(0,1fr))}
   .mods{grid-template-columns:1fr}
   .pbs{padding:22px 18px}
   .books{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:10px 4px 6px;margin:0 -4px}
@@ -296,8 +332,8 @@ footer p{margin:0}
   </div>
 
   <section aria-labelledby="libT">
-    <div class="sh"><h2 id="libT">Latest from the Setup Library</h2><a class="r" href="/setup-library.html" id="libAll">All trades →</a></div>
-    <div class="lib" id="lib"></div>
+    <div class="sh"><h2 id="libT">Trade of the day</h2><a class="r" href="/setup-library.html" id="libAll" hidden>All trades →</a></div>
+    <div class="feat" id="lib"></div>
   </section>
 
   <section id="academy" aria-labelledby="acT">
@@ -502,15 +538,29 @@ fetch("/setup-library.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).cat
   if(!Array.isArray(data) || !data.length){ $("lib").closest("section").hidden = true; return; }
   $("navLib").textContent = data.length;
   $("libAll").textContent = `All ${data.length} trades →`;
-  const latest = data.map((t, i) => ({ t, i })).sort((a, b) => (b.t.date || "").localeCompare(a.t.date || "") || b.i - a.i).slice(0, 6).map(x => x.t);
-  $("lib").innerHTML = latest.map(t => {
-    const d = (t.direction || "").toLowerCase(), img = (t.images || [])[0];
-    const dt = t.date ? new Date(t.date + "T12:00:00").toLocaleDateString("en-GB", { day:"numeric", month:"short" }) : "";
-    return `<a class="tr" href="/setup-library.html">
-      <div class="im">${img ? `<img src="/${esc(img)}" alt="" loading="lazy">` : ""}${t.result ? `<span class="r">${esc(t.result)}</span>` : ""}</div>
-      <div class="bd"><div class="tags"><span class="tg">${esc(t.instrument)}</span><span class="tg">${esc(SET[t.setup] || t.setup)}</span>${d ? `<span class="tg ${d === "short" ? "s" : "L"}">${esc(t.direction)}</span>` : ""}</div>
-      <h4>${esc(t.title)}</h4><div class="dt">${dt}</div></div></a>`;
-  }).join("");
+  const order = data.map((t, i) => ({ t, i })).sort((a, b) => (b.t.date || "").localeCompare(a.t.date || "") || (b.t.stars || 0) - (a.t.stars || 0) || b.i - a.i).map(x => x.t);
+  const f = order[0], more = order.slice(1, 4);
+  const day = t => t.date ? new Date(t.date + "T12:00:00").toLocaleDateString("en-GB", { day:"numeric", month:"short" }) : "";
+  const tagsOf = t => { const d = (t.direction || "").toLowerCase();
+    return `<div class="tags"><span class="tg">${esc(t.instrument)}</span><span class="tg">${esc(SET[t.setup] || t.setup)}</span>${d ? `<span class="tg ${d === "short" ? "s" : "L"}">${esc(t.direction)}</span>` : ""}</div>`; };
+  const INST = { GC:"Gold", NQ:"Nasdaq", ES:"S&P 500", CL:"Crude oil", MNQ:"Nasdaq", MES:"S&P 500", MGC:"Gold" };
+  const today = new Date(), fd = f.date ? new Date(f.date + "T12:00:00") : null;
+  const when = fd && fd.toDateString() === today.toDateString() ? "Today" : "Latest";
+  const st = Math.max(0, Math.min(4, f.stars || 0));
+  const fImg = (f.images || [])[0];
+  const SETF = { snap:"Snap", flip:"Flip", magnet:"Magnet", anchor:"Anchor", wall:"Wall", whip:"Whip" };
+  const conf = (f.confluences || []).map(c => `<span>${esc(c)}</span>`).join("") + (f.direction ? `<span>${esc(f.direction)}</span>` : "");
+  $("lib").innerHTML = `<a class="d1" href="/setup-library.html#${encodeURIComponent(f.id)}">
+      <div class="im">${fImg ? `<img src="/${esc(fImg)}" alt="">` : ""}${f.result ? `<span class="r">${esc(f.result)}</span>` : ""}</div>
+      <div class="bd"><div class="eb ${when === "Today" ? "" : "old"}"><i></i>${when} · ${esc(day(f))}</div><h3>${esc(f.title)}</h3>
+        <div class="st"><div><small>SETUP</small><b>${esc(SETF[f.setup] || f.setup)}</b></div><div><small>MARKET</small><b>${esc(INST[f.instrument] || f.instrument)}</b></div>
+          <div><small>RESULT</small><b class="g">${esc(f.result || "–")}</b></div><div><small>RATING</small><b class="y" aria-label="${st} out of 4 stars">${"★".repeat(st)}<span>${"★".repeat(4 - st)}</span></b></div></div>
+        ${f.summary ? `<div class="q"><b>WHY I TOOK IT</b>${esc(f.summary)}</div>` : ""}
+        ${conf ? `<div class="cf">${conf}</div>` : ""}
+        <span class="go">Open in the library →</span></div></a>
+    <div class="tline"><div class="h">MORE RECENT TRADES</div>${more.map(t => { const im = (t.images || [])[0];
+      return `<a class="ti" href="/setup-library.html#${encodeURIComponent(t.id)}"><span class="dot"></span>${im ? `<img src="/${esc(im)}" alt="" loading="lazy">` : "<span></span>"}<div>${tagsOf(t)}<h4>${esc(t.title)}</h4><div class="dt">${esc(day(t))}${t.result ? " · " + esc(t.result) : ""}</div></div></a>`; }).join("")}
+      <a class="all" href="/setup-library.html">All ${data.length} trades →</a></div>`;
 });
 
 /* ---------- tools ---------- */

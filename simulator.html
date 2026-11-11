@@ -5,99 +5,109 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Rep Room · MalikTrades</title>
 <meta name="description" content="Practise reading the auction: take the trade, pick the setup, or sit on your hands. Then watch it play out.">
-<meta name="theme-color" content="#1E4C52">
+<meta name="theme-color" content="#21414A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="/MalikTradesJournal/banner.jpg">
+<link rel="stylesheet" href="/mt-shell.css">
 <style>
-:root{
-  --ground:#1E4C52;--panel:rgba(247,239,220,0.05);--line:rgba(247,239,220,0.13);
-  --cream:#F7EFDC;--muted:rgba(247,239,220,0.66);--jade:#7EC3A0;--gold:#E3C98A;--red:#E8907F;
-  --serif:"Cormorant Garamond","Hoefler Text",Baskerville,Georgia,serif;
-  --sans:"Figtree","Avenir Next","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
-}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{background:var(--ground);color:var(--cream);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-button{font:inherit;color:inherit;cursor:pointer}
-a{color:var(--jade)}
-:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
-main{max-width:1120px;margin:0 auto;padding:36px 24px 64px}
-h1{font-family:var(--serif);font-weight:600;font-size:48px;line-height:1.05;margin:0}
-.intro p{color:var(--muted);font-size:17px;max-width:60ch;margin:10px 0 0}
-.stats{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 18px}
-.stat{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 14px;min-width:96px}
-.stat b{display:block;font-family:var(--serif);font-size:24px;font-weight:600;line-height:1.1;font-variant-numeric:lining-nums;font-feature-settings:"lnum"}
-.stat span{color:var(--muted);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase}
-.wrap{display:grid;grid-template-columns:1fr 330px;gap:18px;align-items:start}
-.chartbox{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#E8E4DC;position:relative}
+.rr{max-width:1320px;margin:0 auto;padding:28px 36px 40px;display:flex;flex-direction:column;gap:20px}
+.ph{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.ph .k{font-size:11px;letter-spacing:.22em;font-weight:700;color:var(--gold)}
+h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margin:4px 0 6px;color:var(--teal)}
+.ph p{margin:0;color:var(--mut);max-width:62ch}
+.stats{display:flex;gap:10px;flex-wrap:wrap}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 14px;text-align:center;min-width:88px}
+.stat b{display:block;font-size:22px;font-weight:700;color:var(--teal);font-variant-numeric:tabular-nums;line-height:1.2}
+.stat span{font-size:11.5px;color:var(--mut)}
+.wrap{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(300px,1fr);gap:18px;align-items:start}
+.chartbox{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:10px;box-shadow:0 10px 30px -18px rgba(33,65,74,.3)}
+.chartbox .cv{border-radius:12px;overflow:hidden;background:#EFEBE3}
 .chartbox canvas{display:block;width:100%;height:auto}
-.cbar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 14px;background:#22545A;border-top:1px solid var(--line);font-size:13px;color:var(--muted);flex-wrap:wrap}
-.legend{display:flex;gap:12px;flex-wrap:wrap}
-.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
-.side{display:grid;gap:14px}
-.card{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:16px 18px}
-.card .lab{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.ctx{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.tag{font-size:12px;font-weight:500;border-radius:6px;padding:3px 9px;background:rgba(247,239,220,.08)}
-.tag.warn{background:rgba(227,180,90,.18);color:#F2CF8A}
-.prompt{font-family:var(--serif);font-size:23px;font-weight:600;line-height:1.2;margin:0 0 4px}
-.sub{color:var(--muted);font-size:14px;margin:0}
-.btns{display:grid;gap:8px;margin-top:12px}
+.cbar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px 4px;font-size:13px;color:var(--mut);flex-wrap:wrap}
+.legend{display:flex;gap:14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.side{display:flex;flex-direction:column;gap:16px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 10px 30px -22px rgba(33,65,74,.3)}
+.card .lab{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal2);font-weight:700;margin-bottom:8px}
+.ctx{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tag{font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;background:var(--tealsoft);color:var(--teal2)}
+.tag.warn{background:#F3E7CC;color:#7A5A1C}
+.prompt{font-family:var(--display);font-size:27px;font-weight:600;line-height:1.12;margin:0 0 8px;text-wrap:pretty}
+.sub{color:var(--mut);font-size:14.5px;margin:0}
+.btns{display:grid;gap:8px;margin-top:4px}
 .btns.three{grid-template-columns:1fr 1fr 1fr}
-.btns.four{grid-template-columns:1fr 1fr 1fr 1fr}
 .btns.two{grid-template-columns:1fr 1fr}
-.grp{font-size:12px;font-weight:600;color:var(--muted);margin:10px 0 -4px;display:flex;align-items:center;gap:8px}
-.grp:after{content:"";flex:1;height:1px;background:rgba(255,255,255,.12)}
-.kind{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:.06em;white-space:nowrap;text-transform:uppercase;padding:5px 10px;border-radius:999px;margin:0 0 10px;background:rgba(127,211,158,.14);color:#9FDDB6}
-.kind.adv{background:rgba(226,180,90,.16);color:#E8C27A}
-.btns.four .b{padding-left:4px;padding-right:4px}
-@media (max-width:420px){.btns.four{grid-template-columns:1fr 1fr}}
-.b{border:1px solid var(--line);background:rgba(247,239,220,.05);border-radius:9px;padding:11px 8px;font-weight:500;font-size:15px;transition:background .15s,border-color .15s}
-.b:hover:not(:disabled){border-color:rgba(247,239,220,.45);background:rgba(247,239,220,.1)}
-.b.long{border-color:rgba(126,195,160,.5)}
-.b.short{border-color:rgba(232,144,127,.5)}
-.b.sel{background:var(--cream);color:#1E4C52;border-color:var(--cream)}
-.b:disabled{opacity:.45;cursor:default}
-.hint{margin-top:12px;background:none;border:0;color:var(--muted);font-size:13.5px;text-decoration:underline;padding:0}
-.hinttx{font-size:14px;color:var(--gold);margin:8px 0 0}
-.res .verdict{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1.1;margin:0 0 6px}
-.res .verdict.ok{color:var(--jade)}.res .verdict.half{color:var(--gold)}.res .verdict.no{color:var(--red)}
-.res p{font-size:14.5px;margin:0 0 8px;line-height:1.55}
-.res .ans{font-size:14px;color:var(--muted)}
-.res .ans b{color:var(--cream)}
-.res .trade{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:10px}
-.next{width:100%;margin-top:12px;background:var(--cream);color:#1E4C52;border:0;border-radius:9px;padding:12px;font-weight:600;font-size:15.5px}
-.next:hover{filter:brightness(.96)}
-.small{font-size:12.5px;color:var(--muted);margin-top:10px}
-.reset{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:12.5px;padding:0}
-@media (max-width:900px){ .wrap{grid-template-columns:1fr} }
-@media (max-width:640px){
-  main{padding:24px 14px 48px}
+.grp{font-size:12px;font-weight:700;color:var(--mut);margin:12px 0 6px;display:flex;align-items:center;gap:8px}
+.grp:after{content:"";flex:1;height:1px;background:var(--line)}
+.b{font:inherit;cursor:pointer;border:1px solid var(--line);background:#FBF7EF;color:var(--ink);border-radius:11px;padding:11px 8px;font-weight:700;font-size:15px;transition:background .15s,border-color .15s}
+.b:hover:not(:disabled){border-color:var(--teal2);background:var(--tealsoft)}
+.b.long{border-color:rgba(46,139,87,.45)}.b.short{border-color:rgba(176,58,46,.45)}
+.b.sel{background:var(--teal);color:#fff;border-color:var(--teal)}
+.b:disabled{opacity:.5;cursor:default}
+.hint{margin-top:14px;background:none;border:0;color:var(--teal2);font:inherit;font-weight:600;font-size:14px;text-decoration:underline;padding:0;cursor:pointer}
+.hinttx{font-size:14.5px;color:#7A5A1C;background:#FBF3E1;border-radius:10px;padding:10px 12px;margin:10px 0 0}
+.kind{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:.06em;white-space:nowrap;text-transform:uppercase;padding:5px 10px;border-radius:999px;margin:0 0 10px;background:var(--winbg);color:var(--win)}
+.kind.adv{background:#F3E7CC;color:#7A5A1C}
+.res .verdict{font-family:var(--display);font-size:32px;font-weight:600;line-height:1.05;margin:0 0 8px}
+.res .verdict.ok{color:var(--win)}.res .verdict.half{color:var(--gold)}.res .verdict.no{color:var(--loss)}
+.res p{font-size:15px;margin:0 0 10px;line-height:1.55}
+.res .ans{font-size:14px;color:var(--mut)}.res .ans b{color:var(--ink)}
+.res .trade{font-size:14px;color:var(--mut);border-top:1px solid var(--line);padding-top:10px;margin-top:12px}
+.next{width:100%;margin-top:12px;background:var(--teal);color:#fff;border:0;border-radius:11px;padding:13px;font:inherit;font-weight:700;font-size:15.5px;cursor:pointer}
+.next:hover{background:var(--teal2)}
+.small{font-size:12.5px;color:var(--mut);margin:0}
+.reset{background:none;border:0;color:var(--mut);text-decoration:underline;font:inherit;font-size:12.5px;padding:0;cursor:pointer}
+/* review */
+.rev{background:linear-gradient(135deg,#FBF3E1,#F7ECD6);border:1px solid #E9D3A3;border-radius:18px;padding:18px 20px}
+.rev .t{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rev .h{font-family:var(--display);font-size:25px;font-weight:600;color:var(--ink)}
+.rev .n{font-size:13px;font-weight:700;color:#7A5A1C;background:#F3E2B8;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.rev p{margin:6px 0 12px;color:#6B5A3A;font-size:14px}
+.ml{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.mi{display:flex;justify-content:space-between;align-items:center;gap:10px;background:rgba(255,255,255,.65);border-radius:10px;padding:8px 12px;font-size:14px}
+.mi span{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.mi em{font-style:normal;font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px;background:var(--tealsoft);color:var(--teal2)}
+.mi em.adv{background:#F3E7CC;color:#7A5A1C}.mi small{color:#8C7A57;font-weight:600;white-space:nowrap}
+.more{font-size:13px;color:#8C7A57;margin:-6px 0 12px}
+.gbtn{font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;padding:10px 16px;border-radius:10px;font-weight:700;border:0}
+.gbtn:hover{background:var(--teal2)}
+.rev.empty .h{font-size:22px}
+.mode{display:flex;align-items:center;gap:14px;background:var(--teal);color:#EEE7D8;border-radius:14px;padding:12px 16px;flex-wrap:wrap}
+.mode b{color:var(--gold2);letter-spacing:.16em;font-size:12px}
+.mode .pr{display:flex;gap:4px;margin-left:auto}.mode .pr i{width:22px;height:6px;border-radius:3px;background:rgba(255,255,255,.2)}.mode .pr i.d{background:var(--gold2)}
+.mode button{background:none;border:0;font:inherit;font-size:13px;color:#AFC1BD;text-decoration:underline;cursor:pointer;padding:0}
+@media (max-width:1000px){ .wrap{grid-template-columns:1fr} }
+@media (max-width:860px){
+  .rr{padding:16px max(16px,env(safe-area-inset-right)) 28px max(16px,env(safe-area-inset-left))}
   h1{font-size:36px}
-  .intro p{font-size:15.5px}
-  .stat{min-width:0;flex:1}
-  .prompt{font-size:21px}
+  .stat{flex:1;min-width:0}
+  .stats{width:100%}
+  .prompt{font-size:23px}
+  .chartbox{padding:6px}
+  .mode .pr{margin-left:0}
 }
 </style>
 </head>
-<body>
-<main>
-  <div class="intro">
-    <h1>The Rep Room</h1>
-    <p>Read the chart like a live session. Take the trade, pick the setup, or sit on your hands. Then watch how it plays out.</p>
+<body data-page="reproom">
+<div class="rr">
+  <div class="ph">
+    <div><div class="k">PRACTISE</div><h1>The Rep Room</h1><p>Read the chart like a live session. Take the trade, pick the setup, or sit on your hands. Then watch how it plays out.</p></div>
+    <div class="stats">
+      <div class="stat"><b id="sToday">0/10</b><span>today</span></div>
+      <div class="stat"><b id="sAcc">–</b><span>accuracy</span></div>
+      <div class="stat"><b id="sStreak">0</b><span>streak</span></div>
+      <div class="stat"><b id="sBest">0</b><span>best</span></div>
+      <div class="stat" hidden><b id="sPlayed">0</b><span>played</span></div>
+    </div>
   </div>
-  <div class="stats">
-    <div class="stat"><b id="sPlayed">0</b><span>Played</span></div>
-    <div class="stat"><b id="sAcc">–</b><span>Accuracy</span></div>
-    <div class="stat"><b id="sStreak">0</b><span>Streak</span></div>
-    <div class="stat"><b id="sBest">0</b><span>Best streak</span></div>
-  </div>
+
+  <div class="mode" id="mode" hidden><b>REVIEW MODE</b><span id="modeTx"></span><div class="pr" id="modePr"></div><button type="button" id="exitRev">Exit review</button></div>
 
   <div class="wrap">
     <div class="chartbox">
-      <canvas id="cv" aria-label="Simulated 1-minute chart with developing volume profile"></canvas>
+      <div class="cv"><canvas id="cv" aria-label="Simulated 1-minute chart with developing volume profile"></canvas></div>
       <div class="cbar">
         <div class="legend">
           <span><i style="background:#C9473A"></i>dPOC</span>
@@ -113,14 +123,14 @@ h1{font-family:var(--serif);font-weight:600;font-size:48px;line-height:1.05;marg
         <div class="ctx" id="ctx"></div>
         <p class="prompt" id="prompt"></p>
         <p class="sub" id="psub"></p>
-        <div class="lab" style="margin-top:14px">1 · What do you do?</div>
+        <div class="lab" style="margin-top:16px">1 · What do you do?</div>
         <div class="btns three">
           <button class="b long" data-act="long" type="button">Long</button>
           <button class="b short" data-act="short" type="button">Short</button>
           <button class="b" data-act="none" type="button">No trade</button>
         </div>
         <div id="step2" hidden>
-          <div class="lab" style="margin-top:14px">2 · Which setup?</div>
+          <div class="lab" style="margin-top:16px">2 · Which setup?</div>
           <div class="grp">Core setups</div>
           <div class="btns three">
             <button class="b" data-set="snap" type="button">🫰 Snap</button>
@@ -147,11 +157,14 @@ h1{font-family:var(--serif);font-weight:600;font-size:48px;line-height:1.05;marg
         <button class="next" id="nextBtn" type="button">Next scenario →</button>
       </div>
 
+      <div class="rev" id="revCard"></div>
+
       <p class="small">Scenarios are simplified and generated, not real market data. Every one follows the rules in VP Academy and the Playbook. Your score saves in this browser. <button class="reset" id="resetBtn" type="button">Reset score</button></p>
     </div>
   </div>
-</main>
+</div>
 
+<script src="/mt-shell.js"></script>
 <script>
 "use strict";
 /* ================= random + path generation ================= */
@@ -450,6 +463,37 @@ const SC = {
     hint: "Look at the profile where price is pulling back to. Is there an obvious shelf there?",
     why: "The session is one-way, but price is pulling back into thin volume. There's no obvious HVN shelf here, just a patch of the profile price moved straight through. No shelf, no Wall.",
     see: "Advanced Setups: The Wall" },
+  /* ---- round 5 ---- */
+  vwapSnap: { valid:true, ans:{ act:"long", set:"snap" }, showD:false, keyAtEnd:true, keySet:"low", band:true,
+    head:(r, s) => stepDown(r, s),
+    tail:() => [go(6, -.08, .04), go(16, 1.2, .06), rot(30, 1.3, .5, .08, .12)], tailRel:true,
+    prompt: k => `Price is coming down to the ${k}, right where the lower VWAP band is.`,
+    hint: "Count the confluences at this price. Is the level on its own?",
+    why: "The {K} lines up with the lower VWAP band, so this price has two confluences (2★). The VWAP band adds weight to the level, which makes this a stronger Snap than the level on its own.",
+    see: "VP Academy #06: VWAP and ATR · Core Setups" },
+  pMagnet: { valid:true, ans:{ act:"long", set:"magnet" }, showD:true, endAtPOC:true, anyVA:true,
+    head:(r, s) => gen([go(6, -3.3, .05, -3.4), go(Math.round(jit(16, r)), -2.3, .08), go(6, -2.45, .05), go(Math.round(jit(16, r)), -1.3, .08), go(6, -1.45, .05), go(12, -.4, .08),
+      rot(Math.round(jit(200, r)), .2, .55, .08, .13), go(10, 1.75, .06), rot(Math.round(jit(36, r)), 1.85, .25, .1, .1), go(14, "POC", .05)], s),
+    check:(head, PH, lo, hi) => PH.val > lo + (hi - lo) * .42 && PH.pocP < 1.0 && PH.vah < 1.5,
+    tail:() => [go(10, 1.1), go(8, .85), go(16, 2.6, .07)], tailRel:true,
+    zone:["VAH", 2.15, "Acceptance above the dVAH", "ok"],
+    prompt: () => `It's a strong day up and the profile is P-shaped. Price is pulling back to the dPOC.`,
+    hint: "What shape is the profile, and did price accept above the dVAH before pulling back?",
+    why: "On a P-shaped day, value builds at the top after the trend up. Price accepted above the dVAH, then pulled back to the dPOC. That's the Magnet, in the direction of the trend: a retest of fair value before the move continues.",
+    see: "VP Academy #04: Profile Shapes · Core Setups" },
+  whipMid: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"whip" }, showD:true,
+    head:(r, s) => { let h = dshapeHead(r, s);
+      for(let k = 0; k < 3; k++){ const mn = Math.min(...h), mx = Math.max(...h), m = (mx - mn) * .2, P = profile(h, 22, mn - m, mx + m), st = h[h.length - 1];
+        h = h.concat([1, 2, 3, 4].map(j => st + (P.pocP + .05 - st) * j / 4)); }
+      const v = h[h.length - 1], mn = Math.min(...h), mx = Math.max(...h), P = profile(h, 22, mn - (mx - mn) * .2, mx + (mx - mn) * .2), d = (v - P.val) * .72;
+      return h.concat([.3, .6, .85, 1].map(f => v - d * f), [.7, .35, .05].map(f => v - d * f), [v + .03]); },
+    check:(head, PH, lo, hi) => { const w = Math.min(...head.slice(-10)), row = (hi - lo) / 22; return w > PH.val + row * .8 && Math.abs(head[head.length - 1] - PH.pocP) < row * 2.5; },
+    tail:() => [go(6, .08, .04), go(8, -.2, .05), go(10, -.9, .05), go(16, -1.6, .07)], tailRel:true,
+    zone:e => [e - .5, e + .1, "Wick inside value, not past the dVAL", "bad"],
+    prompt: () => `Price wicked down hard from the dPOC and came straight back.`,
+    hint: "Where did the wick happen? Did price ever break past the dVAH or dVAL?",
+    why: "That's not a Whip. The Whip needs price to break past the dVAH or dVAL, find no volume and come straight back into value. This wick happened in the middle of value, around the dPOC, so there was no failed breakout to trade.",
+    see: "Advanced Setups: The Whip" },
   /* ---- The Whip (Advanced Setups) ---- */
   whip: { valid:true, ans:{ act:"long", set:"whip" }, showD:true,
     head:(r, s) => whipEnd(dshapeHead(r, s), 5.5),
@@ -528,11 +572,31 @@ function mirrorText(t){
 const MIRROR_NAME = n => n.replace("VAL", "§").replace("VAH", "VAL").replace("§", "VAH");
 const opp = a => a === "long" ? "short" : a === "short" ? "long" : a;
 
-const RECENT = [];
+/* Every situation comes up once, in a random order, before any repeats.
+   The order is saved in this browser, so it carries on across visits. */
+const BKEY = "maliktrades.sim.bag.v1";
+const kindOf = id => SC[id].ans.set || (SC[id].tempt && SC[id].tempt.set) || "none";
+function shuffle(a){ for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(R0() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function loadBag(){ try{ const b = JSON.parse(localStorage.getItem(BKEY)); if(b && Array.isArray(b.left)) return b; }catch(e){} return { left:[], last:null }; }
+function saveBag(b){ try{ localStorage.setItem(BKEY, JSON.stringify(b)); }catch(e){} }
+let BAG = loadBag();
+BAG.left = BAG.left.filter(k => SC[k]);
+function nextId(){
+  if(!BAG.left.length) BAG.left = shuffle(Object.keys(SC).filter(k => k !== BAG.last));
+  // avoid the same setup twice in a row when there's another choice left
+  const prev = BAG.last && SC[BAG.last] ? kindOf(BAG.last) : null;
+  let i = BAG.left.findIndex(k => kindOf(k) !== prev); if(i < 0) i = 0;
+  const id = BAG.left.splice(i, 1)[0];
+  if(BAG.last && !SC[BAG.last]) BAG.last = null;
+  // a newly added situation joins the current cycle
+  BAG.seen = (BAG.seen || []).filter(k => SC[k]); BAG.seen.push(id);
+  Object.keys(SC).forEach(k => { if(!BAG.left.includes(k) && !BAG.seen.includes(k) && k !== id) BAG.left.splice(Math.floor(R0() * (BAG.left.length + 1)), 0, k); });
+  if(!BAG.left.length) BAG.seen = [];
+  BAG.last = id; saveBag(BAG); return id;
+}
 function makeRound(forceId){
-  const valid = R0() < .5;
-  let ids = Object.keys(SC).filter(k => forceId ? k === forceId : SC[k].valid === valid);
-  if(!forceId){ const fresh = ids.filter(k => !RECENT.includes(k)); if(fresh.length) ids = fresh; }
+  if(!forceId) forceId = nextId();
+  let ids = [forceId];
   for(let attempt = 0; attempt < 60; attempt++){
     const id = pick(ids), sc = SC[id], seed = Math.floor(R0() * 1e9), r = rng(seed);
     let head = sc.head(r, seed);
@@ -566,6 +630,10 @@ function makeRound(forceId){
     if(level && sc.key2){ const others = set.filter(x => x.n !== level.n && x.c !== level.c); level2 = { ...pick(others, r), p: key + sc.key2 }; }
     let level3 = null;
     if(level2 && sc.key3){ const others = set.filter(x => ![level.n, level2.n].includes(x.n) && ![level.c, level2.c].includes(x.c)); level3 = { ...pick(others, r), p: key + sc.key3 }; }
+    // VWAP band: a running average of the session, shifted so the band meets the level at the decision
+    let band = null;
+    if(sc.band && key != null){ const vw = []; let sum = 0; pts.forEach((v, i) => { sum += v; vw.push(sum / (i + 1)); });
+      const off = vw[cut - 1] - key; if(off < .25) continue; band = vw.map(v => v - off); }
     // zone
     const mn0 = Math.min(...pts, key ?? Infinity), mx0 = Math.max(...pts, key ?? -Infinity), m0 = (mx0 - mn0) * .28;
     let lo = mn0 - m0, hi = mx0 + m0;
@@ -595,9 +663,9 @@ function makeRound(forceId){
       if(zone) zone = { ...zone, a: -zone.a, b: -zone.b, lab: mirrorText(zone.lab) };
       ans.act = opp(ans.act); if(tempt) tempt.act = opp(tempt.act); trade.act = opp(trade.act);
       E = -E; T = -T; S = -S;
+      if(band) band = band.map(v => -v);
     }
-    if(!forceId){ RECENT.push(id); if(RECENT.length > 4) RECENT.shift(); }
-    return { id, sc, pts, cut, lo, hi, qlo, qhi, prof, level, level2, level3, marks, zone, ans, tempt, trade, entry:E, tgt:T, sl:S, atr, stop, hitI, mirror,
+    return { id, sc, pts, cut, lo, hi, qlo, qhi, prof, level, level2, level3, band, marks, zone, ans, tempt, trade, entry:E, tgt:T, sl:S, atr, stop, hitI, mirror,
              inst: pick(INSTR), sess: pick(SESS) };
   }
   return makeRound(forceId);
@@ -636,6 +704,9 @@ function draw(){
   const nearH = S.level && S.sc.showD && Math.abs(Y(S.level.p) - Y(P.vah)) < 14;
   if(S.sc.showD){ line(P.vah, "#2962FF", nearH ? "" : "dVAH"); line(P.pocP, "#C9473A", "dPOC"); line(P.val, "#2962FF", near ? "" : "dVAL"); }
   if(S.level){ const tag = near ? " + dVAL" : nearH ? " + dVAH" : ""; line(S.level.p, S.level.c, S.level.n + tag, 2.4, [7, 5]); }
+  if(S.band){ const upto = Math.min(N, revealing ? shown : S.cut); ctx.strokeStyle = "#3E9C5B"; ctx.lineWidth = 2; ctx.setLineDash([]);
+    const b0 = Math.floor(S.cut * .22); ctx.beginPath(); for(let i = b0; i < upto; i++){ const x = X(i), y = Y(S.band[i]); i > b0 ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke();
+    labs.push({ y: Y(S.band[upto - 1]) + 4, lab: "VWAP band", col: "#3E9C5B" }); }
   if(S.level2) line(S.level2.p, S.level2.c, S.level2.n, 2.4, [3, 4]);
   if(S.level3) line(S.level3.p, S.level3.c, S.level3.n, 2.4, [10, 4]);
   labs.sort((u, v) => u.y - v.y);
@@ -695,11 +766,66 @@ let score = load() || { played:0, pts:0, streak:0, best:0 };
 let choice = { act:null, set:null };
 const Tx = t => S && S.mirror ? mirrorText(t) : t;
 const cap = s => s[0].toUpperCase() + s.slice(1);
+function todayKey(){ const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
 function paintScore(){
   $("sPlayed").textContent = score.played;
+  const n = score.today && score.today.d === todayKey() ? score.today.res.length : 0;
+  $("sToday").textContent = `${n}/10`;
   $("sAcc").textContent = score.played ? Math.round(score.pts / score.played * 100) + "%" : "–";
   $("sStreak").textContent = score.streak; $("sBest").textContent = score.best;
 }
+/* ================= review my mistakes ================= */
+const NAMES = { dshape:"D-shape Snap", flip:"The Flip", magnet:"The Magnet", hvn:"HVN under the level", poke:"Poke through", fakeMagnet:"Fake Magnet",
+  trend:"Fading a trend day", slice:"The Slice", snapPlain:"Plain Snap", stackedSnap:"Stacked Snap", hvnLevel:"HVN at the level", trendFlip:"Trend Flip",
+  dpocFade:"Fading the dPOC", chase:"Chasing", twoLosses:"Two losses already", reinforced:"Reinforced Flip", sliceFlip:"Slice Flip", dpocNear:"dPOC too close",
+  twoLevels:"Two levels close together", secondSnap:"Second Snap", thirdSnap:"Third Snap", secondFlip:"Second Flip", thirdFlip:"Third Flip",
+  trendMagnet:"Trend Magnet", tripleStack:"Triple stack", noLevel:"No level", wall:"The Wall", wallDpoc:"The Wall at the dPOC",
+  wallRotating:"The Wall on a rotating day", wallNoShelf:"The Wall with no shelf", vwapSnap:"Snap with a VWAP band", pMagnet:"Magnet on a P-shape",
+  whipMid:"Whip in the middle of value", whip:"The Whip", whipP:"Whip on a P-shape", whipTrend:"Whip against the trend" };
+const KIND = { snap:"Snap", flip:"Flip", magnet:"Magnet", wall:"Wall", whip:"Whip", anchor:"Anchor", none:"No trade" };
+const MKEY = "maliktrades.sim.miss.v1";
+let MISS = (() => { try{ const m = JSON.parse(localStorage.getItem(MKEY)); return m && typeof m === "object" ? m : {}; }catch(e){ return {}; } })();
+Object.keys(MISS).forEach(k => { if(!SC[k]) delete MISS[k]; });
+function saveMiss(){ try{ localStorage.setItem(MKEY, JSON.stringify(MISS)); }catch(e){} }
+function logResult(id, pts){
+  if(pts < 1){ const m = MISS[id] || { miss:0, fix:0 }; m.miss++; m.fix = 0; m.last = Date.now(); MISS[id] = m; }
+  else if(MISS[id]){ MISS[id].fix++; if(MISS[id].fix >= 2) delete MISS[id]; }
+  saveMiss();
+}
+const missList = () => Object.keys(MISS).sort((a, b) => MISS[b].miss - MISS[a].miss || MISS[b].last - MISS[a].last);
+let REV = null; // { total, cur }
+function paintReview(){
+  const list = missList(), c = $("revCard");
+  if(REV){ c.hidden = true; return; }
+  c.hidden = false;
+  if(!list.length){ c.className = "rev empty"; c.innerHTML = `<div class="t"><span class="h">Review my mistakes</span></div><p style="margin-bottom:0">${score.played ? "No mistakes to review. Nice work." : "Any situation you get wrong will show up here, so you can drill it until you get it right twice."}</p>`; return; }
+  c.className = "rev";
+  const kindTag = id => { const k = kindOf(id), adv = ["wall","whip","anchor"].includes(k); return `<em class="${adv ? "adv" : ""}">${KIND[k] || k}</em>`; };
+  c.innerHTML = `<div class="t"><span class="h">Review my mistakes</span><span class="n">${list.length} to review</span></div>
+    <p>Replay the situations you got wrong until you get each one right twice.</p>
+    <div class="ml">${list.slice(0, 5).map(id => `<div class="mi"><span>${NAMES[id] || id}${kindTag(id)}</span><small>missed ${MISS[id].miss}×</small></div>`).join("")}</div>
+    ${list.length > 5 ? `<p class="more">and ${list.length - 5} more</p>` : ""}
+    <button class="gbtn" type="button" id="startRev">Start review →</button>`;
+}
+function paintMode(){
+  const m = $("mode"); if(!REV){ m.hidden = true; return; }
+  const left = missList().length, done = Math.max(0, REV.total - left), id = REV.cur, mm = MISS[id];
+  m.hidden = false;
+  $("modeTx").textContent = `${NAMES[id] || id}${mm ? ` · you missed this ${mm.miss}×` : " · cleared ✓"}`;
+  $("modePr").innerHTML = Array.from({ length: Math.min(REV.total, 12) }, (_, i) => `<i class="${i < Math.round(done / REV.total * Math.min(REV.total, 12)) ? "d" : ""}"></i>`).join("");
+}
+function reviewNext(){
+  const list = missList();
+  if(!list.length){ REV = null; paintMode(); paintReview(); newRound(); $("psub").textContent = "Review done. Every mistake is cleared, nice work. Back to normal rounds."; return; }
+  const pool = list.length > 1 ? list.filter(k => k !== REV.cur) : list;
+  pool.sort((x, y) => (REV.t[x] || 0) - (REV.t[y] || 0));
+  REV.cur = pool[0]; REV.t[REV.cur] = ++REV.n; newRound(REV.cur); paintMode();
+  $("psub").textContent = "You got this one wrong before. Take your time.";
+}
+document.addEventListener("click", e => {
+  if(e.target.closest("#startRev")){ const l = missList(); if(!l.length) return; REV = { total:l.length, cur:null, t:{}, n:0 }; paintReview(); reviewNext(); window.scrollTo({ top:0, behavior:"smooth" }); }
+  if(e.target.closest("#exitRev")){ REV = null; paintMode(); paintReview(); newRound(); }
+});
 function newRound(forceId){
   cancelAnimationFrame(raf);
   S = makeRound(forceId); shown = S.cut; revealing = false; choice = { act:null, set:null };
@@ -726,7 +852,7 @@ function finish(){
   { const d = new Date(), day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
     if(!score.today || score.today.d !== day) score.today = { d:day, res:[] };
     score.today.res.push(pts); }
-  save(); paintScore();
+  save(); paintScore(); logResult(S.id, pts); if(REV) paintMode(); else paintReview();
   const names = { snap:"Snap 🫰", flip:"Flip 🔄", magnet:"Magnet 🧲", wall:"Wall 🧱", whip:"Whip ⚡" };
   const ks = a.set || (S.tempt && S.tempt.set), adv = ["anchor","wall","whip"].includes(ks), full = { snap:"The Snap 🫰", flip:"The Flip 🔄", magnet:"The Magnet 🧲", anchor:"The Anchor ⚓", wall:"The Wall 🧱", whip:"The Whip ⚡" };
   const kd = $("kind"); kd.hidden = !ks; if(ks){ kd.className = "kind" + (adv ? " adv" : ""); kd.textContent = (adv ? "Advanced setup · " : "Core setup · ") + full[ks]; }
@@ -756,12 +882,11 @@ document.addEventListener("click", e => {
   if(s && !s.disabled){ choice.set = s.dataset.set; document.querySelectorAll("[data-set]").forEach(x => x.classList.toggle("sel", x === s)); finish(); }
 });
 $("hintBtn").addEventListener("click", () => { $("hintTx").textContent = "💡 " + Tx(S.sc.hint); $("hintTx").hidden = false; $("hintBtn").hidden = true; });
-$("nextBtn").addEventListener("click", () => { newRound(); window.scrollTo({ top:0, behavior:"smooth" }); });
-$("resetBtn").addEventListener("click", () => { score = { played:0, pts:0, streak:0, best:0 }; save(); paintScore(); });
+$("nextBtn").addEventListener("click", () => { if(REV) reviewNext(); else newRound(); window.scrollTo({ top:0, behavior:"smooth" }); });
+$("resetBtn").addEventListener("click", () => { score = { played:0, pts:0, streak:0, best:0 }; save(); paintScore(); MISS = {}; saveMiss(); REV = null; paintMode(); paintReview(); });
 let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw, 120); });
-paintScore();
+paintScore(); paintReview();
 Promise.all(["600 12px Figtree", "600 11px Figtree", "600 10.5px Figtree"].map(f => document.fonts.load(f).catch(() => {}))).then(() => newRound());
 </script>
-<script src="/mt-nav.js" defer></script>
 </body>
 </html>
