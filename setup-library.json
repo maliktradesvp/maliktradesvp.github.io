@@ -681,5 +681,87 @@
     "images": [
       "lib-2026-11-11-gc-snap-pwpoc.jpg"
     ]
+  },
+  {
+    "id": "2026-11-12-nq-snap-onpoc-stacked",
+    "date": "2026-11-12",
+    "setup": "snap",
+    "instrument": "NQ",
+    "direction": "Short",
+    "stars": 3,
+    "result": "+1R",
+    "title": "Stacked ONPOC and NYVAL Snap with the VWAP band",
+    "summary": "This was a very good zone for a snap, it had 2 stacked levels + vwap band, giving me a high probability Snap set up. Price tapped into ONPOC and immediately shot down, hitting my TP.",
+    "confluences": [
+      "VWAP Band",
+      "ONPOC",
+      "NYVAL"
+    ],
+    "notes": [
+      "This was a very good zone for a snap, it had 2 stacked levels + vwap band, giving me a high probability Snap set up. Price tapped into ONPOC and immediately shot down, hitting my TP."
+    ],
+    "images": [
+      "lib-2026-11-12-nq-snap-onpoc-stacked.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-12-gc-magnet-dpoc",
+    "date": "2026-11-12",
+    "setup": "magnet",
+    "instrument": "GC",
+    "direction": "Short",
+    "stars": 1,
+    "result": "+1R",
+    "title": "Classic dPOC Magnet on gold",
+    "summary": "This was a classic magnet set up on gold. Price went past the dVAL and built volume there and when it came back to the dPOC for a retest, it gave a nice reaction to the downside which i capitalised on.",
+    "confluences": [
+      "dPOC"
+    ],
+    "notes": [
+      "This was a classic magnet set up on gold. Price went past the dVAL and built volume there and when it came back to the dPOC for a retest, it gave a nice reaction to the downside which i capitalised on."
+    ],
+    "images": [
+      "lib-2026-11-12-gc-magnet-dpoc.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-12-nq-flip-onval",
+    "date": "2026-11-12",
+    "setup": "flip",
+    "instrument": "NQ",
+    "direction": "Long",
+    "stars": 1,
+    "result": "+1R",
+    "title": "ONVAL Flip on the retest",
+    "summary": "This was a classic flip set up. Price initially broke past ONVAL and when it came back to retest it, i took a long on the level and it hit TP immediately.",
+    "confluences": [
+      "ONVAL"
+    ],
+    "notes": [
+      "This was a classic flip set up. Price initially broke past ONVAL and when it came back to retest it, i took a long on the level and it hit TP immediately."
+    ],
+    "images": [
+      "lib-2026-11-12-nq-flip-onval.jpg"
+    ]
+  },
+  {
+    "id": "2026-11-12-nq-snap-pwpoc",
+    "date": "2026-11-12",
+    "setup": "snap",
+    "instrument": "NQ",
+    "direction": "Short",
+    "stars": 1,
+    "result": "+1R",
+    "title": "PWPOC Snap from below",
+    "summary": "This was a bread and butter snap set up. Price approached PWPOC from below and when it tapped into the level, it provided a nice and quick reaction to the downside which i took.",
+    "confluences": [
+      "PWPOC"
+    ],
+    "notes": [
+      "This was a bread and butter snap set up. Price approached PWPOC from below and when it tapped into the level, it provided a nice and quick reaction to the downside which i took."
+    ],
+    "images": [
+      "lib-2026-11-12-nq-snap-pwpoc.jpg"
+    ]
   }
 ]

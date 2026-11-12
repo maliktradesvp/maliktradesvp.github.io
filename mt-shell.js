@@ -22,7 +22,7 @@
   let read = 0; try{ const r = JSON.parse(localStorage.getItem("maliktrades.reading.v1")); read = (r && r.read || []).filter(x => /^a0\d$/.test(x)).length; }catch(e){}
   const L = [
     ["home","home","Home","/",""], ["book","academy","VP Academy","/#academy",`${read}/9`], ["layers","playbook","The Playbook","/#playbook",""],
-    ["grid","library","Setup Library","/setup-library.html",'<span class="ct" id="mtLibCt"></span>'], ["target","reproom","The Rep Room","/simulator.html",""]
+    ["grid","library","Setup Library","/setup-library.html",""], ["target","reproom","The Rep Room","/simulator.html",""]
   ];
   const T = [["pen","Journal","/MalikTradesJournal/"],["card","Trade Review","/MalikTradesReview/"],["chart","Prop Tracker","/MalikTradesPropTracker/"],["calc","Prop Firm Hacking Tool","/prop-firm-tool.html"],["brain","Mindset","/MalikTrades-Mindset-Tool/"]];
   const side = `<aside class="mt-side" aria-label="Main menu"><a href="/"><img class="wm" src="/mt-wordmark.png" alt="MalikTrades"></a>
@@ -40,5 +40,4 @@
   [...document.body.childNodes].forEach(n => { if(n.nodeName !== "SCRIPT") main.appendChild(n); });
   document.body.prepend(app);
   document.body.insertAdjacentHTML("beforeend", tabs);
-  fetch("/setup-library.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).then(d => { const el = document.getElementById("mtLibCt"); if(el && Array.isArray(d)) el.textContent = d.length; }).catch(() => {});
 })();

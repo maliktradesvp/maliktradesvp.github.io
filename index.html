@@ -297,7 +297,7 @@ footer p{margin:0}
     <a class="on" href="/" data-ic="home">Home</a>
     <a href="#academy" data-ic="book">VP Academy<span class="ct" id="navAcad"></span></a>
     <a href="#playbook" data-ic="layers">The Playbook</a>
-    <a href="/setup-library.html" data-ic="grid">Setup Library<span class="ct" id="navLib"></span></a>
+    <a href="/setup-library.html" data-ic="grid">Setup Library</a>
     <a href="/simulator.html" data-ic="target">The Rep Room</a>
   </nav>
   <nav class="nav" aria-label="Tools"><div class="navh">TOOLS</div>
@@ -545,7 +545,6 @@ const SET = { snap:"Snap", flip:"Flip", magnet:"Magnet", anchor:"Anchor", wall:"
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
 fetch("/setup-library.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []).then(data => {
   if(!Array.isArray(data) || !data.length){ $("lib").closest("section").hidden = true; return; }
-  $("navLib").textContent = data.length;
   
   const order = data.map((t, i) => ({ t, i })).sort((a, b) => (b.t.date || "").localeCompare(a.t.date || "") || (b.t.stars || 0) - (a.t.stars || 0) || b.i - a.i).map(x => x.t);
   const f = order[0], more = order.slice(1, 4);
