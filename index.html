@@ -187,7 +187,7 @@ section{scroll-margin-top:20px}
 .pbs .k{font-size:11px;letter-spacing:.22em;font-weight:700;color:var(--gold2)}
 .pbs h3{font-family:var(--display);font-weight:600;font-size:34px;margin:6px 0 8px;line-height:1}
 .pbs p{margin:0;color:#C9D5D2;font-size:14.5px;line-height:1.5}
-.books{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.books{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
 .bk{position:relative;display:flex;flex-direction:column;gap:6px;min-width:0}
 .bk .lnk{display:block;border-radius:6px}
 .bk img{width:100%;aspect-ratio:297/420;object-fit:cover;object-position:top;border-radius:6px;box-shadow:0 14px 26px -12px rgba(0,0,0,.6);display:block;transition:transform .2s}
@@ -352,7 +352,7 @@ footer p{margin:0}
 
   <section id="playbook" aria-labelledby="pbT">
     <div class="pbs">
-      <div><div class="k">THE PLAYBOOK</div><h3 id="pbT">Your reference shelf</h3><p>My setups, rules and chart. Keep these open while you trade, and save Advanced Setups for when the core three feel obvious.</p></div>
+      <div><div class="k">THE PLAYBOOK</div><h3 id="pbT">Your reference shelf</h3><p>My setups, rules, chart and mindset notes. Keep these open while you trade, and save Advanced Setups for when the core three feel obvious.</p></div>
       <div class="books" id="books"></div>
     </div>
   </section>
@@ -485,7 +485,8 @@ function paintGuides(){
           <img src="/${slug}-cover.jpg" alt="" loading="lazy"><div><b>#${String(i + 1).padStart(2,"0")} ${title}</b><span>${line}</span>${nx ? '<em class="up" style="font-style:normal">UP NEXT</em>' : ""}</div>${tick(id, title)}</div>`; }).join("") + `</div>`;
   }).join("");
   const BOOKS = PLAY.map(([id, slug, title, line]) => ({ id, slug, title, line, tag: slug === "advanced-setups" ? "Read last" : "Reference", adv: slug === "advanced-setups" }))
-    .concat([{ id:null, slug:"trading-in-the-zone", title:"Trading in the Zone", line:"Book notes · Mark Douglas", tag:"Book notes", adv:false }]);
+    .concat([{ id:null, slug:"trading-in-the-zone", title:"Trading in the Zone", line:"Book notes · Mark Douglas", tag:"Book notes", adv:false },
+             { id:"p5", slug:"boom-and-bust-cycle", title:"The Boom-and-Bust Cycle", line:"Why traders make money, then give it back.", tag:"Mindset", adv:false }]);
   $("books").innerHTML = BOOKS.map(b => `<div class="bk"><a class="lnk" href="/${b.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg" alt="" loading="lazy"></a>
     ${b.id ? tick(b.id, b.title) : ""}<span class="tg2 ${b.adv ? "adv" : ""}">${b.tag}</span><b>${b.title}</b><span>${b.line}</span></div>`).join("");
   const a = ACAD.filter(g => readSet.has(g[0])).length;
