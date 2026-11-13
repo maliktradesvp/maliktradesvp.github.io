@@ -22,6 +22,10 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
 .stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 16px;text-align:center;min-width:88px}
 .stat b{display:block;font-size:22px;font-weight:700;color:var(--teal);font-variant-numeric:tabular-nums;line-height:1.2}
 .stat span{font-size:11.5px;color:var(--mut)}
+.pstrip{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 14px;margin:-4px 0 16px;font-size:14.5px;color:var(--mut)}
+.pracbtn{display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff!important;text-decoration:none!important;font-weight:700;font-size:14px;border-radius:10px;padding:8px 14px;white-space:nowrap}
+.pracbtn:hover{background:var(--teal2)}
+#dSee .pracbtn{margin-top:12px;display:flex;width:max-content;max-width:100%}
 .frombar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(160deg,#21414A,#1A333A);color:#E9E2D3;border-radius:14px;padding:12px 16px;margin-bottom:12px;font-size:14.5px}
 .frombar b{color:#fff}.frombar .fx{margin-left:auto;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:#fff;border-radius:9px;padding:6px 12px;font-weight:700;font-size:13px;cursor:pointer}
 .frombar .fx:hover{background:rgba(255,255,255,.18)}
@@ -100,6 +104,7 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
     <div class="fg" role="group" aria-label="Setup"><span class="lab">Setup</span><span id="fSetup" style="display:contents"></span></div>
     <div class="fg" role="group" aria-label="Instrument"><span class="lab">Instrument</span><span id="fInst" style="display:contents"></span><span style="margin-left:auto;color:var(--mut);font-size:13.5px">Newest first</span></div>
   </div>
+  <div class="pstrip" id="pStrip" hidden></div>
   <div class="grid" id="grid"></div>
 </div>
 
@@ -130,6 +135,7 @@ const SETUPS = [
 ];
 const INSTRUMENTS = ["NQ", "ES", "GC", "CL"];
 const state = { setup:"all", inst:"all" };
+const PRACTICE = ["snap","flip","magnet","wall","whip"];
 let TRADES = [];
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
@@ -173,7 +179,14 @@ function renderGrid(){
     </button>`;
   }).join("");
 }
-function render(){ renderFilters(); renderGrid(); }
+function renderPractice(){
+  const el = document.getElementById("pStrip"), su = setupOf(state.setup);
+  if(state.setup === "all" || !PRACTICE.includes(state.setup)){ el.hidden = true; return; }
+  const nm = su.label.startsWith("The ") ? su.label : "the " + su.label;
+  el.innerHTML = `<span>${su.icon} Studied these? Now practise spotting ${esc(nm)} on unseen charts.</span><a class="pracbtn" href="/simulator.html?focus=${state.setup}">\u{1F3AF} Practice in the Rep Room →</a>`;
+  el.hidden = false;
+}
+function render(){ renderFilters(); renderGrid(); renderPractice(); }
 
 let lastFocus = null;
 function openTrade(id){
@@ -187,7 +200,8 @@ function openTrade(id){
   try{ history.replaceState(null, "", "#" + encodeURIComponent(t.id)); }catch(e){}
   const notes = Array.isArray(t.notes) ? t.notes : (t.notes ? [t.notes] : []);
   document.getElementById("dNotes").innerHTML = (t.confluences && t.confluences.length ? `<div class="cfl">Confluences</div><div class="cf">${t.confluences.map(c => `<span>${esc(c)}</span>`).join("")}</div><div class="cfl">Why I took it</div>` : "") + notes.map(n => `<p>${esc(n)}</p>`).join("");
-  document.getElementById("dSee").innerHTML = s.guide ? `Read more: <a href="${s.guide.href}" target="_blank" rel="noopener">${s.guide.name}</a>` : "";
+  document.getElementById("dSee").innerHTML = (s.guide ? `Read more: <a href="${s.guide.href}" target="_blank" rel="noopener">${s.guide.name}</a>` : "") +
+    (PRACTICE.includes(t.setup) ? `<a class="pracbtn" href="/simulator.html?focus=${t.setup}">\u{1F3AF} Practice ${esc(s.label.startsWith("The ") ? s.label : "the " + s.label)} in the Rep Room →</a>` : "");
   lastFocus = document.activeElement;
   const ov = document.getElementById("ov"); ov.classList.add("open"); ov.setAttribute("aria-hidden", "false"); ov.scrollTop = 0;
   document.body.style.overflow = "hidden";
@@ -224,7 +238,8 @@ function applyParams(){
   if(!visible().length) state.inst = "all";
   const bar = document.getElementById("fromBar"), su = setupOf(state.setup);
   const n = visible().length;
-  bar.innerHTML = `<span>${q.get("from") === "journal" ? "\u{1F4D3} From your journal: " : ""}showing <b>${n} ${su.icon} ${esc(su.label)}</b> example${n === 1 ? "" : "s"}${state.inst !== "all" ? ` on <b>${esc(state.inst)}</b>` : ""}. Compare them with the trade you logged.</span><button class="fx" type="button" id="fromAll">Show all trades</button>`;
+  const fromTx = q.get("from") === "journal" ? "\u{1F4D3} From your journal: " : q.get("from") === "reproom" ? "\u{1F3AF} From the Rep Room: " : "";
+  bar.innerHTML = `<span>${fromTx}showing <b>${n} ${su.icon} ${esc(su.label)}</b> example${n === 1 ? "" : "s"}${state.inst !== "all" ? ` on <b>${esc(state.inst)}</b>` : ""}. ${q.get("from") === "reproom" ? "This is what it looks like on a live chart." : "Compare them with the trade you logged."}</span><button class="fx" type="button" id="fromAll">Show all trades</button>`;
   bar.hidden = false;
   document.getElementById("fromAll").onclick = () => { state.setup = "all"; state.inst = "all"; bar.hidden = true; history.replaceState(null, "", location.pathname); render(); };
 }

@@ -77,6 +77,10 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
 .mode{display:flex;align-items:center;gap:14px;background:var(--teal);color:#EEE7D8;border-radius:14px;padding:12px 16px;flex-wrap:wrap}
 .mode b{color:var(--gold2);letter-spacing:.16em;font-size:12px}
 .mode .pr{display:flex;gap:4px;margin-left:auto}.mode .pr i{width:22px;height:6px;border-radius:3px;background:rgba(255,255,255,.2)}.mode .pr i.d{background:var(--gold2)}
+.mode.focus{background:linear-gradient(160deg,#2F5A60,#1A333A);margin-bottom:10px}
+.mode .flib{color:var(--gold2);font-weight:700;font-size:13.5px;text-decoration:none;margin-left:auto}.mode .flib:hover{text-decoration:underline}
+.mode.focus button{margin-left:6px}
+#libLink a{color:var(--teal);font-weight:700;text-decoration:none;border-bottom:1.5px dotted var(--teal2)}#libLink a:hover{border-bottom-style:solid}
 .mode button{background:none;border:0;font:inherit;font-size:13px;color:#AFC1BD;text-decoration:underline;cursor:pointer;padding:0}
 @media (max-width:1000px){ .wrap{grid-template-columns:1fr} }
 @media (max-width:860px){
@@ -103,6 +107,7 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
     </div>
   </div>
 
+  <div class="mode focus" id="focusBar" hidden><b>PRACTICE MODE</b><span id="focusTx"></span><a class="flib" id="focusLib" href="/setup-library.html" hidden>See real examples →</a><button type="button" id="exitFocus">Back to all situations</button></div>
   <div class="mode" id="mode" hidden><b>REVIEW MODE</b><span id="modeTx"></span><div class="pr" id="modePr"></div><button type="button" id="exitRev">Exit review</button></div>
 
   <div class="wrap">
@@ -154,6 +159,7 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
         <p id="why"></p>
         <p class="trade" id="tradeTx"></p>
         <p class="small" id="see"></p>
+        <p class="small" id="libLink"></p>
         <button class="next" id="nextBtn" type="button">Next scenario →</button>
       </div>
 
@@ -581,7 +587,40 @@ function loadBag(){ try{ const b = JSON.parse(localStorage.getItem(BKEY)); if(b 
 function saveBag(b){ try{ localStorage.setItem(BKEY, JSON.stringify(b)); }catch(e){} }
 let BAG = loadBag();
 BAG.left = BAG.left.filter(k => SC[k]);
+/* Practice mode: one setup or one lesson's situations only, opened with ?focus=flip etc. */
+const FOCUS_PACKS = {
+  snap:{ label:"The Snap 🫰", lib:"snap", ids:k => kindOf(k) === "snap" },
+  flip:{ label:"The Flip 🔄", lib:"flip", ids:k => kindOf(k) === "flip" },
+  magnet:{ label:"The Magnet 🧲", lib:"magnet", ids:k => kindOf(k) === "magnet" },
+  wall:{ label:"The Wall 🧱", lib:"wall", ids:k => kindOf(k) === "wall" },
+  whip:{ label:"The Whip ⚡", lib:"whip", ids:k => kindOf(k) === "whip" },
+  core:{ label:"Core setups: Snap, Flip and Magnet", ids:k => ["snap","flip","magnet"].includes(kindOf(k)) },
+  advanced:{ label:"Advanced setups: the Wall and the Whip", ids:k => ["wall","whip","anchor"].includes(kindOf(k)) },
+  levels:{ label:"Reading the levels (Volume Profile 101)", ids:["hvn","hvnLevel","poke","slice","snapPlain","noLevel","twoLevels"] },
+  shapes:{ label:"Profile shapes", ids:["dshape","trend","trendFlip","trendMagnet","pMagnet","whipP","whipTrend","wallRotating"] },
+  vwap:{ label:"VWAP bands and confluence", ids:["vwapSnap","stackedSnap","tripleStack","hvnLevel"] },
+  execution:{ label:"Execution and discipline", ids:["chase","twoLosses","noLevel","dpocNear","secondSnap","thirdSnap","secondFlip","thirdFlip","dpocFade"] }
+};
+let FOCUS = null;
+(() => {
+  const f = new URLSearchParams(location.search).get("focus"), P = f && FOCUS_PACKS[f];
+  if(!P) return;
+  const ids = (typeof P.ids === "function" ? Object.keys(SC).filter(P.ids) : P.ids.filter(k => SC[k]));
+  if(ids.length) FOCUS = { key:f, label:P.label, lib:P.lib, ids, left:[], last:null };
+})();
+function focusNext(){
+  if(!FOCUS.left.length) FOCUS.left = shuffle(FOCUS.ids.filter(k => k !== FOCUS.last || FOCUS.ids.length === 1));
+  const id = FOCUS.left.shift(); FOCUS.last = id; return id;
+}
+function paintFocus(){
+  const b = $("focusBar"); if(!b) return;
+  if(!FOCUS){ b.hidden = true; return; }
+  b.hidden = false;
+  $("focusTx").textContent = `${FOCUS.label} · ${FOCUS.ids.length} situation${FOCUS.ids.length === 1 ? "" : "s"}`;
+  const l = $("focusLib"); l.hidden = !FOCUS.lib; if(FOCUS.lib) l.href = `/setup-library.html?setup=${FOCUS.lib}&from=reproom`;
+}
 function nextId(){
+  if(FOCUS) return focusNext();
   if(!BAG.left.length) BAG.left = shuffle(Object.keys(SC).filter(k => k !== BAG.last));
   // avoid the same setup twice in a row when there's another choice left
   const prev = BAG.last && SC[BAG.last] ? kindOf(BAG.last) : null;
@@ -824,6 +863,7 @@ function reviewNext(){
 }
 document.addEventListener("click", e => {
   if(e.target.closest("#startRev")){ const l = missList(); if(!l.length) return; REV = { total:l.length, cur:null, t:{}, n:0 }; paintReview(); reviewNext(); window.scrollTo({ top:0, behavior:"smooth" }); }
+  if(e.target.closest("#exitFocus")){ FOCUS = null; try{ history.replaceState(null, "", location.pathname); }catch(err){} paintFocus(); newRound(); return; }
   if(e.target.closest("#exitRev")){ REV = null; paintMode(); paintReview(); newRound(); }
 });
 function newRound(forceId){
@@ -851,7 +891,8 @@ function finish(){
   score.played++; score.pts += pts; score.streak = pts === 1 ? score.streak + 1 : 0; score.best = Math.max(score.best, score.streak);
   { const d = new Date(), day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
     if(!score.today || score.today.d !== day) score.today = { d:day, res:[] };
-    score.today.res.push(pts); }
+    score.today.res.push(pts);
+    try{ const DK = "maliktrades.sim.days.v1", dm = JSON.parse(localStorage.getItem(DK) || "{}"); dm[day] = (dm[day] || 0) + 1; localStorage.setItem(DK, JSON.stringify(dm)); }catch(e){} }
   save(); paintScore(); logResult(S.id, pts); if(REV) paintMode(); else paintReview();
   const names = { snap:"Snap 🫰", flip:"Flip 🔄", magnet:"Magnet 🧲", wall:"Wall 🧱", whip:"Whip ⚡" };
   const ks = a.set || (S.tempt && S.tempt.set), adv = ["anchor","wall","whip"].includes(ks), full = { snap:"The Snap 🫰", flip:"The Flip 🔄", magnet:"The Magnet 🧲", anchor:"The Anchor ⚓", wall:"The Wall 🧱", whip:"The Whip ⚡" };
@@ -870,6 +911,8 @@ function finish(){
     ? `The trade: ${S.trade.act} ${cap(S.trade.set)} at the level, stop ${st}, 1:1 target. It hit target.`
     : `If you'd taken the ${S.trade.act} ${cap(S.trade.set)} here with a stop of ${st}, it would have been stopped out.`;
   $("see").textContent = "Read more: " + S.sc.see;
+  { const LIBN = { snap:"Snap", flip:"Flip", magnet:"Magnet", wall:"Wall", whip:"Whip", anchor:"Anchor" };
+    $("libLink").innerHTML = ks && LIBN[ks] ? `📚 <a href="/setup-library.html?setup=${ks}&from=reproom" target="_blank" rel="noopener">See my real ${LIBN[ks]} trades in the Setup Library →</a>` : ""; }
   $("rCard").hidden = false;
   if(window.innerWidth < 900) setTimeout(() => $("cv").scrollIntoView({ behavior:"smooth", block:"start" }), 50);
   revealing = true; let lastT = 0;
@@ -885,7 +928,7 @@ $("hintBtn").addEventListener("click", () => { $("hintTx").textContent = "💡 "
 $("nextBtn").addEventListener("click", () => { if(REV) reviewNext(); else newRound(); window.scrollTo({ top:0, behavior:"smooth" }); });
 $("resetBtn").addEventListener("click", () => { score = { played:0, pts:0, streak:0, best:0 }; save(); paintScore(); MISS = {}; saveMiss(); REV = null; paintMode(); paintReview(); });
 let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(draw, 120); });
-paintScore(); paintReview();
+paintScore(); paintReview(); paintFocus();
 Promise.all(["600 12px Figtree", "600 11px Figtree", "600 10.5px Figtree"].map(f => document.fonts.load(f).catch(() => {}))).then(() => newRound());
 </script>
 </body>

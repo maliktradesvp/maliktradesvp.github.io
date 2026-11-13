@@ -196,6 +196,9 @@ section{scroll-margin-top:20px}
 .mr{position:relative;display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px;border-radius:12px;border:1px solid transparent;transition:background .15s}
 .mr:hover{background:#F7F1E6}
 .mr .lnk{position:absolute;inset:0;border-radius:12px;z-index:1}
+.pl{display:flex!important;flex-wrap:wrap;gap:6px;margin-top:7px!important;position:relative;z-index:2}
+.pl a{font-size:11.5px;font-weight:700;color:var(--teal);background:var(--tealsoft);border-radius:999px;padding:3px 9px;text-decoration:none;white-space:nowrap;line-height:1.4}
+.pl a:hover{background:var(--teal);color:#fff}
 .mr img{width:46px;border-radius:4px;box-shadow:0 4px 10px rgba(0,0,0,.18);display:block}
 .mr b{font-size:14.5px;display:block;line-height:1.25}.mr span{font-size:12.5px;color:var(--mut);display:block;margin-top:2px;line-height:1.35}
 .mr.nx{background:#FBF3E1;border-color:#E9D3A3}
@@ -492,6 +495,17 @@ const PLAY = [
   ["p4","advanced-setups","Advanced Setups","Rarer plays: The Anchor, The Wall and The Whip. Read this last."],
   [null,"chart-colours","Chart Colours","The exact colours on my charts, ready to copy."]
 ];
+const PRAC = {
+  a03:[["/simulator.html?focus=levels","\u{1F3AF} Practise reading levels"]],
+  a04:[["/simulator.html?focus=shapes","\u{1F3AF} Practise profile shapes"]],
+  a05:[["/simulator.html?focus=core","\u{1F3AF} Practise the setups"],["/setup-library.html","\u{1F4DA} Real trades"]],
+  a06:[["/simulator.html?focus=vwap","\u{1F3AF} Practise VWAP confluence"]],
+  a07:[["/simulator.html?focus=execution","\u{1F3AF} Practise execution"]],
+  a08:[["/simulator.html","\u{1F3AF} Do today's 10 rounds"]],
+  "core-setups":[["/simulator.html?focus=core","\u{1F3AF} Practise"],["/setup-library.html","\u{1F4DA} Real trades"]],
+  "advanced-setups":[["/simulator.html?focus=advanced","\u{1F3AF} Practise"]]
+};
+const pracLinks = k => PRAC[k] ? `<span class="pl">${PRAC[k].map(([h, t]) => `<a href="${h}">${t}</a>`).join("")}</span>` : "";
 const RKEY = "maliktrades.reading.v1";
 let readSet = new Set((read(RKEY) || {}).read || []);
 function saveRead(){ try{ localStorage.setItem(RKEY, JSON.stringify({ read:[...readSet] })); }catch(e){} }
@@ -505,13 +519,13 @@ function paintGuides(){
     return `<div class="mod ${d === 3 ? "done" : ""}"><div class="mh"><div><div class="mk">${k}</div><h3>${h}</h3></div><span class="ms">${d === 3 ? "✓ " : ""}${d}/3</span></div>` +
       items.map(([id, slug, title, line], j) => { const i = from + j, nx = id === nextId;
         return `<div class="mr ${nx ? "nx" : ""}"><a class="lnk" href="/${slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${title}"></a>
-          <img src="/${slug}-cover.jpg" alt="" loading="lazy"><div><b>#${String(i + 1).padStart(2,"0")} ${title}</b><span>${line}</span>${nx ? '<em class="up" style="font-style:normal">UP NEXT</em>' : ""}</div>${tick(id, title)}</div>`; }).join("") + `</div>`;
+          <img src="/${slug}-cover.jpg" alt="" loading="lazy"><div><b>#${String(i + 1).padStart(2,"0")} ${title}</b><span>${line}</span>${nx ? '<em class="up" style="font-style:normal">UP NEXT</em>' : ""}${pracLinks(id)}</div>${tick(id, title)}</div>`; }).join("") + `</div>`;
   }).join("");
   const BOOKS = PLAY.map(([id, slug, title, line]) => ({ id, slug, title, line, tag: slug === "advanced-setups" ? "Read last" : "Reference", adv: slug === "advanced-setups" }))
     .concat([{ id:null, slug:"trading-in-the-zone", title:"Trading in the Zone", line:"Book notes · Mark Douglas", tag:"Book notes", adv:false },
              { id:"p5", slug:"boom-and-bust-cycle", title:"The Boom-and-Bust Cycle", line:"Why traders make money, then give it back.", tag:"Mindset", adv:false }]);
   $("books").innerHTML = BOOKS.map(b => `<div class="bk"><a class="lnk" href="/${b.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg" alt="" loading="lazy"></a>
-    ${b.id ? tick(b.id, b.title) : ""}<span class="tg2 ${b.adv ? "adv" : ""}">${b.tag}</span><b>${b.title}</b><span>${b.line}</span></div>`).join("");
+    ${b.id ? tick(b.id, b.title) : ""}<span class="tg2 ${b.adv ? "adv" : ""}">${b.tag}</span><b>${b.title}</b><span>${b.line}</span>${pracLinks(b.slug)}</div>`).join("");
   const a = ACAD.filter(g => readSet.has(g[0])).length;
   $("acTot").innerHTML = `<b>${a} of 9 read</b> · 3 modules · read in order`;
   $("navAcad").textContent = `${a}/9`;
