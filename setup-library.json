@@ -845,5 +845,45 @@
   "images": [
    "lib-2026-11-12-gc-flip-pwval.jpg"
   ]
+ },
+ {
+  "id": "2026-11-13-gc-flip-nyvah",
+  "date": "2026-11-13",
+  "setup": "flip",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYVAH Flip after volume built above",
+  "summary": "Classic Flip set up. Price initially broke through the level and built volume above the level. I took the buy at NYVAH and it hit TP immediately.",
+  "confluences": [
+   "NYVAH"
+  ],
+  "notes": [
+   "Classic Flip set up. Price initially broke through the level and built volume above the level. I took the buy at NYVAH and it hit TP immediately."
+  ],
+  "images": [
+   "lib-2026-11-13-gc-flip-nyvah.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-13-nq-flip-nyvah",
+  "date": "2026-11-13",
+  "setup": "flip",
+  "instrument": "NQ",
+  "direction": "Short",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYVAH Flip on the retest from below",
+  "summary": "Clean Flip set up. Price broke through the level to the downside and built a lot of volume below the level and when it came back to retest NYVAH, price had a quick reaction to the downside and hit TP.",
+  "confluences": [
+   "NYVAH"
+  ],
+  "notes": [
+   "Clean Flip set up. Price broke through the level to the downside and built a lot of volume below the level and when it came back to retest NYVAH, price had a quick reaction to the downside and hit TP."
+  ],
+  "images": [
+   "lib-2026-11-13-nq-flip-nyvah.jpg"
+  ]
  }
 ]
