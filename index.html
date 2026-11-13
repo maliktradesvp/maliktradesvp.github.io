@@ -79,6 +79,28 @@ main{padding:28px 36px 40px;display:flex;flex-direction:column;gap:28px;max-widt
 .leg .tz{margin-left:auto}
 
 .g2{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.jwcard{margin-top:20px;padding:18px 22px}
+.jw{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.3fr) auto auto;gap:26px;align-items:center}
+.jws{display:flex;flex-direction:column;gap:2px}
+.jwv{font-size:38px;font-weight:700;line-height:1.1;margin-top:6px;font-variant-numeric:tabular-nums}
+.jwv.p{color:var(--win)}.jwv.n{color:var(--loss)}
+.jwsub{font-size:14px;color:var(--mut)}
+.jwb{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;height:84px}
+.jb{display:flex;flex-direction:column;align-items:center;gap:6px}
+.jbp{flex:1;width:100%;background:#F3ECDF;border-radius:8px;position:relative;overflow:hidden}
+.jbp i{position:absolute;left:24%;right:24%;bottom:0;border-radius:6px 6px 0 0;background:#C9C2B4}
+.jbp i.p{background:linear-gradient(180deg,#3FA46C,#2E8B57)}.jbp i.n{background:linear-gradient(180deg,#C9574A,#B03A2E)}
+.jb span{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--mut);text-transform:uppercase}
+.jwr{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;padding:8px 14px 8px 8px;border-radius:14px;border:1px solid var(--line);background:#FBF7EF}
+.jwr:hover{border-color:var(--teal2)}
+.jwr b{display:block;font-size:15px}.jwr span{font-size:12.5px;color:var(--mut)}
+.jwa{display:flex;flex-direction:column;gap:8px}
+.jwa .btn{justify-content:center;white-space:nowrap}
+.jw0{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.jw0 h3{font-family:var(--display);font-weight:600;font-size:28px;margin:6px 0 4px}.jw0 p{margin:0;color:var(--mut);max-width:560px}
+@media(max-width:1100px){.jw{grid-template-columns:1fr 1fr}.jwa{flex-direction:row}}
+@media(max-width:600px){.jw{grid-template-columns:1fr;gap:16px}.jwv{font-size:32px}.jwa .btn{flex:1}}
+
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 10px 30px -18px rgba(33,65,74,.25);min-width:0}
 .lab{font-size:11px;letter-spacing:.2em;font-weight:700;color:var(--teal2);text-transform:uppercase}
 .cont{display:flex;gap:22px;align-items:center;margin-top:14px}
@@ -339,6 +361,7 @@ footer p{margin:0}
     <div class="card" id="contCard"></div>
     <div class="card prac" id="pracCard"></div>
   </div>
+  <div class="card jwcard" id="jwCard"></div>
 
   <section aria-labelledby="libT">
     <div class="sh" style="align-items:flex-end"><div><div class="eyb">FROM THE SETUP LIBRARY</div><h2 id="libT">Trade of the day</h2></div><a class="r" href="/setup-library.html" style="margin-bottom:6px">Open the Setup Library →</a></div>
@@ -540,6 +563,47 @@ function paintPractice(){
     <div class="mind">${ic("brain", 18)}<span>Losing streak getting to you? Open <a href="/MalikTrades-Mindset-Tool/">Mindset</a>.</span></div>`;
 }
 paintPractice();
+
+/* ---------- My week (from the journal) ---------- */
+function paintJournal(){
+  const box = $("jwCard"); if(!box) return;
+  const j = read("maliktrades.journal.v1") || {};
+  const T = Array.isArray(j.trades) ? j.trades : [];
+  const PVJ = { NQ:20, MNQ:2, ES:50, MES:5, GC:100, MGC:10, CL:1000, MCL:100 };
+  const isoD = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  const now = new Date(), mon = new Date(now.getFullYear(), now.getMonth(), now.getDate() - ((now.getDay()+6)%7));
+  const days = [0,1,2,3,4].map(i => isoD(new Date(mon.getFullYear(), mon.getMonth(), mon.getDate()+i)));
+  const today = isoD(now), monIso = days[0];
+  if(!T.length){
+    box.innerHTML = `<div class="jw0"><div><div class="lab">Your trade journal</div><h3>Log your trades, see your edge</h3><p>Every trade in R, where your edge really is, what your mistakes cost, and a review card for #trade-review in one click.</p></div>
+      <a class="btn" href="/MalikTradesJournal/#log">Log your first trade →</a></div>`;
+    return;
+  }
+  const risk = t => (typeof t.risk === "number" && t.risk > 0) ? t.risk : (t.sl && t.qty ? t.sl * (PVJ[t.sym] ?? 1) * t.qty : null);
+  const rOf = t => { const k = risk(t); return k ? (t.pnl||0)/k : null; };
+  const wk = T.filter(t => t.date >= monIso && t.date <= today);
+  const useR = wk.some(t => rOf(t) !== null);
+  const val = ts => ts.reduce((a,t) => a + (useR ? (rOf(t) ?? 0) : (t.pnl||0)), 0);
+  const f = v => useR ? ((v>0?"+":v<0?"−":"") + Math.abs(v).toFixed(1) + "R") : ((v<0?"−":"") + "$" + Math.abs(Math.round(v)).toLocaleString("en-US"));
+  const net = val(wk), wins = wk.filter(t => (t.pnl||0) > 0).length;
+  const dv = days.map(d => { const ts = wk.filter(t => t.date === d); return { d, n: ts.length, v: val(ts) }; });
+  const mx = Math.max(1e-9, ...dv.map(x => Math.abs(x.v)));
+  const DN = ["Mon","Tue","Wed","Thu","Fri"];
+  const bars = dv.map((x,i) => `<div class="jb"><div class="jbp"><i class="${x.v>0?"p":x.v<0?"n":""}" style="height:${x.n ? Math.max(6, Math.abs(x.v)/mx*100) : 0}%"></i></div><span>${DN[i]}</span></div>`).join("");
+  const r = (j.reviews || {})[monIso] || {}, has = v => typeof v === "string" && v.trim() !== "";
+  const done = [has(r.k1), has(r.s2)&&has(r.k2), has(r.s3)&&has(r.k3), has(r.s4)&&has(r.k4), has(r.k5)&&(r.m||[]).some(x=>x&&(has(x.title)||has(x.text))), ["weak","action","goal","rule","study"].filter(k=>has((r.plan||{})[k])).length>=3].filter(Boolean).length;
+  const C = 2*Math.PI*26;
+  const tone = net > 0 ? "p" : net < 0 ? "n" : "";
+  box.innerHTML = `<div class="jw">
+    <div class="jws"><div class="lab">Your journal · this week</div>
+      <b class="jwv ${tone}">${wk.length ? f(net) : "—"}</b>
+      <span class="jwsub">${wk.length ? `${wk.length} trade${wk.length===1?"":"s"} · ${Math.round(wins/wk.length*100)}% won` : "No trades logged this week yet"}</span></div>
+    <div class="jwb">${bars}</div>
+    <a class="jwr" href="/MalikTradesJournal/#week"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="#EAE1D1" stroke-width="6"/><circle cx="32" cy="32" r="26" fill="none" stroke="#B4893A" stroke-width="6" stroke-linecap="round" stroke-dasharray="${(C*done/6).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 32 32)"/><text x="32" y="38" text-anchor="middle" font-family="Source Sans 3, system-ui, sans-serif" font-weight="700" font-size="16" fill="#1B2729">${done}/6</text></svg><div><b>Weekly review</b><span>${done===6?"Done. Post your card.":done?`${6-done} section${6-done===1?"":"s"} to go`:"Not started"}</span></div></a>
+    <div class="jwa"><a class="btn" href="/MalikTradesJournal/#log">+ Log a trade</a><a class="btn ghost" href="/MalikTradesJournal/">Open journal →</a></div>
+  </div>`;
+}
+paintJournal();
 
 /* ---------- Setup Library preview ---------- */
 const SET = { snap:"Snap", flip:"Flip", magnet:"Magnet", anchor:"Anchor", wall:"The Wall", whip:"The Whip" };
