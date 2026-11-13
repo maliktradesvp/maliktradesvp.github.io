@@ -885,5 +885,25 @@
   "images": [
    "lib-2026-11-13-nq-flip-nyvah.jpg"
   ]
+ },
+ {
+  "id": "2026-11-13-gc-snap-onpoc",
+  "date": "2026-11-13",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "ONPOC Snap from above",
+  "summary": "Bread and butter Snap on Gold. Price came down from above and when it tapped the ONPOC, it shot up to TP, easy in and out trade.",
+  "confluences": [
+   "ONPOC"
+  ],
+  "notes": [
+   "Bread and butter Snap on Gold. Price came down from above and when it tapped the ONPOC, it shot up to TP, easy in and out trade."
+  ],
+  "images": [
+   "lib-2026-11-13-gc-snap-onpoc.jpg"
+  ]
  }
 ]
