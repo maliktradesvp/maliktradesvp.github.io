@@ -15,6 +15,7 @@
     { label: "Mindset",       href: "/MalikTrades-Mindset-Tool/" },
     { label: "Setup Library", href: "/setup-library.html" },
     { label: "The Rep Room",  href: "/simulator.html" },
+    { label: "Hall of Fame",  href: "/hall-of-fame.html" },
     { label: "Guides",        href: "/#guides" }
   ];
 

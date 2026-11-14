@@ -387,6 +387,7 @@ footer p{margin:0}
     <a href="#playbook" data-ic="layers">The Playbook</a>
     <a href="/setup-library.html" data-ic="grid">Setup Library</a>
     <a href="/simulator.html" data-ic="target">The Rep Room</a>
+    <a href="/hall-of-fame.html" data-ic="trophy">Hall of Fame</a>
   </nav>
   <nav class="nav" aria-label="Tools"><div class="navh">TOOLS</div>
     <a href="/MalikTradesJournal/" data-ic="pen">Journal</a>
@@ -495,7 +496,8 @@ const IC = {
   calc:'<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 7h6M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/>',
   brain:'<path d="M12 5a3 3 0 0 0-5.5 1.5A3 3 0 0 0 5 12a3 3 0 0 0 2 5 3 3 0 0 0 5 1z"/><path d="M12 5a3 3 0 0 1 5.5 1.5A3 3 0 0 1 19 12a3 3 0 0 1-2 5 3 3 0 0 1-5 1z"/>',
   chat:'<path d="M5 5h14v10H9l-4 4z"/>',
-  play:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/>'
+  play:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/>',
+  trophy:'<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5v1a3 3 0 0 0 3 3M16 6h3v1a3 3 0 0 1-3 3"/><path d="M12 13v3M9 20h6M10 16h4v4h-4z"/>'
 };
 const ic = (n, s = 20) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
 document.querySelectorAll("[data-ic]").forEach(el => el.insertAdjacentHTML("afterbegin", ic(el.dataset.ic, el.closest(".tabs") ? 22 : el.closest(".disc") || el.closest(".social") ? 16 : el.closest(".tk") ? 22 : 19)));
