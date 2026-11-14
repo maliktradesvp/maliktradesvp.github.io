@@ -121,7 +121,7 @@ function render(){
   if(!PEOPLE.length){ g.innerHTML = `<p class="empty">The first certificates are going up soon.</p>`; return; }
   const list = PEOPLE.slice().sort((a, b) => String(latest(b).date).localeCompare(String(latest(a).date)));
   g.innerHTML = list.map(card).join("") +
-    `<div class="soon"><span class="t">🏆</span><b>You're next.</b><p>Get funded or take a payout, post your certificate in #funded on the Discord, and you go up on the wall.</p></div>`;
+    `<div class="soon"><span class="t">🏆</span><b>You're next.</b><p>Study the framework. Do the tasks, every single day. Execute your setups with discipline, win or lose. Nobody on this wall got lucky. They put the work in, and so can you. Keep showing up, and your certificate goes up here next.</p></div>`;
 }
 let lastFocus = null;
 function open(id){
