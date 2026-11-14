@@ -19,6 +19,8 @@
     trophy:'<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5v1a3 3 0 0 0 3 3M16 6h3v1a3 3 0 0 1-3 3"/><path d="M12 13v3M9 20h6M10 16h4v4h-4z"/>'
   };
   const ic = (n, s) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
+  const COL = {home:'#F3C9A0',book:'#86C1EA',layers:'#8FD3AE',grid:'#B9A6F2',target:'#F29C8B',trophy:'#F5C451',pen:'#7FD1C3',card:'#9DB8F5',chart:'#F2B86B',calc:'#EE9FC0',brain:'#C6A8EE'}, COLD = {home:'#B8692F',book:'#2F78AE',grid:'#6A4FC2',target:'#C9503A',calc:'#B83E73'};
+  const tile = (n, s, dark) => { const c = (dark ? COLD[n] : 0) || COL[n] || "#C3D1CE"; return `<span class="mt-ti" style="color:${c};background:${(dark ? COL[n] : c) || c}${dark ? "40" : "26"}">${ic(n, s)}</span>`; };
   const page = document.body.dataset.page || "";
   let read = 0; try{ const r = JSON.parse(localStorage.getItem("maliktrades.reading.v1")); read = (r && r.read || []).filter(x => /^a0\d$/.test(x)).length; }catch(e){}
   const L = [
@@ -27,13 +29,13 @@
   ];
   const T = [["pen","Journal","/MalikTradesJournal/"],["card","Trade Review","/MalikTradesReview/"],["chart","Prop Tracker","/MalikTradesPropTracker/"],["calc","Prop Firm Hacking Tool","/prop-firm-tool.html"],["brain","Mindset","/MalikTrades-Mindset-Tool/"]];
   const side = `<aside class="mt-side" aria-label="Main menu"><a href="/"><img class="wm" src="/mt-wordmark.png" alt="MalikTrades"></a>
-    <nav class="mt-nav" aria-label="Learn"><div class="mt-navh">LEARN</div>${L.map(([i, id, t, h, c]) => `<a class="${id === page ? "on" : ""}" href="${h}"${id === page ? ' aria-current="page"' : ""}>${ic(i, 19)}${t}${c && !c.startsWith("<") ? `<span class="ct">${c}</span>` : c}</a>`).join("")}</nav>
-    <nav class="mt-nav" aria-label="Tools"><div class="mt-navh">TOOLS</div>${T.map(([i, t, h]) => { const on = location.pathname.startsWith(h); return `<a class="${on ? "on" : ""}" href="${h}"${on ? ' aria-current="page"' : ""}>${ic(i, 19)}${t}</a>`; }).join("")}</nav>
+    <nav class="mt-nav" aria-label="Learn"><div class="mt-navh">LEARN</div>${L.map(([i, id, t, h, c]) => `<a class="${id === page ? "on" : ""}" href="${h}"${id === page ? ' aria-current="page"' : ""}>${tile(i, 17)}${t}${c && !c.startsWith("<") ? `<span class="ct">${c}</span>` : c}</a>`).join("")}</nav>
+    <nav class="mt-nav" aria-label="Tools"><div class="mt-navh">TOOLS</div>${T.map(([i, t, h]) => { const on = location.pathname.startsWith(h); return `<a class="${on ? "on" : ""}" href="${h}"${on ? ' aria-current="page"' : ""}>${tile(i, 17)}${t}</a>`; }).join("")}</nav>
     <div class="mt-end"><div class="mt-disc"><b>Malik's Auction House</b>Ask questions, post reviews and trade the session together.<br>${DISCORD ? `<a href="${DISCORD}" target="_blank" rel="noopener">${ic("chat", 16)} Join the Discord</a>` : ""}</div>
     <a class="mt-tk" href="https://www.tiktok.com/@maliktradesvp" target="_blank" rel="noopener">${ic("play", 22)}<span><b>@maliktradesvp</b>Daily live recaps on TikTok</span></a></div></aside>`;
   const top = `<div class="mt-top"><a href="/"><img src="/mt-wordmark-teal.png" alt="MalikTrades"></a><span style="display:flex;gap:8px"><a class="b2" href="https://www.tiktok.com/@maliktradesvp" target="_blank" rel="noopener">TikTok</a>${DISCORD ? `<a class="b2" href="${DISCORD}" target="_blank" rel="noopener">Discord</a>` : ""}</span></div>`;
   const tabs = `<nav class="mt-tabs" aria-label="Quick menu">${[["home","home","Home","/"],["book","academy","Academy","/#academy"],["grid","library","Library","/setup-library.html"],["target","reproom","Rep Room","/simulator.html"],["calc","tools","Tools","/#tools"]]
-    .map(([i, id, t, h]) => `<a class="${id === page ? "on" : ""}" href="${h}">${ic(i, 22)}${t}</a>`).join("")}</nav>`;
+    .map(([i, id, t, h]) => `<a class="${id === page ? "on" : ""}" href="${h}">${tile(i, 19, true)}${t}</a>`).join("")}</nav>`;
   const app = document.createElement("div"); app.className = "mt-app";
   app.innerHTML = side + '<div class="mt-main"></div>';
   const main = app.querySelector(".mt-main");
