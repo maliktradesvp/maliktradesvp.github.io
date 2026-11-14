@@ -131,11 +131,12 @@ const SETUPS = [
   { id:"magnet", label:"Magnet", icon:"🧲", guide:{ name:"Core Setups",     href:"/core-setups.pdf" } },
   { id:"anchor", label:"Anchor", icon:"⚓", guide:{ name:"Advanced Setups", href:"/advanced-setups.pdf" } },
   { id:"wall",   label:"The Wall", icon:"🧱", guide:{ name:"Advanced Setups", href:"/advanced-setups.pdf" } },
-  { id:"whip",   label:"The Whip", icon:"⚡", guide:{ name:"Advanced Setups", href:"/advanced-setups.pdf" } }
+  { id:"whip",   label:"The Whip", icon:"⚡", guide:{ name:"Advanced Setups", href:"/advanced-setups.pdf" } },
+  { id:"guard",  label:"The Guard", icon:"💂", guide:{ name:"Advanced Setups", href:"/advanced-setups.pdf" } }
 ];
 const INSTRUMENTS = ["NQ", "ES", "GC", "CL"];
 const state = { setup:"all", inst:"all" };
-const PRACTICE = ["snap","flip","magnet","wall","whip"];
+const PRACTICE = ["snap","flip","magnet","wall","whip","guard"];
 let TRADES = [];
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));

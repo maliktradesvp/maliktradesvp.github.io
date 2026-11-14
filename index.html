@@ -556,7 +556,7 @@ const PLAY = [
   ["p1","core-setups","Core Setups","The Snap, the Flip and the Magnet."],
   ["p2","bonus-tips","Bonus Tips","Five scenarios to watch for."],
   ["p3","common-mistakes","Common Mistakes","The fourteen I see most, and how to fix them."],
-  ["p4","advanced-setups","Advanced Setups","Rarer plays: The Anchor, The Wall and The Whip. Read this last."],
+  ["p4","advanced-setups","Advanced Setups","Rarer plays: The Anchor, The Wall, The Whip and The Guard. Read this last."],
   ["p9","chart-colours","Chart Colours","The exact colours on my charts, ready to copy."]
 ];
 const PRAC = {
@@ -698,7 +698,7 @@ function paintJournal(){
 paintJournal();
 
 /* ---------- Setup Library preview ---------- */
-const SET = { snap:"Snap", flip:"Flip", magnet:"Magnet", anchor:"Anchor", wall:"The Wall", whip:"The Whip" };
+const SET = { snap:"Snap", flip:"Flip", magnet:"Magnet", anchor:"Anchor", wall:"The Wall", whip:"The Whip", guard:"The Guard" };
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
 fetch("/setup-library.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []).then(data => {
   if(!Array.isArray(data) || !data.length){ $("lib").closest("section").hidden = true; return; }

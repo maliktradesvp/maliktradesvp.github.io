@@ -143,9 +143,10 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
             <button class="b" data-set="magnet" type="button">🧲 Magnet</button>
           </div>
           <div class="grp">Advanced setups</div>
-          <div class="btns two">
+          <div class="btns three">
             <button class="b" data-set="wall" type="button">🧱 Wall</button>
             <button class="b" data-set="whip" type="button">⚡ Whip</button>
+            <button class="b" data-set="guard" type="button">💂 Guard</button>
           </div>
         </div>
         <button class="hint" id="hintBtn" type="button">Need a hint?</button>
@@ -263,7 +264,7 @@ const SC = {
     hint: "How long did price spend above the level? Did any volume build there?",
     why: "Price only poked above the {K} for a few candles. No volume built above it, so there was no acceptance. A retest without acceptance isn't a Flip, and price fell back through the level.",
     see: "Common Mistakes #04 · Core Setups" },
-  fakeMagnet: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"magnet" }, showD:true, endAtPOC:true,
+  fakeMagnet: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"magnet" }, showD:true, endAtPOC:true, sess:"notLondon",
     head:(r, s) => gen([rot(Math.round(jit(170, r)), 0, .9, .07, .14), go(4, 2.1, .05), go(5, .6, .05), go(10, "POC", .05)], s),
     tail:() => [go(10, -.7), go(8, -.5), go(14, -1.7, .07)], tailRel:true,
     zone:["VAH", 2.2, "Spiked and snapped back", "bad"],
@@ -320,12 +321,12 @@ const SC = {
     see: "VP Academy #04: Profile Shapes · Core Setups" },
 
   /* ---- more traps ---- */
-  dpocFade: { valid:false, ans:{ act:"none" }, tempt:{ act:"short", set:"snap" }, showD:true, endAtPOC:true,
+  dpocFade: { valid:false, ans:{ act:"none" }, tempt:{ act:"short", set:"snap" }, showD:true, endAtPOC:true, sess:"notLondon",
     head:(r, s) => gen([rot(Math.round(jit(190, r)), 0, .9, .07, .14), go(10, -.8, .05), go(12, "POC", .05)], s),
     tail:() => [go(10, .9, .06), go(8, .6, .05), go(14, 1.6, .07)], tailRel:true,
     prompt: () => `Price is coming up to the dPOC.`,
     hint: "Has price been accepted outside the value area today? Without that, what does the dPOC give you?",
-    why: "Price has stayed inside the value area all session, so there's been no acceptance outside it and no Magnet. On its own, the dPOC is the busiest, noisiest price of the day. We only trade it as a Magnet, so this is a pass.",
+    why: "Price has stayed inside the value area all session, so there's been no acceptance outside it and no Magnet. On its own, the dPOC is the busiest, noisiest price of the day. Outside London, we only trade it as a Magnet, so this is a pass.",
     see: "Common Mistakes #05 · Core Setups" },
   chase: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"snap" }, showD:true, key:-1.2, keySet:"low",
     head:(r, s) => gen([rot(Math.round(jit(130, r)), 1.0, .7, .07, .14), go(14, -1.2, .05), go(4, -1.12, .03), go(12, jit(0, r) - .05 + r() * .3, .06)], s),
@@ -529,8 +530,35 @@ const SC = {
     prompt: () => `It's been a strong day down and the profile is b-shaped. Price broke below the dVAL and came straight back inside value.`,
     hint: "Which way is the session trending, and which side of value is this break on?",
     why: "On a bearish trend day with a b-shaped profile, the only Whip is a break above the dVAH that whips back down, with the trend. This break was below the dVAL, against the trend, so there's no Whip and price kept going down.",
-    see: "Advanced Setups: The Whip" }
+    see: "Advanced Setups: The Whip" },
+  /* ---- The Guard (Advanced Setups, London only) ---- */
+  guard: { valid:true, ans:{ act:"long", set:"guard" }, showD:true, endAtPOC:true, sess:"London", london:1,
+    head:(r, s) => gen([rot(Math.round(jit(230, r, .08)), 0, .9, .07, .14), go(10, jit(1.7, r, .1), .06), rot(Math.round(jit(9, r)), 1.75, .2, .1, .08), go(12, 1.0, .05), go(10, "POC", .05)], s),
+    tail:() => [go(8, .9, .06), go(8, .6, .05), go(14, 1.9, .07)], tailRel:true,
+    prompt: () => `London is open and price is coming back down to the dPOC.`,
+    hint: "Which session is it, how long has the dPOC had to build, and how many times has price touched it since London opened?",
+    why: "It's the London session. The dPOC has had all of Asia, about 8 hours, to build, so it sits on a huge node and barely moves. Price moved away after the open and this is the first touch back, so it's The Guard: trade the reaction back the way price came. It isn't a Magnet, because price never built acceptance above the dVAH first.",
+    result:(act, st) => `The trade: ${act} The Guard at the dPOC, stop ${st}, 1:1 target. We're after the reaction, not a big move. It hit target.`,
+    see: "Advanced Setups: The Guard" },
+  guardThird: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"guard" }, showD:true, endAtPOC:true, sess:"London", london:1, marks:[2, 4],
+    markNote:"Rings: earlier touches of the dPOC since London opened",
+    head:(r, s) => { const h = gen([rot(Math.round(jit(230, r, .08)), 0, .9, .07, .14), go(10, jit(1.5, r, .1), .06), go(12, -.12, .03), go(10, jit(1.1, r, .1), .06), go(12, -.1, .03), go(8, .8, .05), go(10, "POC", .05)], s);
+      GT = [LAST_ENDS[2] - 1, LAST_ENDS[4] - 1]; return h; },
+    check:(head, PH, lo, hi) => { const row = (hi - lo) / 22; return GT.every(i => Math.abs(Math.min(...head.slice(i - 3, i + 4)) - PH.pocP) < row * 1.1); },
+    tail:() => [go(6, .2, .05), go(10, -.8, .06), go(14, -1.7, .07)], tailRel:true,
+    prompt: () => `London is open and price is coming back down to the dPOC.`,
+    hint: "Count how many times price has touched the dPOC since London opened, and how big each reaction was.",
+    why: "This is the third touch of the dPOC since London opened. The Guard is the first touch, when the traders who built the node defend it. Each touch after that reacts less, and by now the dPOC is just chop. Skip it.",
+    see: "Advanced Setups: The Guard · Common Mistakes #06" },
+  guardAsia: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"guard" }, showD:true, endAtPOC:true, sess:"Asia",
+    head:(r, s) => gen([rot(Math.round(jit(80, r, .1)), 0, .9, .07, .14), go(10, jit(1.5, r, .1), .06), go(12, "POC", .05)], s),
+    tail:() => [go(6, .2, .05), go(10, -.8, .06), go(14, -1.7, .07)], tailRel:true,
+    prompt: () => `Price is coming back down to the dPOC.`,
+    hint: "Which session is it? How long has the profile had to build?",
+    why: "It's the Asia session and the profile has only just started building. The dPOC hasn't had time to build a big node yet, so it moves around and price chops through it. The Guard is London only, once the dPOC has had all of Asia to build.",
+    see: "Advanced Setups: The Guard · Common Mistakes #06" }
 };
+let GT = []; // the earlier dPOC touches in guardThird
 // walk the end of a path onto the dVAL, in the same rows the chart uses
 function toVal(head){
   for(let k = 0; k < 3; k++){ const mn = Math.min(...head), mx = Math.max(...head), m = (mx - mn) * .2;
@@ -594,8 +622,9 @@ const FOCUS_PACKS = {
   magnet:{ label:"The Magnet 🧲", lib:"magnet", ids:k => kindOf(k) === "magnet" },
   wall:{ label:"The Wall 🧱", lib:"wall", ids:k => kindOf(k) === "wall" },
   whip:{ label:"The Whip ⚡", lib:"whip", ids:k => kindOf(k) === "whip" },
+  guard:{ label:"The Guard 💂", lib:"guard", ids:k => kindOf(k) === "guard" || k === "dpocFade" },
   core:{ label:"Core setups: Snap, Flip and Magnet", ids:k => ["snap","flip","magnet"].includes(kindOf(k)) },
-  advanced:{ label:"Advanced setups: the Wall and the Whip", ids:k => ["wall","whip","anchor"].includes(kindOf(k)) },
+  advanced:{ label:"Advanced setups: the Wall, the Whip and the Guard", ids:k => ["wall","whip","anchor","guard"].includes(kindOf(k)) },
   levels:{ label:"Reading the levels (Volume Profile 101)", ids:["hvn","hvnLevel","poke","slice","snapPlain","noLevel","twoLevels"] },
   shapes:{ label:"Profile shapes", ids:["dshape","trend","trendFlip","trendMagnet","pMagnet","whipP","whipTrend","wallRotating"] },
   vwap:{ label:"VWAP bands and confluence", ids:["vwapSnap","stackedSnap","tripleStack","hvnLevel"] },
@@ -640,6 +669,7 @@ function makeRound(forceId){
     const id = pick(ids), sc = SC[id], seed = Math.floor(R0() * 1e9), r = rng(seed);
     let head = sc.head(r, seed);
     const marks = sc.marks ? sc.marks.map(i => LAST_ENDS[i] - 1) : null;
+    const lon = sc.london != null ? LAST_ENDS[sc.london - 1] : null;
     // walk the last few points onto the dPOC (Magnet) or the dVAL (D-shape), measured in the same rows the chart draws
     const snapTo = which => { for(let k = 0; k < 3; k++){ const mn = Math.min(...head), mx = Math.max(...head), m = (mx - mn) * .2;
       const P = profile(head, 22, mn - m, mx + m), t = which === "poc" ? P.pocP : P.val, st = head[head.length - 1];
@@ -704,8 +734,8 @@ function makeRound(forceId){
       E = -E; T = -T; S = -S;
       if(band) band = band.map(v => -v);
     }
-    return { id, sc, pts, cut, lo, hi, qlo, qhi, prof, level, level2, level3, band, marks, zone, ans, tempt, trade, entry:E, tgt:T, sl:S, atr, stop, hitI, mirror,
-             inst: pick(INSTR), sess: pick(SESS) };
+    return { id, sc, pts, cut, lo, hi, qlo, qhi, prof, level, level2, level3, band, marks, lon, zone, ans, tempt, trade, entry:E, tgt:T, sl:S, atr, stop, hitI, mirror,
+             inst: pick(INSTR), sess: sc.sess === "notLondon" ? pick(["Asia", "NY"]) : sc.sess || pick(SESS) };
   }
   return makeRound(forceId);
 }
@@ -724,6 +754,12 @@ function draw(){
   ctx.fillStyle = "#EFEBE3"; ctx.fillRect(0, 0, W, H);
   const P = S.prof, rows = P.h.length, mx = Math.max(...P.h), step = (P.hi - P.lo) / rows, rh = Y(P.lo) - Y(P.lo + step);
   if(S.sc.showD){ ctx.fillStyle = "rgba(73,156,136,.10)"; ctx.fillRect(L, Y(P.vah), Rr - L, Y(P.val) - Y(P.vah)); }
+  if(S.lon != null){ const xl = X(S.lon);
+    ctx.fillStyle = "rgba(30,76,82,.06)"; ctx.fillRect(L, T, xl - L, B - T);
+    ctx.strokeStyle = "#B8862F"; ctx.lineWidth = 1.4; ctx.setLineDash([5, 4]); ctx.beginPath(); ctx.moveTo(xl, T); ctx.lineTo(xl, B); ctx.stroke(); ctx.setLineDash([]);
+    ctx.font = "700 10.5px Figtree, system-ui, sans-serif"; ctx.textAlign = "left";
+    ctx.fillStyle = "#1E4C52"; ctx.fillText("ASIA", L + 6, T + 13);
+    ctx.fillStyle = "#8A6A22"; ctx.textAlign = "right"; ctx.fillText("LONDON OPEN ▸", xl - 6, T + 13); ctx.textAlign = "left"; }
   // teaching annotation only after the decision
   if(revealing && S.zone){ const a0 = Math.min(S.zone.a, S.zone.b), a1 = Math.max(S.zone.a, S.zone.b);
     ctx.fillStyle = S.zone.good ? "rgba(46,139,87,.13)" : "rgba(192,57,43,.12)"; ctx.fillRect(L - 8, Y(a1), Rr - L + 8, Y(a0) - Y(a1));
@@ -820,8 +856,9 @@ const NAMES = { dshape:"D-shape Snap", flip:"The Flip", magnet:"The Magnet", hvn
   twoLevels:"Two levels close together", secondSnap:"Second Snap", thirdSnap:"Third Snap", secondFlip:"Second Flip", thirdFlip:"Third Flip",
   trendMagnet:"Trend Magnet", tripleStack:"Triple stack", noLevel:"No level", wall:"The Wall", wallDpoc:"The Wall at the dPOC",
   wallRotating:"The Wall on a rotating day", wallNoShelf:"The Wall with no shelf", vwapSnap:"Snap with a VWAP band", pMagnet:"Magnet on a P-shape",
-  whipMid:"Whip in the middle of value", whip:"The Whip", whipP:"Whip on a P-shape", whipTrend:"Whip against the trend" };
-const KIND = { snap:"Snap", flip:"Flip", magnet:"Magnet", wall:"Wall", whip:"Whip", anchor:"Anchor", none:"No trade" };
+  whipMid:"Whip in the middle of value", whip:"The Whip", whipP:"Whip on a P-shape", whipTrend:"Whip against the trend",
+  guard:"The Guard", guardThird:"Third touch of the dPOC", guardAsia:"The dPOC in Asia" };
+const KIND = { snap:"Snap", flip:"Flip", magnet:"Magnet", wall:"Wall", whip:"Whip", anchor:"Anchor", guard:"Guard", none:"No trade" };
 const MKEY = "maliktrades.sim.miss.v1";
 let MISS = (() => { try{ const m = JSON.parse(localStorage.getItem(MKEY)); return m && typeof m === "object" ? m : {}; }catch(e){ return {}; } })();
 Object.keys(MISS).forEach(k => { if(!SC[k]) delete MISS[k]; });
@@ -839,7 +876,7 @@ function paintReview(){
   c.hidden = false;
   if(!list.length){ c.className = "rev empty"; c.innerHTML = `<div class="t"><span class="h">Review my mistakes</span></div><p style="margin-bottom:0">${score.played ? "No mistakes to review. Nice work." : "Any situation you get wrong will show up here, so you can drill it until you get it right twice."}</p>`; return; }
   c.className = "rev";
-  const kindTag = id => { const k = kindOf(id), adv = ["wall","whip","anchor"].includes(k); return `<em class="${adv ? "adv" : ""}">${KIND[k] || k}</em>`; };
+  const kindTag = id => { const k = kindOf(id), adv = ["wall","whip","anchor","guard"].includes(k); return `<em class="${adv ? "adv" : ""}">${KIND[k] || k}</em>`; };
   c.innerHTML = `<div class="t"><span class="h">Review my mistakes</span><span class="n">${list.length} to review</span></div>
     <p>Replay the situations you got wrong until you get each one right twice.</p>
     <div class="ml">${list.slice(0, 5).map(id => `<div class="mi"><span>${NAMES[id] || id}${kindTag(id)}</span><small>missed ${MISS[id].miss}×</small></div>`).join("")}</div>
@@ -894,8 +931,8 @@ function finish(){
     score.today.res.push(pts);
     try{ const DK = "maliktrades.sim.days.v1", dm = JSON.parse(localStorage.getItem(DK) || "{}"); dm[day] = (dm[day] || 0) + 1; localStorage.setItem(DK, JSON.stringify(dm)); }catch(e){} }
   save(); paintScore(); logResult(S.id, pts); if(REV) paintMode(); else paintReview();
-  const names = { snap:"Snap 🫰", flip:"Flip 🔄", magnet:"Magnet 🧲", wall:"Wall 🧱", whip:"Whip ⚡" };
-  const ks = a.set || (S.tempt && S.tempt.set), adv = ["anchor","wall","whip"].includes(ks), full = { snap:"The Snap 🫰", flip:"The Flip 🔄", magnet:"The Magnet 🧲", anchor:"The Anchor ⚓", wall:"The Wall 🧱", whip:"The Whip ⚡" };
+  const names = { snap:"Snap 🫰", flip:"Flip 🔄", magnet:"Magnet 🧲", wall:"Wall 🧱", whip:"Whip ⚡", guard:"Guard 💂" };
+  const ks = a.set || (S.tempt && S.tempt.set), adv = ["anchor","wall","whip","guard"].includes(ks), full = { snap:"The Snap 🫰", flip:"The Flip 🔄", magnet:"The Magnet 🧲", anchor:"The Anchor ⚓", wall:"The Wall 🧱", whip:"The Whip ⚡", guard:"The Guard 💂" };
   const kd = $("kind"); kd.hidden = !ks; if(ks){ kd.className = "kind" + (adv ? " adv" : ""); kd.textContent = (adv ? "Advanced setup · " : "Core setup · ") + full[ks]; }
   const v = $("verdict");
   v.className = "verdict " + (pts === 1 ? "ok" : pts ? "half" : "no");
@@ -911,7 +948,7 @@ function finish(){
     ? `The trade: ${S.trade.act} ${cap(S.trade.set)} at the level, stop ${st}, 1:1 target. It hit target.`
     : `If you'd taken the ${S.trade.act} ${cap(S.trade.set)} here with a stop of ${st}, it would have been stopped out.`;
   $("see").textContent = "Read more: " + S.sc.see;
-  { const LIBN = { snap:"Snap", flip:"Flip", magnet:"Magnet", wall:"Wall", whip:"Whip", anchor:"Anchor" };
+  { const LIBN = { snap:"Snap", flip:"Flip", magnet:"Magnet", wall:"Wall", whip:"Whip", anchor:"Anchor", guard:"Guard" };
     $("libLink").innerHTML = ks && LIBN[ks] ? `📚 <a href="/setup-library.html?setup=${ks}&from=reproom" target="_blank" rel="noopener">See my real ${LIBN[ks]} trades in the Setup Library →</a>` : ""; }
   $("rCard").hidden = false;
   if(window.innerWidth < 900) setTimeout(() => $("cv").scrollIntoView({ behavior:"smooth", block:"start" }), 50);

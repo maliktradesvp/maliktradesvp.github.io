@@ -905,5 +905,28 @@
   "images": [
    "lib-2026-11-13-gc-snap-onpoc.jpg"
   ]
+ },
+ {
+  "id": "2026-11-13-es-guard",
+  "date": "2026-11-13",
+  "setup": "guard",
+  "instrument": "ES",
+  "direction": "Short",
+  "stars": 1,
+  "result": "+1R",
+  "title": "First London touch of the dPOC",
+  "summary": "ES had been trading below the dPOC all through Asia. In London, price rallied up to it for the first time and got turned away hard, dropping about 6 points, well past 1:1.",
+  "confluences": [
+   "dPOC"
+  ],
+  "notes": [
+   "Going into London, ES had been trading below the dPOC, which had been building all through the Asia session. With that much volume behind it, the dPOC was the strongest level on the chart.",
+   "In London, price rallied up to the dPOC for the first time. That's The Guard, so I went short at the dPOC with a 1:1 target.",
+   "The dPOC held. Price dropped to my target and kept going, about 6 points, well past 1:1.",
+   "Price came back up to the dPOC a second time. It reacted again, just less, and I managed to take a small profit on it. Straight after, price pushed through the dPOC. Each touch reacted less than the one before, which is why the first touch is the trade."
+  ],
+  "images": [
+   "lib-2026-11-13-es-guard.jpg"
+  ]
  }
 ]
