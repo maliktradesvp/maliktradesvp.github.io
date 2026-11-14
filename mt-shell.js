@@ -15,14 +15,15 @@
     calc:'<rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 7h6M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/>',
     brain:'<path d="M12 5a3 3 0 0 0-5.5 1.5A3 3 0 0 0 5 12a3 3 0 0 0 2 5 3 3 0 0 0 5 1z"/><path d="M12 5a3 3 0 0 1 5.5 1.5A3 3 0 0 1 19 12a3 3 0 0 1-2 5 3 3 0 0 1-5 1z"/>',
     chat:'<path d="M5 5h14v10H9l-4 4z"/>',
-    play:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/>'
+    play:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/>',
+    trophy:'<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5v1a3 3 0 0 0 3 3M16 6h3v1a3 3 0 0 1-3 3"/><path d="M12 13v3M9 20h6M10 16h4v4h-4z"/>'
   };
   const ic = (n, s) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
   const page = document.body.dataset.page || "";
   let read = 0; try{ const r = JSON.parse(localStorage.getItem("maliktrades.reading.v1")); read = (r && r.read || []).filter(x => /^a0\d$/.test(x)).length; }catch(e){}
   const L = [
     ["home","home","Home","/",""], ["book","academy","VP Academy","/#academy",`${read}/9`], ["layers","playbook","The Playbook","/#playbook",""],
-    ["grid","library","Setup Library","/setup-library.html",""], ["target","reproom","The Rep Room","/simulator.html",""]
+    ["grid","library","Setup Library","/setup-library.html",""], ["target","reproom","The Rep Room","/simulator.html",""], ["trophy","hall","Hall of Fame","/hall-of-fame.html",""]
   ];
   const T = [["pen","Journal","/MalikTradesJournal/"],["card","Trade Review","/MalikTradesReview/"],["chart","Prop Tracker","/MalikTradesPropTracker/"],["calc","Prop Firm Hacking Tool","/prop-firm-tool.html"],["brain","Mindset","/MalikTrades-Mindset-Tool/"]];
   const side = `<aside class="mt-side" aria-label="Main menu"><a href="/"><img class="wm" src="/mt-wordmark.png" alt="MalikTrades"></a>

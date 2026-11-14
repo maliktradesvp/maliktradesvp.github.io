@@ -367,6 +367,13 @@ footer p{margin:0}
   .tabs a.on{color:var(--teal)}.tabs a.on svg{color:var(--gold)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.hof{display:flex;align-items:center;gap:16px;margin:16px 0 0;padding:14px 18px;border-radius:18px;background:linear-gradient(100deg,#FBF1DC,#FFFCF6 60%);border:1px solid #EAD7AE;text-decoration:none;color:var(--ink);box-shadow:0 12px 30px -26px rgba(30,50,55,.5);transition:transform .15s,box-shadow .15s}
+.hof:hover{transform:translateY(-2px);box-shadow:0 18px 34px -24px rgba(30,50,55,.55)}
+.hof-ic{font-size:26px;width:46px;height:46px;border-radius:14px;background:#F3DFB2;display:grid;place-items:center;flex:none}
+.hof-tx{flex:1;min-width:0}.hof-k{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#8A6A22}
+.hof-tx b{font-size:15px}
+.hof-go{font-weight:700;font-size:14px;color:var(--teal);white-space:nowrap}
+@media (max-width:700px){.hof{flex-wrap:wrap;gap:10px 14px}.hof-go{width:100%;padding-left:60px}}
 </style>
 </head>
 <body>
@@ -415,6 +422,12 @@ footer p{margin:0}
     </div>
     <div class="leg"><span><i style="background:rgba(242,236,225,.4)"></i>Asia 7 PM–2 AM</span><span><i style="background:var(--gold2)"></i>London 2:00–9:30 AM</span><span><i style="background:#F2ECE1"></i>New York 9:30 AM–4 PM</span><span class="tz" id="tzNote">All times EST</span></div>
   </div>
+
+  <a class="hof" href="/hall-of-fame.html">
+    <span class="hof-ic">🏆</span>
+    <span class="hof-tx"><span class="hof-k">Hall of Fame</span><b>Members who followed the framework, got funded and got paid.</b></span>
+    <span class="hof-go">See the Hall of Fame →</span>
+  </a>
 
   <div class="g2">
     <div class="card" id="contCard"></div>

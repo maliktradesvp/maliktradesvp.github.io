@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="MalikTrades members who followed the framework, got funded and got paid.">
+<meta property="og:title" content="Hall of Fame · MalikTrades">
+<meta property="og:description" content="Members who followed the framework, got funded and got paid.">
+<meta name="theme-color" content="#21414A">
+<title>Hall of Fame · MalikTrades</title>
+<link rel="stylesheet" href="/mt-shell.css">
+<style>
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.55}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:0}
+main.hf{max-width:1260px;padding:40px 44px 70px}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.hero{background:radial-gradient(120% 140% at 100% 0%,#2F5A60 0%,#21414A 45%,#1A333A 100%);color:#fff;border-radius:24px;padding:24px 30px 30px;box-shadow:0 24px 50px -30px rgba(20,40,45,.7);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-60px;top:-110px;width:380px;height:380px;border-radius:50%;background:radial-gradient(closest-side,rgba(226,194,122,.24),transparent);pointer-events:none}
+.eyb{font-size:11px;letter-spacing:.24em;color:var(--gold2);font-weight:700;text-transform:uppercase;position:relative;z-index:1}
+.hero h1{font-size:56px;line-height:1.02;margin:18px 0 10px;position:relative;z-index:1}
+.hero p{margin:0;color:#C3D1CE;max-width:600px;font-size:16px;position:relative;z-index:1}
+.sech{display:flex;justify-content:space-between;align-items:end;margin:34px 2px 16px;gap:12px;flex-wrap:wrap}
+.sech h2{margin:0;font-size:32px;line-height:1.1}
+.sech p{margin:4px 0 0;color:var(--mut);font-size:15px}
+.sech span{font-size:13.5px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.fc{display:flex;flex-direction:column;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 12px 30px -26px rgba(30,50,55,.5);cursor:pointer;padding:0;font:inherit;transition:transform .15s,box-shadow .15s,border-color .15s}
+.fc:hover{transform:translateY(-3px);box-shadow:0 20px 38px -26px rgba(30,50,55,.6);border-color:#D5C8B2}
+.fc.founder{border-color:#E3CF9F}
+.im{position:relative;aspect-ratio:3/2;background:#0E1416;overflow:hidden}
+.im img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.im .tall{object-fit:cover;object-position:top}
+.rib{position:absolute;top:12px;left:12px;font-size:11px;letter-spacing:.12em;font-weight:700;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:var(--teal);color:#fff;box-shadow:0 6px 14px -8px rgba(0,0,0,.6)}
+.rib.pay{background:#C79A44}
+.more{position:absolute;bottom:10px;right:10px;font-size:11.5px;font-weight:700;color:#fff;background:rgba(14,20,22,.7);border-radius:999px;padding:4px 9px}
+.fb{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.who{display:flex;align-items:center;gap:11px}
+.av{width:44px;height:44px;flex:none;border-radius:50%;background:var(--tealsoft);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:21px;color:var(--teal)}
+.fc.founder .av{background:#F3DFB2;color:#8A6A22}
+.who b{display:block;font-size:16.5px;line-height:1.2}
+.who span{font-size:13px;color:var(--mut)}
+.ver{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--win);background:var(--winbg);border-radius:999px;padding:4px 9px;white-space:nowrap}
+.ms{display:flex;flex-direction:column;gap:7px;margin-top:14px}
+.m{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700;border-radius:12px;padding:8px 11px;background:var(--tealsoft);color:var(--teal)}
+.m.pay{background:#F6EBD3;color:#7A5A1C}
+.m small{margin-left:auto;font-weight:600;font-size:12.5px;opacity:.8;white-space:nowrap}
+.m.next{background:none;border:1.5px dashed #D5C8B2;color:var(--mut);font-weight:600}
+.soon{border:2px dashed #D5C8B2;border-radius:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:30px 26px;background:#FBF6EC;min-height:260px}
+.soon .t{font-size:34px}
+.soon b{font-family:var(--display);font-size:28px;font-weight:600;margin-top:4px}
+.soon p{color:var(--mut);font-size:15px;margin:6px 0 0;max-width:290px}
+.note{margin:18px 2px 0;font-size:13px;color:var(--mut)}
+.empty{grid-column:1/-1;color:var(--mut)}
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(14,22,24,.82);backdrop-filter:blur(3px);display:grid;place-items:center;padding:16px;z-index:100}
+.lb[hidden]{display:none}
+.lbx{background:var(--card);border-radius:22px;max-width:980px;width:100%;max-height:calc(100% - 32px);overflow:auto;padding:22px;position:relative}
+.lbx h2{margin:0 40px 2px 0;font-size:30px}
+.lbx .sub{color:var(--mut);font-size:14px;margin:0 0 16px}
+.lbx figure{margin:0 0 18px}
+.lbx figure img{width:100%;height:auto;border-radius:12px;display:block;background:#0E1416}
+.lbx figure img.tall{max-width:520px;margin:0 auto}
+.lbx figcaption{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;font-weight:700}
+.lbx figcaption small{color:var(--mut);font-weight:600}
+.x{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:18px;line-height:1}
+@media (max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){main.hf{padding:18px 16px 96px}.hero{padding:20px 20px 24px;border-radius:20px}.hero h1{font-size:42px}}
+@media (max-width:640px){.grid{grid-template-columns:1fr}.lbx{padding:16px}.lbx h2{font-size:24px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body data-page="hall">
+<main class="hf">
+  <div class="hero">
+    <div class="eyb">Results · Malik's Auction House</div>
+    <h1>Hall of Fame 🏆</h1>
+    <p>Members who followed the framework, did the work, and got funded or paid. Every card is backed by a real certificate or payout.</p>
+  </div>
+
+  <div class="sech"><div><h2>On the wall</h2><p>One card per trader. Every new milestone gets added as it happens. Tap a card to see the proof.</p></div><span>Newest first</span></div>
+  <div class="grid" id="grid"></div>
+  <p class="note">Names are shortened and full names are blurred on certificates for privacy.</p>
+</main>
+
+<div class="lb" id="lb" hidden>
+  <div class="lbx" role="dialog" aria-modal="true" aria-labelledby="lbT">
+    <button class="x" id="lbX" type="button" aria-label="Close">✕</button>
+    <h2 id="lbT"></h2>
+    <p class="sub" id="lbS"></p>
+    <div id="lbB"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const fmt = d => { const [y, m, dd] = String(d).split("-").map(Number); return y ? `${dd} ${MON[m - 1]} ${y}` : esc(d); };
+const ico = t => t === "payout" ? "💸" : "🏆";
+let PEOPLE = [];
+const latest = p => p.items.slice().sort((a, b) => String(b.date).localeCompare(String(a.date)))[0];
+const isTall = src => /payout-\d|email|plane/.test(src) && !/anon/.test(src);
+
+function card(p){
+  const L = latest(p), its = p.items.slice().sort((a, b) => String(a.date).localeCompare(String(b.date)));
+  const hasPay = p.items.some(i => i.type === "payout");
+  const av = p.anon ? "?" : esc(p.name.trim()[0]);
+  return `<button class="fc${p.founder ? " founder" : ""}" type="button" data-id="${esc(p.id)}" aria-label="See ${esc(p.name)}'s certificates">
+    <div class="im"><img src="/${esc(L.img)}" alt="" loading="lazy"${isTall(L.img) ? ' class="tall"' : ""}><span class="rib${L.type === "payout" ? " pay" : ""}">${ico(L.type)} ${L.type === "payout" ? "Paid out" : "Funded"}</span>${p.items.length > 1 ? `<span class="more">+${p.items.length - 1} more</span>` : ""}</div>
+    <div class="fb">
+      <div class="who"><span class="av">${av}</span><div><b>${esc(p.name)}</b><span>${esc(p.role || "")}</span></div><span class="ver">✓ Verified</span></div>
+      <div class="ms">${its.map(i => `<span class="m${i.type === "payout" ? " pay" : ""}">${ico(i.type)} ${esc(i.label)}<small>${fmt(i.date)}</small></span>`).join("")}
+        ${!hasPay && !p.founder ? `<span class="m next">Next: first payout</span>` : ""}</div>
+    </div></button>`;
+}
+function render(){
+  const g = $("grid");
+  if(!PEOPLE.length){ g.innerHTML = `<p class="empty">The first certificates are going up soon.</p>`; return; }
+  const list = PEOPLE.slice().sort((a, b) => String(latest(b).date).localeCompare(String(latest(a).date)));
+  g.innerHTML = list.map(card).join("") +
+    `<div class="soon"><span class="t">🏆</span><b>You're next.</b><p>Get funded or take a payout, post your certificate in #funded on the Discord, and you go up on the wall.</p></div>`;
+}
+let lastFocus = null;
+function open(id){
+  const p = PEOPLE.find(x => x.id === id); if(!p) return;
+  lastFocus = document.activeElement;
+  $("lbT").textContent = p.name;
+  $("lbS").textContent = p.role || "";
+  const its = p.items.slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  $("lbB").innerHTML = its.map(i => `<figure><img src="/${esc(i.img)}" alt="${esc(i.label)} certificate"${isTall(i.img) ? ' class="tall"' : ""}><figcaption>${ico(i.type)} ${esc(i.label)} <small>· ${esc(i.firm || "")} · ${fmt(i.date)}</small></figcaption></figure>`).join("");
+  $("lb").hidden = false; document.body.style.overflow = "hidden"; $("lbX").focus();
+}
+function close(){ $("lb").hidden = true; document.body.style.overflow = ""; if(lastFocus) lastFocus.focus(); }
+$("grid").addEventListener("click", e => { const c = e.target.closest(".fc"); if(c) open(c.dataset.id); });
+$("lbX").onclick = close;
+$("lb").addEventListener("click", e => { if(e.target.id === "lb") close(); });
+document.addEventListener("keydown", e => { if(e.key === "Escape" && !$("lb").hidden) close(); });
+fetch("/hall-of-fame.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []).then(d => { PEOPLE = Array.isArray(d) ? d : []; render(); });
+})();
+</script>
+<script src="/mt-shell.js"></script>
+</body>
+</html>

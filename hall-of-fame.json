@@ -1,0 +1,67 @@
+[
+ {
+  "id": "matthew",
+  "name": "Matthew T.",
+  "role": "Member",
+  "items": [
+   {
+    "type": "funded",
+    "label": "Funded · 50K",
+    "firm": "Apex Trader Funding",
+    "date": "2026-11-13",
+    "img": "hof-matthew-funded-2026-11-13.jpg"
+   }
+  ]
+ },
+ {
+  "id": "joshua",
+  "name": "Joshua N.",
+  "role": "Member",
+  "items": [
+   {
+    "type": "payout",
+    "label": "Payout · S$633.83",
+    "firm": "Apex Trader Funding",
+    "date": "2026-10-07",
+    "img": "hof-joshua-payout-2026-10-07.jpg"
+   },
+   {
+    "type": "funded",
+    "label": "Funded · 50K",
+    "firm": "Apex Trader Funding",
+    "date": "2026-11-12",
+    "img": "hof-joshua-funded-2026-11-12.jpg"
+   }
+  ]
+ },
+ {
+  "id": "anon-1",
+  "name": "Anonymous member",
+  "role": "Asked to stay anonymous",
+  "anon": true,
+  "items": [
+   {
+    "type": "payout",
+    "label": "Payout · $1,000",
+    "firm": "Apex Trader Funding",
+    "date": "2026-10-02",
+    "img": "hof-anon-payout-2026-10-02.jpg"
+   }
+  ]
+ },
+ {
+  "id": "anon-2",
+  "name": "Anonymous member",
+  "role": "Asked to stay anonymous",
+  "anon": true,
+  "items": [
+   {
+    "type": "funded",
+    "label": "Funded · 50K",
+    "firm": "Apex Trader Funding",
+    "date": "2026-09-28",
+    "img": "hof-anon-funded-2026-09-28.jpg"
+   }
+  ]
+ }
+]
