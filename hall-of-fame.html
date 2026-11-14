@@ -8,6 +8,13 @@
 <meta property="og:description" content="Members who followed the framework, got funded and got paid.">
 <meta name="theme-color" content="#21414A">
 <title>Hall of Fame · MalikTrades</title>
+<meta property="og:image" content="https://maliktradesvp.github.io/og-hall-of-fame.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://maliktradesvp.github.io/hall-of-fame.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MalikTrades">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/mt-shell.css">
 <style>
 body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.55}
@@ -50,6 +57,8 @@ button{font-family:inherit;color:inherit}
 .soon .t{font-size:34px}
 .soon b{font-family:var(--display);font-size:28px;font-weight:600;margin-top:4px}
 .soon p{color:var(--mut);font-size:15px;margin:6px 0 0;max-width:290px}
+.soon .join{margin-top:16px;display:inline-block;background:var(--teal);color:#fff;font-weight:700;font-size:14px;border-radius:11px;padding:10px 16px;text-decoration:none}
+.soon .join:hover{background:var(--teal2)}
 .note{margin:18px 2px 0;font-size:13px;color:var(--mut)}
 .empty{grid-column:1/-1;color:var(--mut)}
 /* lightbox */
@@ -121,7 +130,7 @@ function render(){
   if(!PEOPLE.length){ g.innerHTML = `<p class="empty">The first certificates are going up soon.</p>`; return; }
   const list = PEOPLE.slice().sort((a, b) => String(latest(b).date).localeCompare(String(latest(a).date)));
   g.innerHTML = list.map(card).join("") +
-    `<div class="soon"><span class="t">🏆</span><b>You're next.</b><p>Study the framework. Do the tasks, every single day. Execute your setups with discipline, win or lose. Nobody on this wall got lucky. They put the work in, and so can you. Keep showing up, and your certificate goes up here next.</p></div>`;
+    `<div class="soon"><span class="t">🏆</span><b>You're next.</b><p>Study the framework. Do the tasks, every single day. Execute your setups with discipline, win or lose. Nobody on this wall got lucky. They put the work in, and so can you. Keep showing up, and your certificate goes up here next.</p><a class="join" href="https://discord.gg/krJB5Dnqn" target="_blank" rel="noopener">Join Malik's Auction House →</a></div>`;
 }
 let lastFocus = null;
 function open(id){

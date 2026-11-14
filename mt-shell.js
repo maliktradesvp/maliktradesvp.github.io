@@ -2,7 +2,7 @@
    include /mt-shell.css and this script, and the page content gets wrapped in the sidebar layout. */
 (function(){
   "use strict";
-  const DISCORD = ""; // paste your Discord invite link here to show the Join buttons
+  const DISCORD = "https://discord.gg/krJB5Dnqn"; // Discord invite link for the Join buttons
   const IC = {
     home:'<path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/>',
     book:'<path d="M5 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h9"/>',
