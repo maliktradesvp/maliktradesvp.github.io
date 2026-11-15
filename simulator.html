@@ -48,6 +48,8 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
 .btns{display:grid;gap:8px;margin-top:4px}
 .btns.three{grid-template-columns:1fr 1fr 1fr}
 .btns.two{grid-template-columns:1fr 1fr}
+.btns.four{grid-template-columns:repeat(4,1fr)}
+@media (max-width:520px){.btns.four{grid-template-columns:1fr 1fr}}
 .grp{font-size:12px;font-weight:700;color:var(--mut);margin:12px 0 6px;display:flex;align-items:center;gap:8px}
 .grp:after{content:"";flex:1;height:1px;background:var(--line)}
 .b{font:inherit;cursor:pointer;border:1px solid var(--line);background:#FBF7EF;color:var(--ink);border-radius:11px;padding:11px 8px;font-weight:700;font-size:15px;transition:background .15s,border-color .15s}
@@ -152,7 +154,8 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
             <button class="b" data-set="magnet" type="button">🧲 Magnet</button>
           </div>
           <div class="grp">Advanced setups</div>
-          <div class="btns three">
+          <div class="btns four">
+            <button class="b" data-set="anchor" type="button">⚓ Anchor</button>
             <button class="b" data-set="wall" type="button">🧱 Wall</button>
             <button class="b" data-set="whip" type="button">⚡ Whip</button>
             <button class="b" data-set="guard" type="button">💂 Guard</button>
@@ -565,9 +568,66 @@ const SC = {
     prompt: () => `Price is coming back down to the dPOC.`,
     hint: "Which session is it? How long has the profile had to build?",
     why: "It's the Asia session and the profile has only just started building. The dPOC hasn't had time to build a big node yet, so it moves around and price chops through it. The Guard is London only, once the dPOC has had all of Asia to build.",
-    see: "Advanced Setups: The Guard · Common Mistakes #06" }
+    see: "Advanced Setups: The Guard · Common Mistakes #06" },
+  /* ---- The Anchor (Advanced Setups): a Magnet at the old dPOC node ---- */
+  anchor: { valid:true, ans:{ act:"long", set:"anchor" }, showD:true,
+    head:(r, s) => gen([rot(Math.round(jit(120, r, .06)), 1.2, .28, .07, .12), go(10, 0, .05), rot(Math.round(jit(135, r, .06)), 0, .28, .07, .12), go(12, 2.3, .05), rot(Math.round(jit(60, r)), 2.5, .35, .1, .12), go(14, 1.2, .05)], s),
+    check:(head, PH, lo, hi) => anchorShape(head, PH, lo, hi, "big"),
+    tail:() => [go(10, 1.0, .05), go(8, .8, .05), go(14, 2.6, .07)], tailRel:true,
+    zone:["VAH", 3.0, "Acceptance above the dVAH", "ok"],
+    prompt: () => `Price is pulling back to the big node above the dPOC.`,
+    hint: "Where did the dPOC start the day? How big is that node compared with the one the dPOC line sits on now?",
+    why: "Price built acceptance above the dVAH, so this is a Magnet situation. The dPOC line only recently shifted down to the new node, and the old dPOC node above it holds about as much volume. We trade volume, not the line, so the old node is still fair value. That's The Anchor: take the continuation the way price broke.",
+    result:(act, st) => `The trade: ${act} The Anchor at the old dPOC node, stop ${st}, 1:1 target. It hit target.`,
+    see: "Advanced Setups: The Anchor" },
+  anchorSmall: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"anchor" }, showD:true,
+    head:(r, s) => gen([rot(Math.round(jit(42, r, .1)), 1.2, .25, .07, .12), go(10, 0, .05), rot(Math.round(jit(150, r, .06)), 0, .3, .07, .12), go(12, 2.3, .05), rot(Math.round(jit(60, r)), 2.5, .35, .1, .12), go(14, 1.2, .05)], s),
+    check:(head, PH, lo, hi) => anchorShape(head, PH, lo, hi, "small"),
+    tail:() => [go(6, .2, .05), go(10, -.8, .06), go(14, -1.7, .07)], tailRel:true,
+    zone:["VAH", 3.0, "Acceptance above the dVAH", "ok"],
+    prompt: () => `Price is pulling back to the node above the dPOC.`,
+    hint: "Compare the node price is pulling back to with the one the dPOC line sits on. Are they about the same size?",
+    why: "Price did build acceptance above the dVAH, but the node it's pulling back to is much smaller than the dPOC node. That's just an HVN, not fair value, so it isn't an Anchor. The only Magnet entry here is the dPOC itself.",
+    see: "Advanced Setups: The Anchor" },
+  anchorNoAccept: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"anchor" }, showD:true,
+    head:(r, s) => gen([rot(Math.round(jit(112, r, .05)), 1.2, .28, .07, .12), go(10, 0, .05), rot(Math.round(jit(140, r, .05)), 0, .28, .07, .12), go(10, 2.2, .05), go(10, 1.2, .05)], s),
+    check:(head, PH, lo, hi) => anchorShape(head, PH, lo, hi, "big"),
+    tail:() => [go(6, .2, .05), go(10, -.9, .06), go(16, -2.6, .07)], tailRel:true,
+    zone:["VAH", 2.5, "Spiked and snapped back", "bad"],
+    prompt: () => `Price is pulling back to the big node above the dPOC.`,
+    hint: "When price went above the dVAH, did it stay there and build volume?",
+    why: "The old dPOC node is big enough, but price only spiked above the dVAH and came straight back. There was no acceptance, so there's no Magnet. The Anchor is a Magnet trade at the old node, so no Magnet means no Anchor either.",
+    see: "Advanced Setups: The Anchor · Common Mistakes" },
+  /* ---- The Guard, written as a short ---- */
+  guardShort: { valid:true, ans:{ act:"short", set:"guard" }, showD:true, endAtPOC:true, sess:"London", london:1, noMirror:true,
+    head:(r, s) => gen([rot(Math.round(jit(230, r, .08)), 0, .9, .07, .14), go(10, -jit(1.7, r, .1), .06), rot(Math.round(jit(9, r)), -1.75, .2, .1, .08), go(12, -1.0, .05), go(10, "POC", .05)], s),
+    tail:() => [go(8, -.9, .06), go(8, -.6, .05), go(14, -1.9, .07)], tailRel:true,
+    prompt: () => `London is open and price is rallying back up to the dPOC.`,
+    hint: "Which session is it, how long has the dPOC had to build, and how many times has price touched it since London opened?",
+    why: "It's the London session. The dPOC has had all of Asia, about 8 hours, to build, so it sits on a huge node and barely moves. London pushed price below it, and this is the first touch back, so it's The Guard: short the reaction back the way price came. It isn't a Magnet, because price never built acceptance below the dVAL first.",
+    result:(act, st) => `The trade: ${act} The Guard at the dPOC, stop ${st}, 1:1 target. We're after the reaction, not a big move. It hit target.`,
+    see: "Advanced Setups: The Guard" },
+  /* ---- dPOC between the entry and the 1:1 target ---- */
+  dpocBlock: { valid:false, ans:{ act:"none" }, tempt:{ act:"long", set:"snap" }, showD:true, key:-.26, keySet:"low",
+    head:(r, s) => gen([rot(Math.round(jit(55, r)), 1.3, .3, .08, .12), go(12, 0, .05), rot(Math.round(jit(170, r)), 0, .45, .08, .14), go(14, -.26, .05)], s),
+    check:(head, PH) => { const cs = candles(head).slice(-20), atr = cs.reduce((a, x) => a + (x.h - x.l), 0) / cs.length, d = PH.pocP - head[head.length - 1];
+      return d > .35 * atr && d < .85 * atr && d < .26 && d > .1; },
+    tail:() => [go(10, .24, .04), go(8, .12, .04), go(12, -.55, .05), go(12, -.95, .06)], tailRel:true,
+    prompt: k => `Price is coming down to the ${k}.`,
+    hint: "Where would your 1:1 target be? What's sitting between your entry and that target?",
+    why: "Your 1:1 target is above the dPOC, so the dPOC sits right in the way. It's the busiest price of the day, and price often stalls or turns there before it reaches your target. You can have the dPOC as your target, but it's still a no trade: that target is less than 1:1 for the same risk.",
+    see: "Core Setups: The Snap" }
 };
 let GT = []; // the earlier dPOC touches in guardThird
+// the Anchor: the dPOC sits on the newer node, and price ends on the old dPOC node above it
+function anchorShape(head, PH, lo, hi, size){
+  const st = (hi - lo) / 22, end = head[head.length - 1], i = Math.floor((end - lo) / st), H = k => PH.h[k] || 0;
+  if(i <= PH.poc + 3 || i >= 21) return false;
+  const near = k => H(k - 1) + H(k) + H(k + 1), old = Math.max(near(i - 1), near(i), near(i + 1)), top = near(PH.poc);
+  const dip = Math.min(...PH.h.slice(PH.poc + 2, i - 1));
+  if(Math.abs(PH.pocP) > .35 || PH.vah > 1.9 || dip > .5 * H(PH.poc)) return false;
+  return size === "big" ? old >= .72 * top && i <= PH.z : old <= .5 * top;
+}
 // walk the end of a path onto the dVAL, in the same rows the chart uses
 function toVal(head){
   for(let k = 0; k < 3; k++){ const mn = Math.min(...head), mx = Math.max(...head), m = (mx - mn) * .2;
@@ -632,12 +692,13 @@ const FOCUS_PACKS = {
   wall:{ label:"The Wall 🧱", lib:"wall", ids:k => kindOf(k) === "wall" },
   whip:{ label:"The Whip ⚡", lib:"whip", ids:k => kindOf(k) === "whip" },
   guard:{ label:"The Guard 💂", lib:"guard", ids:k => kindOf(k) === "guard" || k === "dpocFade" },
+  anchor:{ label:"The Anchor ⚓", lib:"anchor", ids:k => kindOf(k) === "anchor" || k === "fakeMagnet" },
   core:{ label:"Core setups: Snap, Flip and Magnet", ids:k => ["snap","flip","magnet"].includes(kindOf(k)) },
-  advanced:{ label:"Advanced setups: the Wall, the Whip and the Guard", ids:k => ["wall","whip","anchor","guard"].includes(kindOf(k)) },
+  advanced:{ label:"Advanced setups: the Anchor, the Wall, the Whip and the Guard", ids:k => ["wall","whip","anchor","guard"].includes(kindOf(k)) },
   levels:{ label:"Reading the levels (Volume Profile 101)", ids:["hvn","hvnLevel","poke","slice","snapPlain","noLevel","twoLevels"] },
   shapes:{ label:"Profile shapes", ids:["dshape","trend","trendFlip","trendMagnet","pMagnet","whipP","whipTrend","wallRotating"] },
   vwap:{ label:"VWAP bands and confluence", ids:["vwapSnap","stackedSnap","tripleStack","hvnLevel"] },
-  execution:{ label:"Execution and discipline", ids:["chase","twoLosses","noLevel","dpocNear","secondSnap","thirdSnap","secondFlip","thirdFlip","dpocFade"] }
+  execution:{ label:"Execution and discipline", ids:["chase","twoLosses","noLevel","dpocNear","dpocBlock","secondSnap","thirdSnap","secondFlip","thirdFlip","dpocFade"] }
 };
 let FOCUS = null;
 (() => {
@@ -729,7 +790,7 @@ function makeRound(forceId){
     let zone = null;
     const zz = typeof sc.zone === "function" ? sc.zone(end) : sc.zone;
     if(zz) zone = { a: zz[0] === "VAH" ? PH.vah : zz[0], b: zz[1], lab: zz[2], good: zz[3] === "ok" };
-    const mirror = R0() < .5;
+    const mirror = sc.noMirror ? false : R0() < .5;
     let prof = { h: PH.h, poc: PH.poc, a: PH.a, z: PH.z, lo: qlo, hi: qhi, pocP: PH.pocP, vah: PH.vah, val: PH.val };
     let ans = { ...sc.ans }, tempt = sc.tempt ? { ...sc.tempt } : null, trade = { act: tr.act, set: tr.set };
     let E = entry, T = tgt, S = sl;
@@ -866,7 +927,8 @@ const NAMES = { dshape:"D-shape Snap", flip:"The Flip", magnet:"The Magnet", hvn
   trendMagnet:"Trend Magnet", tripleStack:"Triple stack", noLevel:"No level", wall:"The Wall", wallDpoc:"The Wall at the dPOC",
   wallRotating:"The Wall on a rotating day", wallNoShelf:"The Wall with no shelf", vwapSnap:"Snap with a VWAP band", pMagnet:"Magnet on a P-shape",
   whipMid:"Whip in the middle of value", whip:"The Whip", whipP:"Whip on a P-shape", whipTrend:"Whip against the trend",
-  guard:"The Guard", guardThird:"Third touch of the dPOC", guardAsia:"The dPOC in Asia" };
+  guard:"The Guard", guardThird:"Third touch of the dPOC", guardAsia:"The dPOC in Asia",
+  anchor:"The Anchor", anchorSmall:"Anchor at a small node", anchorNoAccept:"Anchor with no acceptance", guardShort:"The Guard (short)", dpocBlock:"dPOC in the way" };
 const KIND = { snap:"Snap", flip:"Flip", magnet:"Magnet", wall:"Wall", whip:"Whip", anchor:"Anchor", guard:"Guard", none:"No trade" };
 const MKEY = "maliktrades.sim.miss.v1";
 let MISS = (() => { try{ const m = JSON.parse(localStorage.getItem(MKEY)); return m && typeof m === "object" ? m : {}; }catch(e){ return {}; } })();
@@ -940,7 +1002,7 @@ function finish(){
     score.today.res.push(pts);
     try{ const DK = "maliktrades.sim.days.v1", dm = JSON.parse(localStorage.getItem(DK) || "{}"); dm[day] = (dm[day] || 0) + 1; localStorage.setItem(DK, JSON.stringify(dm)); }catch(e){} }
   save(); paintScore(); logResult(S.id, pts); if(REV) paintMode(); else paintReview();
-  const names = { snap:"Snap 🫰", flip:"Flip 🔄", magnet:"Magnet 🧲", wall:"Wall 🧱", whip:"Whip ⚡", guard:"Guard 💂" };
+  const names = { snap:"Snap 🫰", flip:"Flip 🔄", magnet:"Magnet 🧲", anchor:"Anchor ⚓", wall:"Wall 🧱", whip:"Whip ⚡", guard:"Guard 💂" };
   const ks = a.set || (S.tempt && S.tempt.set), adv = ["anchor","wall","whip","guard"].includes(ks), full = { snap:"The Snap 🫰", flip:"The Flip 🔄", magnet:"The Magnet 🧲", anchor:"The Anchor ⚓", wall:"The Wall 🧱", whip:"The Whip ⚡", guard:"The Guard 💂" };
   const kd = $("kind"); kd.hidden = !ks; if(ks){ kd.className = "kind" + (adv ? " adv" : ""); kd.textContent = (adv ? "Advanced setup · " : "Core setup · ") + full[ks]; }
   const v = $("verdict");
