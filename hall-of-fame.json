@@ -63,20 +63,5 @@
     "img": "hof-anon-funded-2026-09-28.jpg"
    }
   ]
- },
- {
-  "id": "anon-3",
-  "name": "Anonymous member",
-  "role": "Asked to stay anonymous",
-  "anon": true,
-  "items": [
-   {
-    "type": "funded",
-    "label": "Funded · 50K",
-    "firm": "Apex Trader Funding",
-    "date": "2026-10-13",
-    "img": "hof-anon-funded-2026-10-13.jpg"
-   }
-  ]
  }
 ]
