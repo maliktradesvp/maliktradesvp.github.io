@@ -599,6 +599,7 @@ const PLAY = [
   ["p1","core-setups","Core Setups","The Snap, the Flip and the Magnet."],
   ["p2","bonus-tips","Bonus Tips","Five scenarios to watch for."],
   ["p3","common-mistakes","Common Mistakes","The fourteen I see most, and how to fix them."],
+  ["p10","volume-not-candles","Volume, Not Candles","Judge acceptance by the volume in the profile, not by counting candles."],
   ["p4","advanced-setups","Advanced Setups","Rarer plays: The Anchor, The Wall, The Whip and The Guard. Read this last."],
   ["p9","chart-colours","Chart Colours","The exact colours on my charts, ready to copy."]
 ];
@@ -628,7 +629,7 @@ function paintGuides(){
           <img src="/${slug}-cover.jpg" alt="" loading="lazy"><div><b>#${String(i + 1).padStart(2,"0")} ${title}</b><span>${line}</span>${nx ? '<em class="up" style="font-style:normal">UP NEXT</em>' : ""}${pracLinks(id)}</div>${tick(id, title)}</div>`; }).join("") + `</div>`;
   }).join("");
   const FEAT = { id:"p7", slug:"why-i-left-ict-smc", title:"Why I Left ICT/SMC", line:"Why I switched to volume profile, why it works in any market, and why I'm not going back. Read this before anything else." };
-  const SETB = PLAY.map(([id, slug, title, line]) => ({ id, slug, title, line, tag: slug === "advanced-setups" ? "Read last" : slug === "chart-colours" ? "Reference" : "", adv: slug === "advanced-setups" }));
+  const SETB = PLAY.map(([id, slug, title, line]) => ({ id, slug, title, line, tag: slug === "advanced-setups" ? "Read last" : slug === "chart-colours" ? "Reference" : slug === "volume-not-candles" ? "Common mistake" : "", adv: slug === "advanced-setups" }));
   const MIND = [
     { id:"p5", slug:"boom-and-bust-cycle", title:"The Boom-and-Bust Cycle", line:"Why traders make money, then give it back, and how to stay level.", tag:"Mindset" },
     { id:"p6", slug:"the-coin-flip", title:"The Coin Flip", line:"Why a losing streak doesn't mean your strategy is broken.", tag:"Mindset" },
