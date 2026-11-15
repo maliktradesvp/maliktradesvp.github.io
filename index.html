@@ -642,7 +642,7 @@ function paintGuides(){
   $("pbCnt").innerHTML = `<i><u style="width:${Math.round(nRead / ALLB.length * 100)}%"></u></i><span><b>${nRead} of ${ALLB.length}</b> read</span>`;
   const fcard = (F, tag, pages) => `<div class="pfeat"><div class="fcv"><a href="/${F.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${F.title}"><img src="/${F.slug}-cover.jpg" alt="" loading="lazy"></a>${tick(F.id, F.title)}</div>
     <div><em class="st">${tag}</em><h4>${F.title}</h4><p>${F.line}</p><a class="rd" href="/${F.slug}.pdf" target="_blank" rel="noopener">Read it · ${pages} pages →</a></div></div>`;
-  $("pbFeat").innerHTML = `<div class="pfeats">${fcard(FEAT, "1 · Start here", 8)}${fcard(FEAT2, "2 · Then this", 8)}</div>`;
+  $("pbFeat").innerHTML = `<div class="pfeats">${fcard(FEAT, "1 · Start here", 8)}${fcard(FEAT2, "2 · Then this", 10)}</div>`;
   $("books").innerHTML = SETB.map(b => `<div class="bk"><a class="lnk" href="/${b.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg" alt="" loading="lazy"></a>
     ${tick(b.id, b.title)}${b.tag ? `<span class="tg2 ${b.adv ? "adv" : ""}">${b.tag}</span>` : ""}<b>${b.title}</b><span>${b.line}</span>${pracLinks(b.slug)}</div>`).join("");
   $("mindBooks").innerHTML = MIND.map(b => `<div class="mdk"><div class="mcv"><a href="/${b.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg" alt="" loading="lazy"></a>${tick(b.id, b.title)}</div>
