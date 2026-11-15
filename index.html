@@ -266,6 +266,8 @@ section{scroll-margin-top:20px}
 .shelf .sl{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
 .shelf .sl b{font-size:11px;letter-spacing:.2em;font-weight:700;color:#C3D1CE;text-transform:uppercase}
 .shelf .sl span{font-size:12px;color:#93AAA6}
+.pfeats{display:grid;gap:14px;height:100%;grid-template-rows:1fr 1fr}
+@media(max-width:1280px){.pfeats{grid-template-rows:auto auto}}
 .pfeat{height:100%;display:grid;grid-template-columns:120px minmax(0,1fr);gap:18px;align-items:center;background:linear-gradient(140deg,rgba(226,194,122,.16),rgba(226,194,122,.04));border:1px solid rgba(226,194,122,.3);border-radius:16px;padding:16px}
 .fcv,.mcv{position:relative}
 .fcv img,.mcv img{width:100%;aspect-ratio:325/420;object-fit:cover;border-radius:6px;box-shadow:0 14px 26px -12px rgba(0,0,0,.6);display:block}
@@ -629,16 +631,18 @@ function paintGuides(){
           <img src="/${slug}-cover.jpg" alt="" loading="lazy"><div><b>#${String(i + 1).padStart(2,"0")} ${title}</b><span>${line}</span>${nx ? '<em class="up" style="font-style:normal">UP NEXT</em>' : ""}${pracLinks(id)}</div>${tick(id, title)}</div>`; }).join("") + `</div>`;
   }).join("");
   const FEAT = { id:"p7", slug:"why-i-left-ict-smc", title:"Why I Left ICT/SMC", line:"Why I switched to volume profile, why it works in any market, and why I'm not going back. Read this before anything else." };
+  const FEAT2 = { id:"p11", slug:"base-hits", title:"Base Hits", line:"Why I scalp, and why every trade I take is 1:1." };
   const SETB = PLAY.map(([id, slug, title, line]) => ({ id, slug, title, line, tag: slug === "advanced-setups" ? "Read last" : slug === "chart-colours" ? "Reference" : slug === "volume-not-candles" ? "Common mistake" : "", adv: slug === "advanced-setups" }));
   const MIND = [
     { id:"p5", slug:"boom-and-bust-cycle", title:"The Boom-and-Bust Cycle", line:"Why traders make money, then give it back, and how to stay level.", tag:"Mindset" },
     { id:"p6", slug:"the-coin-flip", title:"The Coin Flip", line:"Why a losing streak doesn't mean your strategy is broken.", tag:"Mindset" },
     { id:"p8", slug:"trading-in-the-zone", title:"Trading in the Zone", line:"My key lessons from Mark Douglas.", tag:"Book notes", tool:true }
   ];
-  const ALLB = [FEAT, ...SETB, ...MIND], nRead = ALLB.filter(b => readSet.has(b.id)).length;
+  const ALLB = [FEAT, FEAT2, ...SETB, ...MIND], nRead = ALLB.filter(b => readSet.has(b.id)).length;
   $("pbCnt").innerHTML = `<i><u style="width:${Math.round(nRead / ALLB.length * 100)}%"></u></i><span><b>${nRead} of ${ALLB.length}</b> read</span>`;
-  $("pbFeat").innerHTML = `<div class="pfeat"><div class="fcv"><a href="/${FEAT.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${FEAT.title}"><img src="/${FEAT.slug}-cover.jpg" alt="" loading="lazy"></a>${tick(FEAT.id, FEAT.title)}</div>
-    <div><em class="st">Start here</em><h4>${FEAT.title}</h4><p>${FEAT.line}</p><a class="rd" href="/${FEAT.slug}.pdf" target="_blank" rel="noopener">Read it · 8 pages →</a></div></div>`;
+  const fcard = (F, tag, pages) => `<div class="pfeat"><div class="fcv"><a href="/${F.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${F.title}"><img src="/${F.slug}-cover.jpg" alt="" loading="lazy"></a>${tick(F.id, F.title)}</div>
+    <div><em class="st">${tag}</em><h4>${F.title}</h4><p>${F.line}</p><a class="rd" href="/${F.slug}.pdf" target="_blank" rel="noopener">Read it · ${pages} pages →</a></div></div>`;
+  $("pbFeat").innerHTML = `<div class="pfeats">${fcard(FEAT, "1 · Start here", 8)}${fcard(FEAT2, "2 · Then this", 8)}</div>`;
   $("books").innerHTML = SETB.map(b => `<div class="bk"><a class="lnk" href="/${b.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg" alt="" loading="lazy"></a>
     ${tick(b.id, b.title)}${b.tag ? `<span class="tg2 ${b.adv ? "adv" : ""}">${b.tag}</span>` : ""}<b>${b.title}</b><span>${b.line}</span>${pracLinks(b.slug)}</div>`).join("");
   $("mindBooks").innerHTML = MIND.map(b => `<div class="mdk"><div class="mcv"><a href="/${b.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg" alt="" loading="lazy"></a>${tick(b.id, b.title)}</div>
