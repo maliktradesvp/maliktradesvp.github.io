@@ -597,11 +597,13 @@ const ACAD = [
   ["a08","putting-it-all-together","Putting It All Together","Your pre-session checklist, and what your chart should look like."],
   ["a09","prop-playbook","The Prop Playbook","Trading prop firms as a business: drawdowns, risk rules and running 2–3 accounts."]
 ];
+const V = "20261116";
 const PLAY = [
   ["p1","core-setups","Core Setups","The Snap, the Flip and the Magnet."],
   ["p2","bonus-tips","Bonus Tips","Five scenarios to watch for."],
   ["p3","common-mistakes","Common Mistakes","The fourteen I see most, and how to fix them."],
   ["p10","volume-not-candles","Volume, Not Candles","Judge acceptance by the volume in the profile, not by counting candles."],
+  ["p13","mind-the-open","Mind the Open","Why I never leave limit orders sitting into a session open."],
   ["p4","advanced-setups","Advanced Setups","Rarer plays: The Anchor, The Wall, The Whip and The Guard. Read this last."],
   ["p9","chart-colours","Chart Colours","The exact colours on my charts, ready to copy."],
   ["p12","edge-boosters","Edge Boosters","Three settings that sharpen your execution."]
@@ -628,12 +630,12 @@ function paintGuides(){
     const items = ACAD.slice(from, from + 3), d = items.filter(g => readSet.has(g[0])).length;
     return `<div class="mod ${d === 3 ? "done" : ""}"><div class="mh"><div><div class="mk">${k}</div><h3>${h}</h3></div><span class="ms">${d === 3 ? "✓ " : ""}${d}/3</span></div>` +
       items.map(([id, slug, title, line], j) => { const i = from + j, nx = id === nextId;
-        return `<div class="mr ${nx ? "nx" : ""}"><a class="lnk" href="/${slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${title}"></a>
-          <img src="/${slug}-cover.jpg" alt="" loading="lazy"><div><b>#${String(i + 1).padStart(2,"0")} ${title}</b><span>${line}</span>${nx ? '<em class="up" style="font-style:normal">UP NEXT</em>' : ""}${pracLinks(id)}</div>${tick(id, title)}</div>`; }).join("") + `</div>`;
+        return `<div class="mr ${nx ? "nx" : ""}"><a class="lnk" href="/${slug}.pdf?v=${V}" target="_blank" rel="noopener" aria-label="Open ${title}"></a>
+          <img src="/${slug}-cover.jpg?v=${V}" alt="" loading="lazy"><div><b>#${String(i + 1).padStart(2,"0")} ${title}</b><span>${line}</span>${nx ? '<em class="up" style="font-style:normal">UP NEXT</em>' : ""}${pracLinks(id)}</div>${tick(id, title)}</div>`; }).join("") + `</div>`;
   }).join("");
   const FEAT = { id:"p7", slug:"why-i-left-ict-smc", title:"Why I Left ICT/SMC", line:"Why I switched to volume profile, why it works in any market, and why I'm not going back. Read this before anything else." };
   const FEAT2 = { id:"p11", slug:"base-hits", title:"Base Hits", line:"Why I scalp, and why every trade I take is 1:1." };
-  const SETB = PLAY.map(([id, slug, title, line]) => ({ id, slug, title, line, tag: slug === "advanced-setups" ? "Read last" : (slug === "chart-colours" || slug === "edge-boosters") ? "Reference" : slug === "volume-not-candles" ? "Common mistake" : "", adv: slug === "advanced-setups" }));
+  const SETB = PLAY.map(([id, slug, title, line]) => ({ id, slug, title, line, tag: slug === "advanced-setups" ? "Read last" : (slug === "chart-colours" || slug === "edge-boosters") ? "Reference" : (slug === "volume-not-candles" || slug === "mind-the-open") ? "Common mistake" : "", adv: slug === "advanced-setups" }));
   const MIND = [
     { id:"p5", slug:"boom-and-bust-cycle", title:"The Boom-and-Bust Cycle", line:"Why traders make money, then give it back, and how to stay level.", tag:"Mindset" },
     { id:"p6", slug:"the-coin-flip", title:"The Coin Flip", line:"Why a losing streak doesn't mean your strategy is broken.", tag:"Mindset" },
@@ -641,13 +643,13 @@ function paintGuides(){
   ];
   const ALLB = [FEAT, FEAT2, ...SETB, ...MIND], nRead = ALLB.filter(b => readSet.has(b.id)).length;
   $("pbCnt").innerHTML = `<i><u style="width:${Math.round(nRead / ALLB.length * 100)}%"></u></i><span><b>${nRead} of ${ALLB.length}</b> read</span>`;
-  const fcard = (F, tag, pages) => `<div class="pfeat"><div class="fcv"><a href="/${F.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${F.title}"><img src="/${F.slug}-cover.jpg" alt="" loading="lazy"></a>${tick(F.id, F.title)}</div>
-    <div><em class="st">${tag}</em><h4>${F.title}</h4><p>${F.line}</p><a class="rd" href="/${F.slug}.pdf" target="_blank" rel="noopener">Read it · ${pages} pages →</a></div></div>`;
+  const fcard = (F, tag, pages) => `<div class="pfeat"><div class="fcv"><a href="/${F.slug}.pdf?v=${V}" target="_blank" rel="noopener" aria-label="Open ${F.title}"><img src="/${F.slug}-cover.jpg?v=${V}" alt="" loading="lazy"></a>${tick(F.id, F.title)}</div>
+    <div><em class="st">${tag}</em><h4>${F.title}</h4><p>${F.line}</p><a class="rd" href="/${F.slug}.pdf?v=${V}" target="_blank" rel="noopener">Read it · ${pages} pages →</a></div></div>`;
   $("pbFeat").innerHTML = `<div class="pfeats">${fcard(FEAT, "1 · Start here", 8)}${fcard(FEAT2, "2 · Then this", 10)}</div>`;
-  $("books").innerHTML = SETB.map(b => `<div class="bk"><a class="lnk" href="/${b.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg" alt="" loading="lazy"></a>
+  $("books").innerHTML = SETB.map(b => `<div class="bk"><a class="lnk" href="/${b.slug}.pdf?v=${V}" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg?v=${V}" alt="" loading="lazy"></a>
     ${tick(b.id, b.title)}${b.tag ? `<span class="tg2 ${b.adv ? "adv" : ""}">${b.tag}</span>` : ""}<b>${b.title}</b><span>${b.line}</span>${pracLinks(b.slug)}</div>`).join("");
-  $("mindBooks").innerHTML = MIND.map(b => `<div class="mdk"><div class="mcv"><a href="/${b.slug}.pdf" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg" alt="" loading="lazy"></a>${tick(b.id, b.title)}</div>
-    <div><em>${b.tag}</em><b>${b.title}</b><span>${b.line}</span><a class="rd" href="/${b.slug}.pdf" target="_blank" rel="noopener">Read →</a>${b.tool ? `<a class="rd alt" href="/MalikTrades-Mindset-Tool/">Mindset tool →</a>` : ""}</div></div>`).join("");
+  $("mindBooks").innerHTML = MIND.map(b => `<div class="mdk"><div class="mcv"><a href="/${b.slug}.pdf?v=${V}" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg?v=${V}" alt="" loading="lazy"></a>${tick(b.id, b.title)}</div>
+    <div><em>${b.tag}</em><b>${b.title}</b><span>${b.line}</span><a class="rd" href="/${b.slug}.pdf?v=${V}" target="_blank" rel="noopener">Read →</a>${b.tool ? `<a class="rd alt" href="/MalikTrades-Mindset-Tool/">Mindset tool →</a>` : ""}</div></div>`).join("");
   const a = ACAD.filter(g => readSet.has(g[0])).length;
   $("acTot").innerHTML = `<b>${a} of 9 read</b> · 3 modules · read in order`;
   $("navAcad").textContent = `${a}/9`;
@@ -656,12 +658,12 @@ function paintGuides(){
     const steps = [["Next","bonus-tips","Bonus Tips","Five scenarios to watch for","/bonus-tips.pdf"],["Every day","core-setups","Setup Library","Study real trades of each setup","/setup-library.html"],["Read last","advanced-setups","Advanced Setups","Once the core three feel obvious","/advanced-setups.pdf"]];
     $("acNext").className = "acnext" + (done ? " done" : "");
     $("acNext").innerHTML = `<div class="ah"><div class="k">${done ? "\u2713 Course complete" : "After lesson #09"}</div><b>${done ? "Now, the Playbook" : "What comes next"}</b><span>${done ? "You've read all 9 lessons. Here's where to go from here." : `Finish all ${nb} lessons, then move on to these.`}</span></div>
-      <div class="acsteps">${steps.map(([k, img, t, l, h]) => `<a class="acstep" href="${h}"${h.endsWith(".pdf") ? ' target="_blank" rel="noopener"' : ""}><img src="/${img}-cover.jpg" alt="" loading="lazy"><div><em>${k}</em><b>${t}</b><small>${l}</small></div></a>`).join("")}</div>`; }
+      <div class="acsteps">${steps.map(([k, img, t, l, h]) => `<a class="acstep" href="${h}"${h.endsWith(".pdf") ? ' target="_blank" rel="noopener"' : ""}><img src="/${img}-cover.jpg?v=${V}" alt="" loading="lazy"><div><em>${k}</em><b>${t}</b><small>${l}</small></div></a>`).join("")}</div>`; }
   const c = $("contCard");
   if(next){
     const i = ACAD.indexOf(next), after = ACAD[i + 1];
     c.innerHTML = `<div class="lab">${a ? "Continue VP Academy" : "Start here"}</div>
-      <div class="cont"><img src="/${next[1]}-cover.jpg" alt=""><div><div class="num">#${String(i + 1).padStart(2,"0")} of 09</div><h3>${next[2]}</h3><p>${next[3]}</p>
+      <div class="cont"><img src="/${next[1]}-cover.jpg?v=${V}" alt=""><div><div class="num">#${String(i + 1).padStart(2,"0")} of 09</div><h3>${next[2]}</h3><p>${next[3]}</p>
       <div class="btns"><a class="btn" href="/${next[1]}.pdf" target="_blank" rel="noopener">${a ? "Keep reading" : "Start reading"} →</a><a class="btn ghost" href="#academy">All guides</a></div></div></div>
       <div class="pg">${ACAD.map(g => `<i class="${readSet.has(g[0]) ? "d" : ""}"></i>`).join("")}</div>
       <div class="pgl"><span>${a} of 9 read</span><span>${after ? "Next up: " + after[2] : "Last one"}</span></div>`;
