@@ -1010,5 +1010,45 @@
   "images": [
    "lib-2026-11-16-gc-snap-onpoc.jpg"
   ]
+ },
+ {
+  "id": "2026-11-16-gc-flip-pwval",
+  "date": "2026-11-16",
+  "setup": "flip",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "PWVAL Flip after volume built above",
+  "summary": "Classic Flip set up. Price broke past PWVAL and built volume above the level and when it came back to retest the level, price shot up and hit my TP.",
+  "confluences": [
+   "PWVAL"
+  ],
+  "notes": [
+   "Classic Flip set up. Price broke past PWVAL and built volume above the level and when it came back to retest the level, price shot up and hit my TP."
+  ],
+  "images": [
+   "lib-2026-11-16-gc-flip-pwval.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-16-nq-flip-nypoc",
+  "date": "2026-11-16",
+  "setup": "flip",
+  "instrument": "NQ",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYPOC Flip after volume built above",
+  "summary": "Classic Flip set up. Price broke past NYPOC and built volume above the level and when it came back to retest the level, price shot to TP, easy in and out trade.",
+  "confluences": [
+   "NYPOC"
+  ],
+  "notes": [
+   "Classic Flip set up. Price broke past NYPOC and built volume above the level and when it came back to retest the level, price shot to TP, easy in and out trade."
+  ],
+  "images": [
+   "lib-2026-11-16-nq-flip-nypoc.jpg"
+  ]
  }
 ]
