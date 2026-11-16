@@ -928,5 +928,87 @@
   "images": [
    "lib-2026-11-13-es-guard.jpg"
   ]
+ },
+ {
+  "id": "2026-11-16-es-snap-nyvah",
+  "date": "2026-11-16",
+  "setup": "snap",
+  "instrument": "ES",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYVAH Snap from above",
+  "summary": "Classic Snap set up, price came down from above and surged up to TP really quickly, easy in and out trade.",
+  "confluences": [
+   "NYVAH"
+  ],
+  "notes": [
+   "Classic Snap set up, price came down from above and surged up to TP really quickly, easy in and out trade."
+  ],
+  "images": [
+   "lib-2026-11-16-es-snap-nyvah.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-16-es-flip-nyvah",
+  "date": "2026-11-16",
+  "setup": "flip",
+  "instrument": "ES",
+  "direction": "Short",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYVAH Flip after volume built below",
+  "summary": "Clean Flip set up, price initially broke through the level and built volume below and when it came back to NYVAH to retest, it gave us a nice reaction to the downside which I capitalised on.",
+  "confluences": [
+   "NYVAH"
+  ],
+  "notes": [
+   "Clean Flip set up, price initially broke through the level and built volume below and when it came back to NYVAH to retest, it gave us a nice reaction to the downside which I capitalised on."
+  ],
+  "images": [
+   "lib-2026-11-16-es-flip-nyvah.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-16-gc-snap-pwpoc",
+  "date": "2026-11-16",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 2,
+  "result": "+1R",
+  "title": "PWPOC + dVAL Snap",
+  "summary": "Really high probability Snap set up. PWPOC + dVAL combined gave us a nice high probability zone to trade from and price gave a quick reaction to the upside and hit my TP extremely quickly.",
+  "confluences": [
+   "PWPOC",
+   "dVAL"
+  ],
+  "notes": [
+   "Really high probability Snap set up. PWPOC + dVAL combined gave us a nice high probability zone to trade from and price gave a quick reaction to the upside and hit my TP extremely quickly."
+  ],
+  "images": [
+   "lib-2026-11-16-gc-snap-pwpoc.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-16-gc-snap-onpoc",
+  "date": "2026-11-16",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Short",
+  "stars": 2,
+  "result": "+1R",
+  "title": "ONPOC Snap from below",
+  "summary": "Bread and butter Snap on Gold. Price came up from below and had an extremely nice reaction to the downside.",
+  "confluences": [
+   "ONPOC",
+   "VWAP Band"
+  ],
+  "notes": [
+   "Bread and butter Snap on Gold. Price came up from below and had an extremely nice reaction to the downside."
+  ],
+  "images": [
+   "lib-2026-11-16-gc-snap-onpoc.jpg"
+  ]
  }
 ]
