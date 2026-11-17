@@ -1050,5 +1050,109 @@
   "images": [
    "lib-2026-11-16-nq-flip-nypoc.jpg"
   ]
+ },
+ {
+  "id": "2026-11-17-gc-snap-onpoc-asia",
+  "date": "2026-11-17",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Short",
+  "stars": 2,
+  "result": "+1R",
+  "title": "ONPOC + VWAP Band Snap from below",
+  "summary": "Classic Snap set up. Price came up to the level from below and when it tapped into the level, there was a nice reaction to the downside which I capitalised on.",
+  "confluences": [
+   "ONPOC",
+   "VWAP Band"
+  ],
+  "notes": [
+   "Classic Snap set up. Price came up to the level from below and when it tapped into the level, there was a nice reaction to the downside which I capitalised on."
+  ],
+  "images": [
+   "lib-2026-11-17-gc-snap-onpoc-asia.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-17-gc-flip-pwval",
+  "date": "2026-11-17",
+  "setup": "flip",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 2,
+  "result": "+1R",
+  "title": "PWVAL + dVAL Flip",
+  "summary": "Classic Flip set up. Price broke through the level initially and built volume beyond PWVAL and when it came back for the retest, it was a clean move up to my TP, easy in and out trade.",
+  "confluences": [
+   "dVAL",
+   "PWVAL"
+  ],
+  "notes": [
+   "Classic Flip set up. Price broke through the level initially and built volume beyond PWVAL and when it came back for the retest, it was a clean move up to my TP, easy in and out trade."
+  ],
+  "images": [
+   "lib-2026-11-17-gc-flip-pwval.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-17-gc-snap-onpoc-london",
+  "date": "2026-11-17",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Short",
+  "stars": 1,
+  "result": "+1R",
+  "title": "ONPOC Snap, bread and butter",
+  "summary": "Classic Snap, price went up to the level and I capitalised on the reaction to the downside, bread and butter move.",
+  "confluences": [
+   "ONPOC"
+  ],
+  "notes": [
+   "Classic Snap, price went up to the level and I capitalised on the reaction to the downside, bread and butter move."
+  ],
+  "images": [
+   "lib-2026-11-17-gc-snap-onpoc-london.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-17-es-snap-nyval",
+  "date": "2026-11-17",
+  "setup": "snap",
+  "instrument": "ES",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYVAL Snap from above",
+  "summary": "Classic Snap, price went down to the level and had a nice reaction to the upside and hit TP easily.",
+  "confluences": [
+   "NYVAL"
+  ],
+  "notes": [
+   "Classic Snap, price went down to the level and had a nice reaction to the upside and hit TP easily."
+  ],
+  "images": [
+   "lib-2026-11-17-es-snap-nyval.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-17-gc-flip-onval",
+  "date": "2026-11-17",
+  "setup": "flip",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 3,
+  "result": "+1R",
+  "title": "ONVAL + NYVAL Flip with an HVN shelf",
+  "summary": "Extremely confluential zone for a Flip. Price initially broke through the levels and built volume below the levels. When it came back for a retest, I put my limit on the ONVAL as there was a huge HVN shelf above the level. It tapped me in and quickly hit TP.",
+  "confluences": [
+   "ONVAL",
+   "NYVAL",
+   "dPOC"
+  ],
+  "notes": [
+   "Extremely confluential zone for a Flip. Price initially broke through the levels and built volume below the levels. When it came back for a retest, I put my limit on the ONVAL as there was a huge HVN shelf above the level. It tapped me in and quickly hit TP."
+  ],
+  "images": [
+   "lib-2026-11-17-gc-flip-onval.jpg"
+  ]
  }
 ]
