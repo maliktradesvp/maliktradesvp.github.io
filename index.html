@@ -402,6 +402,23 @@ footer p{margin:0}
 .hof-fan img{transition:transform .25s}
 @media (max-width:900px){.hof{grid-template-columns:1fr;padding:20px}.hof-fan{height:150px;max-width:340px;margin:0 auto;width:100%}.hof-fan img{width:170px}.hof-fan img:nth-child(2){left:75px}.hof-fan img:nth-child(3){left:140px}.hof h3{font-size:32px}}
 @media (prefers-reduced-motion:reduce){.hof-fan img,.hof{transition:none}}
+
+.mgrid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px}
+.wf{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:#FBF7EF;border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:transform .15s,box-shadow .15s}
+.wf{position:relative}.wfa{display:flex;flex-direction:column;flex:1;text-decoration:none;color:inherit}.wf .tick{position:absolute;top:10px;right:12px;border-color:color-mix(in srgb,var(--acc) 45%,#fff);background:#fff}.wf .tick[aria-pressed="true"]{background:var(--win);border-color:#fff;color:#fff}.wfx{position:absolute;left:108px;bottom:16px;font-weight:700;font-size:13px;color:var(--gold);text-decoration:none}
+.wf:hover{transform:translateY(-3px);box-shadow:0 18px 30px -22px rgba(30,50,55,.55)}
+.wfq{display:flex;align-items:center;gap:10px;padding:12px 16px;background:color-mix(in srgb,var(--acc) 12%,#fff);border-bottom:1px solid color-mix(in srgb,var(--acc) 25%,#fff)}
+.wfq i{font-style:normal;font-size:18px}.wfq span{font-weight:800;font-size:14px;color:var(--acc)}
+.wfb{display:grid;grid-template-columns:78px 1fr;gap:14px;padding:16px}
+.wfc img{width:100%;border-radius:5px;box-shadow:0 10px 18px -10px rgba(0,0,0,.5);display:block}
+.wf em{font-style:normal;font-size:9.5px;letter-spacing:.1em;font-weight:800;text-transform:uppercase;color:var(--teal2)}
+.wf b{display:block;font-family:var(--display);font-weight:600;font-size:21px;line-height:1.1;margin:4px 0 4px}
+.wf p{margin:0;font-size:13px;color:var(--mut);line-height:1.4}
+.wf u{display:inline-block;margin-top:9px;text-decoration:none;font-weight:700;font-size:13px;color:var(--acc)}
+.wf.tool{background:linear-gradient(150deg,#2F5A60,#1F3B42);border-color:#2F5A60;color:#F2ECE1}
+.wf.tool .wfq{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}.wf.tool .wfq span{color:#E2C27A}
+.wft{padding:16px}.wft b{font-size:23px;color:#fff}.wft p{color:#C3D1CE}.wf.tool u{color:#E2C27A}
+@media(max-width:900px){.mgrid{grid-template-columns:1fr!important}}
 </style>
 </head>
 <body>
@@ -651,8 +668,15 @@ function paintGuides(){
   $("pbFeat").innerHTML = `<div class="pfeats">${fcard(FEAT, "1 · Start here", 8)}${fcard(FEAT2, "2 · Then this", 10)}</div>`;
   $("books").innerHTML = SETB.map(b => `<div class="bk"><a class="lnk" href="/${b.slug}.pdf?v=${V}" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg?v=${V}" alt="" loading="lazy"></a>
     ${tick(b.id, b.title)}${b.tag ? `<span class="tg2 ${b.adv ? "adv" : ""}">${b.tag}</span>` : ""}<b>${b.title}</b><span>${b.line}</span>${pracLinks(b.slug)}</div>`).join("");
-  $("mindBooks").innerHTML = MIND.map(b => `<div class="mdk"><div class="mcv"><a href="/${b.slug}.pdf?v=${V}" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg?v=${V}" alt="" loading="lazy"></a>${tick(b.id, b.title)}</div>
-    <div><em>${b.tag}</em><b>${b.title}</b><span>${b.line}</span><a class="rd" href="/${b.slug}.pdf?v=${V}" target="_blank" rel="noopener">Read →</a>${b.tool ? `<a class="rd alt" href="/MalikTrades-Mindset-Tool/">Mindset tool →</a>` : ""}</div></div>`).join("");
+  const MX = {"boom-and-bust-cycle":{when:"Up big, then gave it all back?",ic:"📉",acc:"#B5652F",pg:3},
+    "the-coin-flip":{when:"On a losing streak?",ic:"🪙",acc:"#C79A44",pg:5},
+    "pull-the-trigger":{when:"Frozen at the level?",ic:"🎯",acc:"#2E6B4F",pg:7},
+    "good-trade-bad-result":{when:"Judging trades by P&L?",ic:"⚖️",acc:"#2E5157",pg:5},
+    "trading-in-the-zone":{when:"Want the foundations?",ic:"📖",acc:"#6E5A8C",pg:4}};
+  $("mindBooks").innerHTML = MIND.map(b => { const m = MX[b.slug]; return `<div class="wf" style="--acc:${m.acc}"><a class="wfa" href="/${b.slug}.pdf?v=${V}" target="_blank" rel="noopener">
+    <div class="wfq"><i>${m.ic}</i><span>${m.when}</span></div>
+    <div class="wfb"><div class="wfc"><img src="/${b.slug}-cover.jpg?v=${V}" alt="" loading="lazy"></div><div><em>${b.tag}</em><b>${b.title}</b><p>${b.line}</p><u>Read · ${m.pg} pages →</u></div></div></a>${tick(b.id, b.title)}${b.tool ? `<a class="wfx" href="/MalikTrades-Mindset-Tool/">Mindset tool →</a>` : ""}</div>`; }).join("") +
+    `<a class="wf tool" href="/MalikTrades-Mindset-Tool/"><div class="wfq"><i>🧠</i><span>Struggling right now?</span></div><div class="wft"><b>Open the Mindset Tool</b><p>Pick what you're feeling and get the fix, backed by the numbers.</p><u>Open the tool →</u></div></a>`;
   const a = ACAD.filter(g => readSet.has(g[0])).length;
   $("acTot").innerHTML = `<b>${a} of 9 read</b> · 3 modules · read in order`;
   $("navAcad").textContent = `${a}/9`;
