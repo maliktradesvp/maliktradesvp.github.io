@@ -1,5 +1,19 @@
 [
  {
+  "id": "matthew-2",
+  "name": "Matthew T.",
+  "role": "Member",
+  "items": [
+   {
+    "type": "funded",
+    "label": "Funded · 50K",
+    "firm": "Apex Trader Funding",
+    "date": "2026-11-17",
+    "img": "hof-matthew-funded-2026-11-17.jpg"
+   }
+  ]
+ },
+ {
   "id": "matthew",
   "name": "Matthew T.",
   "role": "Member",
