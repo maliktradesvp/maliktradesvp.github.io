@@ -622,6 +622,7 @@ const PLAY = [
   ["p3","common-mistakes","Common Mistakes","The fourteen I see most, and how to fix them."],
   ["p10","volume-not-candles","Volume, Not Candles","Judge acceptance by the volume in the profile, not by counting candles."],
   ["p13","mind-the-open","Mind the Open","Why I never leave limit orders sitting into a session open."],
+  ["p16","widen-the-net","Widen the Net","Why you shouldn't trade one instrument forever."],
   ["p4","advanced-setups","Advanced Setups","Rarer plays: The Anchor, The Wall, The Whip and The Guard. Read this last."],
   ["p9","chart-colours","Chart Colours","The exact colours on my charts, ready to copy."],
   ["p12","edge-boosters","Edge Boosters","Three settings that sharpen your execution."]
@@ -653,7 +654,7 @@ function paintGuides(){
   }).join("");
   const FEAT = { id:"p7", slug:"why-i-left-ict-smc", title:"Why I Left ICT/SMC", line:"Why I switched to volume profile, why it works in any market, and why I'm not going back. Read this before anything else." };
   const FEAT2 = { id:"p11", slug:"base-hits", title:"Base Hits", line:"Why I scalp, and why every trade I take is 1:1." };
-  const SETB = PLAY.map(([id, slug, title, line]) => ({ id, slug, title, line, tag: slug === "advanced-setups" ? "Read last" : (slug === "chart-colours" || slug === "edge-boosters") ? "Reference" : (slug === "volume-not-candles" || slug === "mind-the-open") ? "Common mistake" : "", adv: slug === "advanced-setups" }));
+  const SETB = PLAY.map(([id, slug, title, line]) => ({ id, slug, title, line, tag: slug === "advanced-setups" ? "Read last" : (slug === "chart-colours" || slug === "edge-boosters") ? "Reference" : (slug === "volume-not-candles" || slug === "mind-the-open" || slug === "widen-the-net") ? "Common mistake" : "", adv: slug === "advanced-setups" }));
   const MIND = [
     { id:"p5", slug:"boom-and-bust-cycle", title:"The Boom-and-Bust Cycle", line:"Why traders make money, then give it back, and how to stay level.", tag:"Mindset" },
     { id:"p6", slug:"the-coin-flip", title:"The Coin Flip", line:"Why a losing streak doesn't mean your strategy is broken.", tag:"Mindset" },
