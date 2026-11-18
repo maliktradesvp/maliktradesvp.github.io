@@ -33,13 +33,6 @@
   "role": "Member",
   "items": [
    {
-    "type": "payout",
-    "label": "Payout · S$633.83",
-    "firm": "Apex Trader Funding",
-    "date": "2026-10-07",
-    "img": "hof-joshua-payout-2026-10-07.jpg"
-   },
-   {
     "type": "funded",
     "label": "Funded · 50K",
     "firm": "Apex Trader Funding",
@@ -89,7 +82,15 @@
     "firm": "Apex Trader Funding",
     "date": "2026-08-18",
     "img": "hof-joshua-funded-2026-08-18.jpg"
+   },
+   {
+    "type": "payout",
+    "label": "Payout · S$633.83",
+    "firm": "Apex Trader Funding",
+    "date": "2026-10-07",
+    "img": "hof-joshua-payout-2026-10-07.jpg"
    }
-  ]
+  ],
+  "cover": "hof-joshua-funded-2026-08-18.jpg"
  }
 ]
