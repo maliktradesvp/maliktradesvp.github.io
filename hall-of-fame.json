@@ -77,5 +77,19 @@
     "img": "hof-anon-funded-2026-09-28.jpg"
    }
   ]
+ },
+ {
+  "id": "joshua-2",
+  "name": "Joshua N.",
+  "role": "Member",
+  "items": [
+   {
+    "type": "funded",
+    "label": "Funded · 50K",
+    "firm": "Apex Trader Funding",
+    "date": "2026-08-18",
+    "img": "hof-joshua-funded-2026-08-18.jpg"
+   }
+  ]
  }
 ]
