@@ -1154,5 +1154,26 @@
   "images": [
    "lib-2026-11-17-gc-flip-onval.jpg"
   ]
+ },
+ {
+  "id": "2026-11-18-nq-snap-nyvah",
+  "date": "2026-11-18",
+  "setup": "snap",
+  "instrument": "NQ",
+  "direction": "Long",
+  "stars": 2,
+  "result": "+1R",
+  "title": "NYVAH Snap from above",
+  "summary": "Classic Snap, price went down to the level and had a nice reaction to the upside and hit TP easily.",
+  "confluences": [
+   "NYVAL",
+   "NYVAH"
+  ],
+  "notes": [
+   "Classic Snap, price went down to the level and had a nice reaction to the upside and hit TP easily."
+  ],
+  "images": [
+   "lib-2026-11-18-nq-snap-nyvah.jpg"
+  ]
  }
 ]
