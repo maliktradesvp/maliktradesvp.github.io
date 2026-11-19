@@ -106,7 +106,6 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
 <div class="lib">
   <div class="ph">
     <div><div class="k">LEARN</div><h1>Setup Library</h1><p>Real trades from my sessions, broken down setup by setup. Study them until you can spot them on your own chart.</p></div>
-    <div class="stats"><div class="stat"><b id="nTrades">–</b><span>trades</span></div><div class="stat"><b id="nWins">–</b><span>winners</span></div></div>
   </div>
   <div class="count" id="count" hidden></div>
   <div class="frombar" id="fromBar" hidden></div>
@@ -237,8 +236,6 @@ fetch("/setup-library.json?v=" + Date.now()).then(r => r.ok ? r.json() : []).cat
   TRADES = (Array.isArray(data) ? data : (data.trades || [])).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
   applyParams();
   render();
-  const w = TRADES.filter(t => resClass(t.result) === "w").length;
-  document.getElementById("nTrades").textContent = TRADES.length; document.getElementById("nWins").textContent = w;
   const h = decodeURIComponent(location.hash.slice(1)); if(h && TRADES.some(t => t.id === h)) openTrade(h);
 });
 function applyParams(){

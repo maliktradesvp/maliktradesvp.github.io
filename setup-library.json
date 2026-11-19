@@ -1197,5 +1197,29 @@
   "images": [
    "lib-2026-11-19-es-snap-onvah.jpg"
   ]
+ },
+ {
+  "id": "2026-11-18-nq-guard",
+  "date": "2026-11-18",
+  "setup": "guard",
+  "instrument": "NQ",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "Textbook first London touch of the dPOC",
+  "summary": "The dPOC had built a huge node all through Asia. In London, price traded away from it, then came back down for the first time at 02:37 ET. The dPOC held almost to the tick and hit 1:1 within a couple of minutes.",
+  "confluences": [
+   "dPOC"
+  ],
+  "notes": [
+   "The developing profile started at 18:00 ET. Through the Asia session, NQ rotated in a tight range and built a huge node of volume, with the dPOC sitting right in the middle of it around 27,218. By London, it had over 8 hours of volume behind it.",
+   "After the London open at 02:00 ET, price pushed up and away from the dPOC towards the ONVAL. London hadn't touched the dPOC yet.",
+   "Around 02:37 ET, price dropped back to the dPOC for the first time in London. Price came down to it, so the trade was long: limit at 27,217.75, stop at 27,194, target at 27,241.25. That's 1:1.",
+   "The dPOC held almost to the tick. Price snapped back up, hit the 1:1 within a couple of minutes, then kept going all the way up through the ONVAL. The touch in late Asia doesn't count: The Guard is the first touch in the London session."
+  ],
+  "images": [
+   "lib-2026-11-18-nq-guard.jpg",
+   "lib-2026-11-18-nq-guard-build.jpg"
+  ]
  }
 ]
