@@ -1175,5 +1175,27 @@
   "images": [
    "lib-2026-11-18-nq-snap-nyvah.jpg"
   ]
+ },
+ {
+  "id": "2026-11-19-es-snap-onvah",
+  "date": "2026-11-19",
+  "setup": "snap",
+  "instrument": "ES",
+  "direction": "Long",
+  "stars": 3,
+  "result": "+1R",
+  "title": "ONVAH + NYVAH + VWAP Band Snap",
+  "summary": "Extremely confluential zone for a Snap. There was ONVAH + NYVAH + VWAP band in that zone which made it very likely for price to react at the stacked levels. I put a limit order there just after I got out at BE on the previous Snap and this hit TP quickly.",
+  "confluences": [
+   "ONVAH",
+   "NYVAH",
+   "VWAP Band"
+  ],
+  "notes": [
+   "Extremely confluential zone for a Snap. There was ONVAH + NYVAH + VWAP band in that zone which made it very likely for price to react at the stacked levels. I put a limit order there just after I got out at BE on the previous Snap and this hit TP quickly."
+  ],
+  "images": [
+   "lib-2026-11-19-es-snap-onvah.jpg"
+  ]
  }
 ]
