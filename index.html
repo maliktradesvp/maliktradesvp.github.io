@@ -615,7 +615,7 @@ const ACAD = [
   ["a08","putting-it-all-together","Putting It All Together","Your pre-session checklist, and what your chart should look like."],
   ["a09","prop-playbook","The Prop Playbook","Trading prop firms as a business: drawdowns, risk rules and running 2–3 accounts."]
 ];
-const V = "20261118";
+const V = "20261119";
 const PLAY = [
   ["p1","core-setups","Core Setups","The Snap, the Flip and the Magnet."],
   ["p2","bonus-tips","Bonus Tips","Five scenarios to watch for."],
@@ -671,7 +671,7 @@ function paintGuides(){
     ${tick(b.id, b.title)}${b.tag ? `<span class="tg2 ${b.adv ? "adv" : ""}">${b.tag}</span>` : ""}<b>${b.title}</b><span>${b.line}</span>${pracLinks(b.slug)}</div>`).join("");
   const MX = {"boom-and-bust-cycle":{when:"Up big, then gave it all back?",ic:"📉",acc:"#B5652F",pg:3},
     "the-coin-flip":{when:"On a losing streak?",ic:"🪙",acc:"#C79A44",pg:5},
-    "pull-the-trigger":{when:"Frozen at the level?",ic:"🎯",acc:"#2E6B4F",pg:7},
+    "pull-the-trigger":{when:"Frozen at the level?",ic:"🎯",acc:"#2E6B4F",pg:8},
     "good-trade-bad-result":{when:"Judging trades by P&L?",ic:"⚖️",acc:"#2E5157",pg:5},
     "trading-in-the-zone":{when:"Want the foundations?",ic:"📖",acc:"#6E5A8C",pg:4}};
   $("mindBooks").innerHTML = MIND.map(b => { const m = MX[b.slug]; return `<div class="wf" style="--acc:${m.acc}"><a class="wfa" href="/${b.slug}.pdf?v=${V}" target="_blank" rel="noopener">
