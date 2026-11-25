@@ -1221,5 +1221,162 @@
    "lib-2026-11-18-nq-guard.jpg",
    "lib-2026-11-18-nq-guard-build.jpg"
   ]
+ },
+ {
+  "id": "2026-11-25-es-snap-nyval",
+  "date": "2026-11-25",
+  "setup": "snap",
+  "instrument": "ES",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYVAL Snap in the Asia session",
+  "summary": "Price came down into the NYVAL from above early in the Asia session and reacted cleanly off the level for a quick 1:1.",
+  "confluences": [
+   "NYVAL"
+  ],
+  "notes": [
+   "Early in the Asia session, around 19:10 ET, ES sold off hard from the ONPOC straight down towards the NYVAL.",
+   "Price approached the NYVAL from above, so the Snap was a long: limit at 7,181.50, stop at 7,178.00, target at 7,185.00. That's 1:1.",
+   "The level held almost to the tick. Price snapped back up through the target and kept going all the way back to the ONPOC.",
+   "The same move happened on NQ and GC at the same time: all three dropped into their NYVAL together and all three reacted."
+  ],
+  "images": [
+   "lib-2026-11-25-es-snap-nyval.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-25-gc-snap-nyval",
+  "date": "2026-11-25",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYVAL Snap at the Asia open",
+  "summary": "Gold pushed down into the NYVAL from above right around the start of the Asia session and reacted cleanly from the level.",
+  "confluences": [
+   "NYVAL"
+  ],
+  "notes": [
+   "Around 19:00 ET, gold traded down from above into the NYVAL.",
+   "Price approached the level from above, so it was a long Snap: limit at 3,545.7, stop at 3,542.7, target at 3,548.7. That's 1:1.",
+   "Price wicked into the level and snapped straight back up through the target within a few candles."
+  ],
+  "images": [
+   "lib-2026-11-25-gc-snap-nyval.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-25-nq-snap-nyval",
+  "date": "2026-11-25",
+  "setup": "snap",
+  "instrument": "NQ",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "NYVAL Snap during the Asia sell-off",
+  "summary": "NQ sold off into the NYVAL from above in the Asia session. The level gave a clean reaction for the 1:1 before price carried on lower.",
+  "confluences": [
+   "NYVAL"
+  ],
+  "notes": [
+   "Around 19:05 ET, NQ sold off from above into the NYVAL.",
+   "Price approached the level from above, so it was a long Snap: limit at 26,134.25, stop at 26,115.00, target at 26,153.75. That's 1:1.",
+   "Price reacted off the NYVAL and hit the target within a couple of candles. It later broke through the level and dropped further, which is why we take the reaction and get out at 1:1."
+  ],
+  "images": [
+   "lib-2026-11-25-nq-snap-nyval.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-25-gc-snap-dval",
+  "date": "2026-11-25",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "D-shape dVAL fade",
+  "summary": "The developing profile was balanced in a D-shape, so the edges of value were the trade. Price came down to the dVAL and faded back up for 1:1.",
+  "confluences": [
+   "dVAL"
+  ],
+  "notes": [
+   "Through the early Asia session, gold rotated in a balanced range and the developing profile built a D-shape, with the dPOC sitting near the ONPOC in the middle.",
+   "In a D-shape, the play is to fade the edges of value: short near the dVAH, long near the dVAL.",
+   "Around 19:15 ET, price came down to the dVAL. Long: limit at 3,570.3, stop at 3,567.3, target at 3,573.3. That's 1:1.",
+   "Price held the dVAL and rotated back up towards the middle of value, hitting the target."
+  ],
+  "images": [
+   "lib-2026-11-25-gc-snap-dval.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-25-gc-snap-dval-2",
+  "date": "2026-11-25",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "D-shape dVAL fade, second time",
+  "summary": "Same balanced profile, same edge. Price rotated back down to the dVAL a second time and faded up for another 1:1.",
+  "confluences": [
+   "dVAL"
+  ],
+  "notes": [
+   "After the first dVAL fade, gold stayed balanced and the D-shape kept building.",
+   "Around 19:47 ET, price rotated back down to the dVAL for a second time. Long: limit at 3,570.4, stop at 3,567.4, target at 3,573.4. That's 1:1.",
+   "The dVAL held again and price pushed back up through the target. As long as the profile stays balanced, you can keep ping-ponging between the edges of value."
+  ],
+  "images": [
+   "lib-2026-11-25-gc-snap-dval-2.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-25-gc-flip-onvah",
+  "date": "2026-11-25",
+  "setup": "flip",
+  "instrument": "GC",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "ONVAH Flip after volume built above",
+  "summary": "Price broke above the ONVAH and built a lot of volume beyond it. When it came back to retest the ONVAH, it reacted quickly and hit 1:1.",
+  "confluences": [
+   "ONVAH"
+  ],
+  "notes": [
+   "Gold rallied hard through the ONVAH and spent time above it, building a lot of volume beyond the level. That's acceptance above.",
+   "Around 20:55 ET, price pulled back to retest the ONVAH from above. Long on the retest: limit at 3,598.9, stop at 3,594.4, target at 3,603.4. That's 1:1.",
+   "There was a nice, quick reaction off the level that hit the target. Price later broke back down through the ONVAH, but the trade was already done at 1:1."
+  ],
+  "images": [
+   "lib-2026-11-25-gc-flip-onvah.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-25-gc-snap-nypoc",
+  "date": "2026-11-25",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Short",
+  "stars": 2,
+  "result": "+1R",
+  "title": "NYPOC Snap with the VWAP band",
+  "summary": "Gold rallied into the NYPOC from below, with a VWAP band in the same area. The level rejected price cleanly for a quick 1:1.",
+  "confluences": [
+   "NYPOC",
+   "VWAP Band"
+  ],
+  "notes": [
+   "Gold rallied from below up into the NYPOC, with a VWAP band sitting in the same area. Two confluences, so a 2-star trade.",
+   "Price approached the level from below, so the Snap was a short: limit at 3,566.5, stop at 3,569.5, target at 3,563.5. That's 1:1.",
+   "Price spiked through the level briefly but couldn't hold above it, then sold off through the target and kept dropping."
+  ],
+  "images": [
+   "lib-2026-11-25-gc-snap-nypoc.jpg"
+  ]
  }
 ]
