@@ -114,6 +114,20 @@
   ]
  },
  {
+  "id": "fm",
+  "name": "F. M.",
+  "role": "Member",
+  "items": [
+   {
+    "type": "funded",
+    "label": "Funded · Eval passed",
+    "firm": "Alpha Futures",
+    "date": "2026-10-13",
+    "img": "hof-anon-funded-2026-10-13-alpha.jpg"
+   }
+  ]
+ },
+ {
   "id": "anon-4",
   "name": "Anonymous member",
   "role": "Asked to stay anonymous",
