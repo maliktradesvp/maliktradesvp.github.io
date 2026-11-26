@@ -419,6 +419,8 @@ footer p{margin:0}
 .wf.tool .wfq{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}.wf.tool .wfq span{color:#E2C27A}
 .wft{padding:16px}.wft b{font-size:23px;color:#fff}.wft p{color:#C3D1CE}.wf.tool u{color:#E2C27A}
 @media(max-width:900px){.mgrid{grid-template-columns:1fr!important}}
+.wf:has(.wfx) .wfb{padding-bottom:42px}.wfx{bottom:18px}
+#academy,#playbook,#mindset,#tools{scroll-margin-top:16px}
 </style>
 </head>
 <body>
@@ -469,6 +471,8 @@ footer p{margin:0}
     <div class="leg"><span><i style="background:rgba(242,236,225,.4)"></i>Asia 7 PM–2 AM</span><span><i style="background:var(--gold2)"></i>London 2:00–9:30 AM</span><span><i style="background:#F2ECE1"></i>New York 9:30 AM–4 PM</span><span class="tz" id="tzNote">All times EST</span></div>
   </div>
 
+  <section id="wnBand" hidden aria-label="What's new"></section>
+
   <a class="hof" href="/hall-of-fame.html">
     <div class="hof-tx"><span class="hof-k">🏆 Hall of Fame</span><h3>Funded. <em>And paid.</em></h3><p>Real certificates from members who studied the framework, did the work and executed.</p><span class="hof-go">See the Hall of Fame →</span></div>
     <div class="hof-fan" aria-hidden="true"><img src="/hof-anon-payout-2026-10-02.jpg" alt="" loading="lazy"><img src="/hof-joshua-funded-2026-11-12.jpg" alt="" loading="lazy"><img src="/hof-matthew-funded-2026-11-13.jpg" alt="" loading="lazy"></div>
@@ -499,7 +503,7 @@ footer p{margin:0}
         <div class="shelf rset"><div class="sl"><b>Setups &amp; reference</b><span>Read in order</span></div><div class="books" id="books"></div></div>
       </div>
     </div>
-    <div class="mdc" aria-labelledby="mdT">
+    <div class="mdc" id="mindset" aria-labelledby="mdT">
       <div class="mdh"><div><div class="k">MINDSET</div><h3 id="mdT">The mental side of the game</h3><p class="d">The setups get you in the trade. These keep you consistent after a win, after a loss, and through a losing streak.</p></div></div>
       <div class="mgrid" id="mindBooks"></div>
     </div>
@@ -615,7 +619,7 @@ const ACAD = [
   ["a08","putting-it-all-together","Putting It All Together","Your pre-session checklist, and what your chart should look like."],
   ["a09","prop-playbook","The Prop Playbook","Trading prop firms as a business: drawdowns, risk rules and running 2–3 accounts."]
 ];
-const V = "20261120";
+const V = window.MT_V = "20261120";
 const PLAY = [
   ["p1","core-setups","Core Setups","The Snap, the Flip and the Magnet."],
   ["p2","bonus-tips","Bonus Tips","Five scenarios to watch for."],
@@ -630,13 +634,13 @@ const PLAY = [
 const PRAC = {
   a03:[["/simulator.html?focus=levels","\u{1F3AF} Practise reading levels"]],
   a04:[["/simulator.html?focus=shapes","\u{1F3AF} Practise profile shapes"]],
-  a05:[["/core-setups.pdf","\u{1F4D8} Core Setups"],["/simulator.html?focus=core","\u{1F3AF} Practise the setups"],["/setup-library.html","\u{1F4DA} Real trades"]],
-  a07:[["/common-mistakes.pdf","\u{1F4D8} Common Mistakes"],["/simulator.html?focus=execution","\u{1F3AF} Practise execution"]],
+  a05:[["/read-core-setups.html","\u{1F4D8} Core Setups"],["/simulator.html?focus=core","\u{1F3AF} Practise the setups"],["/setup-library.html","\u{1F4DA} Real trades"]],
+  a07:[["/read-common-mistakes.html","\u{1F4D8} Common Mistakes"],["/simulator.html?focus=execution","\u{1F3AF} Practise execution"]],
   a08:[["/simulator.html","\u{1F3AF} Do today's 10 rounds"]],
   "core-setups":[["/simulator.html?focus=core","\u{1F3AF} Practise"],["/setup-library.html","\u{1F4DA} Real trades"]],
   "advanced-setups":[["/simulator.html?focus=advanced","\u{1F3AF} Practise"]]
 };
-const pracLinks = k => PRAC[k] ? `<span class="pl">${PRAC[k].map(([h, t]) => `<a href="${h}"${h.endsWith(".pdf") ? ' class="bkc" target="_blank" rel="noopener"' : ""}>${t}</a>`).join("")}</span>` : "";
+const pracLinks = k => PRAC[k] ? `<span class="pl">${PRAC[k].map(([h, t]) => `<a href="${h}"${h.startsWith("/read-") ? ' class="bkc"' : ""}>${t}</a>`).join("")}</span>` : "";
 const RKEY = "maliktrades.reading.v1";
 let readSet = new Set((read(RKEY) || {}).read || []);
 function saveRead(){ try{ localStorage.setItem(RKEY, JSON.stringify({ read:[...readSet] })); }catch(e){} }
@@ -649,7 +653,7 @@ function paintGuides(){
     const items = ACAD.slice(from, from + 3), d = items.filter(g => readSet.has(g[0])).length;
     return `<div class="mod ${d === 3 ? "done" : ""}"><div class="mh"><div><div class="mk">${k}</div><h3>${h}</h3></div><span class="ms">${d === 3 ? "✓ " : ""}${d}/3</span></div>` +
       items.map(([id, slug, title, line], j) => { const i = from + j, nx = id === nextId;
-        return `<div class="mr ${nx ? "nx" : ""}"><a class="lnk" href="/${slug}.pdf?v=${V}" target="_blank" rel="noopener" aria-label="Open ${title}"></a>
+        return `<div class="mr ${nx ? "nx" : ""}"><a class="lnk" href="/read-${slug}.html" aria-label="Open ${title}"></a>
           <img src="/${slug}-cover.jpg?v=${V}" alt="" loading="lazy"><div><b>#${String(i + 1).padStart(2,"0")} ${title}</b><span>${line}</span>${nx ? '<em class="up" style="font-style:normal">UP NEXT</em>' : ""}${pracLinks(id)}</div>${tick(id, title)}</div>`; }).join("") + `</div>`;
   }).join("");
   const FEAT = { id:"p7", slug:"why-i-left-ict-smc", title:"Why I Left ICT/SMC", line:"Why I switched to volume profile, why it works in any market, and why I'm not going back. Read this before anything else." };
@@ -664,17 +668,17 @@ function paintGuides(){
   ];
   const ALLB = [FEAT, FEAT2, ...SETB, ...MIND], nRead = ALLB.filter(b => readSet.has(b.id)).length;
   $("pbCnt").innerHTML = `<i><u style="width:${Math.round(nRead / ALLB.length * 100)}%"></u></i><span><b>${nRead} of ${ALLB.length}</b> read</span>`;
-  const fcard = (F, tag, pages) => `<div class="pfeat"><div class="fcv"><a href="/${F.slug}.pdf?v=${V}" target="_blank" rel="noopener" aria-label="Open ${F.title}"><img src="/${F.slug}-cover.jpg?v=${V}" alt="" loading="lazy"></a>${tick(F.id, F.title)}</div>
-    <div><em class="st">${tag}</em><h4>${F.title}</h4><p>${F.line}</p><a class="rd" href="/${F.slug}.pdf?v=${V}" target="_blank" rel="noopener">Read it · ${pages} pages →</a></div></div>`;
+  const fcard = (F, tag, pages) => `<div class="pfeat"><div class="fcv"><a href="/read-${F.slug}.html" aria-label="Open ${F.title}"><img src="/${F.slug}-cover.jpg?v=${V}" alt="" loading="lazy"></a>${tick(F.id, F.title)}</div>
+    <div><em class="st">${tag}</em><h4>${F.title}</h4><p>${F.line}</p><a class="rd" href="/read-${F.slug}.html">Read it · ${pages} pages →</a></div></div>`;
   $("pbFeat").innerHTML = `<div class="pfeats">${fcard(FEAT, "1 · Start here", 8)}${fcard(FEAT2, "2 · Then this", 10)}</div>`;
-  $("books").innerHTML = SETB.map(b => `<div class="bk"><a class="lnk" href="/${b.slug}.pdf?v=${V}" target="_blank" rel="noopener" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg?v=${V}" alt="" loading="lazy"></a>
+  $("books").innerHTML = SETB.map(b => `<div class="bk"><a class="lnk" href="/read-${b.slug}.html" aria-label="Open ${b.title}"><img src="/${b.slug}-cover.jpg?v=${V}" alt="" loading="lazy"></a>
     ${tick(b.id, b.title)}${b.tag ? `<span class="tg2 ${b.adv ? "adv" : ""}">${b.tag}</span>` : ""}<b>${b.title}</b><span>${b.line}</span>${pracLinks(b.slug)}</div>`).join("");
   const MX = {"boom-and-bust-cycle":{when:"Up big, then gave it all back?",ic:"📉",acc:"#B5652F",pg:3},
     "the-coin-flip":{when:"On a losing streak?",ic:"🪙",acc:"#C79A44",pg:5},
     "pull-the-trigger":{when:"Frozen at the level?",ic:"🎯",acc:"#2E6B4F",pg:8},
     "good-trade-bad-result":{when:"Judging trades by P&L?",ic:"⚖️",acc:"#2E5157",pg:5},
     "trading-in-the-zone":{when:"Want the foundations?",ic:"📖",acc:"#6E5A8C",pg:4}};
-  $("mindBooks").innerHTML = MIND.map(b => { const m = MX[b.slug]; return `<div class="wf" style="--acc:${m.acc}"><a class="wfa" href="/${b.slug}.pdf?v=${V}" target="_blank" rel="noopener">
+  $("mindBooks").innerHTML = MIND.map(b => { const m = MX[b.slug]; return `<div class="wf" style="--acc:${m.acc}"><a class="wfa" href="/read-${b.slug}.html">
     <div class="wfq"><i>${m.ic}</i><span>${m.when}</span></div>
     <div class="wfb"><div class="wfc"><img src="/${b.slug}-cover.jpg?v=${V}" alt="" loading="lazy"></div><div><em>${b.tag}</em><b>${b.title}</b><p>${b.line}</p><u>Read · ${m.pg} pages →</u></div></div></a>${tick(b.id, b.title)}${b.tool ? `<a class="wfx" href="/MalikTrades-Mindset-Tool/">Mindset tool →</a>` : ""}</div>`; }).join("") +
     `<a class="wf tool" href="/MalikTrades-Mindset-Tool/"><div class="wfq"><i>🧠</i><span>Struggling right now?</span></div><div class="wft"><b>Open the Mindset Tool</b><p>Pick what you're feeling and get the fix, backed by the numbers.</p><u>Open the tool →</u></div></a>`;
@@ -683,7 +687,7 @@ function paintGuides(){
   $("navAcad").textContent = `${a}/9`;
   // continue card
   { const done = !next, nb = ACAD.length;
-    const steps = [["Next","bonus-tips","Bonus Tips","Five scenarios to watch for","/bonus-tips.pdf"],["Every day","core-setups","Setup Library","Study real trades of each setup","/setup-library.html"],["Read last","advanced-setups","Advanced Setups","Once the core three feel obvious","/advanced-setups.pdf"]];
+    const steps = [["Next","bonus-tips","Bonus Tips","Five scenarios to watch for","/read-bonus-tips.html"],["Every day","core-setups","Setup Library","Study real trades of each setup","/setup-library.html"],["Read last","advanced-setups","Advanced Setups","Once the core three feel obvious","/read-advanced-setups.html"]];
     $("acNext").className = "acnext" + (done ? " done" : "");
     $("acNext").innerHTML = `<div class="ah"><div class="k">${done ? "\u2713 Course complete" : "After lesson #09"}</div><b>${done ? "Now, the Playbook" : "What comes next"}</b><span>${done ? "You've read all 9 lessons. Here's where to go from here." : `Finish all ${nb} lessons, then move on to these.`}</span></div>
       <div class="acsteps">${steps.map(([k, img, t, l, h]) => `<a class="acstep" href="${h}"${h.endsWith(".pdf") ? ' target="_blank" rel="noopener"' : ""}><img src="/${img}-cover.jpg?v=${V}" alt="" loading="lazy"><div><em>${k}</em><b>${t}</b><small>${l}</small></div></a>`).join("")}</div>`; }
@@ -692,7 +696,7 @@ function paintGuides(){
     const i = ACAD.indexOf(next), after = ACAD[i + 1];
     c.innerHTML = `<div class="lab">${a ? "Continue VP Academy" : "Start here"}</div>
       <div class="cont"><img src="/${next[1]}-cover.jpg?v=${V}" alt=""><div><div class="num">#${String(i + 1).padStart(2,"0")} of 09</div><h3>${next[2]}</h3><p>${next[3]}</p>
-      <div class="btns"><a class="btn" href="/${next[1]}.pdf" target="_blank" rel="noopener">${a ? "Keep reading" : "Start reading"} →</a><a class="btn ghost" href="#academy">All guides</a></div></div></div>
+      <div class="btns"><a class="btn" href="/read-${next[1]}.html">${a ? "Keep reading" : "Start reading"} →</a><a class="btn ghost" href="#academy">All guides</a></div></div></div>
       <div class="pg">${ACAD.map(g => `<i class="${readSet.has(g[0]) ? "d" : ""}"></i>`).join("")}</div>
       <div class="pgl"><span>${a} of 9 read</span><span>${after ? "Next up: " + after[2] : "Last one"}</span></div>`;
   } else {
@@ -842,5 +846,7 @@ function paintTools(){
 paintTools();
 document.addEventListener("visibilitychange", () => { if(!document.hidden){ paintClock(); paintPractice(); paintTools(); readSet = new Set((read(RKEY) || {}).read || []); paintGuides(); } });
 </script>
+<script src="/mt-search.js?v=20261120"></script>
+<script src="/mt-updates.js?v=20261120"></script>
 </body>
 </html>

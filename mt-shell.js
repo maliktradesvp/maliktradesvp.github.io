@@ -43,4 +43,5 @@
   [...document.body.childNodes].forEach(n => { if(n.nodeName !== "SCRIPT") main.appendChild(n); });
   document.body.prepend(app);
   document.body.insertAdjacentHTML("beforeend", tabs);
+  const s = document.createElement("script"); s.src = "/mt-search.js?v=20261120"; document.body.appendChild(s);
 })();
