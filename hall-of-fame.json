@@ -84,6 +84,21 @@
   ]
  },
  {
+  "id": "anon-3",
+  "name": "Anonymous member",
+  "role": "Asked to stay anonymous",
+  "anon": true,
+  "items": [
+   {
+    "type": "funded",
+    "label": "Funded · 50K",
+    "firm": "Lucid Trading",
+    "date": "2026-10-22",
+    "img": "hof-anon-funded-2026-10-22.jpg"
+   }
+  ]
+ },
+ {
   "id": "anon-1",
   "name": "Anonymous member",
   "role": "Asked to stay anonymous",
@@ -95,6 +110,21 @@
     "firm": "Apex Trader Funding",
     "date": "2026-10-02",
     "img": "hof-anon-payout-2026-10-02.jpg"
+   }
+  ]
+ },
+ {
+  "id": "anon-4",
+  "name": "Anonymous member",
+  "role": "Asked to stay anonymous",
+  "anon": true,
+  "items": [
+   {
+    "type": "funded",
+    "label": "Funded · 50K",
+    "firm": "Tradeify",
+    "date": "2026-10-20",
+    "img": "hof-anon-funded-2026-10-20.jpg"
    }
   ]
  },
