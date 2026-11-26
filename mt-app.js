@@ -16,7 +16,7 @@
   // Cloudflare Web Analytics (anonymous, cookie-free; the dashboard is private to the site owner)
   if (location.hostname === "maliktradesvp.github.io" && !document.querySelector('script[src*="cloudflareinsights.com/beacon"]')) {
     const cf = document.createElement("script");
-    cf.type = "module"; cf.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    cf.type = "module"; cf.src = "https://static.cloudflareinsights.com/beacon.min.js?token=cc250df447dc4549a4c96a123348d5ba";
     cf.setAttribute("data-cf-beacon", JSON.stringify({ token: "cc250df447dc4549a4c96a123348d5ba" }));
     head.appendChild(cf);
   }
