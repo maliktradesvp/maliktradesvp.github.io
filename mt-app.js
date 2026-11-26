@@ -13,6 +13,14 @@
   add("meta", { name: "apple-mobile-web-app-title", content: "MalikTrades" });
   add("meta", { name: "apple-mobile-web-app-status-bar-style", content: "default" });
 
+  // Cloudflare Web Analytics (anonymous, cookie-free; the dashboard is private to the site owner)
+  if (location.hostname === "maliktradesvp.github.io" && !document.querySelector('script[src*="cloudflareinsights.com/beacon"]')) {
+    const cf = document.createElement("script");
+    cf.type = "module"; cf.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    cf.setAttribute("data-cf-beacon", JSON.stringify({ token: "cc250df447dc4549a4c96a123348d5ba" }));
+    head.appendChild(cf);
+  }
+
   if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
     addEventListener("load", () => navigator.serviceWorker.register("/sw.js", { scope: "/" }).catch(() => {}));
   }
