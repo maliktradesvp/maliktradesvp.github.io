@@ -1,0 +1,85 @@
+[
+ {
+  "date": "2026-11-20",
+  "kind": "updated",
+  "slug": "advanced-setups",
+  "title": "The Whip at the Open",
+  "desc": "Advanced Setups · new example",
+  "page": 16,
+  "badge": "p.15–18",
+  "img": "/wn-whip.jpg"
+ },
+ {
+  "date": "2026-11-19",
+  "kind": "new",
+  "slug": "widen-the-net",
+  "title": "Widen the Net",
+  "desc": "Common mistake · 6 pages",
+  "badge": "NEW",
+  "img": "/wn-widen-the-net.jpg"
+ },
+ {
+  "date": "2026-11-17",
+  "kind": "new",
+  "slug": "good-trade-bad-result",
+  "title": "Good Trade, Bad Result",
+  "desc": "Mindset · 5 pages",
+  "img": "/wn-good-trade-bad-result.jpg"
+ },
+ {
+  "date": "2026-11-17",
+  "kind": "new",
+  "slug": "pull-the-trigger",
+  "title": "Pull the Trigger",
+  "desc": "Mindset · fear of execution",
+  "img": "/wn-pull-the-trigger.jpg"
+ },
+ {
+  "date": "2026-11-16",
+  "kind": "new",
+  "slug": "mind-the-open",
+  "title": "Mind the Open",
+  "desc": "Common mistake · 5 pages",
+  "img": "/wn-mind-the-open.jpg"
+ },
+ {
+  "date": "2026-11-16",
+  "kind": "new",
+  "slug": "edge-boosters",
+  "title": "Edge Boosters",
+  "desc": "Reference · three settings",
+  "img": "/wn-edge-boosters.jpg"
+ },
+ {
+  "date": "2026-11-15",
+  "kind": "new",
+  "slug": "base-hits",
+  "title": "Base Hits",
+  "desc": "Playbook · why every trade is 1:1",
+  "img": "/wn-base-hits.jpg"
+ },
+ {
+  "date": "2026-11-15",
+  "kind": "new",
+  "slug": "volume-not-candles",
+  "title": "Volume, Not Candles",
+  "desc": "Common mistake · 5 pages",
+  "img": "/wn-volume-not-candles.jpg"
+ },
+ {
+  "date": "2026-11-14",
+  "kind": "new",
+  "slug": "why-i-left-ict-smc",
+  "title": "Why I Left ICT/SMC",
+  "desc": "Playbook · start here",
+  "img": "/wn-why-i-left-ict-smc.jpg"
+ },
+ {
+  "date": "2026-11-14",
+  "kind": "new",
+  "slug": "the-coin-flip",
+  "title": "The Coin Flip",
+  "desc": "Mindset · losing streaks",
+  "img": "/wn-the-coin-flip.jpg"
+ }
+]

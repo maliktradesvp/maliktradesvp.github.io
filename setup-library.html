@@ -7,7 +7,7 @@
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:title" content="Setup Library · MalikTrades">
 <meta property="og:description" content="Real trades from MalikTrades sessions, sorted by setup and instrument.">
-<meta property="og:image" content="https://maliktradesvp.github.io/og-image.jpg">
+<meta property="og:image" content="https://maliktradesvp.github.io/og-setup-library.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://maliktradesvp.github.io/setup-library.html">
@@ -135,13 +135,13 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
 <script>
 "use strict";
 const SETUPS = [
-  { id:"snap",   label:"Snap",   icon:"🫰", guide:{ name:"Core Setups",     href:"/core-setups.pdf" } },
-  { id:"flip",   label:"Flip",   icon:"🔄", guide:{ name:"Core Setups",     href:"/core-setups.pdf" } },
-  { id:"magnet", label:"Magnet", icon:"🧲", guide:{ name:"Core Setups",     href:"/core-setups.pdf" } },
-  { id:"anchor", label:"Anchor", icon:"⚓", guide:{ name:"Advanced Setups", href:"/advanced-setups.pdf" } },
-  { id:"wall",   label:"The Wall", icon:"🧱", guide:{ name:"Advanced Setups", href:"/advanced-setups.pdf" } },
-  { id:"whip",   label:"The Whip", icon:"⚡", guide:{ name:"Advanced Setups", href:"/advanced-setups.pdf" } },
-  { id:"guard",  label:"The Guard", icon:"💂", guide:{ name:"Advanced Setups", href:"/advanced-setups.pdf" } }
+  { id:"snap",   label:"Snap",   icon:"🫰", guide:{ name:"Core Setups",     href:"/read-core-setups.html" } },
+  { id:"flip",   label:"Flip",   icon:"🔄", guide:{ name:"Core Setups",     href:"/read-core-setups.html" } },
+  { id:"magnet", label:"Magnet", icon:"🧲", guide:{ name:"Core Setups",     href:"/read-core-setups.html" } },
+  { id:"anchor", label:"Anchor", icon:"⚓", guide:{ name:"Advanced Setups", href:"/read-advanced-setups.html" } },
+  { id:"wall",   label:"The Wall", icon:"🧱", guide:{ name:"Advanced Setups", href:"/read-advanced-setups.html" } },
+  { id:"whip",   label:"The Whip", icon:"⚡", guide:{ name:"Advanced Setups", href:"/read-advanced-setups.html" } },
+  { id:"guard",  label:"The Guard", icon:"💂", guide:{ name:"Advanced Setups", href:"/read-advanced-setups.html" } }
 ];
 const INSTRUMENTS = ["NQ", "ES", "GC", "CL"];
 const state = { setup:"all", inst:"all" };
@@ -210,7 +210,7 @@ function openTrade(id){
   try{ history.replaceState(null, "", "#" + encodeURIComponent(t.id)); }catch(e){}
   const notes = Array.isArray(t.notes) ? t.notes : (t.notes ? [t.notes] : []);
   document.getElementById("dNotes").innerHTML = (t.confluences && t.confluences.length ? `<div class="cfl">Confluences</div><div class="cf">${t.confluences.map(c => `<span>${esc(c)}</span>`).join("")}</div><div class="cfl">Why I took it</div>` : "") + notes.map(n => `<p>${esc(n)}</p>`).join("");
-  document.getElementById("dSee").innerHTML = (s.guide ? `Read more: <a href="${s.guide.href}" target="_blank" rel="noopener">${s.guide.name}</a>` : "") +
+  document.getElementById("dSee").innerHTML = (s.guide ? `Read more: <a href="${s.guide.href}">${s.guide.name}</a>` : "") +
     (PRACTICE.includes(t.setup) ? `<a class="pracbtn" href="/simulator.html?focus=${t.setup}">\u{1F3AF} Practice ${esc(s.label.startsWith("The ") ? s.label : "the " + s.label)} in the Rep Room →</a>` : "");
   lastFocus = document.activeElement;
   const ov = document.getElementById("ov"); ov.classList.add("open"); ov.setAttribute("aria-hidden", "false"); ov.scrollTop = 0;
