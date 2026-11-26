@@ -25,11 +25,10 @@
   <a class="rd-b rd-hide" ${prev ? `href="/read-${prev.slug}.html"` : 'aria-disabled="true"'}>‹ Prev</a>
   <a class="rd-b" ${next ? `href="/read-${next.slug}.html"` : `href="${g.shelfHref}"`}>${next ? "Next ›" : "Done ›"}</a>
   <button class="rd-b mk rd-hide" type="button" id="rdMk"></button>
-  <a class="rd-b rd-hide" href="${pdfUrl}" download="${slug}.pdf">⬇ PDF</a>
 </div><div class="rd-prog"><i id="rdProg"></i></div></header>
 <main class="rd-doc" id="rdDoc"><div id="rdPages"></div>
   <div class="rd-done"><div><b>Finished this one?</b><p>Mark it as read and it ticks off on your shelf.</p></div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="rd-b mk" type="button" id="rdMk2"></button><a class="rd-b" href="${pdfUrl}" download="${slug}.pdf">⬇ Download PDF</a></div></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="rd-b mk" type="button" id="rdMk2"></button></div></div>
   <div class="rd-end">
     ${prev ? `<a class="rd-nv" href="/read-${prev.slug}.html"><img src="/${prev.slug}-cover.jpg?v=${V}" alt=""><div><small>‹ PREVIOUS</small><b>${esc(prev.title)}</b><span>${esc(prev.line)}</span></div></a>`
            : `<a class="rd-nv home" href="${g.shelfHref}"><span class="ic">📚</span><div><small>‹ BACK</small><b>${esc(g.shelfLabel)}</b><span>See the whole shelf</span></div></a>`}
@@ -55,7 +54,7 @@
   };
   addEventListener("scroll", onScroll, { passive: true });
 
-  const fail = () => { host.innerHTML = `<div class="rd-fail"><p>This guide couldn't be shown here.</p><a href="${pdfUrl}">Open the PDF instead →</a></div>`; };
+  const fail = () => { host.innerHTML = `<div class="rd-fail"><p>This guide couldn't load. Check your connection and refresh the page.</p><a href="${location.pathname}">Refresh →</a></div>`; };
   if (!window.pdfjsLib) { fail(); return; }
   pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
 
@@ -78,6 +77,7 @@
       const vp = page.getViewport({ scale: (w * dpr) / page.getViewport({ scale: 1 }).width });
       const c = document.createElement("canvas"); c.width = Math.round(vp.width); c.height = Math.round(vp.height);
       await page.render({ canvasContext: c.getContext("2d"), viewport: vp }).promise;
+      c.addEventListener("contextmenu", e => e.preventDefault());
       box.innerHTML = ""; box.appendChild(c);
     };
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) render(+e.target.id.slice(5)); }), { rootMargin: "1200px 0px" });
