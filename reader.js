@@ -2,6 +2,7 @@
    Each /read-<slug>.html page sets <body data-guide="<slug>"> and loads /guides-data.js before this file. */
 (function () {
   "use strict";
+  { const a = document.createElement("script"); a.src = "/mt-app.js"; document.head.appendChild(a); }
   const G = window.MT_GUIDES, V = window.MT_V;
   const slug = document.body.dataset.guide;
   const g = G.find(x => x.slug === slug);

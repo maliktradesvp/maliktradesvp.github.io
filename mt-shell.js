@@ -44,4 +44,5 @@
   document.body.prepend(app);
   document.body.insertAdjacentHTML("beforeend", tabs);
   const s = document.createElement("script"); s.src = "/mt-search.js?v=20261120"; document.body.appendChild(s);
+  const a = document.createElement("script"); a.src = "/mt-app.js"; document.body.appendChild(a);
 })();

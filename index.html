@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MalikTrades</title>
 <link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#21414A"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="MalikTrades">
 <meta property="og:title" content="MalikTrades · Volume profile trading">
 <meta property="og:description" content="Free volume profile academy, playbook and tools for trading the MalikTrades way.">
 <meta property="og:image" content="https://maliktradesvp.github.io/og-image.jpg">
@@ -847,6 +848,7 @@ paintTools();
 document.addEventListener("visibilitychange", () => { if(!document.hidden){ paintClock(); paintPractice(); paintTools(); readSet = new Set((read(RKEY) || {}).read || []); paintGuides(); } });
 </script>
 <script src="/mt-search.js?v=20261120"></script>
+<script src="/mt-app.js"></script>
 <script src="/mt-updates.js?v=20261120"></script>
 </body>
 </html>

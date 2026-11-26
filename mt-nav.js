@@ -5,6 +5,7 @@
    shadow DOM, so it can't clash with the tool's own styles. */
 (function(){
   if (window.__mtNav) return; window.__mtNav = true;
+  var mtA = document.createElement('script'); mtA.src = '/mt-app.js'; document.head.appendChild(mtA);
 
   var LINKS = [
     { label: "Home",          href: "/" },

@@ -92,7 +92,12 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
 @media (max-width:860px){
   .lib{padding:16px max(16px,env(safe-area-inset-right)) 28px max(16px,env(safe-area-inset-left))}
   h1{font-size:36px}
-  .fg .lab{width:100%}
+  .filters{padding:12px 0;gap:8px}
+  .fg{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:0 14px;scroll-padding:0 14px}
+  .fg::-webkit-scrollbar{display:none}
+  .fg .lab{width:auto;flex:none;letter-spacing:.12em;font-size:10.5px;margin-right:2px}
+  .fg .chip{flex:none;padding:6px 12px;font-size:13.5px}
+  .fg .nf{display:none}
   .grid{grid-template-columns:1fr}
   .ov{padding:0}
   .dlg{border-radius:0;min-height:100%;grid-template-columns:1fr}
@@ -111,7 +116,7 @@ h1{font-family:var(--display);font-weight:600;font-size:46px;line-height:1;margi
   <div class="frombar" id="fromBar" hidden></div>
   <div class="filters">
     <div class="fg" role="group" aria-label="Setup"><span class="lab">Setup</span><span id="fSetup" style="display:contents"></span></div>
-    <div class="fg" role="group" aria-label="Instrument"><span class="lab">Instrument</span><span id="fInst" style="display:contents"></span><span style="margin-left:auto;color:var(--mut);font-size:13.5px">Newest first</span></div>
+    <div class="fg" role="group" aria-label="Instrument"><span class="lab">Instrument</span><span id="fInst" style="display:contents"></span><span class="nf" style="margin-left:auto;color:var(--mut);font-size:13.5px">Newest first</span></div>
   </div>
   <div class="pstrip" id="pStrip" hidden></div>
   <div class="grid" id="grid"></div>
@@ -163,7 +168,7 @@ function chip(group, value, label, n){
 function renderFilters(){
   const inInst = TRADES.filter(t => state.inst === "all" || t.instrument === state.inst);
   document.getElementById("fSetup").innerHTML = chip("setup", "all", "All", inInst.length) +
-    SETUPS.map(s => chip("setup", s.id, `${s.icon} ${s.label}`, inInst.filter(t => t.setup === s.id).length)).join("");
+    SETUPS.filter(s => state.setup === s.id || TRADES.some(t => t.setup === s.id)).map(s => chip("setup", s.id, `${s.icon} ${s.label}`, inInst.filter(t => t.setup === s.id).length)).join("");
   document.getElementById("fInst").innerHTML = chip("inst", "all", "All") + INSTRUMENTS.map(i => chip("inst", i, i)).join("");
 }
 function visible(){
