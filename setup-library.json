@@ -1493,5 +1493,51 @@
   "images": [
    "lib-2026-11-26-nq-magnet-dpoc.jpg"
   ]
+ },
+ {
+  "id": "2026-11-27-es-magnet-dpoc",
+  "date": "2026-11-27",
+  "setup": "magnet",
+  "instrument": "ES",
+  "direction": "Long",
+  "stars": 1,
+  "result": "+1R",
+  "title": "dPOC Magnet after acceptance above the dVAH",
+  "summary": "ES pushed above the dVAH and built a lot of volume up there. When price came back down to the dPOC, the buy order on the dPOC gave a clean continuation long for 1:1.",
+  "confluences": [
+   "dPOC"
+  ],
+  "notes": [
+   "Around 19:00 ET, ES rallied through the dVAH and spent time above it, building a lot of volume beyond the level. That's acceptance above value, so the bias was up.",
+   "The Magnet only comes into play after that acceptance: once price has gone past the dVAH and comes back to the dPOC, we look for continuation.",
+   "Around 19:30 ET, price pulled back into the dPOC. Long with the limit on the dPOC itself: limit at 7,240.50, stop at 7,238.25, target at 7,242.75. That's 1:1.",
+   "Price wicked through the dPOC briefly, then the continuation kicked in. It pushed up through the target and back above the ONVAH."
+  ],
+  "images": [
+   "lib-2026-11-27-es-magnet-dpoc.jpg"
+  ]
+ },
+ {
+  "id": "2026-11-27-gc-snap-onvah",
+  "date": "2026-11-27",
+  "setup": "snap",
+  "instrument": "GC",
+  "direction": "Short",
+  "stars": 1,
+  "result": "+1R",
+  "title": "ONVAH Snap before the breakout",
+  "summary": "Gold rallied up into the ONVAH and got a quick reaction to the downside for 1:1, before price later ripped straight through the level.",
+  "confluences": [
+   "ONVAH"
+  ],
+  "notes": [
+   "Around 20:50 ET, gold pushed up from the ONPOC area straight into the ONVAH.",
+   "Price approached the level from below, so the Snap was a short: limit at 3,610.1, stop at 3,612.6, target at 3,607.6. That's 1:1.",
+   "The ONVAH gave a nice reaction to the downside and price dipped through the target.",
+   "A few minutes later, price broke through the ONVAH and rallied over 10 points. That's exactly why we take the reaction and get out at 1:1."
+  ],
+  "images": [
+   "lib-2026-11-27-gc-snap-onvah.jpg"
+  ]
  }
 ]
