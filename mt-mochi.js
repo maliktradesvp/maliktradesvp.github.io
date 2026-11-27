@@ -104,7 +104,7 @@ function holidayKey(ms){
 const SESS = [
   { n: "Asia", e: "🌏", tz: "Asia/Singapore", h: 8, m: 0, end: [11, 0], tip: "Levels marked? No limits resting into the open.", live: "Asia's live 🎧 <b>Patience at your levels.</b>" },
   { n: "London", e: "🇬🇧", tz: "America/New_York", h: 2, m: 0, end: [5, 0], tip: "Mark your levels and set your alerts.", live: "London's live 🎧 <b>Patience at your levels.</b>" },
-  { n: "NY", e: "🗽", tz: "America/New_York", h: 9, m: 30, end: [16, 0], tip: "Let the developing VP build. <span class='nw'>Start from 10:00 ET.</span>", live: "NY's live 🎧 <b>Patience at your levels.</b>" }
+  { n: "NY", e: "🗽", tz: "America/New_York", h: 9, m: 30, end: [16, 0], tip: "Levels marked?", live: "NY's live 🎧 <b>Patience at your levels.</b>" }
 ];
 const WK = new Set(["Mon", "Tue", "Wed", "Thu", "Fri"]);
 function opens(s, now){
@@ -126,7 +126,7 @@ function greet(){
     line = (et.wd === "Sun" && next) ? `Markets reopen soon 😴 <b class="nw">Asia opens in ${dur(next[1] - now)}.</b>` : "Markets are closed 😴 <b>Rest, review your week, come back fresh.</b>";
   } else if (live) {
     outfit = outfit || "headset";
-    line = (live.n === "NY" && (et.h === 9)) ? "NY's open 🗽 <b>Let the developing VP build <span class='nw'>until 10:00 ET.</span></b>" : live.live;
+    line = live.live;
   } else if (next && next[1] - now <= 60 * 60000) {
     line = (next[0].n === "Asia" && tp(now, "Asia/Singapore").wd === "Mon") ? `New week 🌱 <b>Mark your prior-week levels.</b> <span class="nw">Asia opens in <b>${dur(next[1] - now)}</b> 🌏</span>`
       : `${next[0].n} opens in <span class="nw"><b>${dur(next[1] - now)}</b> ${next[0].e}</span> ${next[0].tip}`;
@@ -163,22 +163,32 @@ const TAPS = ["Hehe, that tickles!", "Boop! 💚", "Small, steady base hits 🌱
 let last = -1;
 function pick(){ let i; do { i = Math.floor(Math.random() * TAPS.length); } while (i === last); last = i; return TAPS[i]; }
 function draw(el, face){ el.innerHTML = mochiSvg(face); }
-/* el: container; opts.say: element for speech; opts.line: default line html */
+const PROMO = ["Rough session? <b>I'm here for you</b> 🌱", "Tilted or itchy to trade? <b>Talk to me first.</b>", "Need a minute? <b>I do 60-second breathing resets</b> 🫁",
+  "Losses getting to you? <b>I've got the numbers</b> that calm you down.", "Psst… <b>tap me</b> 👆", "About to revenge trade? <b>Check in with me first.</b>"];
+function promoLine(){
+  const g = greet(), now = Date.now();
+  // before a session, make it timely
+  if (/opens in/.test(g.line) && !/reopen/.test(g.line)) { const mm = g.line.match(/(\w+ opens in <span class="nw"><b>[^<]*<\/b>[^<]*<\/span>)/); if (mm) return mm[1] + " <b>Check in with me before you trade.</b>"; }
+  return PROMO[Math.floor(Math.random() * PROMO.length)];
+}
+/* el: container; opts.say: element for speech */
 function mount(el, opts){
   opts = opts || {};
+  const href = opts.href || "/MalikTrades-Mindset-Tool/";
+  const cta = `<a class="mcta" href="${href}">Check in with Mochi →</a>`;
   const g = greet(); CUR_OUT = g.outfit; let base = g.face === "sleepy" ? "sleepy" : "calm"; if (opts.face) base = opts.face;
   draw(el, base);
-  if (opts.say) opts.say.innerHTML = opts.line || g.line;
   el.setAttribute("role", "button"); el.setAttribute("tabindex", "0"); el.setAttribute("aria-label", "Tap Mochi");
   let t = null;
-  const tap = () => {
-    draw(el, Math.random() < .5 ? "giggle" : "love"); const svg = el.querySelector("svg"); svg.classList.add("boing"); setTimeout(() => svg.classList.remove("boing"), 600);
-    if (opts.say) { opts.say.innerHTML = pick(); opts.say.classList.add("on"); }
-    if (opts.onTap) opts.onTap();
-    clearTimeout(t); t = setTimeout(() => { draw(el, base); if (opts.say) { opts.say.innerHTML = opts.line || g.line; if (opts.hideSay) opts.say.classList.remove("on"); } }, 2600);
+  const show = (html, face, ms) => {
+    if (face) { draw(el, face); const svg = el.querySelector("svg"); svg.classList.add("boing"); setTimeout(() => svg.classList.remove("boing"), 600); }
+    if (opts.say) { opts.say.innerHTML = html + "<br>" + cta; opts.say.classList.add("on"); }
+    clearTimeout(t); t = setTimeout(() => { draw(el, base); if (opts.say) opts.say.classList.remove("on"); }, ms);
   };
+  const tap = () => show(pick(), Math.random() < .5 ? "giggle" : "love", 4200);
   el.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); tap(); });
   el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tap(); } });
+  if (opts.promo !== false) setTimeout(() => show(promoLine(), "happy", 7000), opts.promoDelay || 1600);
   setInterval(() => { const f = el.querySelectorAll(".ey"); f.forEach(x => x.classList.add("bl")); setTimeout(() => f.forEach(x => x.classList.remove("bl")), 140); }, 3800 + Math.random() * 2000);
 }
 window.MTMochi = { mount, today, svg: (face, outfit) => { const o = CUR_OUT; CUR_OUT = outfit === undefined ? greet().outfit : outfit; const s = mochiSvg(face || "calm"); CUR_OUT = o; return s; } };

@@ -434,8 +434,10 @@ footer p{margin:0}
 @keyframes mbob{0%,100%{transform:scale(1,1)}50%{transform:scale(1.03,.97)}}
 @keyframes mboing{0%{transform:scale(1.12,.86)}55%{transform:scale(.94,1.08)}100%{transform:scale(1,1)}}
 .mochi .ey{transition:transform .12s}.mochi .ey.bl{transform:scaleY(.12);transform-box:fill-box;transform-origin:center}
-.hsay{position:absolute;right:calc(100% + 6px);top:18px;width:200px;background:#FFFCF6;color:var(--ink);border-radius:16px 16px 4px 16px;padding:9px 12px;font-size:14px;line-height:1.35;font-weight:600;box-shadow:0 12px 24px -14px rgba(0,0,0,.6);opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none;z-index:2}
-.hsay.on{opacity:1;transform:none}
+.hsay{position:absolute;right:calc(100% + 6px);top:18px;width:230px;background:#FFFCF6;color:var(--ink);border-radius:16px 16px 4px 16px;padding:9px 12px;font-size:14px;line-height:1.35;font-weight:600;box-shadow:0 12px 24px -14px rgba(0,0,0,.6);opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none;z-index:2}
+.hsay.on{opacity:1;transform:none;pointer-events:auto}
+.hsay .mcta{display:inline-block;margin-top:6px;font-weight:800;font-size:13px;color:#2F6B5A;text-decoration:none;border-bottom:2px solid #9AD196}
+.hsay .mcta:hover{color:#21414A}
 .pvm{display:flex;align-items:center;gap:6px;height:100%;padding:0 14px}
 .pvm .m{width:108px;flex:none}
 .pvm .b{background:#FFFCF6;color:#21414A;border-radius:14px 14px 14px 4px;padding:8px 11px;font:700 13px var(--body);line-height:1.3;max-width:120px}
@@ -872,7 +874,7 @@ function paintTools(){
 paintTools();
 document.addEventListener("visibilitychange", () => { if(!document.hidden){ paintClock(); paintPractice(); paintTools(); readSet = new Set((read(RKEY) || {}).read || []); paintGuides(); } });
 </script>
-<script>if(window.MTMochi){const s=document.getElementById("heroSay");MTMochi.mount(document.getElementById("heroMochi"),{say:s,hideSay:true,line:""});}</script>
+<script>if(window.MTMochi){const s=document.getElementById("heroSay");MTMochi.mount(document.getElementById("heroMochi"),{say:s});}</script>
 <script src="/mt-search.js?v=20261120"></script>
 <script src="/mt-app.js"></script>
 <script src="/mt-updates.js?v=20261120"></script>
